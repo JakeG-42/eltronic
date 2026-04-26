@@ -9,7 +9,9 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - App scaffold: Next.js app using the App Router under `src/app`.
 - Deployment: Vercel project `project-5v5cr` is connected and deployed.
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
-- Product content: initial structured product data lives in `src/content/products.ts`.
+- Product content: initial structured product data lives in `src/content/products.ts`; live editable data is read through `src/lib/managed-data.ts`.
+- Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, templates and contact submissions.
+- Contact handling: `/contact` now stores enquiries through the managed data layer.
 
 ## What Has Happened So Far
 
@@ -23,12 +25,17 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Deployment is active through Vercel.
 - A Vercel framework detection issue was addressed with `vercel.json`.
 - Initial product-template support was added through a `template` field in the product data model.
+- Added Tailwind CSS v4 and local shadcn-style UI primitives for the admin interface.
+- Added simple admin authentication using `ELTRONIC_ADMIN_PASSWORD` and `ELTRONIC_ADMIN_SECRET`.
+- Added local JSON development storage with optional Upstash/Vercel KV persistence through `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+- Switched public product routes to read from managed catalogue data so admin edits can feed the front end.
 
 ## Future Considerations
 
 - WordPress migration work is being considered for any content that is not publicly crawlable.
 - A possible temporary WordPress plugin could provide a controlled JSON/ZIP export from wp-admin.
-- Enquiry/contact handling still needs a final decision, such as email, form endpoint, CRM, or lightweight admin inbox.
+- Production persistence needs a Vercel KV/Upstash Redis connection before live admin writes and contact submissions should be trusted.
+- Future admin improvements could include image uploads, richer product template fields, and email notifications for new submissions.
 
 ## Update Notes
 

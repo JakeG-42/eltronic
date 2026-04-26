@@ -1,11 +1,33 @@
-import { products } from "@/content/products";
+import { Button } from "@/components/ui/button";
+import { getProducts } from "@/lib/managed-data";
+import { submitContactFormAction } from "./actions";
 
 export const metadata = {
   title: "Contact | Eltronic",
   description: "Contact Eltronic for product and project enquiries.",
 };
 
-export default function ContactPage() {
+type ContactPageProps = {
+  searchParams?: Promise<{
+    error?: string;
+    product?: string;
+    sent?: string;
+  }>;
+};
+
+export const dynamic = "force-dynamic";
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = await searchParams;
+  const products = await getProducts();
+  const selectedProduct = params?.product ?? "";
+  const errorMessage =
+    params?.error === "required"
+      ? "Please add your name, email and message before sending."
+      : params?.error === "storage"
+        ? "The message could not be stored because persistent storage is not configured yet. Please email sales@eltronic.co.uk for now."
+        : null;
+
   return (
     <main className="page">
       <section className="section contact-grid">
@@ -15,7 +37,7 @@ export default function ContactPage() {
           <p className="lede">
             The current WordPress form asks for name, company, email, message
             and an optional product selection. This is the same intended flow,
-            ready to wire to a real form endpoint.
+            now wired into Eltronic Studio so submissions are captured for review.
           </p>
 
           <div className="contact-list">
@@ -30,20 +52,26 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <form className="panel form-grid">
-          <input aria-label="Name" placeholder="Name" />
-          <input aria-label="Company name" placeholder="Company name" />
-          <input aria-label="Email" placeholder="Email" type="email" />
-          <select aria-label="Product">
-            <option>Please select product (optional)</option>
+        <form action={submitContactFormAction} className="panel form-grid">
+          {params?.sent ? (
+            <div className="success-message">Thanks, your enquiry has been saved. We will reply shortly.</div>
+          ) : null}
+          {errorMessage ? <div className="error-message">{errorMessage}</div> : null}
+          <input aria-label="Name" name="name" placeholder="Name" required />
+          <input aria-label="Company name" name="company" placeholder="Company name" />
+          <input aria-label="Email" name="email" placeholder="Email" required type="email" />
+          <select aria-label="Product" defaultValue={selectedProduct} name="productSlug">
+            <option value="">Please select product (optional)</option>
             {products.map((product) => (
-              <option key={product.slug}>{product.name}</option>
+              <option key={product.slug} value={product.slug}>
+                {product.name}
+              </option>
             ))}
           </select>
-          <textarea aria-label="Message" placeholder="Message" />
-          <a className="button" href="mailto:sales@eltronic.co.uk">
-            Send by email
-          </a>
+          <textarea aria-label="Message" name="message" placeholder="Message" required />
+          <Button type="submit" size="lg">
+            Send enquiry
+          </Button>
         </form>
       </section>
     </main>

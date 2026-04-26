@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products } from "@/content/products";
+import { getProductBySlug } from "@/lib/managed-data";
 
 type ProductPageProps = {
   params: Promise<{
@@ -9,15 +9,11 @@ type ProductPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = products.find((item) => item.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return {};
@@ -31,7 +27,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = products.find((item) => item.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();

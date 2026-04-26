@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { featuredProducts, products } from "@/content/products";
+import { getFeaturedProducts, getProducts } from "@/lib/managed-data";
 
 const capabilities = [
   {
@@ -19,7 +19,11 @@ const capabilities = [
 
 const sectors = ["Agriculture", "Construction", "Logistics", "Industrial automation"];
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [products, featuredProducts] = await Promise.all([getProducts(), getFeaturedProducts()]);
+
   return (
     <main className="page">
       <section className="hero">

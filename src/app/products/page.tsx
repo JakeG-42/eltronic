@@ -1,13 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { productFamilies, products } from "@/content/products";
+import { getProductFamilies, getProducts } from "@/lib/managed-data";
 
 export const metadata = {
   title: "Products | Eltronic",
   description: "Browse Eltronic HMI, CAN data logging and control products.",
 };
 
-export default function ProductsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ProductsPage() {
+  const [products, productFamilies] = await Promise.all([getProducts(), getProductFamilies()]);
+
   return (
     <main className="page">
       <section className="section">
