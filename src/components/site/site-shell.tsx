@@ -3,6 +3,7 @@ import Link from "next/link";
 const navItems = [
   { href: "/products", label: "Products", icon: "products" },
   { href: "/solutions", label: "Solutions", icon: "solutions" },
+  { href: "/software-it", label: "Software & IT", icon: "software" },
   { href: "/sectors", label: "Sectors", icon: "sectors" },
   { href: "/data-specification", label: "Data", icon: "data" },
   { href: "/about", label: "About", icon: "about" },
@@ -63,6 +64,15 @@ function NavIcon({ name }: { name: (typeof navItems)[number]["icon"] }) {
       <svg {...commonProps}>
         <path d="M7 7h10v10H7z" />
         <path d="M3 12h4M17 12h4M12 3v4M12 17v4" />
+      </svg>
+    );
+  }
+
+  if (name === "software") {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 6h14v9H5z" />
+        <path d="M8 19h8M10 15v4M14 15v4M9 10l2 2 4-5" />
       </svg>
     );
   }

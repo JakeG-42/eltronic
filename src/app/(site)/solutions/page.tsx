@@ -80,6 +80,23 @@ export default function SolutionsPage() {
       </section>
 
       <section className="section">
+        <div className="cta-module">
+          <div>
+            <span className="section-number">software.it</span>
+            <h2>Need the system around the machine too?</h2>
+            <p>
+              Eltronic can also help with custom backend tools, API
+              integrations, CRM workflows, practical IT setup and connected
+              hardware support.
+            </p>
+          </div>
+          <Link className="button" href="/software-it">
+            View Software & IT
+          </Link>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="section-heading">
           <div>
             <span className="section-number">03</span>

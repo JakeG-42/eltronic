@@ -14,7 +14,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Site page/module content: `src/content/site.ts`.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Admin UI: `src/app/studio`.
-- Public navigation: brand link to `/`, plus icon-labelled links for `/products`, `/solutions`, `/sectors`, `/data-specification`, `/about`, and `/contact`.
+- Public navigation: brand link to `/`, plus icon-labelled links for `/products`, `/solutions`, `/software-it`, `/sectors`, `/data-specification`, `/about`, and `/contact`.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.
@@ -22,10 +22,11 @@ Concise living reference for how the current Eltronic Next.js site works.
 
 ## Current Routes
 
-- `/`: homepage with hero copy, product-template explanation, and product cards generated from `products`.
+- `/`: homepage with hero copy, solution/service sections, featured product cards and public service CTAs.
 - `/products`: dynamic product listing page generated from the managed catalogue.
 - `/products/[slug]`: dynamic product detail page generated from the managed catalogue.
 - `/solutions`: public solution/service page for HMI, CANbus and bespoke control integration.
+- `/software-it`: public service page for custom software, API integrations, practical IT, hardware setup and consultation.
 - `/sectors`: public sector page for agriculture, construction, logistics and industrial automation.
 - `/data-specification`: public resource page for data sheets, guides and product documents.
 - `/about`: placeholder page for company story, services, credentials, and trust-building content.

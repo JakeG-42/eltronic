@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="stack">
           <section className="panel">
             <div className="tag-row">
-              <span className="tag">{templateLabel[product.template]}</span>
+              <span className="tag">{productTypeLabel[product.template]}</span>
               <span className="tag warning">{product.category}</span>
             </div>
             <h2>Highlights</h2>
@@ -113,8 +113,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   );
 }
 
-const templateLabel = {
-  hmi: "HMI template",
-  "data-logger": "Data logger template",
-  module: "Module template",
+const productTypeLabel = {
+  hmi: "HMI display",
+  "data-logger": "Data logging",
+  module: "Control module",
 };

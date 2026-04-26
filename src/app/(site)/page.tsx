@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { sectorModules, serviceModules, workflowModules } from "@/content/site";
-import { getFeaturedProducts, getProducts } from "@/lib/managed-data";
+import { getFeaturedProducts } from "@/lib/managed-data";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [products, featuredProducts] = await Promise.all([getProducts(), getFeaturedProducts()]);
+  const featuredProducts = await getFeaturedProducts();
 
   return (
     <main className="page">
@@ -34,23 +34,6 @@ export default async function Home() {
         </div>
 
         <TechnicalVisual label="HMI, CANbus and machine control architecture" variant="display" />
-      </section>
-
-      <section className="section">
-        <div className="stats-grid">
-          <div className="stat-card">
-            <strong>{products.length}</strong>
-            <span>specialist products ready for enquiry and specification</span>
-          </div>
-          <div className="stat-card">
-            <strong>3</strong>
-            <span>initial product templates: HMI, data logger and module</span>
-          </div>
-          <div className="stat-card">
-            <strong>{sectorModules.length}</strong>
-            <span>core sectors supported by Eltronic systems</span>
-          </div>
-        </div>
       </section>
 
       <section className="section">
@@ -100,7 +83,7 @@ export default async function Home() {
               <div className="product-content">
                 <div className="tag-row">
                   <span className="tag">{product.family}</span>
-                  <span className="tag warning">{product.template}</span>
+                  <span className="tag warning">{product.category}</span>
                 </div>
                 <h3>{product.name}</h3>
                 <p>{product.summary}</p>
@@ -114,11 +97,38 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <span className="section-number">03</span>
+            <h2>Software and IT support</h2>
+          </div>
+          <p>
+            Custom backend development, API integration, hardware setup and
+            practical technical advice for the systems around your operation.
+          </p>
+        </div>
+        <div className="cta-module">
+          <div>
+            <span className="section-number">software.it</span>
+            <h2>Business systems, devices and integrations.</h2>
+            <p>
+              From DPD and CRM integrations to CCTV, printers, screens,
+              dashboards and custom features, we can help connect the practical
+              technology around your work.
+            </p>
+          </div>
+          <Link className="button" href="/software-it">
+            Explore Software & IT
+          </Link>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section-heading">
+          <div>
+            <span className="section-number">04</span>
             <h2>How projects come together</h2>
           </div>
           <p>
-            The new site can explain the integration process instead of only
-            listing products.
+            A clear path from product enquiry to practical machine-ready
+            integration.
           </p>
         </div>
         <div className="process-grid">
@@ -136,7 +146,7 @@ export default async function Home() {
         <div className="split-module">
           <TechnicalVisual label="Eltronic sector map" variant="sectors" />
           <div>
-            <span className="section-number">04</span>
+            <span className="section-number">05</span>
             <h2>Application sectors</h2>
             <p className="lede">
               Agriculture, construction, logistics and industrial automation

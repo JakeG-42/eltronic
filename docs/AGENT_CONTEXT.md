@@ -26,7 +26,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/app/studio/actions.ts`: admin server actions.
 - `src/app/contact/actions.ts`: public contact form submission action.
 - `src/content/products.ts`: seed catalogue from the crawled WordPress site.
-- `src/content/site.ts`: public services, sector, workflow and resource module content.
+- `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
 - `src/components/site/technical-visuals.tsx`: code-native public-page technical visuals.
 - `src/components/site/product-media-gallery.tsx`: interactive product image selection and zoom.
 - `public/product-gallery`: generated SVG placeholder images appended to product galleries.

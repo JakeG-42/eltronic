@@ -119,7 +119,7 @@
       "path": "/",
       "file": "src/app/(site)/page.tsx",
       "kind": "public",
-      "dataSource": "getProducts(), getFeaturedProducts()"
+      "dataSource": "getFeaturedProducts(), src/content/site.ts#serviceModules, workflowModules, sectorModules"
     },
     {
       "path": "/products",
@@ -139,6 +139,12 @@
       "file": "src/app/(site)/solutions/page.tsx",
       "kind": "public-content",
       "dataSource": "src/content/site.ts#serviceModules, workflowModules"
+    },
+    {
+      "path": "/software-it",
+      "file": "src/app/(site)/software-it/page.tsx",
+      "kind": "public-content",
+      "dataSource": "src/content/site.ts#softwareServiceModules, softwareWorkflowModules"
     },
     {
       "path": "/sectors",

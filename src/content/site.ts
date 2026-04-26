@@ -20,8 +20,76 @@ export const serviceModules = [
     title: "Bespoke control systems",
     eyebrow: "project.specific",
     summary:
-      "Custom software, wiring, harnesses and integration around the machine, not around a generic template.",
+      "Custom software, wiring, harnesses and integration around the machine, not around a generic parts list.",
     bullets: ["Custom harnesses", "Existing control-system integration", "Quote-led engineering support"],
+  },
+];
+
+export const softwareServiceModules = [
+  {
+    title: "Bespoke backend systems",
+    code: "software.backend",
+    summary:
+      "Custom portals, admin panels, dashboards, quoting tools and workflow systems built around how the business actually works.",
+    examples: ["CRM features", "Internal dashboards", "Quote and order workflows", "Reporting tools"],
+  },
+  {
+    title: "API integrations and automation",
+    code: "integration.api",
+    summary:
+      "Connect websites, CRMs, shipping tools, stock systems and third-party platforms so information moves without double entry.",
+    examples: ["DPD integrations", "CRM automation", "Form-to-system workflows", "Data sync"],
+  },
+  {
+    title: "Screens, devices and control software",
+    code: "machine.software",
+    summary:
+      "Software that supports displays, machinery, CAN data, logging workflows and custom features around Eltronic systems.",
+    examples: ["HMI support", "Data capture tools", "Control interfaces", "Feature extensions"],
+  },
+  {
+    title: "IT, hardware and site support",
+    code: "practical.it",
+    summary:
+      "Hands-on support for the practical technology around a site, from printers and networking to CCTV and connected hardware.",
+    examples: ["CCTV setup", "Printers", "Networking", "Device setup"],
+  },
+  {
+    title: "Advice and technical consultation",
+    code: "support.consult",
+    summary:
+      "A practical sounding board for choosing systems, planning integrations, scoping projects and avoiding over-complicated solutions.",
+    examples: ["System planning", "Supplier decisions", "Technical audits", "Project scoping"],
+  },
+  {
+    title: "Ongoing improvement and support",
+    code: "support.iterate",
+    summary:
+      "Small improvements, fixes, documentation and careful handover so the system remains useful after the first version is live.",
+    examples: ["Maintenance", "Training", "Documentation", "Feature updates"],
+  },
+];
+
+export const softwareWorkflowModules = [
+  {
+    step: "01",
+    title: "Understand the workflow",
+    summary: "We start with the real job: who uses the system, where information comes from, and what needs to happen next.",
+  },
+  {
+    step: "02",
+    title: "Choose the simplest route",
+    summary: "Sometimes that means custom software. Sometimes it means configuring existing tools, hardware or integrations properly.",
+  },
+  {
+    step: "03",
+    title: "Build in useful stages",
+    summary: "The first version should solve a clear problem, then grow with the business instead of becoming a large risky rebuild.",
+  },
+  {
+    step: "04",
+    title: "Support and improve",
+    summary: "Once live, we keep the system understandable with documentation, fixes, training and sensible next-step improvements.",
   },
 ];
 

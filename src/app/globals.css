@@ -374,8 +374,7 @@ h3 {
 
 .terminal-panel,
 .panel,
-.product-card,
-.stat-card {
+.product-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   background: rgba(23, 32, 51, 0.84);
@@ -580,7 +579,6 @@ h3 {
   font-weight: 800;
 }
 
-.stats-grid,
 .capability-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -611,19 +609,6 @@ h3 {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-.stat-card {
-  padding: 1.25rem;
-}
-
-.stat-card strong {
-  display: block;
-  color: var(--primary);
-  font-family: var(--font-code), monospace;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1;
-}
-
-.stat-card span,
 .capability-card p,
 .product-card p,
 .panel p {
@@ -1626,7 +1611,6 @@ h3 {
     max-width: 14ch;
   }
 
-  .stats-grid,
   .capability-grid,
   .product-grid,
   .module-grid,
@@ -1664,7 +1648,6 @@ h3 {
     width: min(100% - 1.5rem, 1400px);
   }
 
-  .stats-grid,
   .capability-grid,
   .product-grid,
   .module-grid,
