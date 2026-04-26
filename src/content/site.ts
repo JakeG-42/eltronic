@@ -27,46 +27,46 @@ export const serviceModules = [
 
 export const softwareServiceModules = [
   {
-    title: "Bespoke backend systems",
-    code: "software.backend",
+    title: "Bespoke business systems",
+    code: "systems.backend",
     summary:
-      "Custom portals, admin panels, dashboards, quoting tools and workflow systems built around how the business actually works.",
-    examples: ["CRM features", "Internal dashboards", "Quote and order workflows", "Reporting tools"],
+      "Internal platforms, admin tools, CRM features, quoting workflows and dashboards built around the exact way your team works.",
+    examples: ["Internal CRMs", "Admin portals", "Quote workflows", "Operations dashboards"],
   },
   {
-    title: "API integrations and automation",
+    title: "API, data and shipping integrations",
     code: "integration.api",
     summary:
-      "Connect websites, CRMs, shipping tools, stock systems and third-party platforms so information moves without double entry.",
-    examples: ["DPD integrations", "CRM automation", "Form-to-system workflows", "Data sync"],
+      "Connect customer systems, shipping tools, stock platforms, CRMs and third-party services so data moves cleanly without double entry.",
+    examples: ["Shipping workflows", "CRM automation", "Stock and order sync", "Customer portals"],
   },
   {
-    title: "Screens, devices and control software",
-    code: "machine.software",
+    title: "Embedded and connected services",
+    code: "embedded.services",
     summary:
-      "Software that supports displays, machinery, CAN data, logging workflows and custom features around Eltronic systems.",
-    examples: ["HMI support", "Data capture tools", "Control interfaces", "Feature extensions"],
+      "Software services for connected hardware, telemetry, screen systems and machine data using practical protocols and reliable interfaces.",
+    examples: ["MQTT services", "HTTP/HTTPS APIs", "Device messaging", "Telemetry capture"],
   },
   {
-    title: "IT, hardware and site support",
-    code: "practical.it",
+    title: "Servers and internal infrastructure",
+    code: "platform.internal",
     summary:
-      "Hands-on support for the practical technology around a site, from printers and networking to CCTV and connected hardware.",
-    examples: ["CCTV setup", "Printers", "Networking", "Device setup"],
+      "Practical server-side engineering for the internal systems, databases, services and secure workflows that keep operations moving.",
+    examples: ["Internal servers", "Databases", "Scheduled jobs", "Secure access"],
   },
   {
-    title: "Advice and technical consultation",
-    code: "support.consult",
+    title: "Consulting and efficiency planning",
+    code: "consult.efficiency",
     summary:
-      "A practical sounding board for choosing systems, planning integrations, scoping projects and avoiding over-complicated solutions.",
-    examples: ["System planning", "Supplier decisions", "Technical audits", "Project scoping"],
+      "A technical sounding board for reducing errors, cutting manual admin time, improving handovers and choosing the right system approach.",
+    examples: ["Workflow audits", "Automation planning", "System selection", "Project scoping"],
   },
   {
     title: "Ongoing improvement and support",
     code: "support.iterate",
     summary:
-      "Small improvements, fixes, documentation and careful handover so the system remains useful after the first version is live.",
-    examples: ["Maintenance", "Training", "Documentation", "Feature updates"],
+      "Careful handover, documentation, monitoring and feature improvements so systems stay useful as the business changes.",
+    examples: ["Maintenance", "Monitoring", "Documentation", "Feature updates"],
   },
 ];
 
@@ -74,22 +74,26 @@ export const softwareWorkflowModules = [
   {
     step: "01",
     title: "Understand the workflow",
-    summary: "We start with the real job: who uses the system, where information comes from, and what needs to happen next.",
+    summary:
+      "We map the real workflow, where errors happen, where time is lost and which systems already need to be respected.",
   },
   {
     step: "02",
-    title: "Choose the simplest route",
-    summary: "Sometimes that means custom software. Sometimes it means configuring existing tools, hardware or integrations properly.",
+    title: "Choose the right architecture",
+    summary:
+      "That may mean custom software, API integration, server-side services, embedded messaging or improving existing tools first.",
   },
   {
     step: "03",
     title: "Build in useful stages",
-    summary: "The first version should solve a clear problem, then grow with the business instead of becoming a large risky rebuild.",
+    summary:
+      "The first version should reduce manual work and improve reliability quickly, then grow with the business in sensible phases.",
   },
   {
     step: "04",
     title: "Support and improve",
-    summary: "Once live, we keep the system understandable with documentation, fixes, training and sensible next-step improvements.",
+    summary:
+      "Once live, we keep the system understandable with documentation, support, improvements and clear ownership of how it works.",
   },
 ];
 

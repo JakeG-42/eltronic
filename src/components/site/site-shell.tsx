@@ -3,7 +3,7 @@ import Link from "next/link";
 const navItems = [
   { href: "/products", label: "Products", icon: "products" },
   { href: "/solutions", label: "Solutions", icon: "solutions" },
-  { href: "/software-it", label: "Software & IT", icon: "software" },
+  { href: "/software-it", label: "Software & Systems", icon: "software" },
   { href: "/sectors", label: "Sectors", icon: "sectors" },
   { href: "/data-specification", label: "Data", icon: "data" },
   { href: "/about", label: "About", icon: "about" },

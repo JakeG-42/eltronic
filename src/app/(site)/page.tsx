@@ -97,25 +97,25 @@ export default async function Home() {
         <div className="section-heading">
           <div>
             <span className="section-number">03</span>
-            <h2>Software and IT support</h2>
+            <h2>Software and systems integration</h2>
           </div>
           <p>
-            Custom backend development, API integration, hardware setup and
-            practical technical advice for the systems around your operation.
+            Bespoke internal systems, API integration, embedded services and
+            practical consulting for more efficient operations.
           </p>
         </div>
         <div className="cta-module">
           <div>
-            <span className="section-number">software.it</span>
-            <h2>Business systems, devices and integrations.</h2>
+            <span className="section-number">software.systems</span>
+            <h2>Business systems, data and integrations.</h2>
             <p>
-              From DPD and CRM integrations to CCTV, printers, screens,
-              dashboards and custom features, we can help connect the practical
-              technology around your work.
+              From shipping and CRM integrations to MQTT services, HTTP APIs,
+              internal servers, dashboards and custom workflows, we help reduce
+              errors, manual admin and wasted time.
             </p>
           </div>
           <Link className="button" href="/software-it">
-            Explore Software & IT
+            Explore Software & Systems
           </Link>
         </div>
       </section>

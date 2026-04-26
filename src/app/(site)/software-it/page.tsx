@@ -3,9 +3,9 @@ import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { softwareServiceModules, softwareWorkflowModules } from "@/content/site";
 
 export const metadata = {
-  title: "Software & IT | Eltronic",
+  title: "Software & Systems | Eltronic",
   description:
-    "Custom software, API integrations, practical IT support, hardware setup and technical consultation from Eltronic.",
+    "Bespoke software, internal systems, API integrations, embedded services, servers and technical consultation from Eltronic.",
 };
 
 export default function SoftwareItPage() {
@@ -13,12 +13,13 @@ export default function SoftwareItPage() {
     <main className="page">
       <section className="hero compact-hero">
         <div className="hero-copy">
-          <p className="code-kicker">software.it</p>
-          <h1>Software, IT and practical integration.</h1>
+          <p className="code-kicker">software.systems</p>
+          <h1>Software, systems and practical integration.</h1>
           <p className="lede">
-            From custom backend systems and API integrations to CCTV, printers,
-            connected hardware and technical advice, the aim is simple: make
-            the technology around your operation work together.
+            Bespoke software, internal systems, API integrations, embedded
+            services and technical consultation for teams that need their
+            operation to work more efficiently, with fewer errors and less
+            manual admin.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
@@ -39,9 +40,9 @@ export default function SoftwareItPage() {
             <h2>What we can help with</h2>
           </div>
           <p>
-            A compact service map for the wider software, IT and integration
-            work that often sits around machinery, operations and business
-            systems.
+            A compact service map for the wider software, systems and
+            integration work that often sits around machinery, operations,
+            logistics and business processes.
           </p>
         </div>
         <div className="module-grid">
@@ -63,13 +64,14 @@ export default function SoftwareItPage() {
       <section className="section">
         <div className="cta-module">
           <div>
-            <span className="section-number">keep.it.clear</span>
+            <span className="section-number">keep.clear</span>
             <h2>Not sure what category your problem fits?</h2>
             <p>
               That is fine. Send the rough version of the problem: what is
-              slow, manual, disconnected or unreliable. We can help decide
-              whether it needs software, hardware, configuration or simply
-              better advice.
+              slow, manual, disconnected, unreliable or causing avoidable
+              errors. We can help decide whether it needs software, an
+              integration, a server-side service, embedded messaging or a
+              better process.
             </p>
           </div>
           <Link className="button" href="/contact">
@@ -86,7 +88,8 @@ export default function SoftwareItPage() {
           </div>
           <p>
             Broad capability does not need to become a complicated project.
-            The work is scoped around useful steps and clear outcomes.
+            The work is scoped around useful steps, clear ownership and
+            measurable operational improvements.
           </p>
         </div>
         <div className="process-grid">

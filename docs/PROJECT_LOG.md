@@ -37,7 +37,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Replaced static product image cards with an interactive thumbnail gallery and zoom overlay, and tightened public nav icon alignment.
 - Moved public catalogue imagery into local `public/product-images` assets and removed public-facing migration/source-trace language.
 - Redesigned the public contact page with a dedicated enquiry layout and responsive form panel.
-- Added `/software-it` to present custom software, API integration, practical IT, hardware support and consultation without bloating the main solutions page.
+- Added `/software-it` to present custom software, internal systems, API/shipping integration, embedded services, servers and consultation without bloating the main solutions page.
 - Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
 
 ## Future Considerations
