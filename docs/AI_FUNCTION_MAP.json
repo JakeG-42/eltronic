@@ -342,7 +342,7 @@
       "createdAt",
       "updatedAt"
     ],
-    "emailNotification": "src/lib/email-notifications.ts sends Resend email notifications for enquiry, captcha_failed and honeypot_spam records. Settings live in managed data and are editable from /studio/settings. Required env vars: RESEND_API_KEY and CONTACT_NOTIFICATION_FROM. Default recipient: jakub@gajosz.com. The Vercel Resend key is installed, but delivery to jakub@gajosz.com requires a verified Resend domain and a domain-based sender address. Digest endpoint: /api/contact-notifications/digest."
+    "emailNotification": "src/lib/email-notifications.ts sends Resend email notifications for enquiry, captcha_failed and honeypot_spam records using the official resend package. Settings live in managed data and are editable from /studio/settings. Required env vars: RESEND_API_KEY and CONTACT_NOTIFICATION_FROM; never hard-code re_ keys in source. Default recipient: jakub@gajosz.com. The Vercel Resend key is installed, but delivery to jakub@gajosz.com requires a verified Resend domain and a domain-based sender address. Digest endpoint: /api/contact-notifications/digest. Resend first-email test: npm run email:check -- --send --onboarding."
   },
   "ui": {
     "publicCss": "src/app/globals.css",

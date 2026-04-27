@@ -113,7 +113,7 @@ Each product currently has:
 - Captcha failures and honeypot hits are stored as blocked contact records when storage is available, with `type` values of `captcha_failed` or `honeypot_spam`; rapid duplicate blocked attempts are suppressed before storage.
 - `/studio/submissions` has filters for Enquiries, Blocked, Captcha, Honeypot and All records, collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents for enquiry, captcha and honeypot types.
 - Email notifications are configured in `/studio/settings`; immediate mode sends both enquiries and blocked attempts, while daily/weekly digest modes are handled by `/api/contact-notifications/digest` through Vercel Cron.
-- Resend delivery requires `RESEND_API_KEY` and `CONTACT_NOTIFICATION_FROM`; the default recipient is `jakub@gajosz.com`. The current Vercel key is installed, but Resend requires a verified sending domain before the temporary sender can deliver to `jakub@gajosz.com`.
+- Resend delivery uses the official `resend` package and requires `RESEND_API_KEY` plus `CONTACT_NOTIFICATION_FROM`; the default recipient is `jakub@gajosz.com`. The current Vercel key is installed, but Resend requires a verified sending domain before the temporary sender can deliver to `jakub@gajosz.com`. `npm run email:check -- --send --onboarding` sends the Resend first-email test to the account email.
 - There are no third-party captcha scripts, cookies or external anti-spam services.
 - `npm run test:contact-bot` runs a safe fake-bot tester against `https://project-5v5cr.vercel.app` by default. It only tests rejected bot paths unless `-- --valid` is passed.
 

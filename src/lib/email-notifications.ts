@@ -1,3 +1,5 @@
+import { Resend } from "resend";
+
 import {
   getContactDigestSubmissions,
   getContactNotificationSettings,
@@ -6,9 +8,7 @@ import {
   type ContactSubmission,
 } from "@/lib/managed-data";
 
-const RESEND_EMAIL_ENDPOINT = "https://api.resend.com/emails";
 const DEFAULT_CONTACT_NOTIFICATION_TO = "jakub@gajosz.com";
-const EMAIL_REQUEST_TIMEOUT_MS = 5000;
 
 type EmailNotificationResult = "sent" | "skipped" | "failed";
 
@@ -112,27 +112,20 @@ async function sendResendEmail({
     return "skipped";
   }
 
-  const response = await fetch(RESEND_EMAIL_ENDPOINT, {
-    body: JSON.stringify({
-      from,
-      html,
-      reply_to: replyTo,
-      subject,
-      text,
-      to,
-    }),
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Idempotency-Key": idempotencyKey,
-    },
-    method: "POST",
-    signal: AbortSignal.timeout(EMAIL_REQUEST_TIMEOUT_MS),
+  const resend = new Resend(apiKey);
+  const { error } = await resend.emails.send({
+    from,
+    html,
+    replyTo,
+    subject,
+    text,
+    to,
+  }, {
+    idempotencyKey,
   });
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Resend returned ${response.status}: ${errorBody}`);
+  if (error) {
+    throw new Error(`Resend returned ${error.name}: ${error.message}`);
   }
 
   return "sent";
