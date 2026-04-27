@@ -10,12 +10,12 @@ const DEFAULT_RECIPIENT = "jakub@gajosz.com";
 const DIRECT_SMTP_TIMEOUT_MS = 8000;
 const RESEND_ONBOARDING_RECIPIENT = "jakubgajosz1999@gmail.com";
 const args = new Set(process.argv.slice(2));
-const shouldUseDirectSmtp = args.has("--direct") || process.env.CONTACT_NOTIFICATION_TRANSPORT === "direct";
 const shouldSendOnboardingEmail = args.has("--onboarding");
 const shouldSend = args.has("--send");
 
 loadEnvFile(".env.local");
 
+const shouldUseDirectSmtp = args.has("--direct") || process.env.CONTACT_NOTIFICATION_TRANSPORT === "direct";
 const apiKey = process.env.RESEND_API_KEY;
 const from = process.env.CONTACT_NOTIFICATION_FROM;
 const to = parseRecipientList(process.env.CONTACT_NOTIFICATION_TO ?? DEFAULT_RECIPIENT);
