@@ -12,6 +12,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.
+- Classic/Woo-style Studio: `/studio/classic/products` uses `src/components/studio/classic/woocommerce-product-editor.tsx` and WordPress/WooCommerce-inspired list/edit screens.
 - Global styles: `src/app/globals.css`.
 - Product seed data: `src/content/products.ts`.
 - Site page/module content: `src/content/site.ts`.
@@ -41,6 +42,9 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/studio/products`: product table with quick-edit drawer.
 - `/studio/products/new`: product creation form.
 - `/studio/products/[slug]/edit`: full product editor.
+- `/studio/classic/products`: WordPress/WooCommerce-style product list table.
+- `/studio/classic/products/new`: WordPress/WooCommerce-style add product editor.
+- `/studio/classic/products/[slug]/edit`: WordPress/WooCommerce-style edit product editor.
 - `/studio/submissions`: contact submission inbox.
 - `/studio/settings`: Studio settings and notes.
 
@@ -95,6 +99,7 @@ Each product currently has:
 - Studio has a sidebar, dashboard, products, enquiries and settings modes.
 - Studio has browser-local dark/light mode stored in `localStorage`.
 - Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.
+- Existing Studio topbar includes `Switch to new`, which opens the WordPress/WooCommerce-style product backend at `/studio/classic/products`. That backend includes a black admin bar, left admin menu, product list table, Screen Options/Help tabs, product data panels, publish box, category/tag boxes and product image/gallery boxes. The classic UI is a functional approximation mapped to the current Eltronic product schema, not a full WordPress/WooCommerce runtime.
 - Product management is table-first with full edit pages and a quick-edit right drawer.
 - Product forms use a WooCommerce-style two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.

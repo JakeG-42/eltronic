@@ -13,15 +13,17 @@ type ManagedImage = ProductImage & {
 };
 
 type ProductImageManagerProps = {
+  idPrefix?: string;
   images: ProductImage[];
+  requireFirst?: boolean;
 };
 
-export function ProductImageManager({ images }: ProductImageManagerProps) {
+export function ProductImageManager({ idPrefix = "image", images, requireFirst = true }: ProductImageManagerProps) {
   const initialImages = images.length > 0 ? images : [{ src: "", alt: "" }];
   const [items, setItems] = useState<ManagedImage[]>(() =>
     initialImages.map((image, index) => ({
       ...image,
-      id: `existing-${index}`,
+      id: `${idPrefix}-existing-${index}`,
     })),
   );
 
@@ -35,7 +37,7 @@ export function ProductImageManager({ images }: ProductImageManagerProps) {
     setItems((current) => [
       ...current,
       {
-        id: `${Date.now()}-${current.length}`,
+        id: `${idPrefix}-${Date.now()}-${current.length}`,
         src: "",
         alt: "",
       },
@@ -45,7 +47,7 @@ export function ProductImageManager({ images }: ProductImageManagerProps) {
   function removeImage(index: number) {
     setItems((current) => {
       const nextItems = current.filter((_, itemIndex) => itemIndex !== index);
-      return nextItems.length > 0 ? nextItems : [{ id: `${Date.now()}-empty`, src: "", alt: "" }];
+      return nextItems.length > 0 ? nextItems : [{ id: `${idPrefix}-${Date.now()}-empty`, src: "", alt: "" }];
     });
   }
 
@@ -97,7 +99,7 @@ export function ProductImageManager({ images }: ProductImageManagerProps) {
                   id={`image-src-${image.id}`}
                   name="imageSrc"
                   placeholder="/product-images/example.jpg"
-                  required={index === 0}
+                  required={requireFirst && index === 0}
                   value={image.src}
                   onChange={(event) => updateImage(index, "src", event.target.value)}
                 />

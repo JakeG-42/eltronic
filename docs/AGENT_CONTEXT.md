@@ -208,6 +208,8 @@ The admin uses Tailwind CSS v4 plus local shadcn-style primitives:
 
 Studio page bodies should avoid large duplicate `h1` titles because `src/components/studio/studio-shell.tsx` already shows the current mode in the sticky top bar. Prefer compact `.studio-page-header` rows for short descriptions and actions.
 
+The protected classic backend lives under `/studio/classic/products`. `src/components/studio/studio-shell.tsx` switches to a WordPress-style shell for that route and the existing Studio topbar links to it with `Switch to new`. The classic product editor is `src/components/studio/classic/woocommerce-product-editor.tsx`; it saves through the same `saveProductAction` and should keep using the managed product data model unless a deliberate schema migration is planned. Treat it as a WordPress/WooCommerce-inspired management surface for Eltronic, not a real WooCommerce install.
+
 - `src/components/ui/button.tsx`
 - `src/components/ui/card.tsx`
 - `src/components/ui/input.tsx`

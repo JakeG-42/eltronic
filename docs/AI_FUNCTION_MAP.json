@@ -368,6 +368,13 @@
     "studioShell": "src/components/studio/studio-shell.tsx",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
+    "classicWooStyleBackend": {
+      "routes": ["/studio/classic/products", "/studio/classic/products/new", "/studio/classic/products/[slug]/edit"],
+      "shell": "src/components/studio/studio-shell.tsx",
+      "editor": "src/components/studio/classic/woocommerce-product-editor.tsx",
+      "styleFile": "src/app/globals.css",
+      "behavior": "Protected WordPress/WooCommerce-inspired backend. Existing Studio shows a Switch to new button. Classic shell has WP-like admin bar/menu, product list table, Screen Options/Help tabs, product data panels, publish box, taxonomy boxes, product image and product gallery boxes. Saves through existing saveProductAction."
+    },
     "components": [
       "src/components/ui/button.tsx",
       "src/components/ui/card.tsx",

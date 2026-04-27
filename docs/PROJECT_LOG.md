@@ -52,6 +52,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Refined public content tone away from repeated machine/machinery phrasing, reduced oversized public headings and added restrained magenta/purple halogen edge accents to selected cards.
 - Replaced large duplicate Studio page titles with compact action rows, shortened the About hero heading, tightened homepage hero spacing and added a role typewriter above the Eltronic wordmark.
 - Reduced the oversized About page approach quote card so it reads as supporting content instead of a dominant headline.
+- Added a protected WordPress/WooCommerce-style product backend under `/studio/classic/products`, plus a `Switch to new` button from the current Studio and `Switch to current` from the classic shell.
 - Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
 
 ## Future Considerations
