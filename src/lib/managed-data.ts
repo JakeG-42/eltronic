@@ -24,7 +24,8 @@ import {
 const DATA_KEY = "eltronic:managed-data:v1";
 const LOCAL_DATA_PATH = path.join(process.cwd(), ".data", "eltronic-data.json");
 
-export type ContactSubmissionStatus = "new" | "reviewed" | "replied" | "archived";
+export type ContactSubmissionStatus = "new" | "reviewed" | "replied" | "archived" | "blocked";
+export type ContactSubmissionType = "enquiry" | "captcha_failed" | "honeypot_spam";
 
 export type ContactSubmission = {
   id: string;
@@ -35,6 +36,8 @@ export type ContactSubmission = {
   productName?: string;
   message: string;
   status: ContactSubmissionStatus;
+  type: ContactSubmissionType;
+  rejectionReason?: string;
   source: "website";
   createdAt: string;
   updatedAt: string;
@@ -81,7 +84,7 @@ function normalizeData(data: Partial<ManagedData> | null | undefined): ManagedDa
         ? normalizeProducts(data.products)
         : normalizeProducts(seededProducts),
     siteBuilder: normalizeSiteBuilderSettings(data?.siteBuilder),
-    submissions: Array.isArray(data?.submissions) ? data.submissions : [],
+    submissions: Array.isArray(data?.submissions) ? normalizeSubmissions(data.submissions) : [],
     updatedAt: typeof data?.updatedAt === "string" ? data.updatedAt : new Date().toISOString(),
   };
 }
@@ -105,6 +108,14 @@ function normalizeProductModules(modules?: Partial<ProductModules>): ProductModu
     current[module.key] = modules?.[module.key] ?? true;
     return current;
   }, {} as ProductModules);
+}
+
+function normalizeSubmissions(submissions: ContactSubmission[]): ContactSubmission[] {
+  return submissions.map((submission) => ({
+    ...submission,
+    status: normalizeSubmissionStatus(submission.status),
+    type: normalizeSubmissionType(submission.type),
+  }));
 }
 
 function normalizeSiteBuilderSettings(settings?: Partial<SiteBuilderSettings> | null): SiteBuilderSettings {
@@ -319,6 +330,45 @@ export async function createContactSubmission(input: {
     productName: product?.name,
     message: input.message.trim(),
     status: "new",
+    type: "enquiry",
+    source: "website",
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  await writeManagedData({
+    ...data,
+    submissions: [submission, ...data.submissions],
+  });
+
+  return submission;
+}
+
+export async function createBlockedContactSubmission(input: {
+  name?: string;
+  company?: string;
+  email?: string;
+  productSlug?: string;
+  message?: string;
+  rejectionReason: string;
+  type: Exclude<ContactSubmissionType, "enquiry">;
+}) {
+  const data = await readManagedData();
+  const product = input.productSlug
+    ? data.products.find((item) => item.slug === input.productSlug)
+    : undefined;
+  const now = new Date().toISOString();
+  const submission: ContactSubmission = {
+    id: crypto.randomUUID(),
+    name: input.name?.trim() || "Blocked visitor",
+    company: input.company?.trim() || undefined,
+    email: input.email?.trim() || "blocked@example.invalid",
+    productSlug: input.productSlug || undefined,
+    productName: product?.name,
+    message: input.message?.trim() || "Blocked before a valid enquiry was created.",
+    status: "blocked",
+    type: input.type,
+    rejectionReason: input.rejectionReason,
     source: "website",
     createdAt: now,
     updatedAt: now,
@@ -605,4 +655,24 @@ function normalizeRolePhrases(value: unknown) {
 function normalizeOrder(value: unknown, fallback: number) {
   const order = Number(value);
   return Number.isFinite(order) && order > 0 ? order : fallback;
+}
+
+function normalizeSubmissionStatus(value: unknown): ContactSubmissionStatus {
+  const status = String(value ?? "");
+
+  if (status === "reviewed" || status === "replied" || status === "archived" || status === "blocked") {
+    return status;
+  }
+
+  return "new";
+}
+
+function normalizeSubmissionType(value: unknown): ContactSubmissionType {
+  const type = String(value ?? "");
+
+  if (type === "captcha_failed" || type === "honeypot_spam") {
+    return type;
+  }
+
+  return "enquiry";
 }

@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 
 import { verifyMathCaptcha } from "@/lib/contact-captcha";
-import { createContactSubmission } from "@/lib/managed-data";
+import { createBlockedContactSubmission, createContactSubmission } from "@/lib/managed-data";
 
 export async function submitContactFormAction(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
@@ -20,10 +20,30 @@ export async function submitContactFormAction(formData: FormData) {
   }
 
   if (honeypot) {
+    await recordBlockedAttempt({
+      company,
+      email,
+      message,
+      name,
+      productSlug,
+      rejectionReason: "Hidden website field was populated.",
+      type: "honeypot_spam",
+    });
     redirect(contactRedirect("spam", productSlug));
   }
 
   if (!verifyMathCaptcha(captchaToken, captchaAnswer)) {
+    await recordBlockedAttempt({
+      company,
+      email,
+      message,
+      name,
+      productSlug,
+      rejectionReason: captchaAnswer
+        ? `Incorrect maths answer submitted: ${captchaAnswer}.`
+        : "Maths captcha answer was missing.",
+      type: "captcha_failed",
+    });
     redirect(contactRedirect("captcha", productSlug));
   }
 
@@ -40,6 +60,14 @@ export async function submitContactFormAction(formData: FormData) {
   }
 
   redirect("/contact?sent=1");
+}
+
+async function recordBlockedAttempt(input: Parameters<typeof createBlockedContactSubmission>[0]) {
+  try {
+    await createBlockedContactSubmission(input);
+  } catch {
+    // The user-facing redirect should still happen if production storage is not configured.
+  }
 }
 
 function contactRedirect(error: string, productSlug?: string) {

@@ -309,9 +309,10 @@
   "contactSubmissionModel": {
     "typeFile": "src/lib/managed-data.ts",
     "typeName": "ContactSubmission",
-    "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts rejects invalid captcha answers and populated website honeypot values before storage.",
+    "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts stores captcha failures and populated website honeypot values as blocked records when storage is available.",
     "tester": "npm run test:contact-bot runs scripts/test-contact-antispam.mjs against production by default and only exercises rejected bot paths unless -- --valid is passed.",
-    "statuses": ["new", "reviewed", "replied", "archived"],
+    "types": ["enquiry", "captcha_failed", "honeypot_spam"],
+    "statuses": ["new", "reviewed", "replied", "archived", "blocked"],
     "fields": [
       "id",
       "name",
@@ -321,6 +322,8 @@
       "productName",
       "message",
       "status",
+      "type",
+      "rejectionReason",
       "source",
       "createdAt",
       "updatedAt"

@@ -56,6 +56,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Added `/studio/builder`, a protected Website Builder for homepage theme, hero content, section visibility and section ordering, backed by the managed data layer.
 - Added `/studio/templates`, a protected WordPress-style template/file editor with a whitelisted source file tree and local-development-only save support.
 - Added a local anti-spam layer to the contact form with a signed maths captcha and hidden honeypot field.
+- Updated contact anti-spam to capture blocked captcha and honeypot attempts in the Studio submissions inbox with type filters.
 - Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
 
 ## Future Considerations
