@@ -155,24 +155,11 @@ h3 {
 }
 
 .ambient-background {
-  --ambient-x: 78vw;
-  --ambient-y: 18vh;
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-}
-
-.ambient-background::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background:
-    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(139, 211, 255, 0.12), transparent 18rem),
-    radial-gradient(circle at 8% 84%, rgba(251, 191, 36, 0.055), transparent 16rem);
-  opacity: 0.74;
-  transition: opacity var(--transition);
 }
 
 .ambient-glyph {
@@ -199,16 +186,26 @@ h3 {
 }
 
 @keyframes ambientFloat {
-  0%,
-  100% {
+  0% {
     opacity: 0.08;
     transform: translate3d(0, 0, 0) rotate(var(--glyph-rotate));
   }
 
-  50% {
+  35% {
     opacity: 0.2;
     transform: translate3d(var(--glyph-drift-x), var(--glyph-drift-y), 0)
       rotate(calc(var(--glyph-rotate) + 5deg));
+  }
+
+  70% {
+    opacity: 0.13;
+    transform: translate3d(calc(var(--glyph-drift-x) * -0.45), calc(var(--glyph-drift-y) * 0.55), 0)
+      rotate(calc(var(--glyph-rotate) - 4deg));
+  }
+
+  100% {
+    opacity: 0.08;
+    transform: translate3d(0, 0, 0) rotate(var(--glyph-rotate));
   }
 }
 
@@ -2400,10 +2397,6 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-background::before {
-    opacity: 0.52;
-  }
-
   .ambient-glyph {
     opacity: 0.12;
     animation: none;

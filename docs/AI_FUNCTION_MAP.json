@@ -332,7 +332,7 @@
     "publicAmbientBackground": {
       "file": "src/components/site/ambient-background.tsx",
       "styleFile": "src/app/globals.css",
-      "behavior": "Public-only fixed ambient layer with low-opacity floating syntax glyphs and a subtle pointer-follow radial glow. Respects prefers-reduced-motion."
+      "behavior": "Public-only fixed ambient layer with low-opacity floating syntax glyphs. Respects prefers-reduced-motion; no cursor or pointer-follow glow."
     },
     "publicNavIcons": {
       "file": "src/components/site/site-shell.tsx",
