@@ -104,9 +104,11 @@ The managed data layer is in `src/lib/managed-data.ts`.
 
 Storage selection:
 
+- If `DATABASE_URL`, `POSTGRES_URL`, or a Vercel integration-prefixed variant such as `eltronic_db_1_DATABASE_URL` exists, use Neon/Postgres through `@neondatabase/serverless`.
 - If `KV_REST_API_URL` and `KV_REST_API_TOKEN` exist, use Upstash/Vercel KV through `@upstash/redis`.
-- If KV is not configured and writes are allowed locally, use `.data/eltronic-data.json`.
-- In production without KV, use seeded products as read-only fallback and block writes.
+- If persistent storage is not configured and writes are allowed locally, use `.data/eltronic-data.json`.
+- In production without persistent storage, use seeded products as read-only fallback and block writes.
+- After pulling Vercel env vars locally, run `npm run storage:check` to verify Neon/Postgres or Redis can write, read and delete a test key.
 
 The `.data/` folder is gitignored because it can contain contact submissions and edited content.
 
@@ -246,12 +248,12 @@ Expected production alias:
 https://project-5v5cr.vercel.app
 ```
 
-Before relying on live admin writes, configure persistent KV env vars in Vercel:
+Before relying on live admin writes, configure persistent database env vars in Vercel:
 
-- `KV_REST_API_URL`
-- `KV_REST_API_TOKEN`
+- `DATABASE_URL` or integration-prefixed `eltronic_db_1_DATABASE_URL`
+- Fallback Redis support still accepts `KV_REST_API_URL` and `KV_REST_API_TOKEN`
 
-As of 2026-04-27, `npx vercel env ls` returned no configured env vars for `project-5v5cr`, so production admin/contact writes should still be treated as not persistent until KV/Upstash is connected and redeployed.
+As of 2026-04-27, the Neon database `eltronic_db_1` is connected to Vercel and injects prefixed env vars such as `eltronic_db_1_DATABASE_URL`. Production admin/contact writes should only be trusted after `npm run storage:check` passes and the project is redeployed.
 
 ## Agent Maintenance Rules
 

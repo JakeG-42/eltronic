@@ -55,7 +55,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 
 ## Product Data Model
 
-Products are seeded from `src/content/products.ts` and read through `src/lib/managed-data.ts`. In local development, edits are written to `.data/eltronic-data.json`. In production, persistent writes require Upstash/Vercel KV environment variables.
+Products are seeded from `src/content/products.ts` and read through `src/lib/managed-data.ts`. In local development, edits are written to `.data/eltronic-data.json`. In production, persistent writes require Neon/Postgres or Upstash/Vercel KV environment variables.
 
 Each product currently has:
 
@@ -144,11 +144,12 @@ Each product currently has:
 
 ## Storage Behavior
 
-- Without KV, local development writes to `.data/eltronic-data.json`.
+- Without persistent storage, local development writes to `.data/eltronic-data.json`.
 - `.data/` is gitignored because it may contain contact submissions.
-- On Vercel, set `KV_REST_API_URL` and `KV_REST_API_TOKEN` to persist products and submissions.
+- On Vercel, use Neon/Postgres `DATABASE_URL`, integration-prefixed `eltronic_db_1_DATABASE_URL`, or Redis `KV_REST_API_URL` and `KV_REST_API_TOKEN` to persist products and submissions.
 - Without persistent production storage, public pages fall back to seeded product content and admin/contact writes are blocked.
-- As of 2026-04-27, `npx vercel env ls` showed no configured environment variables for `project-5v5cr`.
+- As of 2026-04-27, Neon database `eltronic_db_1` is connected to Vercel with prefixed environment variables.
+- Use `npm run storage:check` after `npx vercel env pull .env.local` to confirm the live database credentials work before trusting admin/product/submission writes.
 
 ## Deployment Behavior
 

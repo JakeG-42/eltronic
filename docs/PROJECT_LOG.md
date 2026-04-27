@@ -27,7 +27,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Initial product-template support was added through a `template` field in the product data model.
 - Added Tailwind CSS v4 and local shadcn-style UI primitives for the admin interface.
 - Added simple admin authentication using `ELTRONIC_ADMIN_PASSWORD` and `ELTRONIC_ADMIN_SECRET`.
-- Added local JSON development storage with optional Upstash/Vercel KV persistence through `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
+- Added local JSON development storage with optional Neon/Postgres persistence through `DATABASE_URL`/prefixed Vercel integration variables, plus fallback Upstash/Vercel KV persistence through `KV_REST_API_URL` and `KV_REST_API_TOKEN`.
 - Switched public product routes to read from managed catalogue data so admin edits can feed the front end.
 - Added an AI context pack in `docs/AGENT_CONTEXT.md` and `docs/AI_FUNCTION_MAP.json` so future sessions can quickly recover auth, storage, routes and feature behavior.
 - Split public site chrome from Studio chrome with route groups.
@@ -57,13 +57,14 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Added `/studio/templates`, a protected WordPress-style template/file editor with a whitelisted source file tree and local-development-only save support.
 - Added a local anti-spam layer to the contact form with a signed maths captcha and hidden honeypot field.
 - Updated contact anti-spam to capture blocked captcha and honeypot attempts in the Studio submissions inbox with type filters.
-- Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
+- Added `npm run storage:check` to verify Neon/Postgres or Upstash/Vercel Redis credentials by writing, reading and deleting a short-lived test key before trusting live admin/contact persistence.
+- Connected Neon database `eltronic_db_1` on Vercel; the app supports the prefixed env vars injected by the integration.
 
 ## Future Considerations
 
 - WordPress migration work is being considered for any content that is not publicly crawlable.
 - A possible temporary WordPress plugin could provide a controlled JSON/ZIP export from wp-admin.
-- Production persistence needs a Vercel KV/Upstash Redis connection before live admin writes and contact submissions should be trusted.
+- Production persistence needs a passing `npm run storage:check` and a fresh Vercel deployment before live admin writes and contact submissions should be trusted.
 - Future admin improvements could include image uploads, per-page builder screens, richer product template fields, and email notifications for new submissions.
 - Keep AI-facing docs current when auth, route, storage or product-template behavior changes.
 

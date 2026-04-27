@@ -1,3 +1,4 @@
+import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import { Redis } from "@upstash/redis";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
@@ -23,6 +24,7 @@ import {
 
 const DATA_KEY = "eltronic:managed-data:v1";
 const LOCAL_DATA_PATH = path.join(process.cwd(), ".data", "eltronic-data.json");
+const POSTGRES_TABLE_NAME = "eltronic_managed_data";
 
 export type ContactSubmissionStatus = "new" | "reviewed" | "replied" | "archived" | "blocked";
 export type ContactSubmissionType = "enquiry" | "captcha_failed" | "honeypot_spam";
@@ -66,6 +68,35 @@ function getRedisConfig() {
   }
 
   return { url, token };
+}
+
+function getPostgresConnectionString() {
+  const directConnection =
+    process.env.DATABASE_URL ??
+    process.env.POSTGRES_URL ??
+    process.env.DATABASE_URL_UNPOOLED ??
+    process.env.POSTGRES_URL_NON_POOLING;
+
+  if (directConnection) {
+    return directConnection;
+  }
+
+  return getPrefixedPostgresConnectionString();
+}
+
+function getPrefixedPostgresConnectionString() {
+  const preferredSuffixes = ["DATABASE_URL", "POSTGRES_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING"];
+
+  for (const suffix of preferredSuffixes) {
+    const key = Object.keys(process.env).find((envKey) => envKey.endsWith(`_${suffix}`));
+    const value = key ? process.env[key] : undefined;
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return null;
 }
 
 function createEmptyData(): ManagedData {
@@ -171,16 +202,71 @@ function getRedisClient() {
   return new Redis(config);
 }
 
+function getPostgresClient() {
+  const connectionString = getPostgresConnectionString();
+
+  if (!connectionString) {
+    return null;
+  }
+
+  return neon(connectionString);
+}
+
+type NeonSql = NeonQueryFunction<false, false>;
+
+async function ensurePostgresDataTable(sql: NeonSql) {
+  await sql`
+    CREATE TABLE IF NOT EXISTS eltronic_managed_data (
+      id text PRIMARY KEY,
+      data jsonb NOT NULL,
+      updated_at timestamptz NOT NULL DEFAULT now()
+    )
+  `;
+}
+
+async function readPostgresManagedData(sql: NeonSql) {
+  await ensurePostgresDataTable(sql);
+
+  const rows = (await sql.query(`SELECT data FROM ${POSTGRES_TABLE_NAME} WHERE id = $1 LIMIT 1`, [
+    DATA_KEY,
+  ])) as Array<{ data: ManagedData | string | null }>;
+
+  const rowData = rows[0]?.data;
+
+  if (typeof rowData === "string") {
+    return normalizeData(JSON.parse(rowData) as ManagedData);
+  }
+
+  return normalizeData(rowData);
+}
+
+async function writePostgresManagedData(sql: NeonSql, data: ManagedData) {
+  await ensurePostgresDataTable(sql);
+  await sql.query(
+    `
+      INSERT INTO eltronic_managed_data (id, data, updated_at)
+      VALUES ($1, $2::jsonb, now())
+      ON CONFLICT (id)
+      DO UPDATE SET data = EXCLUDED.data, updated_at = now()
+    `,
+    [DATA_KEY, JSON.stringify(data)],
+  );
+}
+
 function canWriteLocalData() {
   return process.env.NODE_ENV !== "production" || process.env.ELTRONIC_ALLOW_LOCAL_WRITES === "true";
 }
 
 export function hasPersistentStorage() {
-  return Boolean(getRedisConfig());
+  return Boolean(getPostgresConnectionString() || getRedisConfig());
 }
 
 export function getStorageMode() {
-  if (hasPersistentStorage()) {
+  if (getPostgresConnectionString()) {
+    return "Neon/Postgres";
+  }
+
+  if (getRedisConfig()) {
     return "Upstash/Vercel KV";
   }
 
@@ -192,6 +278,12 @@ export function getStorageMode() {
 }
 
 async function readManagedData(): Promise<ManagedData> {
+  const postgres = getPostgresClient();
+
+  if (postgres) {
+    return readPostgresManagedData(postgres);
+  }
+
   const redis = getRedisClient();
 
   if (redis) {
@@ -208,11 +300,17 @@ async function readManagedData(): Promise<ManagedData> {
 }
 
 async function writeManagedData(data: ManagedData) {
+  const postgres = getPostgresClient();
   const redis = getRedisClient();
   const nextData = {
     ...data,
     updatedAt: new Date().toISOString(),
   };
+
+  if (postgres) {
+    await writePostgresManagedData(postgres, nextData);
+    return;
+  }
 
   if (redis) {
     await redis.set(DATA_KEY, nextData);
@@ -221,7 +319,7 @@ async function writeManagedData(data: ManagedData) {
 
   if (!canWriteLocalData()) {
     throw new Error(
-      "Persistent storage is not configured. Add KV_REST_API_URL and KV_REST_API_TOKEN on Vercel before writing admin data.",
+      "Persistent storage is not configured. Add DATABASE_URL for Neon/Postgres or KV_REST_API_URL and KV_REST_API_TOKEN for Redis before writing admin data.",
     );
   }
 

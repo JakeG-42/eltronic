@@ -77,6 +77,10 @@
     },
     "selectionOrder": [
       {
+        "mode": "Neon/Postgres",
+        "condition": "DATABASE_URL, POSTGRES_URL, or a Vercel integration-prefixed variant such as eltronic_db_1_DATABASE_URL is present"
+      },
+      {
         "mode": "Upstash/Vercel KV",
         "condition": "KV_REST_API_URL and KV_REST_API_TOKEN are present"
       },
@@ -86,18 +90,27 @@
       },
       {
         "mode": "read-only fallback",
-        "condition": "production without KV"
+        "condition": "production without persistent storage"
       }
     ],
     "env": {
+      "postgresUrl": [
+        "DATABASE_URL",
+        "POSTGRES_URL",
+        "DATABASE_URL_UNPOOLED",
+        "POSTGRES_URL_NON_POOLING",
+        "<integration-prefix>_DATABASE_URL",
+        "<integration-prefix>_POSTGRES_URL"
+      ],
       "kvUrl": ["KV_REST_API_URL", "UPSTASH_REDIS_REST_URL"],
       "kvToken": ["KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN"],
       "allowLocalProductionWrites": "ELTRONIC_ALLOW_LOCAL_WRITES"
     },
+    "smokeTest": "npm run storage:check runs scripts/check-storage.mjs after env vars are pulled locally and verifies Neon/Postgres or Redis write/read/delete access.",
     "currentVercelEnvCheck": {
       "checkedAt": "2026-04-27",
       "project": "project-5v5cr",
-      "result": "No environment variables configured"
+      "result": "Neon database eltronic_db_1 connected with prefixed environment variables"
     },
     "exports": [
       "getProducts",

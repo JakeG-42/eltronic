@@ -112,7 +112,8 @@ export function StudioShell({
         <main className="wp-admin-main">
           {!storageConfigured ? (
             <div className="wp-notice">
-              Storage is currently <strong>{storageMode}</strong>. Configure KV before relying on live admin writes.
+              Storage is currently <strong>{storageMode}</strong>. Configure Neon/Postgres or Redis before relying on
+              live admin writes.
             </div>
           ) : null}
           {children}
@@ -197,8 +198,9 @@ export function StudioShell({
         </header>
         {!storageConfigured ? (
           <div className="studio-storage-alert">
-            Storage is currently <strong>{storageMode}</strong>. Local edits work here, but Vercel needs
-            <code> KV_REST_API_URL </code> and <code>KV_REST_API_TOKEN</code> before live admin writes are persistent.
+            Storage is currently <strong>{storageMode}</strong>. Local edits work here, but Vercel needs a Neon
+            <code> DATABASE_URL </code> or Redis <code>KV_REST_API_URL</code> before live admin writes are
+            persistent.
           </div>
         ) : null}
         <main className="studio-content">{children}</main>
