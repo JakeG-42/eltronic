@@ -1,3 +1,6 @@
+import { resolveMx } from "dns/promises";
+
+import nodemailer from "nodemailer";
 import { Resend } from "resend";
 
 import {
@@ -9,6 +12,9 @@ import {
 } from "@/lib/managed-data";
 
 const FALLBACK_CONTACT_NOTIFICATION_TO = "jakub@gajosz.com";
+const DIRECT_SMTP_TIMEOUT_MS = 8000;
+
+type EmailTransport = "direct" | "resend";
 
 type EmailNotificationResult = "sent" | "skipped" | "failed";
 
@@ -20,7 +26,7 @@ export async function notifyContactSubmission(submission: ContactSubmission): Pr
   }
 
   try {
-    const result = await sendResendEmail({
+    const result = await sendEmailNotification({
       html: buildSubmissionEmailHtml(submission),
       idempotencyKey: submission.id,
       replyTo: isReplyableEmail(submission.email) ? submission.email : undefined,
@@ -61,7 +67,7 @@ export async function sendContactSubmissionDigest(): Promise<EmailNotificationRe
   }
 
   try {
-    const result = await sendResendEmail({
+    const result = await sendEmailNotification({
       html: buildDigestEmailHtml(submissions, settings.mode),
       idempotencyKey: `${settings.mode}:${submissions[0]?.createdAt ?? new Date().toISOString()}`,
       subject: buildDigestSubject(submissions, settings.mode),
@@ -83,14 +89,20 @@ export async function sendContactSubmissionDigest(): Promise<EmailNotificationRe
 }
 
 export function getContactEmailDeliveryStatus() {
+  const transport = getEmailTransport();
+
   return {
-    configured: Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_NOTIFICATION_FROM),
+    configured:
+      transport === "direct"
+        ? Boolean(process.env.CONTACT_NOTIFICATION_FROM)
+        : Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_NOTIFICATION_FROM),
     from: process.env.CONTACT_NOTIFICATION_FROM ?? "",
-    provider: "Resend",
+    provider: transport === "direct" ? "Direct SMTP from Vercel" : "Resend",
+    transport,
   };
 }
 
-async function sendResendEmail({
+async function sendEmailNotification({
   html,
   idempotencyKey,
   replyTo,
@@ -103,13 +115,58 @@ async function sendResendEmail({
   subject: string;
   text: string;
 }): Promise<EmailNotificationResult> {
-  const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CONTACT_NOTIFICATION_FROM;
   const settings = await getContactNotificationSettings();
   const fallbackRecipients = parseRecipientList(process.env.CONTACT_NOTIFICATION_TO ?? FALLBACK_CONTACT_NOTIFICATION_TO);
   const to = settings.recipients.length > 0 ? settings.recipients : fallbackRecipients;
 
-  if (!apiKey || !from || to.length === 0) {
+  if (!from || to.length === 0) {
+    return "skipped";
+  }
+
+  if (getEmailTransport() === "direct") {
+    return sendDirectSmtpEmail({
+      from,
+      html,
+      idempotencyKey,
+      replyTo,
+      subject,
+      text,
+      to,
+    });
+  }
+
+  return sendResendEmail({
+    from,
+    html,
+    idempotencyKey,
+    replyTo,
+    subject,
+    text,
+    to,
+  });
+}
+
+async function sendResendEmail({
+  from,
+  html,
+  idempotencyKey,
+  replyTo,
+  subject,
+  text,
+  to,
+}: {
+  from: string;
+  html: string;
+  idempotencyKey: string;
+  replyTo?: string;
+  subject: string;
+  text: string;
+  to: string[];
+}): Promise<EmailNotificationResult> {
+  const apiKey = process.env.RESEND_API_KEY;
+
+  if (!apiKey) {
     return "skipped";
   }
 
@@ -127,6 +184,87 @@ async function sendResendEmail({
 
   if (error) {
     throw new Error(`Resend returned ${error.name}: ${error.message}`);
+  }
+
+  return "sent";
+}
+
+async function sendDirectSmtpEmail({
+  from,
+  html,
+  idempotencyKey,
+  replyTo,
+  subject,
+  text,
+  to,
+}: {
+  from: string;
+  html: string;
+  idempotencyKey: string;
+  replyTo?: string;
+  subject: string;
+  text: string;
+  to: string[];
+}): Promise<EmailNotificationResult> {
+  const envelopeFrom = extractEmailAddress(from);
+  const groupedRecipients = groupRecipientsByDomain(to);
+  const heloName = process.env.CONTACT_NOTIFICATION_HELO_NAME || getEmailDomain(envelopeFrom) || "eltronic.co.uk";
+
+  if (groupedRecipients.size === 0) {
+    return "skipped";
+  }
+
+  for (const [domain, recipients] of groupedRecipients) {
+    const mxRecords = await resolveMx(domain);
+    const orderedMxRecords = mxRecords.sort((a, b) => a.priority - b.priority);
+
+    if (orderedMxRecords.length === 0) {
+      throw new Error(`Direct SMTP failed for ${domain}: no MX records found.`);
+    }
+
+    for (const [index, mxRecord] of orderedMxRecords.entries()) {
+      try {
+        const transporter = nodemailer.createTransport({
+          connectionTimeout: DIRECT_SMTP_TIMEOUT_MS,
+          greetingTimeout: DIRECT_SMTP_TIMEOUT_MS,
+          host: mxRecord.exchange,
+          name: heloName,
+          port: 25,
+          secure: false,
+          socketTimeout: DIRECT_SMTP_TIMEOUT_MS,
+          tls: {
+            rejectUnauthorized: false,
+            servername: mxRecord.exchange,
+          },
+        });
+
+        await transporter.sendMail({
+          envelope: {
+            from: envelopeFrom,
+            to: recipients,
+          },
+          from,
+          headers: {
+            "X-Eltronic-Notification-Id": idempotencyKey,
+          },
+          html,
+          replyTo,
+          subject,
+          text,
+          to: recipients,
+        });
+
+        break;
+      } catch (error) {
+        if (index === orderedMxRecords.length - 1) {
+          throw new Error(
+            `Direct SMTP failed for ${domain}: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+          );
+        }
+      }
+    }
   }
 
   return "sent";
@@ -270,6 +408,34 @@ function parseRecipientList(value: string) {
     .split(",")
     .map((recipient) => recipient.trim())
     .filter(Boolean);
+}
+
+function getEmailTransport(): EmailTransport {
+  return process.env.CONTACT_NOTIFICATION_TRANSPORT === "direct" ? "direct" : "resend";
+}
+
+function groupRecipientsByDomain(recipients: string[]) {
+  const groups = new Map<string, string[]>();
+
+  for (const recipient of recipients) {
+    const domain = getEmailDomain(recipient);
+
+    if (!domain) {
+      continue;
+    }
+
+    groups.set(domain, [...(groups.get(domain) ?? []), recipient]);
+  }
+
+  return groups;
+}
+
+function getEmailDomain(value: string) {
+  return extractEmailAddress(value).split("@")[1]?.toLowerCase() ?? "";
+}
+
+function extractEmailAddress(value: string) {
+  return value.match(/<([^>]+)>/)?.[1]?.trim() ?? value.trim();
 }
 
 function isReplyableEmail(value: string) {

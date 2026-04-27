@@ -102,6 +102,12 @@ export default async function StudioSettingsPage({ searchParams }: StudioSetting
                   inbox here.
                 </div>
               ) : null}
+              {deliveryStatus.transport === "direct" ? (
+                <div className="rounded-2xl border border-red-400/30 bg-red-500/10 p-4 text-sm text-red-100">
+                  Direct SMTP mode is active. This is a quick owner-notification fallback from Vercel, so delivery can
+                  be rejected or sent to spam without retries.
+                </div>
+              ) : null}
               <Button className="w-full sm:w-fit" type="submit">
                 Save email settings
               </Button>
