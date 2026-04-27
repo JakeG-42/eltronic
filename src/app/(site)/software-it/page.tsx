@@ -26,7 +26,7 @@ export default function SoftwareItPage() {
               Discuss a project
             </Link>
             <Link className="button secondary" href="/solutions">
-              View machine solutions
+              View control-system solutions
             </Link>
           </div>
         </div>
@@ -41,7 +41,7 @@ export default function SoftwareItPage() {
           </div>
           <p>
             A compact service map for the wider software, systems and
-            integration work that often sits around machinery, operations,
+            integration work that often sits around equipment, operations,
             logistics and business processes.
           </p>
         </div>

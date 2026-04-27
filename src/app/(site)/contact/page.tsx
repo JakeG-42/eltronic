@@ -33,7 +33,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
       <section className="contact-hero">
         <div className="contact-copy">
           <p className="code-kicker">project.enquiry</p>
-          <h1 className="contact-title">Talk through your machine project.</h1>
+          <h1 className="contact-title">Talk through your technical project.</h1>
           <p className="lede">
             Tell us what you are building, replacing or trying to control.
             We will review the application and come back with a practical
@@ -54,7 +54,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           <div className="contact-note">
             <span>Useful details</span>
             <p>
-              Product name, machine type, CAN protocol, environment and timing
+              Product name, equipment type, CAN protocol, environment and timing
               are enough to start. If you are not sure yet, send the rough idea.
             </p>
           </div>
@@ -105,7 +105,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             <textarea
               aria-label="Message"
               name="message"
-              placeholder="Tell us about the machine, operating environment, control requirements or product you want to specify."
+              placeholder="Tell us about the equipment, operating environment, control requirements or product you want to specify."
               required
             />
           </label>

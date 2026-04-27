@@ -49,6 +49,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Upgraded Studio product management with collapsible WooCommerce-style sections plus admin-only SKU, price, tags, enhanced variants and product module switches.
 - Added mobile hamburger auto-close behavior for link clicks, outside taps and Escape.
 - Added swipe/drag switching to product galleries and reshaped the Studio product editor into a main column plus sticky management sidebar.
+- Refined public content tone away from repeated machine/machinery phrasing, reduced oversized public headings and added restrained magenta/purple halogen edge accents to selected cards.
 - Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
 
 ## Future Considerations

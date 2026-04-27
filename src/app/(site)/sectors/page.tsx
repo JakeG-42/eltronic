@@ -16,7 +16,7 @@ export default function SectorsPage() {
           <p className="code-kicker">sectors.map</p>
           <h1>Control systems for real working environments.</h1>
           <p className="lede">
-            Eltronic supports specialist machinery across sectors where clear
+            Eltronic supports specialist equipment across sectors where clear
             operator feedback, reliable data and rugged control matter.
           </p>
           <div className="actions">
@@ -57,7 +57,7 @@ export default function SectorsPage() {
             <h2>Not seeing your exact application?</h2>
             <p>
               The site is quote-led by design. If the project involves
-              machinery, operator interfaces, CANbus or control integration,
+              specialist equipment, operator interfaces, CANbus or control integration,
               it is worth starting a conversation.
             </p>
           </div>

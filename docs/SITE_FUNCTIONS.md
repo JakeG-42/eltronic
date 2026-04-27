@@ -22,6 +22,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.
 - Public footer: `src/components/site/site-shell.tsx` renders a simple static footer; avoid sticky/reveal footer effects unless they are tested across full-page layouts.
 - AI context pack: future agents should start with `docs/AGENT_CONTEXT.md` and `docs/AI_FUNCTION_MAP.json`.
+- Public content tone: prefer precise wording such as specialist equipment, operating environment, application, platform, control system and operational workflow instead of repeating generic machine/machinery phrasing.
 
 ## Current Routes
 

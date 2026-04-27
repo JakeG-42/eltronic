@@ -4,15 +4,15 @@ export const serviceModules = [
     title: "Touch screen HMI solutions",
     eyebrow: "operator.interface",
     summary:
-      "Rugged touch screens for harsh machinery environments, with CAN-Bus, Ethernet and serial communications.",
+      "Rugged touch screens for demanding vehicle, plant and industrial environments, with CAN-Bus, Ethernet and serial communications.",
     bullets: ["TOPCON OPUS display supply", "Operator workflow design", "CoDeSys, C/Qt and OPUS Projektor support"],
   },
   {
     slug: "canbus-integration",
     title: "CANbus integration and diagnostics",
-    eyebrow: "machine.network",
+    eyebrow: "equipment.network",
     summary:
-      "Control-system integration, CAN data capture and diagnostics for mobile and stationary machinery.",
+      "Control-system integration, CAN data capture and diagnostics for mobile equipment, fixed installations and specialist vehicles.",
     bullets: ["CANopen, CANfreestyle and J1939", "CAN-FD data logging", "Remote diagnostics and data workflows"],
   },
   {
@@ -20,7 +20,7 @@ export const serviceModules = [
     title: "Bespoke control systems",
     eyebrow: "project.specific",
     summary:
-      "Custom software, wiring, harnesses and integration around the machine, not around a generic parts list.",
+      "Custom software, wiring, harnesses and integration around the application, not around a generic parts list.",
     bullets: ["Custom harnesses", "Existing control-system integration", "Quote-led engineering support"],
   },
 ];
@@ -44,7 +44,7 @@ export const softwareServiceModules = [
     title: "Embedded and connected services",
     code: "embedded.services",
     summary:
-      "Software services for connected hardware, telemetry, screen systems and machine data using practical protocols and reliable interfaces.",
+      "Software services for connected hardware, telemetry, screen systems and operational data using practical protocols and reliable interfaces.",
     examples: ["MQTT services", "HTTP/HTTPS APIs", "Device messaging", "Telemetry capture"],
   },
   {
@@ -106,29 +106,29 @@ export const sectorModules = [
     title: "Agriculture and farming",
     code: "sector.agri",
     summary:
-      "Display, monitoring and control solutions for harvesters, field collectors, spreaders and specialist agricultural machinery.",
+      "Display, monitoring and control solutions for harvesters, field collectors, spreaders and specialist agricultural equipment.",
     examples: ["Potato harvester", "Strawberry harvester", "Hay block field collectors", "Salt spreader"],
   },
   {
-    title: "Construction and heavy machinery",
+    title: "Construction and heavy equipment",
     code: "sector.heavy",
     summary:
-      "Rugged operator interfaces and CANbus control for machines working in vibration, dust, weather and long duty cycles.",
-    examples: ["Utility vehicles", "Construction machinery", "Recovery track safety", "Hydraulic systems"],
+      "Rugged operator interfaces and CANbus control for equipment working in vibration, dust, weather and long duty cycles.",
+    examples: ["Utility vehicles", "Construction equipment", "Recovery track safety", "Hydraulic systems"],
   },
   {
     title: "Logistics and material handling",
     code: "sector.logistics",
     summary:
-      "Interfaces, diagnostics and control integration for moving equipment, operator stations and fleet-facing machinery.",
+      "Interfaces, diagnostics and control integration for moving equipment, operator stations and fleet-facing assets.",
     examples: ["Material handling", "Vehicle data", "Operator feedback", "Remote support"],
   },
   {
     title: "Manufacturing and industrial automation",
     code: "sector.automation",
     summary:
-      "Stationary machine integration where reliability, clear operator control and maintainable systems matter.",
-    examples: ["Industrial HMIs", "Control panels", "Diagnostics", "Machine retrofits"],
+      "Fixed equipment and automation integration where reliability, clear operator control and maintainable systems matter.",
+    examples: ["Industrial HMIs", "Control panels", "Diagnostics", "Equipment retrofits"],
   },
 ];
 
@@ -137,8 +137,8 @@ export const workflowModules = [
     step: "01",
     title: "Operational and technical discovery",
     summary:
-      "We build a clear picture of the machine, environment, operator workflow, protocols, I/O and constraints before recommending hardware.",
-    outcome: "A grounded scope that reflects the real machine, not a generic product list.",
+      "We build a clear picture of the operating environment, workflow, protocols, I/O and constraints before recommending hardware.",
+    outcome: "A grounded scope that reflects the real application, not a generic product list.",
   },
   {
     step: "02",

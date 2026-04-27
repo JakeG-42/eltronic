@@ -4,13 +4,13 @@ import { sectorModules, workflowModules } from "@/content/site";
 
 export const metadata = {
   title: "About | Eltronic",
-  description: "About Eltronic engineering, product supply, systems integration and software support for machinery projects.",
+  description: "About Eltronic engineering, product supply, systems integration and software support for equipment projects.",
 };
 
 const strengths = [
   {
-    code: "machine.context",
-    title: "We start with the machine",
+    code: "application.context",
+    title: "We start with the application",
     summary:
       "The right answer depends on environment, operators, protocols, duty cycle, support needs and what already exists on site.",
   },
@@ -48,12 +48,12 @@ export default function AboutPage() {
       <section className="about-hero section">
         <div>
           <p className="code-kicker">about.eltronic</p>
-          <h1>Practical engineering for machines, screens and the systems around them.</h1>
+          <h1>Practical engineering for control systems, displays and connected operations.</h1>
           <p className="lede">
-            Eltronic supports mobile and stationary machinery projects with
-            rugged HMI displays, CAN data, bespoke integration and software
-            systems that reduce friction between hardware, operators and
-            business workflows.
+            Eltronic supports mobile plant, specialist vehicles and fixed
+            industrial equipment with rugged HMI displays, CAN data, bespoke
+            integration and software systems that reduce friction between
+            hardware, operators and business workflows.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
@@ -65,7 +65,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <TechnicalVisual label="Eltronic machine, data and systems architecture" variant="network" />
+        <TechnicalVisual label="Eltronic data and systems architecture" variant="network" />
       </section>
 
       <section className="about-intro-grid section">
@@ -74,7 +74,7 @@ export default function AboutPage() {
           <h2>Not just a catalogue. Not just code. The useful bit in the middle.</h2>
           <p>
             A product only matters once it is specified correctly, wired into the
-            real machine, configured around the operator and supported by clear
+            real operating environment, configured around the operator and supported by clear
             information. That is the space Eltronic works in.
           </p>
           <p>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             <h2>Engineering support across the whole system.</h2>
           </div>
           <p>
-            Customers can come in through a product requirement, a machine
+            Customers can come in through a product requirement, an equipment
             problem, a workflow bottleneck or a systems integration need.
           </p>
         </div>
@@ -111,7 +111,7 @@ export default function AboutPage() {
           <div>
             <h3>Core capability</h3>
             <p>
-              Eltronic sits between product supply, machine integration and
+              Eltronic sits between product supply, equipment integration and
               practical software delivery, helping customers make good technical
               decisions without overcomplicating the project.
             </p>
@@ -131,7 +131,7 @@ export default function AboutPage() {
             <h2>Structured enough for control. Flexible enough for real projects.</h2>
           </div>
           <p>
-            Machinery projects rarely move in perfect straight lines. The work
+            Engineering projects rarely move in perfect straight lines. The work
             stays calm when discovery, specification, delivery and support are
             handled deliberately.
           </p>
@@ -188,7 +188,7 @@ export default function AboutPage() {
         <div className="cta-module about-cta">
           <div>
             <span className="section-number">next.step</span>
-            <h2>Bring the machine, product or workflow problem.</h2>
+            <h2>Bring the product, platform or workflow challenge.</h2>
             <p>
               We can help shape the route from early specification through to
               hardware, software, integration and support.

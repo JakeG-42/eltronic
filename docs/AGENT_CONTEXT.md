@@ -198,7 +198,9 @@ The public main navigation uses inline SVG icons in `src/components/site/site-sh
 
 The public footer is also rendered from `src/components/site/site-shell.tsx`. Keep it simple and static for now; the sticky reveal experiment made the footer appear behind content and was removed.
 
-Workflow/process copy for public machine integration and Software & Systems pages lives in `src/content/site.ts`. Keep it professional: complex engineering should be presented as controlled, clear and easy for the customer to move through, not as if the work itself is basic.
+Workflow/process copy for public control-system integration and Software & Systems pages lives in `src/content/site.ts`. Keep it professional: complex engineering should be presented as controlled, clear and easy for the customer to move through, not as if the work itself is basic.
+
+Public copy should avoid repeating generic machine/machinery phrasing unless it is clearly the industry term. Prefer more precise language such as specialist equipment, operating environment, application, platform, control system, mobile plant, fixed installation, operator interface and operational workflow.
 
 The admin uses Tailwind CSS v4 plus local shadcn-style primitives:
 

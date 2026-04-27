@@ -42,8 +42,10 @@
   --text-muted: #94a3b8;
   --gradient-1: linear-gradient(135deg, #8bd3ff 0%, #b7a3ff 52%, #fbbf24 100%);
   --gradient-2: linear-gradient(135deg, #86efac 0%, #8bd3ff 100%);
+  --halogen-edge: linear-gradient(135deg, rgba(183, 163, 255, 0.68), rgba(236, 72, 153, 0.4), rgba(139, 211, 255, 0.22));
   --shadow-lg: 0 18px 45px rgba(0, 0, 0, 0.32);
   --shadow-glow: 0 0 32px rgba(139, 211, 255, 0.22);
+  --shadow-halogen: 0 0 34px rgba(183, 163, 255, 0.14);
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 0.9rem;
   --background: var(--bg-darker);
@@ -128,16 +130,18 @@ h3,
 
 h1 {
   margin-bottom: 1.5rem;
-  font-size: clamp(3rem, 9vw, 7rem);
-  line-height: 0.92;
+  font-size: clamp(2.55rem, 6.4vw, 5.45rem);
+  line-height: 0.98;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h2 {
   margin-bottom: 1rem;
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1;
+  font-size: clamp(1.85rem, 3.8vw, 3.25rem);
+  line-height: 1.06;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 h3 {
@@ -422,10 +426,10 @@ h3 {
 }
 
 .compact-hero h1 {
-  max-width: 12ch;
+  max-width: 17ch;
   margin-bottom: 1.2rem;
-  font-size: clamp(2.45rem, 5.4vw, 4.65rem);
-  line-height: 0.98;
+  font-size: clamp(2.25rem, 4.6vw, 3.8rem);
+  line-height: 1.04;
   text-wrap: balance;
 }
 
@@ -770,6 +774,21 @@ h3 {
   box-shadow: var(--shadow-lg);
 }
 
+.feature-module:nth-child(2n),
+.process-card:nth-child(2),
+.process-card:nth-child(4),
+.about-proof-card:nth-child(2n),
+.about-capability-list li:nth-child(2n),
+.contact-card:nth-child(2),
+.document-card:nth-child(3n + 1) {
+  border-color: transparent;
+  background:
+    radial-gradient(circle at top right, rgba(183, 163, 255, 0.12), transparent 12rem) padding-box,
+    linear-gradient(rgba(23, 32, 51, 0.78), rgba(23, 32, 51, 0.78)) padding-box,
+    var(--halogen-edge) border-box;
+  box-shadow: var(--shadow-lg), var(--shadow-halogen);
+}
+
 .feature-module,
 .process-card,
 .sector-card {
@@ -944,7 +963,7 @@ h3 {
 }
 
 .about-hero h1 {
-  max-width: 12ch;
+  max-width: 17ch;
 }
 
 .about-hero .technical-visual {
@@ -1460,10 +1479,10 @@ h3 {
 }
 
 .contact-title {
-  max-width: 11ch;
+  max-width: 15ch;
   margin-bottom: 0.2rem;
-  font-size: clamp(2.5rem, 5vw, 4.85rem);
-  line-height: 0.98;
+  font-size: clamp(2.3rem, 4.4vw, 3.9rem);
+  line-height: 1.04;
   text-wrap: balance;
 }
 
@@ -2465,9 +2484,9 @@ h3 {
   }
 
   .contact-title {
-    max-width: 13ch;
-    font-size: clamp(2.2rem, 11vw, 3.35rem);
-    line-height: 1.02;
+    max-width: 15ch;
+    font-size: clamp(2.05rem, 10vw, 3.05rem);
+    line-height: 1.06;
   }
 
   .about-quote-card {
@@ -2489,9 +2508,9 @@ h3 {
   }
 
   .compact-hero h1 {
-    max-width: 14ch;
-    font-size: clamp(2.15rem, 11vw, 3.25rem);
-    line-height: 1.02;
+    max-width: 17ch;
+    font-size: clamp(2.05rem, 10vw, 3.05rem);
+    line-height: 1.06;
   }
 
   .gallery-stage {

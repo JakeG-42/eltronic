@@ -5,7 +5,7 @@ import { serviceModules, workflowModules } from "@/content/site";
 export const metadata = {
   title: "Solutions | Eltronic",
   description:
-    "HMI, CANbus, harness, software and bespoke control-system integration solutions for machinery.",
+    "HMI, CANbus, harness, software and bespoke control-system integration solutions for specialist equipment.",
 };
 
 export default function SolutionsPage() {
@@ -14,11 +14,11 @@ export default function SolutionsPage() {
       <section className="hero compact-hero">
         <div className="hero-copy">
           <p className="code-kicker">solutions.stack</p>
-          <h1>Built around the machine.</h1>
+          <h1>Integrated systems for demanding applications.</h1>
           <p className="lede">
             Eltronic combines rugged operator interfaces, CANbus integration,
             custom software and project-specific harnessing for mobile and
-            stationary machinery.
+            stationary equipment.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
@@ -40,7 +40,7 @@ export default function SolutionsPage() {
           </div>
           <p>
             A practical view of the services that sit around every successful
-            HMI, CANbus or machine-control project.
+            HMI, CANbus or control-system project.
           </p>
         </div>
         <div className="module-grid">
@@ -83,7 +83,7 @@ export default function SolutionsPage() {
         <div className="cta-module">
           <div>
             <span className="section-number">software.systems</span>
-            <h2>Need the system around the machine too?</h2>
+            <h2>Need the operational system around it too?</h2>
             <p>
               Eltronic can also help with internal systems, API integrations,
               embedded services, server-side workflows, CRMs and practical
@@ -103,7 +103,7 @@ export default function SolutionsPage() {
             <h2>Professional delivery, made straightforward</h2>
           </div>
           <p>
-            Machinery integration has moving parts. The process keeps decisions,
+            Integration projects have moving parts. The process keeps decisions,
             risks and next steps clear from enquiry through support.
           </p>
         </div>

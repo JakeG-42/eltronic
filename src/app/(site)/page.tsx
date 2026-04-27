@@ -21,7 +21,8 @@ export default async function Home() {
           </h1>
           <p className="lede">
             Intelligent HMI displays, CAN data logging, custom harnesses and
-            software integration for mobile and stationary machinery.
+            software integration for mobile equipment, fixed installations and
+            specialist vehicles.
           </p>
           <div className="actions">
             <Link className="button" href="/products">
@@ -33,18 +34,18 @@ export default async function Home() {
           </div>
         </div>
 
-        <TechnicalVisual label="HMI, CANbus and machine control architecture" variant="display" />
+        <TechnicalVisual label="HMI, CANbus and control-system architecture" variant="display" />
       </section>
 
       <section className="section">
         <div className="section-heading">
           <div>
             <span className="section-number">01</span>
-            <h2>Machine-ready systems</h2>
+            <h2>Application-ready systems</h2>
           </div>
           <p>
             Rugged HMIs, CAN data capture and bespoke integration work come
-            together around the machine, the operator and the environment.
+            together around the operator, environment and project requirement.
           </p>
         </div>
         <div className="capability-grid">
@@ -71,7 +72,7 @@ export default async function Home() {
           </div>
           <p>
             A focused selection of displays, data logging tools and control
-            modules for quote-led machinery projects.
+            modules for quote-led equipment projects.
           </p>
         </div>
         <div className="product-grid">

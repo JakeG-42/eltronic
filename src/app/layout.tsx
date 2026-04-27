@@ -16,7 +16,7 @@ const code = Fira_Code({
 export const metadata: Metadata = {
   title: "Eltronic",
   description:
-    "Systems integration, HMI displays, CAN data logging and machinery control solutions.",
+    "Systems integration, HMI displays, CAN data logging and specialist equipment control solutions.",
 };
 
 export default function RootLayout({

@@ -115,16 +115,16 @@ const seedProducts: Product[] = [
       alt: "AutoPi CAN-FD Pro device and antenna kit",
     },
     summary:
-      "Dual CAN-FD data logging, edge processing, local storage and secure cloud upload for vehicles and machinery.",
+      "Dual CAN-FD data logging, edge processing, local storage and secure cloud upload for vehicles and specialist equipment.",
     description:
-      "The CAN-FD Pro is the data-led side of the Eltronic range: a Linux-based edge device for high-speed automotive and machinery logging, diagnostics and remote configuration.",
+      "The CAN-FD Pro is the data-led side of the Eltronic range: a Linux-based edge device for high-speed automotive and equipment logging, diagnostics and remote configuration.",
     highlights: [
       "Dual CAN/CAN-FD logging with support for additional external CAN interfaces",
       "32GB embedded storage with support for external USB storage",
       "Raw or decoded CAN data upload to storage endpoints such as AWS S3",
       "On-device CAN decoding using DBC, Python and SocketCAN workflows",
       "Remote live debugging through secure VPN access",
-      "Plug-and-play use in 12V and 24V vehicles or machinery",
+      "Plug-and-play use in 12V and 24V vehicles or plant",
     ],
     specifications: [
       { label: "Processor", value: "Broadcom BCM2711 Quad-core Cortex-A72 1.5GHz" },
@@ -156,9 +156,9 @@ const seedProducts: Product[] = [
       alt: "Eltronic I&Q CAN-bus I/O module",
     },
     summary:
-      "CAN-bus I/O expansion module for machinery control projects, with configuration details confirmed during enquiry.",
+      "CAN-bus I/O expansion module for equipment control projects, with configuration details confirmed during enquiry.",
     description:
-      "The I&Q CAN-bus I/O Module supports control-system expansion where additional machine inputs, outputs and CAN connectivity need to be discussed around the application.",
+      "The I&Q CAN-bus I/O Module supports control-system expansion where additional equipment inputs, outputs and CAN connectivity need to be discussed around the application.",
     highlights: [
       "Eltronic-owned product page for CAN-bus I/O expansion",
       "Technical data sections exist for housing, user interface and real time clock",
@@ -192,7 +192,7 @@ const seedProducts: Product[] = [
     summary:
       "Large B-series HMI with a bright 10.1 inch display, rugged housing and IP66 protection.",
     description:
-      "The OPUS B6e is positioned for municipal, utility, agriculture, construction and special-purpose machinery where a bright, robust HMI is needed.",
+      "The OPUS B6e is positioned for municipal, utility, agriculture, construction and special-purpose equipment where a bright, robust HMI is needed.",
     highlights: [
       "10.1 inch optically bonded display with 1280 x 800 resolution",
       "IP66 protection and wide temperature operating range",
@@ -225,7 +225,7 @@ const seedProducts: Product[] = [
     summary:
       "7 inch B-series ECO HMI with bright display, aluminium housing and IP66 protection.",
     description:
-      "The OPUS B4e gives the B-series rugged HMI pattern in a 7 inch format for quick implementation across vehicle and machinery applications.",
+      "The OPUS B4e gives the B-series rugged HMI pattern in a 7 inch format for quick implementation across vehicle and equipment applications.",
     highlights: [
       "7 inch optically bonded display with 800 cd/m2 brightness",
       "Landscape or portrait orientation",
@@ -256,9 +256,9 @@ const seedProducts: Product[] = [
       alt: "TOPCON OPUS B3e front view",
     },
     summary:
-      "Compact 5 inch B-series ECO HMI for rugged field and machinery applications.",
+      "Compact 5 inch B-series ECO HMI for rugged field and equipment applications.",
     description:
-      "The OPUS B3e brings the B-series format into a compact 5 inch HMI, suited to tight machine cabins and distributed control positions.",
+      "The OPUS B3e brings the B-series format into a compact 5 inch HMI, suited to tight operator cabins and distributed control positions.",
     highlights: [
       "5 inch optically bonded 800 cd/m2 display",
       "IP66 protection with -30 to +75 deg C operating range",
@@ -297,7 +297,7 @@ const seedProducts: Product[] = [
     summary:
       "12.1 inch A-series HMI with hard keys, soft keys, encoder, CAN bus and video input options.",
     description:
-      "The OPUS A8s is the large-format keyed A-series option, designed for demanding machine interfaces that need screen space and physical controls.",
+      "The OPUS A8s is the large-format keyed A-series option, designed for demanding operator interfaces that need screen space and physical controls.",
     highlights: [
       "12.1 inch high-resolution display with aluminium casing",
       "Eight soft keys, four hard keys, encoder and touchscreen",
@@ -375,7 +375,7 @@ const seedProducts: Product[] = [
     summary:
       "7 inch A-series HMI with soft keys, hard keys, encoder, CAN bus and optional camera inputs.",
     description:
-      "The OPUS A6s adds practical physical controls and expansion options to the 7 inch A-series platform for machinery with greater technical demands.",
+      "The OPUS A6s adds practical physical controls and expansion options to the 7 inch A-series platform for applications with greater technical demands.",
     highlights: [
       "7 inch display with 12 soft keys, hard keys, encoder and touchscreen",
       "Two CAN bus ports with Ethernet, RS232 and USB",
@@ -412,7 +412,7 @@ const seedProducts: Product[] = [
       alt: "TOPCON OPUS A6e front view",
     },
     summary:
-      "7 inch touch HMI for complex machine interfaces with CAN bus, video and configurable I/O.",
+      "7 inch touch HMI for complex control interfaces with CAN bus, video and configurable I/O.",
     description:
       "The OPUS A6e is the touch-focused 7 inch A-series option for applications that need a bright display, CAN bus integration and camera support.",
     highlights: [
@@ -492,7 +492,7 @@ const seedProducts: Product[] = [
     summary:
       "Compact 4.3 inch HMI with soft keys, hard keys, encoder, CAN bus and front USB.",
     description:
-      "The OPUS A3s extends the compact A3 platform with physical controls and extra connectivity for machinery operators who need tactile interaction.",
+      "The OPUS A3s extends the compact A3 platform with physical controls and extra connectivity for equipment operators who need tactile interaction.",
     highlights: [
       "4.3 inch display with eight soft keys, hard keys and encoder",
       "Two CAN bus ports, Ethernet, RS232 and USB",
