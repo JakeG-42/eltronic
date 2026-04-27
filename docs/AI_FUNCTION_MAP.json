@@ -382,8 +382,11 @@
     ],
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
-      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output.",
-      "seedPlaceholders": "public/product-images/placeholders/images-coming-soon-*.svg"
+      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries, not hidden runtime fallbacks.",
+      "generatedManifest": "src/content/product-gallery-assets.json",
+      "generatedAssets": "public/product-images/generated/*.svg",
+      "generator": "npm run images:products",
+      "syncCommand": "npm run images:products:sync"
     },
     "primaryImageAssets": "public/product-images"
   },
@@ -530,7 +533,7 @@
       "file": "src/components/studio/product-image-manager.tsx",
       "parser": "src/lib/managed-data.ts#productFromFormData",
       "fields": ["imageSrc", "imageAlt"],
-      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI or seed data only."
+      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

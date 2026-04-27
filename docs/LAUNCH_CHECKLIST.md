@@ -12,6 +12,8 @@ Use this before pointing `eltronic.co.uk` at Vercel.
 - Password changes/reset paths bump the user session version so old sessions are invalidated.
 - Public footer no longer links to Studio.
 - Product placeholders are filtered out of public gallery/sitemap output.
+- Each product now has generated technical overview, interface and application-context gallery illustrations in addition to its primary product image.
+- Generated product gallery paths have been synced into Neon managed product data so Studio can preview, reorder or remove them.
 - The I&Q CAN-Bus module copy no longer shows unfinished `TBU`/`To be updated` content.
 - Empty Projects page copy no longer mentions source-code editing, and the Projects index is omitted from the sitemap until a project is published.
 - Contact storage errors use neutral customer-facing copy.
@@ -20,7 +22,7 @@ Use this before pointing `eltronic.co.uk` at Vercel.
 
 - Test Studio login with the permanent super-admin account.
 - Delete the temporary `admin` bootstrap account manually only after the permanent account works.
-- Add real extra gallery images for products that currently only have one image.
+- Replace generated product gallery illustrations with real product/application photos where available, or keep them as supporting technical diagrams.
 - Add real project case studies with photos before linking Projects publicly.
 - Confirm product document links: replace request-only document cards with real datasheets where possible.
 - Set `NEXT_PUBLIC_SITE_URL=https://eltronic.co.uk` in Vercel after DNS is ready, then redeploy.

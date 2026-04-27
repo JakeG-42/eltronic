@@ -19,6 +19,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Classic/Woo-style Studio: `/studio/classic/products` uses `src/components/studio/classic/woocommerce-product-editor.tsx` and WordPress/WooCommerce-inspired list/edit screens.
 - Global styles: `src/app/globals.css`.
 - Product seed data: `src/content/products.ts`.
+- Generated product gallery manifest: `src/content/product-gallery-assets.json`.
+- Product gallery generator: `scripts/generate-product-gallery-assets.mjs`.
 - Site page/module content: `src/content/site.ts`.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
@@ -78,7 +80,7 @@ Each product currently has:
 - `tags`: optional admin/product-management tags.
 - `modules`: admin module switches for gallery, highlights, specifications, documents, variants and enquiry; stored but not wired into public rendering yet.
 - `image`: `{ src, alt }` used by listings and detail pages.
-- `images`: optional ordered gallery of `{ src, alt }`; public product galleries use managed images only, with `image` as the fallback primary image. Launch placeholder images are filtered out of public galleries/sitemaps.
+- `images`: optional ordered gallery of `{ src, alt }`; public product galleries use managed images only, with `image` as the fallback primary image. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and are explicit seed/managed gallery entries.
 - `summary`: short card/listing copy.
 - `description`: product detail intro copy.
 - `highlights`: list of product or template highlights.
@@ -110,7 +112,7 @@ Each product currently has:
 - `generateMetadata()` sets product-specific page title, description, canonical URL, Open Graph and Twitter metadata.
 - Unknown product slugs call `notFound()`.
 - The detail page displays family, category, name, description, template-specific heading, image, highlights, enquiry prompt, specifications, documents and variants where available.
-- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data or Studio edits.
+- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data, generated manifest entries or Studio edits.
 - Product detail pages emit product and breadcrumb JSON-LD structured data.
 - Template headings are currently mapped in `src/app/(site)/products/[slug]/page.tsx`.
 
@@ -199,4 +201,4 @@ Each product currently has:
 - WordPress migration/plugin work is being considered but is not implemented in the current app.
 - Image upload management is not implemented yet; product images currently use URLs.
 - Generated public-page imagery is currently code-native SVG, not bitmap media uploads.
-- Product galleries do not append hidden fallback images; placeholder launch assets are filtered from public output and should be replaced with real product media before public launch.
+- Product galleries do not append hidden fallback images; generated product illustrations are explicit gallery records and can be reordered/removed in Studio. Replace them with real product/application photography when available.

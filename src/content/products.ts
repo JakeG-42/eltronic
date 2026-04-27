@@ -1,3 +1,5 @@
+import generatedProductGalleryAssets from "./product-gallery-assets.json";
+
 export type ProductTemplate = "hmi" | "data-logger" | "module";
 
 export type ProductImage = {
@@ -84,6 +86,8 @@ export type Product = {
 const topconDocuments: ProductDocument[] = [
   { label: "Request product data sheet", url: "/contact" },
 ];
+
+const generatedProductGallery = generatedProductGalleryAssets as Record<string, ProductImage[]>;
 
 const seedProducts: Product[] = [
   {
@@ -497,7 +501,43 @@ const seedProducts: Product[] = [
   },
 ];
 
-export const products: Product[] = seedProducts;
+export function getGeneratedProductGalleryImages(slug: string) {
+  return generatedProductGallery[slug] ?? [];
+}
+
+function withGeneratedGallery(product: Product): Product {
+  const images = mergeProductImages(
+    [product.image, ...(product.images ?? []), ...getGeneratedProductGalleryImages(product.slug)],
+    product.name,
+  );
+
+  return {
+    ...product,
+    image: images[0] ?? product.image,
+    images,
+  };
+}
+
+function mergeProductImages(images: ProductImage[], fallbackAlt: string) {
+  const seen = new Set<string>();
+
+  return images
+    .filter((image) => image.src)
+    .map((image) => ({
+      src: image.src,
+      alt: image.alt || fallbackAlt,
+    }))
+    .filter((image) => {
+      if (seen.has(image.src)) {
+        return false;
+      }
+
+      seen.add(image.src);
+      return true;
+    });
+}
+
+export const products: Product[] = seedProducts.map(withGeneratedGallery);
 
 export const productFamilies = Array.from(
   new Set(products.map((product) => product.family)),

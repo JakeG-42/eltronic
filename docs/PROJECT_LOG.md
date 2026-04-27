@@ -5,7 +5,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 ## Current Status
 
 - Repository: standalone GitHub repo `JakeG-42/eltronic`.
-- Active branch: `main`.
+- Active branch: `dev` for launch-hardening work; `main` remains the stable baseline until merged.
 - App scaffold: Next.js app using the App Router under `src/app`.
 - Deployment: Vercel project `project-5v5cr` is connected and deployed.
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
@@ -77,6 +77,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Created local offline backups in `/Users/jake/Documents/Eltronic_backups` and branched `dev` from `main` for launch-hardening work.
 - Added managed Studio users with `super_admin`, `admin` and `moderator` roles, hashed passwords, session-version invalidation, `/studio/users` and `/studio/account`.
 - Cleaned launch-facing content issues: removed public Studio footer link, filtered placeholder gallery images from public output, tightened I&Q CAN-Bus module copy, softened empty Projects/Data/Contact copy and added `docs/LAUNCH_CHECKLIST.md`.
+- Added repeatable generated product gallery assets: 33 technical SVG illustrations across 11 products, a `src/content/product-gallery-assets.json` manifest, `npm run images:products`, and `npm run images:products:sync` to sync the gallery paths into Neon managed product records.
 
 ## Future Considerations
 
@@ -85,6 +86,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Production persistence needs a passing `npm run storage:check` and a fresh Vercel deployment before live admin writes and contact submissions should be trusted.
 - Future admin improvements could include image uploads, per-page builder screens, richer product template fields, and richer email delivery logs.
 - Future SEO/content work should add real project case studies, original project photos, final-domain `NEXT_PUBLIC_SITE_URL`, Search Console submission and domain-specific Open Graph preview checks.
+- Replace generated product technical illustrations with real additional product/application photography when available, or keep them as controlled supporting diagrams where photography is missing.
 - Keep AI-facing docs current when auth, route, storage or product-template behavior changes.
 
 ## Update Notes
