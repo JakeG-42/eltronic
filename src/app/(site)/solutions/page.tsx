@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { serviceModules, workflowModules } from "@/content/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Solutions | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Solutions",
   description:
     "HMI, CAN-Bus, harness, software and bespoke control-system integration solutions for specialist equipment.",
-};
+  path: "/solutions",
+});
 
 export default function SolutionsPage() {
   return (

@@ -145,7 +145,21 @@
       "file": "src/app/(site)/products/[slug]/page.tsx",
       "kind": "public",
       "dataSource": "getProductBySlug(slug), getProductImages(product)",
-      "clientComponents": ["src/components/site/product-media-gallery.tsx"]
+      "clientComponents": ["src/components/site/product-media-gallery.tsx"],
+      "structuredData": ["Product", "BreadcrumbList"]
+    },
+    {
+      "path": "/projects",
+      "file": "src/app/(site)/projects/page.tsx",
+      "kind": "public-content",
+      "dataSource": "src/content/projects.ts#getPublishedProjectCaseStudies"
+    },
+    {
+      "path": "/projects/[slug]",
+      "file": "src/app/(site)/projects/[slug]/page.tsx",
+      "kind": "public-content",
+      "dataSource": "src/content/projects.ts#getProjectCaseStudyBySlug",
+      "structuredData": ["Article", "BreadcrumbList"]
     },
     {
       "path": "/solutions",
@@ -177,6 +191,18 @@
       "kind": "public-form",
       "action": "src/app/contact/actions.ts#submitContactFormAction",
       "antiSpam": "src/lib/contact-captcha.ts local signed maths captcha plus hidden website honeypot"
+    },
+    {
+      "path": "/sitemap.xml",
+      "file": "src/app/sitemap.ts",
+      "kind": "seo",
+      "dataSource": "static public routes, getProducts(), getProductImages(product), getPublishedProjectCaseStudies()"
+    },
+    {
+      "path": "/robots.txt",
+      "file": "src/app/robots.ts",
+      "kind": "seo",
+      "policy": "Allows public site, disallows /studio and /api, points to sitemap.xml"
     },
     {
       "path": "/studio/login",
@@ -319,6 +345,42 @@
     },
     "primaryImageAssets": "public/product-images"
   },
+  "projectCaseStudyModel": {
+    "sourceType": "TypeScript",
+    "typeFile": "src/content/projects.ts",
+    "templateDoc": "docs/PROJECT_CASE_STUDY_TEMPLATE.md",
+    "publishBehavior": "published=true makes the entry appear on /projects, generate /projects/[slug], and appear in /sitemap.xml.",
+    "recommendedImagePath": "public/projects/<slug>/...",
+    "fields": [
+      "published",
+      "slug",
+      "title",
+      "summary",
+      "metaDescription",
+      "date",
+      "updatedAt",
+      "intro",
+      "challenge",
+      "outcomes[]",
+      "services[]",
+      "images[].src",
+      "images[].alt"
+    ]
+  },
+  "seo": {
+    "siteConfig": "src/lib/seo.ts#siteConfig",
+    "canonicalEnv": "NEXT_PUBLIC_SITE_URL",
+    "rootMetadata": "src/app/layout.tsx",
+    "sitemap": "src/app/sitemap.ts",
+    "robots": "src/app/robots.ts",
+    "opengraphImage": "src/app/opengraph-image.tsx",
+    "manifest": "src/app/manifest.ts",
+    "icon": "src/app/icon.svg",
+    "publicMetadataHelper": "src/lib/seo.ts#createPageMetadata",
+    "structuredDataComponent": "src/components/site/structured-data.tsx",
+    "studioNoIndex": ["src/app/studio/(admin)/layout.tsx", "src/app/studio/login/page.tsx"],
+    "behavior": "Public pages have canonical URLs, descriptions, keyword hints, Open Graph/Twitter metadata and JSON-LD where useful. Studio and API routes are excluded from normal crawling."
+  },
   "contactSubmissionModel": {
     "typeFile": "src/lib/managed-data.ts",
     "typeName": "ContactSubmission",
@@ -363,7 +425,7 @@
       "file": "src/components/site/site-shell.tsx",
       "type": "inline SVG",
       "primaryItems": ["Products", "Solutions", "Software", "About", "Contact"],
-      "secondaryItems": ["Sectors", "Data & specification in footer/page CTAs"],
+      "secondaryItems": ["Projects", "Sectors", "Data & specification in footer/page CTAs"],
       "mobileBehavior": "Full desktop nav collapses to a native details hamburger menu under the mobile breakpoint. src/components/site/mobile-nav-auto-close.tsx closes it on link click, outside tap and Escape."
     },
     "publicFooter": {

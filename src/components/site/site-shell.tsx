@@ -50,6 +50,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <div className="footer-container">
           <p>© 2026 Eltronic</p>
           <div className="footer-links">
+            <Link href="/projects">Projects</Link>
             <Link href="/sectors">Sectors</Link>
             <Link href="/data-specification">Data & specification</Link>
             <a href="tel:+447935239421">+44(0) 79 3523 9421</a>

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { sectorModules } from "@/content/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Sectors | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Sectors",
   description:
     "Eltronic application sectors including agriculture, construction, logistics and industrial automation.",
-};
+  path: "/sectors",
+});
 
 export default function SectorsPage() {
   return (

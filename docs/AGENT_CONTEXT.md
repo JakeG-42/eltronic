@@ -28,6 +28,10 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/content/products.ts`: seed catalogue from the crawled WordPress site.
 - `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
 - `src/content/site-builder.ts`: Website Builder defaults for homepage theme, hero and section controls.
+- `src/content/projects.ts`: public project/case-study content scaffold.
+- `src/lib/seo.ts`: shared site URL, metadata and JSON-LD helpers.
+- `src/app/sitemap.ts`: dynamic sitemap for public static routes, products and published projects.
+- `src/app/robots.ts`: crawler policy for public pages versus Studio/API routes.
 - `src/lib/template-editor.ts`: whitelisted Studio Template Editor file registry/read-write helpers.
 - `src/lib/contact-captcha.ts`: local signed maths captcha for contact anti-spam.
 - `src/components/site/technical-visuals.tsx`: code-native public-page technical visuals.
@@ -37,6 +41,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `public/product-images`: local product image assets used by the public catalogue.
 - `public/product-images/placeholders`: explicit seed gallery placeholders that appear in Studio like normal managed images.
 - `docs/AI_FUNCTION_MAP.json`: machine-readable feature map.
+- `docs/PROJECT_CASE_STUDY_TEMPLATE.md`: checklist and object shape for future project write-ups.
 
 ## Auth Model
 
@@ -175,6 +180,28 @@ If adding a new template, update:
 - The template select in `src/components/studio/product-form.tsx`.
 - `productTypeLabel` in `src/app/(site)/products/[slug]/page.tsx`.
 - `docs/AI_FUNCTION_MAP.json`.
+
+## SEO And Project Pages
+
+SEO foundations are centralised, not scattered.
+
+- Site config and canonical URL helper: `src/lib/seo.ts`.
+- Root metadata, title template, keywords, Open Graph/Twitter defaults and Organisation/WebSite JSON-LD: `src/app/layout.tsx`.
+- Dynamic sitemap: `src/app/sitemap.ts`.
+- Robots policy: `src/app/robots.ts`.
+- Default social preview: `src/app/opengraph-image.tsx`.
+- Favicon/app manifest: `src/app/icon.svg` and `src/app/manifest.ts`.
+- Studio noindex metadata: `src/app/studio/(admin)/layout.tsx` and `src/app/studio/login/page.tsx`.
+
+When the final Eltronic domain is connected, set `NEXT_PUBLIC_SITE_URL` in Vercel to the canonical production domain, for example `https://eltronic.co.uk`. That value feeds canonical links, structured data and sitemap URLs.
+
+Project/case-study pages are prepared in `src/content/projects.ts`.
+
+- Keep new entries `published: false` until the copy/photos are ready.
+- `published: true` adds the project to `/projects`, generates `/projects/[slug]` and includes it in `/sitemap.xml`.
+- Use local images under `public/projects/<slug>/...` where possible.
+- Follow `docs/PROJECT_CASE_STUDY_TEMPLATE.md` for required fields and writing rules.
+- Project detail pages emit article and breadcrumb JSON-LD.
 
 ## Contact Submissions
 

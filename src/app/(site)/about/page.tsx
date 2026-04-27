@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { sectorModules, workflowModules } from "@/content/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "About | Eltronic",
-  description: "About Eltronic engineering, product supply, systems integration and software support for equipment projects.",
-};
+export const metadata = createPageMetadata({
+  title: "About",
+  description:
+    "About Eltronic engineering, product supply, systems integration and software support for equipment projects.",
+  path: "/about",
+});
 
 const strengths = [
   {

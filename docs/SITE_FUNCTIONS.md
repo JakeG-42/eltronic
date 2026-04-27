@@ -13,6 +13,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.
 - Website Builder defaults: `src/content/site-builder.ts`.
+- SEO helpers and site configuration: `src/lib/seo.ts`.
+- Project/case-study content scaffold: `src/content/projects.ts` and `docs/PROJECT_CASE_STUDY_TEMPLATE.md`.
 - Template/file editor registry: `src/lib/template-editor.ts`.
 - Classic/Woo-style Studio: `/studio/classic/products` uses `src/components/studio/classic/woocommerce-product-editor.tsx` and WordPress/WooCommerce-inspired list/edit screens.
 - Global styles: `src/app/globals.css`.
@@ -21,7 +23,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
-- Public navigation: brand link to `/`, desktop icon-labelled links for `/products`, `/solutions`, `/software-it`, `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
+- Public navigation: brand link to `/`, desktop icon-labelled links for `/products`, `/solutions`, `/software-it`, `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.
@@ -34,12 +36,16 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/`: homepage with hero copy, solution/service sections, featured product cards, public service CTAs and the shared professional workflow modules from `src/content/site.ts`.
 - `/products`: dynamic product listing page generated from the managed catalogue.
 - `/products/[slug]`: dynamic product detail page generated from the managed catalogue.
+- `/projects`: public project/case-study index generated from `src/content/projects.ts`.
+- `/projects/[slug]`: public project/case-study detail page with article and breadcrumb structured data.
 - `/solutions`: public solution/service page for HMI, CAN-Bus and bespoke control integration.
 - `/software-it`: public service page for full-stack internal platforms, API/shipping integrations, embedded and IoT/device services, backend infrastructure and technical consultation.
 - `/sectors`: public sector page for agriculture, construction, logistics and industrial automation.
 - `/data-specification`: public resource page for data sheets, guides and product documents.
-- `/about`: company positioning page for Eltronic's machinery, product, integration and software approach.
+- `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
+- `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.
+- `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -99,11 +105,31 @@ Each product currently has:
 ## Product Detail Behavior
 
 - Product listing and detail pages are marked dynamic so admin changes can be reflected without rebuilding static slug lists.
-- `generateMetadata()` sets product-specific page title and description.
+- `generateMetadata()` sets product-specific page title, description, canonical URL, Open Graph and Twitter metadata.
 - Unknown product slugs call `notFound()`.
 - The detail page displays family, category, name, description, template-specific heading, image, highlights, enquiry prompt, specifications, documents and variants where available.
 - Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data or Studio edits.
+- Product detail pages emit product and breadcrumb JSON-LD structured data.
 - Template headings are currently mapped in `src/app/(site)/products/[slug]/page.tsx`.
+
+## SEO Behavior
+
+- Site-wide metadata lives in `src/app/layout.tsx` and shared helpers live in `src/lib/seo.ts`.
+- Public pages use canonical URLs, title templates, meta descriptions, keyword hints, Open Graph and Twitter metadata.
+- `NEXT_PUBLIC_SITE_URL` controls the absolute site URL used by canonical links, structured data and the sitemap. Set it to the final domain when `eltronic.co.uk` is pointed at Vercel.
+- `src/app/sitemap.ts` creates `/sitemap.xml` dynamically from static public routes, managed products and published project case studies.
+- `src/app/robots.ts` creates `/robots.txt` and disallows `/studio` and `/api` from normal crawling.
+- `src/app/opengraph-image.tsx` generates the default social sharing preview image.
+- `src/app/icon.svg` and `src/app/manifest.ts` provide basic favicon/app metadata.
+- Studio routes are marked `noindex, nofollow` through admin/login metadata.
+
+## Project Case Study Behavior
+
+- Public project pages are content-code driven for now through `src/content/projects.ts`.
+- `published: true` makes a project appear on `/projects`, generate `/projects/[slug]`, and appear in `/sitemap.xml`.
+- Each project supports title, slug, date, summary, meta description, intro, challenge, outcome bullets, service tags and ordered images.
+- Detail pages emit article and breadcrumb JSON-LD structured data.
+- Use `docs/PROJECT_CASE_STUDY_TEMPLATE.md` when turning Jake's project notes/photos into pages.
 
 ## Contact Anti-Spam Behavior
 

@@ -2,12 +2,14 @@ import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { resourceModules } from "@/content/site";
 import { getProducts } from "@/lib/managed-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Data & Specification | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Data & Specification",
   description:
     "Product data sheets, guides, specification resources and enquiry support for Eltronic products.",
-};
+  path: "/data-specification",
+});
 
 export const dynamic = "force-dynamic";
 

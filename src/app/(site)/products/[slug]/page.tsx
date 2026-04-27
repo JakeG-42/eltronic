@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductMediaGallery } from "@/components/site/product-media-gallery";
+import { StructuredData } from "@/components/site/structured-data";
 import { getProductBySlug, getProductImages } from "@/lib/managed-data";
+import { absoluteUrl, breadcrumbJsonLd, createPageMetadata, siteConfig } from "@/lib/seo";
 
 type ProductPageProps = {
   params: Promise<{
@@ -19,10 +21,11 @@ export async function generateMetadata({ params }: ProductPageProps) {
     return {};
   }
 
-  return {
-    title: `${product.name} | Eltronic`,
+  return createPageMetadata({
+    title: product.name,
     description: product.summary,
-  };
+    path: `/products/${product.slug}`,
+  });
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
@@ -36,6 +39,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <main className="page">
+      <StructuredData
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Products", path: "/products" },
+            { name: product.name, path: `/products/${product.slug}` },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            brand: {
+              "@type": "Brand",
+              name: siteConfig.name,
+            },
+            category: product.category,
+            description: product.summary,
+            image: images.map((image) => absoluteUrl(image.src)),
+            name: product.name,
+            sku: product.sku,
+            url: absoluteUrl(`/products/${product.slug}`),
+          },
+        ]}
+      />
       <section className="detail-hero">
         <div>
           <p className="code-kicker">{product.family}</p>

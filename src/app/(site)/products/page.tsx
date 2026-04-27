@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getProductFamilies, getProducts } from "@/lib/managed-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Products | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Products",
   description: "Browse Eltronic HMI, CAN data logging and control products.",
-};
+  path: "/products",
+});
 
 export const dynamic = "force-dynamic";
 

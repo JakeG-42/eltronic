@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { LockKeyhole } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -14,8 +15,12 @@ type LoginPageProps = {
   }>;
 };
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Studio Login | Eltronic",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function StudioLoginPage({ searchParams }: LoginPageProps) {

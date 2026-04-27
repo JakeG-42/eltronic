@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { createMathCaptcha } from "@/lib/contact-captcha";
 import { getProducts } from "@/lib/managed-data";
+import { createPageMetadata } from "@/lib/seo";
 import { submitContactFormAction } from "@/app/contact/actions";
 
-export const metadata = {
-  title: "Contact | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Contact",
   description: "Contact Eltronic for product and project enquiries.",
-};
+  path: "/contact",
+});
 
 type ContactPageProps = {
   searchParams?: Promise<{

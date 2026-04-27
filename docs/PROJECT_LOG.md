@@ -12,6 +12,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Product content: initial structured product data lives in `src/content/products.ts`; live editable data is read through `src/lib/managed-data.ts`.
 - Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, templates and contact submissions.
 - Contact handling: `/contact` now stores enquiries through the managed data layer.
+- SEO: sitemap, robots rules, canonical metadata, structured data and project/case-study scaffolding are in place.
 
 ## What Has Happened So Far
 
@@ -71,6 +72,8 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Added `npm run storage:check` to verify Neon/Postgres or Upstash/Vercel Redis credentials by writing, reading and deleting a short-lived test key before trusting live admin/contact persistence.
 - Connected Neon database `eltronic_db_1` on Vercel; the app supports the prefixed env vars injected by the integration.
 - Deployed Neon-backed storage support to production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j`; `npm run storage:check` passes and the safe contact bot tester saved two blocked records in Neon.
+- Added SEO foundations: shared metadata helpers, dynamic `/sitemap.xml`, `/robots.txt`, favicon/manifest, Open Graph image, public page canonical metadata, noindex Studio metadata and structured data for products/projects.
+- Added `/projects` and `/projects/[slug]` case-study scaffolding plus `docs/PROJECT_CASE_STUDY_TEMPLATE.md` so future project write-ups with photos can be added cleanly.
 
 ## Future Considerations
 
@@ -78,6 +81,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - A possible temporary WordPress plugin could provide a controlled JSON/ZIP export from wp-admin.
 - Production persistence needs a passing `npm run storage:check` and a fresh Vercel deployment before live admin writes and contact submissions should be trusted.
 - Future admin improvements could include image uploads, per-page builder screens, richer product template fields, and richer email delivery logs.
+- Future SEO/content work should add real project case studies, original project photos, final-domain `NEXT_PUBLIC_SITE_URL`, Search Console submission and domain-specific Open Graph preview checks.
 - Keep AI-facing docs current when auth, route, storage or product-template behavior changes.
 
 ## Update Notes

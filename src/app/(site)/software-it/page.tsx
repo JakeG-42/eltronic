@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { softwareServiceModules, softwareWorkflowModules } from "@/content/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Software & Systems | Eltronic",
+export const metadata = createPageMetadata({
+  title: "Software & Systems",
   description:
     "Full-stack software, internal systems, API integrations, embedded services, IoT workflows and technical consultation from Eltronic.",
-};
+  path: "/software-it",
+});
 
 export default function SoftwareItPage() {
   return (
