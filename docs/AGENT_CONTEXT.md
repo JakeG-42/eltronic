@@ -28,6 +28,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/content/products.ts`: seed catalogue from the crawled WordPress site.
 - `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
 - `src/components/site/technical-visuals.tsx`: code-native public-page technical visuals.
+- `src/components/site/ambient-background.tsx`: subtle public-only floating syntax glyphs and pointer-follow glow.
 - `src/components/site/product-media-gallery.tsx`: interactive product image selection and zoom.
 - `src/components/studio/product-image-manager.tsx`: Studio visual image preview/order editor.
 - `public/product-images`: local product image assets used by the public catalogue.
@@ -187,6 +188,8 @@ Public page visuals are code-native SVG modules, not bitmap files:
 - Component: `src/components/site/technical-visuals.tsx`.
 - Variants: `display`, `network`, `sectors`, `data`.
 - Preferred for now because visuals remain editable, versioned and deployable without a media library.
+
+The public shell also renders `src/components/site/ambient-background.tsx`, a very subtle fixed background layer with floating syntax glyphs and a soft pointer-follow glow. Keep it low opacity, behind content, and respectful of `prefers-reduced-motion`.
 
 The public main navigation uses inline SVG icons in `src/components/site/site-shell.tsx`. Desktop shows the core customer journey links: Products, Solutions, Software, About and Contact. Mobile uses a compact native `details` hamburger with the same links. Keep secondary pages such as Sectors and Data & specification discoverable through page CTAs or footer links rather than crowding the primary nav.
 

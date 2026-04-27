@@ -148,8 +148,68 @@ h3 {
 }
 
 .site-shell {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   background: transparent;
+}
+
+.ambient-background {
+  --ambient-x: 78vw;
+  --ambient-y: 18vh;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient-background::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    radial-gradient(circle at var(--ambient-x) var(--ambient-y), rgba(139, 211, 255, 0.12), transparent 18rem),
+    radial-gradient(circle at 8% 84%, rgba(251, 191, 36, 0.055), transparent 16rem);
+  opacity: 0.74;
+  transition: opacity var(--transition);
+}
+
+.ambient-glyph {
+  position: absolute;
+  left: var(--glyph-x);
+  top: var(--glyph-y);
+  color: rgba(203, 213, 225, 0.12);
+  font-family: var(--font-code), monospace;
+  font-size: clamp(0.9rem, 1.5vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(139, 211, 255, 0.08);
+  transform: translate3d(0, 0, 0) rotate(var(--glyph-rotate));
+  animation: ambientFloat var(--glyph-duration) ease-in-out infinite;
+  animation-delay: var(--glyph-delay);
+}
+
+.ambient-glyph:nth-child(3n) {
+  color: rgba(139, 211, 255, 0.13);
+}
+
+.ambient-glyph:nth-child(4n) {
+  color: rgba(251, 191, 36, 0.11);
+}
+
+@keyframes ambientFloat {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: translate3d(0, 0, 0) rotate(var(--glyph-rotate));
+  }
+
+  50% {
+    opacity: 0.2;
+    transform: translate3d(var(--glyph-drift-x), var(--glyph-drift-y), 0)
+      rotate(calc(var(--glyph-rotate) + 5deg));
+  }
 }
 
 .main-header {
@@ -2053,6 +2113,18 @@ h3 {
 }
 
 @media (max-width: 680px) {
+  .ambient-background {
+    opacity: 0.56;
+  }
+
+  .ambient-glyph {
+    font-size: clamp(0.78rem, 4vw, 1.05rem);
+  }
+
+  .ambient-glyph:nth-child(n + 9) {
+    display: none;
+  }
+
   .footer-container {
     align-items: flex-start;
     flex-direction: column;
@@ -2175,5 +2247,16 @@ h3 {
   .spec-row {
     grid-template-columns: 1fr;
     gap: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-background::before {
+    opacity: 0.52;
+  }
+
+  .ambient-glyph {
+    opacity: 0.12;
+    animation: none;
   }
 }

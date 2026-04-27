@@ -45,6 +45,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Kept product cards in a two-column grid on mobile and added explicit managed `IMAGES COMING SOON` placeholder images to seed product galleries.
 - Restored the public grid background by keeping the site shell transparent instead of covering the body background.
 - Reworked the About page into a stronger company positioning page and simplified primary navigation to the main customer journeys.
+- Added a subtle public ambient background with floating syntax glyphs and a soft pointer-follow glow.
 - Checked Vercel env vars on 2026-04-27; none are configured yet, so KV/Upstash persistence is still required before live admin/contact writes are trusted.
 
 ## Future Considerations

@@ -7,6 +7,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Framework: Next.js with App Router.
 - Global layout: `src/app/layout.tsx`.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
+- Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs and a soft pointer-follow glow behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.

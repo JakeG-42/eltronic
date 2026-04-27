@@ -318,6 +318,11 @@
     "adminStyle": "Tailwind CSS v4 + local shadcn-style primitives",
     "shadcnConfig": "components.json",
     "publicShell": "src/components/site/site-shell.tsx",
+    "publicAmbientBackground": {
+      "file": "src/components/site/ambient-background.tsx",
+      "styleFile": "src/app/globals.css",
+      "behavior": "Public-only fixed ambient layer with low-opacity floating syntax glyphs and a subtle pointer-follow radial glow. Respects prefers-reduced-motion."
+    },
     "publicNavIcons": {
       "file": "src/components/site/site-shell.tsx",
       "type": "inline SVG",

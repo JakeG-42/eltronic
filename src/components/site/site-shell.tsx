@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AmbientBackground } from "@/components/site/ambient-background";
 
 const navItems = [
   { href: "/products", label: "Products", icon: "products" },
@@ -11,6 +12,7 @@ const navItems = [
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="site-shell">
+      <AmbientBackground />
       <header className="main-header">
         <nav className="nav-container" aria-label="Main navigation">
           <Link className="brand-logo logo-text" href="/">
