@@ -36,7 +36,7 @@ const strengths = [
 
 const capabilities = [
   "Rugged HMI displays and operator interfaces",
-  "CANbus, CAN-FD, data logging and diagnostics",
+  "CAN-Bus, CAN-FD, data logging and diagnostics",
   "Custom harnesses, wiring and control integration",
   "Embedded services, APIs, dashboards and internal systems",
   "Specification support, documentation and lifecycle improvement",

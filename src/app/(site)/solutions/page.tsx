@@ -5,7 +5,7 @@ import { serviceModules, workflowModules } from "@/content/site";
 export const metadata = {
   title: "Solutions | Eltronic",
   description:
-    "HMI, CANbus, harness, software and bespoke control-system integration solutions for specialist equipment.",
+    "HMI, CAN-Bus, harness, software and bespoke control-system integration solutions for specialist equipment.",
 };
 
 export default function SolutionsPage() {
@@ -16,7 +16,7 @@ export default function SolutionsPage() {
           <p className="code-kicker">solutions.stack</p>
           <h1>Integrated systems for demanding applications.</h1>
           <p className="lede">
-            Eltronic combines rugged operator interfaces, CANbus integration,
+            Eltronic combines rugged operator interfaces, CAN-Bus integration,
             custom software and project-specific harnessing for mobile and
             stationary equipment.
           </p>
@@ -40,7 +40,7 @@ export default function SolutionsPage() {
           </div>
           <p>
             A practical view of the services that sit around every successful
-            HMI, CANbus or control-system project.
+            HMI, CAN-Bus or control-system project.
           </p>
         </div>
         <div className="module-grid">

@@ -198,7 +198,7 @@ export function ProductForm({
               id={`${formId}-tags`}
               name="tags"
               defaultValue={product?.tags?.join(", ")}
-              placeholder="hmi, canbus, rugged, topcon"
+              placeholder="hmi, CAN-Bus, rugged, topcon"
             />
             <p className="studio-field-hint">Comma-separated tags for filtering, grouping and future admin workflows.</p>
           </div>

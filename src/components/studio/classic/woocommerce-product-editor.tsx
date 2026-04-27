@@ -140,7 +140,7 @@ export function WooCommerceProductEditor({ families, product, returnTo }: WooCom
                     </datalist>
                   </Field>
                   <Field label="Tags / attributes">
-                    <input className={inputClass} name="tags" placeholder="hmi, canbus, rugged" defaultValue={product?.tags?.join(", ")} />
+                    <input className={inputClass} name="tags" placeholder="hmi, CAN-Bus, rugged" defaultValue={product?.tags?.join(", ")} />
                   </Field>
                   <p className="wp-help-text">Use tags now for filtering and future product attributes.</p>
                 </Panel>

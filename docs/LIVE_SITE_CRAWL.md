@@ -26,7 +26,7 @@ Date crawled: 2026-04-26
 ## Product Content Ported
 
 - AutoPi CAN-FD Pro
-- I&Q CAN-bus I/O Module
+- I&Q CAN-Bus I/O Module
 - TOPCON OPUS B6e
 - TOPCON OPUS B4e
 - TOPCON OPUS B3e
@@ -41,8 +41,8 @@ Date crawled: 2026-04-26
 
 - The current site is WordPress with Colibri/Colibri Pro and WooCommerce assets loaded.
 - The visible site acts as a product showcase and enquiry site, not a checkout-led shop.
-- The product catalogue contains TOPCON OPUS HMIs, AutoPi CAN-FD Pro and an Eltronic I&Q CAN-bus module.
-- The I&Q CAN-bus I/O Module page is marked as under construction and includes placeholder technical/order data.
+- The product catalogue contains TOPCON OPUS HMIs, AutoPi CAN-FD Pro and an Eltronic I&Q CAN-Bus module.
+- The I&Q CAN-Bus I/O Module page is marked as under construction and includes placeholder technical/order data.
 - The contact form asks for name, company, email, message and an optional product selection.
 - Public contact details shown include `+44(0) 79 3523 9421`, `sales@eltronic.co.uk` and footer references to `info@eltronic.co.uk`.
 - Data-sheet and certificate pages exist, but some data-sheet labels appear duplicated or unfinished on the live site.
@@ -53,4 +53,3 @@ Date crawled: 2026-04-26
 - Product pages in the new app are generated from that data through `/products/[slug]`.
 - Old WordPress URLs are preserved in each product as `sourceUrl` for traceability.
 - Product image URLs currently point to public WordPress uploads; these can later be downloaded into the Next.js repo if desired.
-

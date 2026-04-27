@@ -34,7 +34,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/`: homepage with hero copy, solution/service sections, featured product cards, public service CTAs and the shared professional workflow modules from `src/content/site.ts`.
 - `/products`: dynamic product listing page generated from the managed catalogue.
 - `/products/[slug]`: dynamic product detail page generated from the managed catalogue.
-- `/solutions`: public solution/service page for HMI, CANbus and bespoke control integration.
+- `/solutions`: public solution/service page for HMI, CAN-Bus and bespoke control integration.
 - `/software-it`: public service page for bespoke software, internal systems, API/shipping integrations, embedded services, servers and technical consultation.
 - `/sectors`: public sector page for agriculture, construction, logistics and industrial automation.
 - `/data-specification`: public resource page for data sheets, guides and product documents.

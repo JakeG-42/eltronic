@@ -40,7 +40,7 @@ export const templateFiles: TemplateFile[] = [
     group: "Public pages",
     language: "tsx",
     publicRoute: "/solutions",
-    description: "HMI, CANbus and control-system integration page.",
+    description: "HMI, CAN-Bus and control-system integration page.",
   },
   {
     path: "src/app/(site)/software-it/page.tsx",

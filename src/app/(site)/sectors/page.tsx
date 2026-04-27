@@ -57,7 +57,7 @@ export default function SectorsPage() {
             <h2>Not seeing your exact application?</h2>
             <p>
               The site is quote-led by design. If the project involves
-              specialist equipment, operator interfaces, CANbus or control integration,
+              specialist equipment, operator interfaces, CAN-Bus or control integration,
               it is worth starting a conversation.
             </p>
           </div>

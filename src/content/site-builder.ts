@@ -102,7 +102,7 @@ export const defaultSiteBuilderSettings: SiteBuilderSettings = {
       primaryCtaHref: "/products",
       secondaryCtaLabel: "Start an enquiry",
       secondaryCtaHref: "/contact",
-      visualLabel: "HMI, CANbus and control-system architecture",
+      visualLabel: "HMI, CAN-Bus and control-system architecture",
       visualVariant: "display",
     },
     sections: [
@@ -168,4 +168,3 @@ export const defaultSiteBuilderSettings: SiteBuilderSettings = {
     ],
   },
 };
-

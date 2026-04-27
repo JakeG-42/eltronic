@@ -8,8 +8,8 @@ export const serviceModules = [
     bullets: ["TOPCON OPUS display supply", "Operator workflow design", "CoDeSys, C/Qt and OPUS Projektor support"],
   },
   {
-    slug: "canbus-integration",
-    title: "CANbus integration and diagnostics",
+    slug: "can-bus-integration",
+    title: "CAN-Bus integration and diagnostics",
     eyebrow: "equipment.network",
     summary:
       "Control-system integration, CAN data capture and diagnostics for mobile equipment, fixed installations and specialist vehicles.",
@@ -113,7 +113,7 @@ export const sectorModules = [
     title: "Construction and heavy equipment",
     code: "sector.heavy",
     summary:
-      "Rugged operator interfaces and CANbus control for equipment working in vibration, dust, weather and long duty cycles.",
+      "Rugged operator interfaces and CAN-Bus control for equipment working in vibration, dust, weather and long duty cycles.",
     examples: ["Utility vehicles", "Construction equipment", "Recovery track safety", "Hydraulic systems"],
   },
   {
