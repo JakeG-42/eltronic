@@ -15,12 +15,14 @@ import {
   deleteAdminUser,
   deleteProduct,
   deleteSubmission,
+  deleteSubmissions,
   productFromFormData,
   saveAdminUser,
   siteBuilderFromFormData,
   updateOwnAdminAccount,
   updateContactNotificationSettings,
   updateSubmissionStatus,
+  updateSubmissionStatuses,
   updateSiteBuilderSettings,
   upsertProduct,
   type ContactSubmissionStatus,
@@ -44,7 +46,7 @@ function getReturnTo(formData: FormData, fallback = "/studio/products") {
   return returnTo.startsWith("/studio") ? returnTo : fallback;
 }
 
-function redirectWithError(message: string, returnTo = "/studio/products") {
+function redirectWithError(message: string, returnTo = "/studio/products"): never {
   const separator = returnTo.includes("?") ? "&" : "?";
   redirect(`${returnTo}${separator}error=${encodeURIComponent(message)}`);
 }
@@ -233,6 +235,57 @@ export async function deleteSubmissionAction(formData: FormData) {
   }
 
   redirect(returnTo);
+}
+
+export async function bulkSubmissionAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/submissions");
+
+  if (!userCanManageSubmissions(user)) {
+    redirectWithError("This account cannot manage enquiries.", returnTo);
+  }
+
+  const ids = Array.from(
+    new Set(
+      formData
+        .getAll("ids")
+        .flatMap((value) => String(value).split(","))
+        .map((id) => id.trim())
+        .filter(Boolean),
+    ),
+  );
+
+  if (ids.length === 0) {
+    redirectWithError("Select at least one submission first.", returnTo);
+  }
+
+  const action = String(formData.get("bulkAction") ?? "");
+  const status = action.startsWith("status:")
+    ? (action.replace("status:", "") as ContactSubmissionStatus)
+    : undefined;
+
+  if (action !== "delete" && (!status || !isSubmissionStatus(status))) {
+    redirectWithError("Choose a valid bulk action.", returnTo);
+  }
+
+  try {
+    if (action === "delete") {
+      await deleteSubmissions(ids);
+    } else {
+      await updateSubmissionStatuses(ids, status as ContactSubmissionStatus);
+    }
+
+    revalidatePath("/studio");
+    revalidatePath("/studio/submissions");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to apply bulk action.", returnTo);
+  }
+
+  redirect(returnTo);
+}
+
+function isSubmissionStatus(value: string): value is ContactSubmissionStatus {
+  return ["new", "reviewed", "replied", "archived", "blocked"].includes(value);
 }
 
 export async function saveAdminUserAction(formData: FormData) {

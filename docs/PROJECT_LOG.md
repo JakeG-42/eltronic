@@ -78,6 +78,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Added managed Studio users with `super_admin`, `admin` and `moderator` roles, hashed passwords, session-version invalidation, `/studio/users` and `/studio/account`.
 - Cleaned launch-facing content issues: removed public Studio footer link, filtered placeholder gallery images from public output, tightened I&Q CAN-Bus module copy, softened empty Projects/Data/Contact copy and added `docs/LAUNCH_CHECKLIST.md`.
 - Added repeatable generated product gallery assets: 33 technical SVG illustrations across 11 products, a `src/content/product-gallery-assets.json` manifest, `npm run images:products`, and `npm run images:products:sync` to sync the gallery paths into Neon managed product records.
+- Added Studio submission bulk actions, auto-refresh, an authenticated submission summary API and coloured sidebar `+N` enquiry badges; also grouped and reduced the Studio sidebar navigation.
 
 ## Future Considerations
 

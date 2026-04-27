@@ -251,7 +251,15 @@
       "path": "/studio/submissions",
       "file": "src/app/studio/(admin)/submissions/page.tsx",
       "kind": "admin-submission-inbox",
-      "guard": "isAdminAuthenticated()"
+      "guard": "isAdminAuthenticated()",
+      "features": ["type filters", "collapsed repeated blocked attempts", "bulk status/delete actions", "auto refresh"]
+    },
+    {
+      "path": "/api/studio/submissions/summary",
+      "file": "src/app/api/studio/submissions/summary/route.ts",
+      "kind": "admin-submission-summary-api",
+      "guard": "getCurrentAdminUser() plus submission-management role",
+      "consumer": "src/components/studio/studio-submission-notifier.tsx"
     },
     {
       "path": "/studio/users",
@@ -302,6 +310,12 @@
       "file": "src/app/studio/actions.ts",
       "authRequired": true,
       "effect": "Deletes one contact submission."
+    },
+    {
+      "id": "bulkSubmissionAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Applies a status update or delete operation to selected contact submissions, including collapsed duplicate groups."
     },
     {
       "id": "saveAdminUserAction",
@@ -430,7 +444,7 @@
     "typeFile": "src/lib/managed-data.ts",
     "typeName": "ContactSubmission",
     "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts stores captcha failures and populated website honeypot values as blocked records when storage is available; src/lib/managed-data.ts suppresses rapid duplicate blocked attempts.",
-    "studioPresentation": "src/app/studio/(admin)/submissions/page.tsx collapses repeated blocked attempts by fingerprint; src/components/studio/submission-card.tsx and src/app/globals.css render green enquiry, amber captcha and red honeypot markers.",
+    "studioPresentation": "src/app/studio/(admin)/submissions/page.tsx collapses repeated blocked attempts by fingerprint; src/components/studio/submission-card.tsx and src/app/globals.css render green enquiry, amber captcha and red honeypot markers. Bulk selection uses src/components/studio/submission-bulk-select.tsx and bulkSubmissionAction(). Auto-refresh uses src/components/studio/submissions-auto-refresh.tsx and pauses while checkboxes are selected.",
     "tester": "npm run test:contact-bot runs scripts/test-contact-antispam.mjs against production by default and only exercises rejected bot paths unless -- --valid is passed.",
     "types": ["enquiry", "captcha_failed", "honeypot_spam"],
     "statuses": ["new", "reviewed", "replied", "archived", "blocked"],
@@ -493,6 +507,7 @@
       "variants": ["display", "network", "sectors", "data"]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
+    "studioSidebar": "Grouped under Overview, Content, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "websiteBuilder": {

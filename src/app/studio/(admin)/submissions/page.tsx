@@ -1,14 +1,19 @@
 import { Inbox } from "lucide-react";
 import Link from "next/link";
 
+import { bulkSubmissionAction } from "@/app/studio/actions";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { SubmissionCard } from "@/components/studio/submission-card";
+import { SubmissionBulkSelect } from "@/components/studio/submission-bulk-select";
+import { SubmissionsAutoRefresh } from "@/components/studio/submissions-auto-refresh";
 import { getSubmissions, type ContactSubmission, type ContactSubmissionType } from "@/lib/managed-data";
 
 type SubmissionFilter = "enquiries" | "blocked" | ContactSubmissionType | "all";
 type SubmissionFilterTone = "enquiry" | "blocked" | ContactSubmissionType | "all";
 export type DisplaySubmission = ContactSubmission & {
   duplicateCount: number;
+  duplicateIds: string[];
 };
 
 type SubmissionsPageProps = {
@@ -29,6 +34,8 @@ export default async function SubmissionsPage({ searchParams }: SubmissionsPageP
   const visibleSubmissions = collapseRepeatedBlockedSubmissions(submissions);
   const activeFilter = parseFilter(params?.type);
   const filteredSubmissions = filterSubmissions(visibleSubmissions, activeFilter);
+  const returnTo = activeFilter === "enquiries" ? "/studio/submissions" : `/studio/submissions?type=${activeFilter}`;
+  const bulkFormId = "submission-bulk-form";
   const counts = {
     all: visibleSubmissions.length,
     blocked: visibleSubmissions.filter((submission) => submission.type !== "enquiry").length,
@@ -45,14 +52,17 @@ export default async function SubmissionsPage({ searchParams }: SubmissionsPageP
 
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-2xl bg-primary/12 text-primary">
-              <Inbox className="size-5" />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-2xl bg-primary/12 text-primary">
+                <Inbox className="size-5" />
+              </div>
+              <div>
+                <CardTitle>Contact submissions</CardTitle>
+                <CardDescription>Review enquiries, captcha failures and honeypot spam attempts.</CardDescription>
+              </div>
             </div>
-            <div>
-              <CardTitle>Contact submissions</CardTitle>
-              <CardDescription>Review enquiries, captcha failures and honeypot spam attempts.</CardDescription>
-            </div>
+            <SubmissionsAutoRefresh />
           </div>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -88,6 +98,25 @@ export default async function SubmissionsPage({ searchParams }: SubmissionsPageP
             <FilterLink active={activeFilter === "all"} count={counts.all} href="/studio/submissions?type=all" label="All" tone="all" />
           </div>
 
+          <form action={bulkSubmissionAction} className="submission-bulk-toolbar" id={bulkFormId}>
+            <input name="returnTo" type="hidden" value={returnTo} />
+            <SubmissionBulkSelect />
+            <label>
+              <span>Mass action</span>
+              <select name="bulkAction" defaultValue="status:reviewed">
+                <option value="status:new">Mark new</option>
+                <option value="status:reviewed">Mark reviewed</option>
+                <option value="status:replied">Mark replied</option>
+                <option value="status:archived">Archive</option>
+                <option value="status:blocked">Mark blocked</option>
+                <option value="delete">Delete selected</option>
+              </select>
+            </label>
+            <Button type="submit" variant="secondary">
+              Apply
+            </Button>
+          </form>
+
           {filteredSubmissions.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-border p-6 text-sm text-muted-foreground">
               No records match this filter yet.
@@ -95,7 +124,9 @@ export default async function SubmissionsPage({ searchParams }: SubmissionsPageP
           ) : null}
           {filteredSubmissions.map((submission) => (
             <SubmissionCard
-              returnTo={activeFilter === "enquiries" ? "/studio/submissions" : `/studio/submissions?type=${activeFilter}`}
+              bulkFormId={bulkFormId}
+              returnTo={returnTo}
+              selectValue={submission.duplicateIds.join(",")}
               submission={submission}
               key={submission.id}
             />
@@ -161,12 +192,14 @@ function collapseRepeatedBlockedSubmissions(submissions: ContactSubmission[]): D
 
     if (existingSubmission) {
       existingSubmission.duplicateCount += 1;
+      existingSubmission.duplicateIds.push(submission.id);
       continue;
     }
 
     collapsedSubmissions.set(key, {
       ...submission,
       duplicateCount: 1,
+      duplicateIds: [submission.id],
     });
   }
 

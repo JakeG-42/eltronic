@@ -818,12 +818,21 @@ export async function createBlockedContactSubmission(input: {
 }
 
 export async function updateSubmissionStatus(id: string, status: ContactSubmissionStatus) {
+  await updateSubmissionStatuses([id], status);
+}
+
+export async function updateSubmissionStatuses(ids: string[], status: ContactSubmissionStatus) {
   const data = await readManagedData();
+  const selectedIds = new Set(ids.filter(Boolean));
+
+  if (selectedIds.size === 0) {
+    return;
+  }
 
   await writeManagedData({
     ...data,
     submissions: data.submissions.map((submission) =>
-      submission.id === id
+      selectedIds.has(submission.id)
         ? {
             ...submission,
             status,
@@ -835,11 +844,20 @@ export async function updateSubmissionStatus(id: string, status: ContactSubmissi
 }
 
 export async function deleteSubmission(id: string) {
+  await deleteSubmissions([id]);
+}
+
+export async function deleteSubmissions(ids: string[]) {
   const data = await readManagedData();
+  const selectedIds = new Set(ids.filter(Boolean));
+
+  if (selectedIds.size === 0) {
+    return;
+  }
 
   await writeManagedData({
     ...data,
-    submissions: data.submissions.filter((submission) => submission.id !== id),
+    submissions: data.submissions.filter((submission) => !selectedIds.has(submission.id)),
   });
 }
 

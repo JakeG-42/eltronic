@@ -142,6 +142,9 @@ Each product currently has:
 - A hidden `website` honeypot field provides an extra low-friction bot signal.
 - Captcha failures and honeypot hits are stored as blocked contact records when storage is available, with `type` values of `captcha_failed` or `honeypot_spam`; rapid duplicate blocked attempts are suppressed before storage.
 - `/studio/submissions` has filters for Enquiries, Blocked, Captcha, Honeypot and All records, collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents for enquiry, captcha and honeypot types.
+- `/studio/submissions` supports mass-select and mass actions for visible cards: mark new, reviewed, replied, archived, blocked or delete selected. Collapsed duplicate blocked attempts submit all IDs in that collapsed group.
+- `/studio/submissions` auto-refreshes while visible, but skips refresh while submissions are selected for a bulk action.
+- `/api/studio/submissions/summary` is an authenticated Studio-only JSON endpoint used by the sidebar to poll submission totals.
 - Email notifications are configured in `/studio/settings`; admins can enter one or more comma-separated recipient email addresses, and immediate mode sends both enquiries and blocked attempts. Daily/weekly digest modes are handled by `/api/contact-notifications/digest` through Vercel Cron.
 - Email notification sending is currently paused with Studio mode set to `off`; submissions still store in Studio. Resend delivery uses the official `resend` package and requires `RESEND_API_KEY` plus `CONTACT_NOTIFICATION_FROM`. A direct SMTP experiment exists in code but failed in practice and is disabled; launch email should use a verified Eltronic domain sender and the preferred owner inbox. `npm run email:check -- --send --onboarding` sends the Resend first-email test to the account email.
 - There are no third-party captcha scripts, cookies or external anti-spam services.
@@ -163,7 +166,7 @@ Each product currently has:
 - Session cookies include user id, session version and issue time; password resets bump the session version and invalidate old sessions for that user.
 - Roles are `super_admin`, `admin`, and `moderator`. Super admin/admin currently have full control; moderator can manage enquiries and their own account.
 - Studio is separate from the public site shell; public header/footer do not render in admin routes.
-- Studio has a sidebar, dashboard, products, enquiries and settings modes.
+- Studio has a grouped sidebar with Overview, Content, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes a Template Editor mode for inspecting whitelisted source files.
@@ -176,7 +179,7 @@ Each product currently has:
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
 - Product image editing uses a visual preview/order manager with repeated `imageSrc` and `imageAlt` fields. The first image is saved as the primary image.
 - Template assignment is managed with a select field on each product.
-- Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, and deleted.
+- Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 
 ## Storage Behavior
 

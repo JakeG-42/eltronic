@@ -22,23 +22,43 @@ import {
 
 import { logoutAction } from "@/app/studio/actions";
 import { Button } from "@/components/ui/button";
+import { StudioSubmissionNotifier } from "@/components/studio/studio-submission-notifier";
 import type { AdminRole, PublicAdminUser } from "@/lib/admin-user-model";
 import { cn } from "@/lib/utils";
 
-const navItems: Array<{
+const navGroups: Array<{
+  label: string;
+  items: Array<{
   href: string;
   icon: ComponentType<{ className?: string }>;
   label: string;
   roles: AdminRole[];
+  }>;
 }> = [
-  { href: "/studio", label: "Dashboard", icon: LayoutDashboard, roles: ["super_admin", "admin", "moderator"] },
-  { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
-  { href: "/studio/templates", label: "Templates", icon: FileCode2, roles: ["super_admin", "admin"] },
-  { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
-  { href: "/studio/submissions", label: "Enquiries", icon: Inbox, roles: ["super_admin", "admin", "moderator"] },
-  { href: "/studio/users", label: "Users", icon: Users, roles: ["super_admin", "admin"] },
-  { href: "/studio/account", label: "Account", icon: UserCircle, roles: ["super_admin", "admin", "moderator"] },
-  { href: "/studio/settings", label: "Settings", icon: Settings, roles: ["super_admin", "admin"] },
+  {
+    label: "Overview",
+    items: [{ href: "/studio", label: "Dashboard", icon: LayoutDashboard, roles: ["super_admin", "admin", "moderator"] }],
+  },
+  {
+    label: "Content",
+    items: [
+      { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
+      { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
+      { href: "/studio/templates", label: "Templates", icon: FileCode2, roles: ["super_admin", "admin"] },
+    ],
+  },
+  {
+    label: "Messages",
+    items: [{ href: "/studio/submissions", label: "Enquiries", icon: Inbox, roles: ["super_admin", "admin", "moderator"] }],
+  },
+  {
+    label: "Admin",
+    items: [
+      { href: "/studio/users", label: "Users", icon: Users, roles: ["super_admin", "admin"] },
+      { href: "/studio/settings", label: "Settings", icon: Settings, roles: ["super_admin", "admin"] },
+      { href: "/studio/account", label: "Account", icon: UserCircle, roles: ["super_admin", "admin", "moderator"] },
+    ],
+  },
 ];
 
 export function StudioShell({
@@ -147,19 +167,29 @@ export function StudioShell({
         </Link>
 
         <nav className="studio-nav" aria-label="Studio navigation">
-          {navItems.map((item) => {
-            if (!item.roles.includes(currentUser.role)) {
+          {navGroups.map((group) => {
+            const visibleItems = group.items.filter((item) => item.roles.includes(currentUser.role));
+
+            if (visibleItems.length === 0) {
               return null;
             }
 
-            const Icon = item.icon;
-            const active = item.href === "/studio" ? pathname === item.href : pathname.startsWith(item.href);
-
             return (
-              <Link className={cn("studio-nav-link", active && "active")} href={item.href} key={item.href}>
-                <Icon className="size-4" />
-                {item.label}
-              </Link>
+              <div className="studio-nav-group" key={group.label}>
+                <span className="studio-nav-heading">{group.label}</span>
+                {visibleItems.map((item) => {
+                  const Icon = item.icon;
+                  const active = item.href === "/studio" ? pathname === item.href : pathname.startsWith(item.href);
+
+                  return (
+                    <Link className={cn("studio-nav-link", active && "active")} href={item.href} key={item.href}>
+                      <Icon className="size-4" />
+                      <span className="studio-nav-label">{item.label}</span>
+                      {item.href === "/studio/submissions" ? <StudioSubmissionNotifier /> : null}
+                    </Link>
+                  );
+                })}
+              </div>
             );
           })}
         </nav>

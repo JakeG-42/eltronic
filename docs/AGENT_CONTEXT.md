@@ -118,6 +118,8 @@ Studio is intentionally separate from the public site chrome.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
 - Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- The current Studio sidebar groups links under Overview, Content, Messages and Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
 
 ## Product Management
@@ -213,7 +215,7 @@ Submissions are stored through `createContactSubmission()` in `src/lib/managed-d
 
 Before normal enquiry storage, the contact action verifies a local maths captcha from `src/lib/contact-captcha.ts` and checks the hidden `website` honeypot field. The captcha token is HMAC-signed and short-lived. Failed captcha and honeypot attempts are stored as blocked submission records when storage is available, with `type` values `captcha_failed` and `honeypot_spam`. Recent duplicate blocked attempts are suppressed in `createBlockedContactSubmission()`. Keep this third-party-free unless Jake explicitly asks for an external captcha service.
 
-The Studio submissions inbox collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents: green for real enquiries, amber for captcha failures and red for honeypot spam.
+The Studio submissions inbox collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents: green for real enquiries, amber for captcha failures and red for honeypot spam. `/studio/submissions` also supports mass-select with bulk status/delete actions through `bulkSubmissionAction()`. The page auto-refreshes through `src/components/studio/submissions-auto-refresh.tsx`, but pauses refresh while any submission checkbox is selected so it does not interrupt a bulk action.
 
 Use `npm run test:contact-bot` to run the safe fake-bot tester in `scripts/test-contact-antispam.mjs`. By default it targets production and only tests rejected bot paths. A valid submission test requires `-- --valid`, and remote valid submissions require `-- --valid --allow-remote-valid`.
 

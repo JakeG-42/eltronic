@@ -9,10 +9,14 @@ const selectClass =
 const statusOptions = ["new", "reviewed", "replied", "archived", "blocked"] satisfies ContactSubmissionStatus[];
 
 export function SubmissionCard({
+  bulkFormId,
   returnTo = "/studio/submissions",
+  selectValue,
   submission,
 }: {
+  bulkFormId?: string;
   returnTo?: string;
+  selectValue?: string;
   submission: ContactSubmission & { duplicateCount?: number };
 }) {
   const isBlocked = submission.type !== "enquiry";
@@ -21,12 +25,24 @@ export function SubmissionCard({
   return (
     <article className="submission-card rounded-2xl border border-border bg-background/35 p-4" data-tone={tone}>
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h3 className="mb-1 flex items-center gap-2 text-lg">
-            <span className="submission-type-dot" aria-hidden="true" />
-            {submission.name}
-          </h3>
-          <p className="mb-0 text-sm text-muted-foreground">{formatDate(submission.createdAt)}</p>
+        <div className="submission-card-title">
+          {bulkFormId ? (
+            <input
+              aria-label={`Select ${submission.name}`}
+              className="submission-bulk-checkbox"
+              form={bulkFormId}
+              name="ids"
+              type="checkbox"
+              value={selectValue ?? submission.id}
+            />
+          ) : null}
+          <div>
+            <h3 className="mb-1 flex items-center gap-2 text-lg">
+              <span className="submission-type-dot" aria-hidden="true" />
+              {submission.name}
+            </h3>
+            <p className="mb-0 text-sm text-muted-foreground">{formatDate(submission.createdAt)}</p>
+          </div>
         </div>
         <div className="flex flex-wrap justify-end gap-2">
           <Badge className="submission-type-badge" variant={isBlocked ? "warning" : "outline"}>
