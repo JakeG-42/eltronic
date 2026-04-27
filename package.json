@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test:contact-bot": "node scripts/test-contact-antispam.mjs",
     "lint": "eslint"
   },
   "dependencies": {

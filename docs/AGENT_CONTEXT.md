@@ -182,6 +182,8 @@ Submissions are stored through `createContactSubmission()` in `src/lib/managed-d
 
 Before storage, the contact action verifies a local maths captcha from `src/lib/contact-captcha.ts` and checks the hidden `website` honeypot field. The captcha token is HMAC-signed and short-lived. Keep this third-party-free unless Jake explicitly asks for an external captcha service.
 
+Use `npm run test:contact-bot` to run the safe fake-bot tester in `scripts/test-contact-antispam.mjs`. By default it targets production and only tests rejected bot paths. A valid submission test requires `-- --valid`, and remote valid submissions require `-- --valid --allow-remote-valid`.
+
 Statuses:
 
 - `new`

@@ -111,6 +111,7 @@ Each product currently has:
 - The captcha token is HMAC-signed and short-lived, so the submitted answer is verified server-side by `submitContactFormAction()` before a submission is stored.
 - A hidden `website` honeypot field provides an extra low-friction bot signal.
 - There are no third-party captcha scripts, cookies or external anti-spam services.
+- `npm run test:contact-bot` runs a safe fake-bot tester against `https://project-5v5cr.vercel.app` by default. It only tests rejected bot paths unless `-- --valid` is passed.
 
 ## Current Product Templates
 

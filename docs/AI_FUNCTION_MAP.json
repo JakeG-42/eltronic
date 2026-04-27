@@ -310,6 +310,7 @@
     "typeFile": "src/lib/managed-data.ts",
     "typeName": "ContactSubmission",
     "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts rejects invalid captcha answers and populated website honeypot values before storage.",
+    "tester": "npm run test:contact-bot runs scripts/test-contact-antispam.mjs against production by default and only exercises rejected bot paths unless -- --valid is passed.",
     "statuses": ["new", "reviewed", "replied", "archived"],
     "fields": [
       "id",
