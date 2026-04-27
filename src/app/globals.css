@@ -48,6 +48,10 @@
   --shadow-halogen: 0 0 34px rgba(183, 163, 255, 0.14);
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 0.9rem;
+  --site-page-y: clamp(2.25rem, 5vw, 4.5rem);
+  --site-top-gap: clamp(0.85rem, 1.8vw, 1.45rem);
+  --site-first-section-top: clamp(0.7rem, 1.7vw, 1.35rem);
+  --site-first-section-bottom: clamp(2rem, 5vw, 4rem);
   --background: var(--bg-darker);
   --foreground: var(--text-primary);
   --card: var(--bg-card);
@@ -415,11 +419,11 @@ h3 {
 .page {
   width: min(1400px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: clamp(2rem, 6vw, 5rem) 0;
+  padding: var(--site-top-gap) 0 var(--site-page-y);
 }
 
 .home-page {
-  padding-top: clamp(0.75rem, 2vw, 1.6rem);
+  padding-top: var(--site-top-gap);
 }
 
 .home-page.builder-density-compact .section {
@@ -462,12 +466,17 @@ h3 {
 
 .home-page .hero {
   min-height: min(43rem, calc(100vh - 6.25rem));
-  padding-top: clamp(0.5rem, 2vw, 1.4rem);
+  padding-top: 0;
 }
 
 .compact-hero {
   min-height: auto;
   padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.page > .compact-hero:first-child {
+  padding-top: var(--site-first-section-top);
+  padding-bottom: var(--site-first-section-bottom);
 }
 
 .compact-hero h1 {
@@ -764,6 +773,10 @@ h3 {
 
 .section {
   padding: clamp(3rem, 7vw, 6rem) 0;
+}
+
+.page > .section:first-child {
+  padding-top: var(--site-first-section-top);
 }
 
 .section-heading {
@@ -1254,6 +1267,10 @@ h3 {
   align-items: center;
 }
 
+.page > .detail-hero:first-child {
+  padding-top: var(--site-first-section-top);
+}
+
 .product-media-gallery {
   display: grid;
   gap: 0.85rem;
@@ -1555,6 +1572,11 @@ h3 {
   gap: clamp(2rem, 6vw, 5rem);
   align-items: start;
   padding: clamp(2.25rem, 6vw, 5.5rem) 0;
+}
+
+.page > .contact-hero:first-child {
+  padding-top: var(--site-first-section-top);
+  padding-bottom: var(--site-first-section-bottom);
 }
 
 .contact-copy {
@@ -3856,6 +3878,13 @@ h3 {
 }
 
 @media (max-width: 680px) {
+  :root {
+    --site-page-y: clamp(1.75rem, 8vw, 3rem);
+    --site-top-gap: 0.8rem;
+    --site-first-section-top: 0.45rem;
+    --site-first-section-bottom: clamp(1.75rem, 7vw, 2.8rem);
+  }
+
   .ambient-background {
     opacity: 0.56;
   }
@@ -3953,7 +3982,7 @@ h3 {
   }
 
   .contact-hero {
-    padding-top: 2rem;
+    padding-top: var(--site-first-section-top);
   }
 
   .contact-title {
