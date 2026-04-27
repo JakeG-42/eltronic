@@ -263,8 +263,10 @@ h3 {
 }
 
 .nav-menu a {
+  --nav-icon-y: -0.09em;
   position: relative;
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: auto auto;
   align-items: center;
   gap: 0.45rem;
   min-height: 2.35rem;
@@ -309,6 +311,7 @@ h3 {
 
 .nav-icon {
   display: block;
+  align-self: center;
   flex: 0 0 auto;
   width: 1.05rem;
   height: 1.05rem;
@@ -317,7 +320,9 @@ h3 {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.8;
-  transform: translateY(-0.02em);
+  transform: translateY(var(--nav-icon-y));
+  transform-box: fill-box;
+  transform-origin: center;
   transition:
     color var(--transition),
     transform var(--transition);
@@ -325,7 +330,7 @@ h3 {
 
 .nav-menu a:hover .nav-icon {
   color: var(--accent);
-  transform: translateY(-0.12em);
+  transform: translateY(var(--nav-icon-y)) scale(1.06);
 }
 
 .mobile-nav {
@@ -389,6 +394,7 @@ h3 {
 }
 
 .mobile-nav-panel a {
+  --nav-icon-y: -0.08em;
   display: flex;
   align-items: center;
   gap: 0.65rem;
