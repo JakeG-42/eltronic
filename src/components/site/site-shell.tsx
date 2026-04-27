@@ -48,13 +48,49 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       {children}
       <footer className="main-footer">
         <div className="footer-container">
-          <p>© 2026 Eltronic</p>
-          <div className="footer-links">
-            <Link href="/projects">Projects</Link>
-            <Link href="/sectors">Sectors</Link>
-            <Link href="/data-specification">Data & specification</Link>
-            <a href="tel:+447935239421">+44(0) 79 3523 9421</a>
-            <a href="mailto:sales@eltronic.co.uk">sales@eltronic.co.uk</a>
+          <div className="footer-main">
+            <div className="footer-brand">
+              <Link className="footer-logo gradient-text" href="/">
+                Eltronic
+              </Link>
+              <p>
+                HMI displays, CAN-Bus data, control integration and software systems for specialist equipment
+                and connected operations.
+              </p>
+              <div className="footer-status">
+                <span />
+                Quote-led engineering support
+              </div>
+            </div>
+
+            <div className="footer-group">
+              <h2>Explore</h2>
+              <Link href="/products">Products</Link>
+              <Link href="/solutions">Solutions</Link>
+              <Link href="/software-it">Software & Systems</Link>
+              <Link href="/projects">Projects</Link>
+            </div>
+
+            <div className="footer-group">
+              <h2>Resources</h2>
+              <Link href="/sectors">Sectors</Link>
+              <Link href="/data-specification">Data & specification</Link>
+              <Link href="/about">About Eltronic</Link>
+              <Link href="/contact">Start an enquiry</Link>
+            </div>
+
+            <div className="footer-contact-card">
+              <span className="section-number">contact.signal</span>
+              <h2>Have a system to discuss?</h2>
+              <p>Send the product, control or software problem and we will help shape the next step.</p>
+              <a href="mailto:sales@eltronic.co.uk">sales@eltronic.co.uk</a>
+              <a href="tel:+447935239421">+44 (0) 79 3523 9421</a>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <p>© 2026 Eltronic. Systems integration and software engineering.</p>
+            <Link href="/studio">Studio</Link>
           </div>
         </div>
       </footer>
