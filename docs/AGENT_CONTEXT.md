@@ -194,6 +194,8 @@ Public page visuals are code-native SVG modules, not bitmap files:
 
 The public shell also renders `src/components/site/ambient-background.tsx`, a very subtle fixed background layer with floating syntax glyphs. Keep it low opacity, behind content, and respectful of `prefers-reduced-motion`.
 
+The homepage hero uses `src/components/site/hero-role-typewriter.tsx` for the small role label above `Eltronic`. It cycles through short professional role phrases and respects `prefers-reduced-motion`.
+
 The public main navigation uses inline SVG icons in `src/components/site/site-shell.tsx`. Desktop shows the core customer journey links: Products, Solutions, Software, About and Contact. Mobile uses a compact native `details` hamburger with the same links, and `src/components/site/mobile-nav-auto-close.tsx` closes it on link click, outside tap or Escape. Keep secondary pages such as Sectors and Data & specification discoverable through page CTAs or footer links rather than crowding the primary nav.
 
 The public footer is also rendered from `src/components/site/site-shell.tsx`. Keep it simple and static for now; the sticky reveal experiment made the footer appear behind content and was removed.
@@ -203,6 +205,8 @@ Workflow/process copy for public control-system integration and Software & Syste
 Public copy should avoid repeating generic machine/machinery phrasing unless it is clearly the industry term. Prefer more precise language such as specialist equipment, operating environment, application, platform, control system, mobile plant, fixed installation, operator interface and operational workflow.
 
 The admin uses Tailwind CSS v4 plus local shadcn-style primitives:
+
+Studio page bodies should avoid large duplicate `h1` titles because `src/components/studio/studio-shell.tsx` already shows the current mode in the sticky top bar. Prefer compact `.studio-page-header` rows for short descriptions and actions.
 
 - `src/components/ui/button.tsx`
 - `src/components/ui/card.tsx`

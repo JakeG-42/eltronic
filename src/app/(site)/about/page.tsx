@@ -48,7 +48,7 @@ export default function AboutPage() {
       <section className="about-hero section">
         <div>
           <p className="code-kicker">about.eltronic</p>
-          <h1>Practical engineering for control systems, displays and connected operations.</h1>
+          <h1>Control systems, displays and connected data.</h1>
           <p className="lede">
             Eltronic supports mobile plant, specialist vehicles and fixed
             industrial equipment with rugged HMI displays, CAN data, bespoke

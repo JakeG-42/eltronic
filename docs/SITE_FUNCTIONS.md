@@ -9,6 +9,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
 - Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
+- Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.
 - Global styles: `src/app/globals.css`.
@@ -93,6 +94,7 @@ Each product currently has:
 - Studio is separate from the public site shell; public header/footer do not render in admin routes.
 - Studio has a sidebar, dashboard, products, enquiries and settings modes.
 - Studio has browser-local dark/light mode stored in `localStorage`.
+- Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.
 - Product management is table-first with full edit pages and a quick-edit right drawer.
 - Product forms use a WooCommerce-style two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.

@@ -16,12 +16,8 @@ export default async function NewProductPage() {
 
   return (
     <div className="grid gap-6">
-      <section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="studio-eyebrow">catalogue.create</p>
-          <h1 className="mb-2 text-4xl font-black">Add product</h1>
-          <p className="text-muted-foreground">Create a product record, choose its template and order its gallery images.</p>
-        </div>
+      <section className="studio-page-header">
+        <p>Create a product record, choose its template and order its gallery images.</p>
         <Button asChild variant="outline">
           <Link href="/studio/products">Back to products</Link>
         </Button>

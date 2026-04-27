@@ -19,14 +19,8 @@ export default async function StudioDashboardPage() {
 
   return (
     <div className="grid gap-6">
-      <section className="studio-hero">
-        <div>
-          <p className="studio-eyebrow">admin.dashboard</p>
-          <h1 className="mb-3 text-4xl font-black md:text-5xl">Eltronic Studio</h1>
-          <p className="max-w-3xl text-muted-foreground">
-            A clean control room for product content, template assignment, ordered galleries and quote enquiries.
-          </p>
-        </div>
+      <section className="studio-page-header">
+        <p>A clean control room for product content, template assignment, ordered galleries and quote enquiries.</p>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link href="/studio/products/new">

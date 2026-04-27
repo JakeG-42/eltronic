@@ -15,10 +15,8 @@ export default async function SubmissionsPage() {
 
   return (
     <div className="grid gap-6">
-      <section>
-        <p className="studio-eyebrow">inbox.mode</p>
-        <h1 className="mb-2 text-4xl font-black">Enquiries</h1>
-        <p className="text-muted-foreground">Messages submitted through the public quote/contact form.</p>
+      <section className="studio-page-header">
+        <p>Messages submitted through the public quote/contact form.</p>
       </section>
 
       <Card>

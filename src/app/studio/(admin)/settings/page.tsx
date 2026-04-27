@@ -9,10 +9,8 @@ export const metadata = {
 export default function StudioSettingsPage() {
   return (
     <div className="grid gap-6">
-      <section>
-        <p className="studio-eyebrow">studio.settings</p>
-        <h1 className="mb-2 text-4xl font-black">Settings</h1>
-        <p className="text-muted-foreground">Studio-level notes and controls. More settings can live here as the admin grows.</p>
+      <section className="studio-page-header">
+        <p>Studio-level notes and controls. More settings can live here as the admin grows.</p>
       </section>
 
       <div className="grid gap-6 lg:grid-cols-2">

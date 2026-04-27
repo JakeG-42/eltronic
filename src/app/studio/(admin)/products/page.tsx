@@ -29,12 +29,8 @@ export default async function StudioProductsPage({ searchParams }: ProductsPageP
 
   return (
     <div className="grid gap-6">
-      <section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="studio-eyebrow">catalogue.mode</p>
-          <h1 className="mb-2 text-4xl font-black">Products</h1>
-          <p className="text-muted-foreground">A table-first view with full edit pages and quick-edit drawer controls.</p>
-        </div>
+      <section className="studio-page-header">
+        <p>A table-first view with full edit pages and quick-edit drawer controls.</p>
         <Button asChild>
           <Link href="/studio/products/new">
             <Plus className="size-4" />

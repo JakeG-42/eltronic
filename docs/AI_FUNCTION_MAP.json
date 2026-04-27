@@ -334,6 +334,11 @@
       "styleFile": "src/app/globals.css",
       "behavior": "Public-only fixed ambient layer with low-opacity floating syntax glyphs. Respects prefers-reduced-motion; no cursor or pointer-follow glow."
     },
+    "homeHeroTypewriter": {
+      "file": "src/components/site/hero-role-typewriter.tsx",
+      "styleFile": "src/app/globals.css",
+      "behavior": "Client-side typewriter role label above the Eltronic homepage hero wordmark. Cycles through short professional role phrases and falls back for prefers-reduced-motion."
+    },
     "publicNavIcons": {
       "file": "src/components/site/site-shell.tsx",
       "type": "inline SVG",
@@ -362,6 +367,7 @@
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
+    "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "components": [
       "src/components/ui/button.tsx",
       "src/components/ui/card.tsx",

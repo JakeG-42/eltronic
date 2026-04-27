@@ -34,12 +34,10 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
 
   return (
     <div className="grid gap-6">
-      <section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="studio-eyebrow">catalogue.edit</p>
-          <h1 className="mb-2 text-4xl font-black">{product.name}</h1>
-          <p className="text-muted-foreground">Full product editor with visual gallery ordering and product data controls.</p>
-        </div>
+      <section className="studio-page-header">
+        <p>
+          Editing <strong>{product.name}</strong>. Manage gallery order, product content and admin-only data controls.
+        </p>
         <div className="flex flex-wrap gap-2">
           <Button asChild variant="outline">
             <Link href="/studio/products">Back to products</Link>

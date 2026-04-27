@@ -412,12 +412,21 @@ h3 {
   padding: clamp(2rem, 6vw, 5rem) 0;
 }
 
+.home-page {
+  padding-top: clamp(0.75rem, 2vw, 1.6rem);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
   min-height: calc(100vh - 4.75rem);
+}
+
+.home-page .hero {
+  min-height: min(43rem, calc(100vh - 6.25rem));
+  padding-top: clamp(0.5rem, 2vw, 1.4rem);
 }
 
 .compact-hero {
@@ -463,6 +472,29 @@ h3 {
   display: block;
   color: var(--secondary);
   font-size: clamp(1.1rem, 2.8vw, 2rem);
+}
+
+.title-typewriter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  min-height: 1.35em;
+  margin-bottom: 0.1rem;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.25);
+  animation: cursorBlink 0.9s steps(2, start) infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .title-value {
@@ -963,7 +995,9 @@ h3 {
 }
 
 .about-hero h1 {
-  max-width: 17ch;
+  max-width: 14ch;
+  font-size: clamp(2.1rem, 3.8vw, 3.45rem);
+  line-height: 1.08;
 }
 
 .about-hero .technical-visual {
@@ -1829,6 +1863,30 @@ h3 {
   font-size: 0.9rem;
 }
 
+.studio-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--card) 62%, transparent);
+}
+
+.studio-page-header p {
+  max-width: 58rem;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.studio-page-header strong {
+  color: var(--foreground);
+}
+
 .studio-hero {
   display: flex;
   align-items: flex-start;
@@ -2289,7 +2347,8 @@ h3 {
   }
 
   .studio-topbar,
-  .studio-hero {
+  .studio-hero,
+  .studio-page-header {
     flex-direction: column;
     align-items: stretch;
   }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HeroRoleTypewriter } from "@/components/site/hero-role-typewriter";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import { sectorModules, serviceModules, workflowModules } from "@/content/site";
 import { getFeaturedProducts } from "@/lib/managed-data";
@@ -10,12 +11,11 @@ export default async function Home() {
   const featuredProducts = await getFeaturedProducts();
 
   return (
-    <main className="page">
+    <main className="page home-page">
       <section className="hero">
         <div className="hero-copy">
-          <p className="code-kicker">systems.integrator</p>
           <h1 className="hero-title">
-            <span className="title-prefix">const partner =</span>
+            <HeroRoleTypewriter />
             <span className="title-value gradient-text">Eltronic</span>
             <span className="title-suffix">;</span>
           </h1>
