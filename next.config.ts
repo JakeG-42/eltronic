@@ -15,6 +15,21 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingIncludes: {
+    "/api/console-code/*": [
+      "./docs/**/*",
+      "./public/**/*",
+      "./scripts/**/*",
+      "./src/**/*",
+      "./components.json",
+      "./eslint.config.mjs",
+      "./next.config.ts",
+      "./package.json",
+      "./payload.config.ts",
+      "./postcss.config.mjs",
+      "./README.md",
+      "./tsconfig.json",
+      "./vercel.json",
+    ],
     "/studio/templates": [
       "./src/app/**/*.tsx",
       "./src/app/**/*.ts",

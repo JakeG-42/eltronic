@@ -106,7 +106,16 @@ function getPayloadSecret() {
 export default buildConfig({
   admin: {
     components: {
+      afterNavLinks: ["/components/code-workspace/CodeWorkspaceNavLink#CodeWorkspaceNavLink"],
       views: {
+        codeWorkspace: {
+          Component: "/components/code-workspace/CodeWorkspaceView#CodeWorkspaceView",
+          exact: true,
+          meta: {
+            title: "Code workspace",
+          },
+          path: "/code-workspace",
+        },
         wysiwyg: {
           Component: "/components/visual-builder/WysiwygPageView#WysiwygPageView",
           exact: true,

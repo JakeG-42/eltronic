@@ -126,7 +126,8 @@ Payload CMS is installed alongside the existing site and Studio rather than repl
 - Payload-backed new-site route: `/v2`, marked noindex and excluded in robots on the old domain. `new.eltronic.co.uk` rewrites to this route without using the old public header/footer.
 - Payload collections live in `src/payload/collections`; the CMS foundation includes admin-only `console-users`, `media`, `documents`, `product-categories`, `products`, `pages`, `posts`, themes, page layouts, menus and `code-snippets`.
 - Payload globals live in `src/payload/globals`; current visible globals are `theme-settings` and `site-settings`. Legacy `navigation` and `footer` globals remain but are hidden from the Console sidebar because the new-site header/footer should be built in WYSIWYG/theme layouts.
-- `Theme > Code editor` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
+- `Theme > Code workspace` is a protected repo browser for admins. It can explore allowed project files from the Console, but source files are read-only because Vercel deployments are immutable.
+- `Theme > Custom CSS` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
 - Page/post builder blocks live in `src/payload/blocks`; current blocks include hero, rich text, image/text, card grid, product grid, gallery, downloads, specification table and CTA band.
 - Jake and Dad are existing admins. The `editor` role remains available in Console users for future limited-access accounts, but no editor users are planned yet.
 - `next.config.ts` is wrapped with `withPayload()`.

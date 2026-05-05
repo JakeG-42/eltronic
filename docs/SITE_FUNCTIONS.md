@@ -75,7 +75,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `PAYLOAD_DATABASE_URL` can override the DB connection. Without it, Payload falls back to the same standard/prefixed Neon environment variables used by the managed data layer.
 - Payload collections are being expanded into a full CMS: admin-only `console-users`, `media`, `documents`, `product-categories`, `products`, `pages`, `posts`, themes, page layouts, menus and `code-snippets`.
 - Payload globals cover `site-settings` and theme settings. Legacy `navigation` and `footer` globals remain in code/data but are hidden from the Console sidebar because the new-site header/footer should be built in the WYSIWYG/theme system.
-- `Theme > Code editor` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
+- `Theme > Code workspace` is a protected repo browser for admins. It can explore allowed project files from the Console, but source files are read-only because Vercel deployments are immutable.
+- `Theme > Custom CSS` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
 - Payload page/post building is block-based with hero, rich text, image/text, card grid, product grid, gallery, downloads, specification table and CTA band sections.
 - The `/v2` route reads a Payload page with slug `home` if one exists, otherwise it renders a safe placeholder. It has its own route-group layout and does not use the old public `SiteShell` header/footer. It is noindex and excluded from robots on the old domain.
 - `PAYLOAD_SECRET` is configured in Vercel for Production and the `dev` Preview branch; keep it present before relying on Console auth in production.

@@ -31,8 +31,8 @@ export const CodeSnippets: CollectionConfig = {
     useAsTitle: "title",
   },
   labels: {
-    plural: "Code editor",
-    singular: "Code snippet",
+    plural: "Custom CSS",
+    singular: "CSS snippet",
   },
   fields: [
     {

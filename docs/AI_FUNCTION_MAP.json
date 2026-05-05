@@ -187,7 +187,8 @@
     "notes": [
       "The current public site and /studio still read/write through the existing managed-data layer.",
       "The /v2 route reads a Payload page with slug home when present and otherwise renders a placeholder. new.eltronic.co.uk rewrites to this isolated new-site route.",
-      "Theme > Code editor stores CSS snippets in Payload and injects active global/theme/page snippets into the new-site renderer.",
+      "Theme > Code workspace is a protected admin repo browser. Source files are read-only because Vercel deployments are immutable.",
+      "Theme > Custom CSS stores CSS snippets in Payload and injects active global/theme/page snippets into the new-site renderer.",
       "Console users support admin and editor roles. Jake and Dad are admins; no editor users are planned yet.",
       "PAYLOAD_SECRET is configured in Vercel for Production and the dev Preview branch; keep it present before treating Console auth as production-ready."
     ]
