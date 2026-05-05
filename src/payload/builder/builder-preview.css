@@ -59,6 +59,29 @@
   color: #065f46;
 }
 
+.wysiwyg-cell-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  min-height: 2rem;
+  padding: 0.36rem 0.55rem;
+  border: 1px solid rgba(34, 113, 177, 0.34);
+  border-radius: 7px;
+  background: rgba(34, 113, 177, 0.08);
+  color: #155e85;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.wysiwyg-cell-button:hover,
+.wysiwyg-cell-button:focus-visible {
+  border-color: rgba(34, 113, 177, 0.62);
+  background: rgba(34, 113, 177, 0.14);
+  color: #0f4f73;
+}
+
 .puck-eltronic-page {
   --builder-accent: #8bd3ff;
   --builder-bg: #020617;

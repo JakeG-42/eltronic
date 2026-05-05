@@ -100,6 +100,18 @@ function getPayloadSecret() {
 
 export default buildConfig({
   admin: {
+    components: {
+      views: {
+        wysiwyg: {
+          Component: "/components/visual-builder/WysiwygPageView#WysiwygPageView",
+          exact: true,
+          meta: {
+            title: "WYSIWYG Builder",
+          },
+          path: "/wysiwyg/:id",
+        },
+      },
+    },
     importMap: {
       baseDir: path.resolve(dirname, "src/app/(payload)"),
       importMapFile: path.resolve(dirname, "src/app/(payload)/console/importMap.js"),

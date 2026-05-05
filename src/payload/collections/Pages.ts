@@ -31,7 +31,7 @@ export const Pages: CollectionConfig = {
             },
             path: "/visual-builder",
             tab: {
-              href: "/visual-builder",
+              href: ({ id, routes }) => `${routes.admin}/wysiwyg/${id}`,
               label: "Visual Builder",
               order: 150,
             },
@@ -39,7 +39,7 @@ export const Pages: CollectionConfig = {
         },
       },
     },
-    defaultColumns: ["title", "slug", "status", "updatedAt"],
+    defaultColumns: ["wysiwyg", "title", "slug", "status", "updatedAt"],
     group: "Content",
     preview: (doc) => `${getNewSiteUrl()}${getPreviewPath(doc.slug)}`,
     useAsTitle: "title",
@@ -64,6 +64,18 @@ export const Pages: CollectionConfig = {
       type: "blocks",
       blocks: pageBlocks,
       required: true,
+    },
+    {
+      name: "wysiwyg",
+      type: "ui",
+      admin: {
+        components: {
+          Cell: "/components/visual-builder/WysiwygCell#WysiwygCell",
+          Field: "/components/visual-builder/WysiwygField#WysiwygField",
+        },
+        disableListColumn: false,
+      },
+      label: "WYSIWYG",
     },
     {
       name: "builderData",
