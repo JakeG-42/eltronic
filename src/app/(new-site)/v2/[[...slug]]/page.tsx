@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import config from "@payload-config";
-import { getPayload } from "payload";
+import { getPayload, type Where } from "payload";
 
 import { PuckBuilderRenderer } from "@/components/payload/puck-builder-renderer";
 import {
@@ -161,6 +161,90 @@ async function getThemeSettings(): Promise<BuilderThemeSettings> {
   }
 }
 
+function numericId(value: number | string | undefined) {
+  if (typeof value === "number") {
+    return value;
+  }
+
+  return typeof value === "string" && /^\d+$/.test(value) ? Number(value) : undefined;
+}
+
+async function getCustomCss({ pageId, themeId }: { pageId?: number | string; themeId?: number | string }) {
+  const orConditions: Where[] = [
+    {
+      scope: {
+        equals: "global",
+      },
+    },
+  ];
+  const numericThemeId = numericId(themeId);
+  const numericPageId = numericId(pageId);
+
+  if (numericThemeId) {
+    orConditions.push({
+      and: [
+        {
+          scope: {
+            equals: "theme",
+          },
+        },
+        {
+          theme: {
+            equals: numericThemeId,
+          },
+        },
+      ],
+    });
+  }
+
+  if (numericPageId) {
+    orConditions.push({
+      and: [
+        {
+          scope: {
+            equals: "page",
+          },
+        },
+        {
+          page: {
+            equals: numericPageId,
+          },
+        },
+      ],
+    });
+  }
+
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: "code-snippets",
+      depth: 0,
+      limit: 50,
+      sort: "priority",
+      where: {
+        and: [
+          {
+            status: {
+              equals: "active",
+            },
+          },
+          {
+            or: orConditions,
+          },
+        ],
+      },
+    });
+
+    return result.docs
+      .map((snippet) => (snippet.css ? `/* ${snippet.title} */\n${snippet.css}` : ""))
+      .filter(Boolean)
+      .join("\n\n");
+  } catch (error) {
+    console.error("Unable to load Payload custom CSS for new site.", error);
+    return "";
+  }
+}
+
 export default async function PayloadV2Page({ params }: PayloadV2PageProps) {
   const { slug: segments } = await params;
   const slug = getSlugFromSegments(segments);
@@ -173,11 +257,14 @@ export default async function PayloadV2Page({ params }: PayloadV2PageProps) {
   ]);
 
   if (page) {
+    const activeTheme = getPageBuilderTheme(page, themes, themeSettings.themeId);
+    const customCss = await getCustomCss({ pageId: page.id, themeId: activeTheme.id });
+
     if ("builderData" in page && page.builderData) {
       const builderData = normalizeBuilderData(page.builderData);
-      const themedBuilderData = builderData ? applyThemeToBuilderData(builderData, getPageBuilderTheme(page, themes, themeSettings.themeId)) : page.builderData;
+      const themedBuilderData = builderData ? applyThemeToBuilderData(builderData, activeTheme) : page.builderData;
 
-      return <PuckBuilderRenderer data={themedBuilderData} featuredProducts={productsToBuilderProducts(featuredProducts)} menus={menus} />;
+      return <PuckBuilderRenderer customCss={customCss} data={themedBuilderData} featuredProducts={productsToBuilderProducts(featuredProducts)} menus={menus} />;
     }
 
     return (

@@ -13,7 +13,7 @@ export const Menus: CollectionConfig = {
   },
   admin: {
     defaultColumns: ["name", "handle", "updatedAt"],
-    group: "Settings",
+    group: "Theme",
     useAsTitle: "name",
   },
   fields: [

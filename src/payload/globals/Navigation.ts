@@ -10,6 +10,7 @@ export const Navigation: GlobalConfig = {
     update: adminsOnly,
   },
   admin: {
+    hidden: true,
     group: "Settings",
   },
   fields: [

@@ -10,6 +10,7 @@ export const Footer: GlobalConfig = {
     update: adminsOnly,
   },
   admin: {
+    hidden: true,
     group: "Settings",
   },
   fields: [

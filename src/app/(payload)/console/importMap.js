@@ -21,13 +21,13 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { WysiwygCell as WysiwygCell_9cd4df1c4e48f87d2c6f5b2c3f4dd033 } from '../components/visual-builder/WysiwygCell'
+import { WysiwygField as WysiwygField_484e685e213fa45295ffc3ef88e6ef97 } from '../components/visual-builder/WysiwygField'
+import { VisualBuilderView as VisualBuilderView_36129a47f1fcd5005fb4d0fd92d06ed1 } from '../components/visual-builder/VisualBuilderView'
 import { ThemePreviewCell as ThemePreviewCell_ac77b5c0503c02d2f3a796dd252d513c } from '../components/theme/ThemePreview'
 import { ThemePreviewField as ThemePreviewField_ac77b5c0503c02d2f3a796dd252d513c } from '../components/theme/ThemePreview'
 import { TemplatePreviewCell as TemplatePreviewCell_ac77b5c0503c02d2f3a796dd252d513c } from '../components/theme/ThemePreview'
 import { TemplatePreviewField as TemplatePreviewField_ac77b5c0503c02d2f3a796dd252d513c } from '../components/theme/ThemePreview'
-import { WysiwygCell as WysiwygCell_9cd4df1c4e48f87d2c6f5b2c3f4dd033 } from '../components/visual-builder/WysiwygCell'
-import { WysiwygField as WysiwygField_484e685e213fa45295ffc3ef88e6ef97 } from '../components/visual-builder/WysiwygField'
-import { VisualBuilderView as VisualBuilderView_36129a47f1fcd5005fb4d0fd92d06ed1 } from '../components/visual-builder/VisualBuilderView'
 import { ThemeSettingsPreviewField as ThemeSettingsPreviewField_ac77b5c0503c02d2f3a796dd252d513c } from '../components/theme/ThemePreview'
 import { WysiwygPageView as WysiwygPageView_c7efaa2257253e4183bd87449699e9e3 } from '../components/visual-builder/WysiwygPageView'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
@@ -57,13 +57,13 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "/components/visual-builder/WysiwygCell#WysiwygCell": WysiwygCell_9cd4df1c4e48f87d2c6f5b2c3f4dd033,
+  "/components/visual-builder/WysiwygField#WysiwygField": WysiwygField_484e685e213fa45295ffc3ef88e6ef97,
+  "/components/visual-builder/VisualBuilderView#VisualBuilderView": VisualBuilderView_36129a47f1fcd5005fb4d0fd92d06ed1,
   "/components/theme/ThemePreview#ThemePreviewCell": ThemePreviewCell_ac77b5c0503c02d2f3a796dd252d513c,
   "/components/theme/ThemePreview#ThemePreviewField": ThemePreviewField_ac77b5c0503c02d2f3a796dd252d513c,
   "/components/theme/ThemePreview#TemplatePreviewCell": TemplatePreviewCell_ac77b5c0503c02d2f3a796dd252d513c,
   "/components/theme/ThemePreview#TemplatePreviewField": TemplatePreviewField_ac77b5c0503c02d2f3a796dd252d513c,
-  "/components/visual-builder/WysiwygCell#WysiwygCell": WysiwygCell_9cd4df1c4e48f87d2c6f5b2c3f4dd033,
-  "/components/visual-builder/WysiwygField#WysiwygField": WysiwygField_484e685e213fa45295ffc3ef88e6ef97,
-  "/components/visual-builder/VisualBuilderView#VisualBuilderView": VisualBuilderView_36129a47f1fcd5005fb4d0fd92d06ed1,
   "/components/theme/ThemePreview#ThemeSettingsPreviewField": ThemeSettingsPreviewField_ac77b5c0503c02d2f3a796dd252d513c,
   "/components/visual-builder/WysiwygPageView#WysiwygPageView": WysiwygPageView_c7efaa2257253e4183bd87449699e9e3,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1

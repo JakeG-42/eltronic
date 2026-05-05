@@ -67,16 +67,17 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    'console-users': ConsoleUser;
-    media: Media;
-    documents: Document;
-    'product-categories': ProductCategory;
     products: Product;
-    themes: Theme;
-    'page-templates': PageTemplate;
-    menus: Menu;
+    'product-categories': ProductCategory;
     pages: Page;
     posts: Post;
+    themes: Theme;
+    'page-templates': PageTemplate;
+    'code-snippets': CodeSnippet;
+    menus: Menu;
+    media: Media;
+    documents: Document;
+    'console-users': ConsoleUser;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,16 +85,17 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    'console-users': ConsoleUsersSelect<false> | ConsoleUsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    documents: DocumentsSelect<false> | DocumentsSelect<true>;
-    'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
-    themes: ThemesSelect<false> | ThemesSelect<true>;
-    'page-templates': PageTemplatesSelect<false> | PageTemplatesSelect<true>;
-    menus: MenusSelect<false> | MenusSelect<true>;
+    'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    themes: ThemesSelect<false> | ThemesSelect<true>;
+    'page-templates': PageTemplatesSelect<false> | PageTemplatesSelect<true>;
+    'code-snippets': CodeSnippetsSelect<false> | CodeSnippetsSelect<true>;
+    menus: MenusSelect<false> | MenusSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    'console-users': ConsoleUsersSelect<false> | ConsoleUsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -142,91 +144,6 @@ export interface ConsoleUserAuthOperations {
     email: string;
     password: string;
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "console-users".
- */
-export interface ConsoleUser {
-  id: number;
-  name?: string | null;
-  /**
-   * Use Admin for now. Editor is available for future limited-access accounts.
-   */
-  role: 'admin' | 'editor';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-  collection: 'console-users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  caption?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "documents".
- */
-export interface Document {
-  id: number;
-  title: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-categories".
- */
-export interface ProductCategory {
-  id: number;
-  name: string;
-  /**
-   * Lowercase URL segment. Use letters, numbers and hyphens.
-   */
-  slug: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -299,95 +216,58 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "themes".
+ * via the `definition` "product-categories".
  */
-export interface Theme {
+export interface ProductCategory {
   id: number;
   name: string;
   /**
-   * Short theme key used by the WYSIWYG editor.
+   * Lowercase URL segment. Use letters, numbers and hyphens.
    */
-  handle: string;
-  status: 'active' | 'draft';
-  /**
-   * Used when a page does not have a theme selected.
-   */
-  isDefault?: boolean | null;
+  slug: string;
   description?: string | null;
-  colors: {
-    backgroundColor: string;
-    textColor: string;
-    accentColor: string;
-    /**
-     * RGB values, for example: 23, 32, 51.
-     */
-    surfaceColor: string;
-    surfaceOpacity: number;
-  };
-  typography: {
-    fontFamily: 'display' | 'sans' | 'code';
-  };
-  layout: {
-    sectionSpacing: 'compact' | 'normal' | 'spacious';
-  };
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-templates".
+ * via the `definition` "media".
  */
-export interface PageTemplate {
+export interface Media {
   id: number;
-  name: string;
-  /**
-   * Short template key used by the whole-site template selector.
-   */
-  handle: string;
-  status: 'active' | 'draft';
-  description?: string | null;
-  /**
-   * Default theme to use when this website template is selected.
-   */
-  theme?: (number | null) | Theme;
-  /**
-   * Reusable WYSIWYG layout data used as the starting point for this website template.
-   */
-  builderData:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
+  alt: string;
+  caption?: string | null;
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menus".
+ * via the `definition` "documents".
  */
-export interface Menu {
+export interface Document {
   id: number;
-  name: string;
-  /**
-   * Short key used by the WYSIWYG editor, for example main-menu or footer-links.
-   */
-  handle: string;
-  /**
-   * Add, remove, rename and reorder the links in this menu.
-   */
-  items?:
-    | {
-        label: string;
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
+  title: string;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -587,6 +467,74 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: number;
+  name: string;
+  /**
+   * Short theme key used by the WYSIWYG editor.
+   */
+  handle: string;
+  status: 'active' | 'draft';
+  /**
+   * Used when a page does not have a theme selected.
+   */
+  isDefault?: boolean | null;
+  description?: string | null;
+  colors: {
+    backgroundColor: string;
+    textColor: string;
+    accentColor: string;
+    /**
+     * RGB values, for example: 23, 32, 51.
+     */
+    surfaceColor: string;
+    surfaceOpacity: number;
+  };
+  typography: {
+    fontFamily: 'display' | 'sans' | 'code';
+  };
+  layout: {
+    sectionSpacing: 'compact' | 'normal' | 'spacious';
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-templates".
+ */
+export interface PageTemplate {
+  id: number;
+  name: string;
+  /**
+   * Short template key used by the whole-site template selector.
+   */
+  handle: string;
+  status: 'active' | 'draft';
+  description?: string | null;
+  /**
+   * Default theme to use when this website template is selected.
+   */
+  theme?: (number | null) | Theme;
+  /**
+   * Reusable WYSIWYG layout data used as the starting point for this website template.
+   */
+  builderData:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -762,6 +710,99 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "code-snippets".
+ */
+export interface CodeSnippet {
+  id: number;
+  title: string;
+  /**
+   * Short internal key, for example product-card-css.
+   */
+  handle: string;
+  status: 'active' | 'draft';
+  /**
+   * Choose where this CSS is allowed to run.
+   */
+  scope: 'global' | 'theme' | 'page';
+  /**
+   * Only used when the scope is One theme.
+   */
+  theme?: (number | null) | Theme;
+  /**
+   * Only used when the scope is One page.
+   */
+  page?: (number | null) | Page;
+  /**
+   * Lower numbers load first. Use this when one snippet needs to override another.
+   */
+  priority: number;
+  /**
+   * Custom CSS for the new Payload site. JavaScript is intentionally not supported here.
+   */
+  css: string;
+  /**
+   * Internal note explaining what this snippet changes.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menus".
+ */
+export interface Menu {
+  id: number;
+  name: string;
+  /**
+   * Short key used by the WYSIWYG editor, for example main-menu or footer-links.
+   */
+  handle: string;
+  /**
+   * Add, remove, rename and reorder the links in this menu.
+   */
+  items?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "console-users".
+ */
+export interface ConsoleUser {
+  id: number;
+  name?: string | null;
+  /**
+   * Use Admin for now. Editor is available for future limited-access accounts.
+   */
+  role: 'admin' | 'editor';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'console-users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -785,24 +826,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'console-users';
-        value: number | ConsoleUser;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'documents';
-        value: number | Document;
+        relationTo: 'products';
+        value: number | Product;
       } | null)
     | ({
         relationTo: 'product-categories';
         value: number | ProductCategory;
       } | null)
     | ({
-        relationTo: 'products';
-        value: number | Product;
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null)
     | ({
         relationTo: 'themes';
@@ -813,16 +850,24 @@ export interface PayloadLockedDocument {
         value: number | PageTemplate;
       } | null)
     | ({
+        relationTo: 'code-snippets';
+        value: number | CodeSnippet;
+      } | null)
+    | ({
         relationTo: 'menus';
         value: number | Menu;
       } | null)
     | ({
-        relationTo: 'pages';
-        value: number | Page;
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
-        relationTo: 'posts';
-        value: number | Post;
+        relationTo: 'documents';
+        value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'console-users';
+        value: number | ConsoleUser;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -865,79 +910,6 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "console-users_select".
- */
-export interface ConsoleUsersSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "documents_select".
- */
-export interface DocumentsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-categories_select".
- */
-export interface ProductCategoriesSelect<T extends boolean = true> {
-  name?: T;
-  slug?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -991,64 +963,12 @@ export interface ProductsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "themes_select".
+ * via the `definition` "product-categories_select".
  */
-export interface ThemesSelect<T extends boolean = true> {
+export interface ProductCategoriesSelect<T extends boolean = true> {
   name?: T;
-  handle?: T;
-  status?: T;
-  isDefault?: T;
+  slug?: T;
   description?: T;
-  colors?:
-    | T
-    | {
-        backgroundColor?: T;
-        textColor?: T;
-        accentColor?: T;
-        surfaceColor?: T;
-        surfaceOpacity?: T;
-      };
-  typography?:
-    | T
-    | {
-        fontFamily?: T;
-      };
-  layout?:
-    | T
-    | {
-        sectionSpacing?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-templates_select".
- */
-export interface PageTemplatesSelect<T extends boolean = true> {
-  name?: T;
-  handle?: T;
-  status?: T;
-  description?: T;
-  theme?: T;
-  builderData?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menus_select".
- */
-export interface MenusSelect<T extends boolean = true> {
-  name?: T;
-  handle?: T;
-  items?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1406,6 +1326,148 @@ export interface PostsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes_select".
+ */
+export interface ThemesSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  status?: T;
+  isDefault?: T;
+  description?: T;
+  colors?:
+    | T
+    | {
+        backgroundColor?: T;
+        textColor?: T;
+        accentColor?: T;
+        surfaceColor?: T;
+        surfaceOpacity?: T;
+      };
+  typography?:
+    | T
+    | {
+        fontFamily?: T;
+      };
+  layout?:
+    | T
+    | {
+        sectionSpacing?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-templates_select".
+ */
+export interface PageTemplatesSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  status?: T;
+  description?: T;
+  theme?: T;
+  builderData?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "code-snippets_select".
+ */
+export interface CodeSnippetsSelect<T extends boolean = true> {
+  title?: T;
+  handle?: T;
+  status?: T;
+  scope?: T;
+  theme?: T;
+  page?: T;
+  priority?: T;
+  css?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menus_select".
+ */
+export interface MenusSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  caption?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "console-users_select".
+ */
+export interface ConsoleUsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

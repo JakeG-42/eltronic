@@ -6,6 +6,7 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 
 import { ConsoleUsers } from "./src/payload/collections/ConsoleUsers.ts";
+import { CodeSnippets } from "./src/payload/collections/CodeSnippets.ts";
 import { Documents } from "./src/payload/collections/Documents.ts";
 import { Media } from "./src/payload/collections/Media.ts";
 import { Menus } from "./src/payload/collections/Menus.ts";
@@ -125,7 +126,7 @@ export default buildConfig({
     },
     user: ConsoleUsers.slug,
   },
-  collections: [ConsoleUsers, Media, Documents, ProductCategories, Products, Themes, PageTemplates, Menus, Pages, Posts],
+  collections: [Products, ProductCategories, Pages, Posts, Themes, PageTemplates, CodeSnippets, Menus, Media, Documents, ConsoleUsers],
   db: postgresAdapter({
     pool: {
       connectionString: getPayloadDatabaseUrl(),
