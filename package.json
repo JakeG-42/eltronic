@@ -8,6 +8,7 @@
     "email:check": "node scripts/check-email-notifications.mjs",
     "images:products": "node scripts/generate-product-gallery-assets.mjs",
     "images:products:sync": "node scripts/generate-product-gallery-assets.mjs --sync-managed-data",
+    "products:topcon:sync": "node scripts/sync-topcon-products.mjs",
     "start": "next start",
     "storage:check": "node scripts/check-storage.mjs",
     "test:contact-bot": "node scripts/test-contact-antispam.mjs",

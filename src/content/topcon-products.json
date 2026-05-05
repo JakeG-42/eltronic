@@ -1,0 +1,1596 @@
+[
+  {
+    "slug": "topcon-opus-a3e",
+    "name": "Topcon OPUS A3e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a3e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Front_web.png",
+      "alt": "Topcon OPUS A3e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Front_web.png",
+        "alt": "Topcon OPUS A3e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Back_web.png",
+        "alt": "Topcon OPUS A3e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/c/7/csm_Produkte-Banner-OpusA3e_1920x680_c8788f6996.jpg",
+        "alt": "Topcon OPUS A3e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/d/csm_OPUS_A3E_Front_web_1b244084cf.png",
+        "alt": "Topcon OPUS A3e front view"
+      }
+    ],
+    "summary": "Compact 4.3 inch OPUS A-series HMI for cost-sensitive control projects that still need CAN-Bus, USB and I/O.",
+    "description": "The OPUS A3e is a compact A-series operator display for mobile machinery and control panels where space, cost and CAN-Bus integration matter. Eltronic can help specify the screen, wiring, mounting and software route around the wider application.",
+    "highlights": [
+      "Display: 4.3 in, 15:9 TFT, 480 x 272 px, 400 cd/m2",
+      "Operator controls: Touchscreen option",
+      "Interfaces: 2 x CAN-Bus, Ethernet, RS232, USB 2.0 full speed, analog/digital I/O",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "4.3 in, 15:9 TFT, 480 x 272 px, 400 cd/m2"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen option"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit 532 MHz Freescale I.MX35"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR2 RAM, 1 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus, Ethernet, RS232, USB 2.0 full speed, analog/digital I/O"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "Operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection"
+      },
+      {
+        "label": "Housing",
+        "value": "Compact housing under 1 kg"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A3e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3e_BASIC.pdf"
+      },
+      {
+        "label": "Topcon OPUS A3e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3e_FULL.pdf"
+      },
+      {
+        "label": "Topcon OPUS A3e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA3.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A3e"
+  },
+  {
+    "slug": "topcon-opus-a3s",
+    "name": "Topcon OPUS A3s",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a3s.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Front_web.png",
+      "alt": "Topcon OPUS A3s front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Front_web.png",
+        "alt": "Topcon OPUS A3s front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Back_web.png",
+        "alt": "Topcon OPUS A3s rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/4/csm_Produkte-Banner-OpusA3s_1920x680neu_fba43f5c59.jpg",
+        "alt": "Topcon OPUS A3s banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/2/c/csm_OPUS_A3S_Front_web_6d4e4e8a5d.png",
+        "alt": "Topcon OPUS A3s front view"
+      }
+    ],
+    "summary": "Compact 4.3 inch keyed OPUS A-series HMI with touchscreen, soft keys, hard keys and encoder.",
+    "description": "The OPUS A3s adds tactile controls to the compact A-series format, making it useful where operators need both touch input and physical interaction. It suits vehicle, plant and machine applications that need a small but capable control display.",
+    "highlights": [
+      "Display: 4.3 in, 15:9 TFT transmissive; 480 x 272 px, 400 cd/m2; Contrast ratio 400:1",
+      "Operator controls: 8 softkeys; 3 hardkeys; Encoder; Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND)...",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "4.3 in, 15:9 TFT transmissive; 480 x 272 px, 400 cd/m2; Contrast ratio 400:1"
+      },
+      {
+        "label": "User interface",
+        "value": "8 softkeys; 3 hardkeys; Encoder; Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 532 MHz; Freescale I.MX35"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 3.0.0 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR2 RAM; 1 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND); Analog/Digital I/O: 4 analog/digital inputs; 3 digital outputs; 1 USB 2.0 full speed on main connector; 1 USB 2.0 high speed on front"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "Operating -30 to +65 deg C; Storage -40 to +85 deg C; Protection: IP65/IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W198 x H98 x D64.7 mm; excl. connector and cables"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED; 3 Status-LEDs"
+      },
+      {
+        "label": "Audio",
+        "value": "Buzzer, approx. 60 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A3s basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3s_BASIC.pdf"
+      },
+      {
+        "label": "Topcon OPUS A3s full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3s_FULL.pdf"
+      },
+      {
+        "label": "Topcon OPUS A3s operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA3.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A3s"
+  },
+  {
+    "slug": "topcon-opus-b6e",
+    "name": "Topcon OPUS B6e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b6e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Front_web.png",
+      "alt": "Topcon OPUS B6e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Front_web.png",
+        "alt": "Topcon OPUS B6e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Back_web.png",
+        "alt": "Topcon OPUS B6e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/1/csm_B6_Banner_dcc53ad67f.jpg",
+        "alt": "Topcon OPUS B6e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/1/csm_OPUS_B6E_Front_web_e44709014f.png",
+        "alt": "Topcon OPUS B6e front view"
+      }
+    ],
+    "summary": "Large 10.1 inch OPUS B-series HMI with a high-brightness display, aluminium housing and broad CAN-Bus connectivity.",
+    "description": "The OPUS B6e is a large B-series HMI for operator stations that need more screen area, bright display performance and rugged field connectivity. It is a strong fit for municipal, agricultural, construction and specialist equipment projects.",
+    "highlights": [
+      "Display: 10.1 in, 15:9 TFT; 1280 x 800 px, 1000 cd/m2; Contrast ratio 800:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 4 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 1 USB 2.0 full speed; Ethernet 10/100 Mbit/s Base T",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "10.1 in, 15:9 TFT; 1280 x 800 px, 1000 cd/m2; Contrast ratio 800:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 1000 MHz; Freescale I.MX6"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 5.4.129 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "2 GB DDR2 RAM; 8 GB NAND EMMC"
+      },
+      {
+        "label": "Interfaces",
+        "value": "4 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 1 USB 2.0 full speed; Ethernet 10/100 Mbit/s Base T"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "8 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 258.9 x H 177.7 x D 34.8 mm excl. connector and cables; Aluminium die cast"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND), AC97 compatible; Output power: approx. 50mW; Speaker, approx. 90 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B6e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B6eB.pdf"
+      },
+      {
+        "label": "Topcon OPUS B6e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B6eF.pdf"
+      },
+      {
+        "label": "Topcon OPUS B6e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB6.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B6e"
+  },
+  {
+    "slug": "topcon-opus-c-series",
+    "name": "Topcon OPUS C Series",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS C series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b6e-copy-1.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "c-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/C_Series_Front.png",
+      "alt": "Topcon OPUS C Series front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/C_Series_Front.png",
+        "alt": "Topcon OPUS C Series front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUSC07_rear2.jpg",
+        "alt": "Topcon OPUS C Series rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/b/6/csm_C_Banner_ecb212af9b.jpg",
+        "alt": "Topcon OPUS C Series banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/7/d/csm_C_Series_Front_5dd3187dd4.png",
+        "alt": "Topcon OPUS C Series front view"
+      }
+    ],
+    "summary": "Scalable OPUS C-series HMI family covering 7, 10, 12 and 15 inch formats for demanding operator interfaces.",
+    "description": "The OPUS C Series gives one HMI platform across multiple screen sizes for projects that need a consistent display family. It is suited to more advanced interfaces where processor headroom, high-resolution displays and modern connectivity are important.",
+    "highlights": [
+      "Display: C7, C10, C12 and C15 touchscreen formats",
+      "Operator controls: Touchscreen",
+      "Interfaces: 3 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 2 x RS232 (only RxD, TxD, GND); 1 x USB 3 Type C super speed, 1.5 Gbit/s...",
+      "Rugged rating: operating -30 to +75 deg C, storage -30 to +85 deg C, IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "C7 - 7 in, 15:9 TFT; 800 x 480 px, 800 cd/m2; Contrast ratio 1000:1; C10 - 10.1 in, 16:10 TFT; 1280 x 800 px, 900 cd/m2; Contrast ratio 800:1; C12 - 12.1 in, 16:10 TFT; 1280 x 800 px, 1100 cd/m2; Contrast ratio 1000:1; C15 - 15 in, 24:9 TFT; 1920 x 720 px, 900 cd/m2; Contrast ratio 1300:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 1600 MHz; Freescale I.MX8 QuadPlus"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 6.1.1 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "4 GB DDR4 RAM; 10 GB pSCL"
+      },
+      {
+        "label": "Interfaces",
+        "value": "3 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 2 x RS232 (only RxD, TxD, GND); 1 x USB 3 Type C super speed, 1.5 Gbit/s; 1 x USB 2 Type A high speed, 480 Mbit/s; 2 x Automotive Ethernet 10/100 Mbit/s Base T1; 4 x Digital/Frequency Inputs; 1 x Analog Input; 3 x Digital Output Open Drain; 1 x Digital Frequency Output Open Drain; 1 x Digital Output High-Side I max 500 mA"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -30 to +85 deg C; Protection: IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; C7 - W 200.6 x H 137.6 x D 41.5 mm excl. connector and cables; C10 - W 248 x H 179.8 x D 50 mm excl. connector and cables; C12 - W 299 x H 210 x D 53.5 mm excl. connector and cables; C15 - W 388.5 x H 188.3 x D 50 mm excl. connector and cables; Aluminium die cast, powder coated"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Proximity Sensor; Acceleration Sensor; Multicolor-LED"
+      },
+      {
+        "label": "Audio",
+        "value": "Microphone; Speaker, approx. 90 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS C Series technical data sheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_C-Series.pdf"
+      },
+      {
+        "label": "Topcon OPUS C Series operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSC-Series.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS C Series"
+  },
+  {
+    "slug": "topcon-opus-b2s",
+    "name": "Topcon OPUS B2s",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2s.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Front_web.png",
+      "alt": "Topcon OPUS B2s front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Front_web.png",
+        "alt": "Topcon OPUS B2s front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Back_web.png",
+        "alt": "Topcon OPUS B2s rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/4/8/csm_B2S_Banner_636189c453.jpg",
+        "alt": "Topcon OPUS B2s banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/f/5/csm_OPUS_B2S_Front_web_23d2393fb7.png",
+        "alt": "Topcon OPUS B2s front view"
+      }
+    ],
+    "summary": "4.3 inch OPUS B2 standard HMI with touchscreen, soft keys and a compact IP66/IP67 housing.",
+    "description": "The OPUS B2s is a compact B-series HMI for rugged applications where a small display still needs physical soft keys and CAN-Bus connectivity. Eltronic can help match it to the application environment, cabling and software stack.",
+    "highlights": [
+      "Display: 4.3 in, 15:9 TFT; 480 x 272 px, 800 cd/m2; Contrast ratio 800:1",
+      "Operator controls: 4 Softkeys; Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66/IP67 protection",
+      "Protocols: CANopen; CANfreestyle (CAN Layer 2); J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "4.3 in, 15:9 TFT; 480 x 272 px, 800 cd/m2; Contrast ratio 800:1"
+      },
+      {
+        "label": "User interface",
+        "value": "4 Softkeys; Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 528 MHz; Freescale I.MX6ULL"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 6.1.45 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR3 RAM; 3 GB eMMC Mass storage"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle (CAN Layer 2); J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66/IP67; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 144.2 x H 89 x D 36 mm excl. connector and cables; Glass, PC/ABS; Autotex XEF200"
+      },
+      {
+        "label": "Audio",
+        "value": "Buzzer, approx. 90 dB(A) at 3500 Hz"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: Deutsch DT06-08SA 8 pin"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B2s basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Basic.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2s full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Full.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2s operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B2s"
+  },
+  {
+    "slug": "topcon-opus-b3e",
+    "name": "Topcon OPUS B3e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b3e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Front_web.png",
+      "alt": "Topcon OPUS B3e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Front_web.png",
+        "alt": "Topcon OPUS B3e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Back_web.png",
+        "alt": "Topcon OPUS B3e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/f/csm_OPUS_B3E_Front_web_70c5591db5.png",
+        "alt": "Topcon OPUS B3e front view"
+      }
+    ],
+    "summary": "Compact 5 inch OPUS B-series touch HMI with aluminium housing, Ethernet and dual CAN-Bus.",
+    "description": "The OPUS B3e brings the rugged B-series platform into a 5 inch touch display. It is a practical choice for tighter operator areas that still need Ethernet, CAN-Bus and robust housing performance.",
+    "highlights": [
+      "Display: 5 in, 15:9 TFT; 800 x 480 px, 800 cd/m2; Contrast ratio 700:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 1 USB 2.0 full speed; Ethernet 10/100 Mbit/s Base T",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "5 in, 15:9 TFT; 800 x 480 px, 800 cd/m2; Contrast ratio 700:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 800 MHz; Freescale I.MX6"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 5.4.129 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "512 MB DDR2 RAM; 4 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 1 USB 2.0 full speed; Ethernet 10/100 Mbit/s Base T"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "8 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 163 x H 99.7 x D 40.8 mm excl. connector and cables; Aluminium die cast"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND), AC97 compatible; Output power: approx. 50mW; Speaker, approx. 90 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B3e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B3eB.pdf"
+      },
+      {
+        "label": "Topcon OPUS B3e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B3eF.pdf"
+      },
+      {
+        "label": "Topcon OPUS B3e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB3.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B3e"
+  },
+  {
+    "slug": "topcon-opus-b2-plus-s",
+    "name": "Topcon OPUS B2+s",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2-s.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Front_web.png",
+      "alt": "Topcon OPUS B2+s front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Front_web.png",
+        "alt": "Topcon OPUS B2+s front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Back_web.png",
+        "alt": "Topcon OPUS B2+s rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/5/7/csm_B2PS_Banner_94c9fc68a6.jpg",
+        "alt": "Topcon OPUS B2+s banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/7/9/csm_OPUS_B2SP_Front_web_26135ac1d0.png",
+        "alt": "Topcon OPUS B2+s front view"
+      }
+    ],
+    "summary": "7 inch OPUS B2 Plus standard HMI with soft keys, touchscreen and compact Deutsch connector architecture.",
+    "description": "The OPUS B2+s extends the B2 platform into a larger 7 inch display with soft keys and touch input. It suits equipment panels that need a larger operator view without moving to the heavier aluminium B-series units.",
+    "highlights": [
+      "Display: 7 in, 15:9 TFT; 800 x 480 px, 900 cd/m2; Contrast ratio 1000:1",
+      "Operator controls: 6 Softkeys; Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66/IP67 protection",
+      "Protocols: CANopen; CANfreestyle (CAN Layer 2); J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "7 in, 15:9 TFT; 800 x 480 px, 900 cd/m2; Contrast ratio 1000:1"
+      },
+      {
+        "label": "User interface",
+        "value": "6 Softkeys; Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 528 MHz; Freescale I.MX6ULL"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 6.1.45 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR3 RAM; 3 GB eMMC Mass storage"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle (CAN Layer 2); J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66/IP67; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 211 x H 129 x D 37.46 mm excl. connector and cables; Glass, PC/ABS; Autotex XEF200"
+      },
+      {
+        "label": "Audio",
+        "value": "Buzzer, approx. 90 dB(A) at 3500 Hz"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: Deutsch DT06-08SA 8 pin"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B2+s basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Basic.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2+s full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Full.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2+s operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B2+s"
+  },
+  {
+    "slug": "topcon-opus-b2e",
+    "name": "Topcon OPUS B2e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b3e-copy-1.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/B2EFront.png",
+      "alt": "Topcon OPUS B2e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/B2EFront.png",
+        "alt": "Topcon OPUS B2e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/B2EBack.png",
+        "alt": "Topcon OPUS B2e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/8/9/csm_B2E_Banner_b5681a3964.jpg",
+        "alt": "Topcon OPUS B2e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/1/csm_B2EFront_eeebf46f13.png",
+        "alt": "Topcon OPUS B2e front view"
+      }
+    ],
+    "summary": "4.3 inch OPUS B2 Eco touch HMI for compact machine-control and vehicle display applications.",
+    "description": "The OPUS B2e is the touch-focused compact B2 unit for smaller control positions. It keeps the CAN-Bus, USB and rugged environmental profile needed for mobile machinery and embedded equipment displays.",
+    "highlights": [
+      "Display: 4.3 in, 15:9 TFT; 480 x 272 px, 800 cd/m2; Contrast ratio 800:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66/IP67 protection",
+      "Protocols: CANopen; CANfreestyle (CAN Layer 2); J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "4.3 in, 15:9 TFT; 480 x 272 px, 800 cd/m2; Contrast ratio 800:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 528 MHz; Freescale I.MX6ULL"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 6.1.45 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR3 RAM; 3 GB eMMC Mass storage"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle (CAN Layer 2); J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66/IP67; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 122.7 x H 89 x D 36 mm excl. connector and cables; Glass, PC/ABS; Autotex XEF200"
+      },
+      {
+        "label": "Audio",
+        "value": "Buzzer, approx. 90 dB(A) at 3500 Hz"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: Deutsch DT06-08SA 8 pin"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B2e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Basic.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Full.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B2e"
+  },
+  {
+    "slug": "topcon-opus-b2-plus-e",
+    "name": "Topcon OPUS B2+e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2-e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "keyed controls",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/B2PEFront_01.png",
+      "alt": "Topcon OPUS B2+e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/B2PEFront_01.png",
+        "alt": "Topcon OPUS B2+e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/B2EPBack.png",
+        "alt": "Topcon OPUS B2+e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/4/7/csm_B2PE_Banner_7bc17af560.jpg",
+        "alt": "Topcon OPUS B2+e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/2/csm_B2PEFront_01_8b0567724f.png",
+        "alt": "Topcon OPUS B2+e front view"
+      }
+    ],
+    "summary": "7 inch OPUS B2 Plus Eco touch HMI for rugged applications needing a brighter, larger operator display.",
+    "description": "The OPUS B2+e provides the larger B2 Plus display format in a touch-led Eco configuration. It is useful when the application needs more screen space, a simple operator surface and dependable CAN-Bus integration.",
+    "highlights": [
+      "Display: 7 in, 15:9 TFT; 800 x 480 px, 900 cd/m2; Contrast ratio 1000:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66/IP67 protection",
+      "Protocols: CANopen; CANfreestyle (CAN Layer 2); J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "7 in, 15:9 TFT; 800 x 480 px, 900 cd/m2; Contrast ratio 1000:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 528 MHz; Freescale I.MX6ULL"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 6.1.45 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "256 MB DDR3 RAM; 3 GB eMMC Mass storage"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 USB 2.0, Type C, high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle (CAN Layer 2); J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66/IP67; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 188 x H 129 x D 37.55 mm excl. connector and cables; Glass, PC/ABS; Autotex XEF200"
+      },
+      {
+        "label": "Audio",
+        "value": "Buzzer, approx. 90 dB(A) at 3500 Hz"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: Deutsch DT06-08SA 8 pin"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B2+e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Basic.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2+e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Full.pdf"
+      },
+      {
+        "label": "Topcon OPUS B2+e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B2+e"
+  },
+  {
+    "slug": "topcon-opus-b4e",
+    "name": "Topcon OPUS B4e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS B series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b4e-6.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "b-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Front_web.png",
+      "alt": "Topcon OPUS B4e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Front_web.png",
+        "alt": "Topcon OPUS B4e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Back_web.png",
+        "alt": "Topcon OPUS B4e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/a/1/csm_B4_Banner_46efaf3cfe.jpg",
+        "alt": "Topcon OPUS B4e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/c/6/csm_OPUS_B4E_Front_web_52f7b88cea.png",
+        "alt": "Topcon OPUS B4e front view"
+      }
+    ],
+    "summary": "7 inch OPUS B-series Eco touch HMI with aluminium housing, Ethernet, USB and dual CAN-Bus.",
+    "description": "The OPUS B4e is a rugged 7 inch B-series touch display for machine and vehicle control tasks. Its aluminium housing and standard industrial interfaces make it a strong mid-size HMI choice.",
+    "highlights": [
+      "Display: 7 in, 15:9 TFT; 800 x 480 px, 800 cd/m2; Contrast ratio 700:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 2 x USB 2.0 high speed; Ethernet 10/100 Mbit/s Base T",
+      "Rugged rating: operating -30 to +75 deg C, storage -40 to +85 deg C, IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "7 in, 15:9 TFT; 800 x 480 px, 800 cd/m2; Contrast ratio 700:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 800 MHz; Freescale I.MX6"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 5.4.129 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "1 GB DDR2 RAM; 4 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); 2 x USB 2.0 high speed; Ethernet 10/100 Mbit/s Base T"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "8 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +75 deg C; storage -40 to +85 deg C; Protection: IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W 202 x H 132.5 x D 40.3 mm excl. connector and cables; Aluminium die cast"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND), AC97 compatible; Output power: approx. 50mW; Speaker, approx. 90 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS B4e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B4eB.pdf"
+      },
+      {
+        "label": "Topcon OPUS B4e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B4eF.pdf"
+      },
+      {
+        "label": "Topcon OPUS B4e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB4.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS B4e"
+  },
+  {
+    "slug": "topcon-opus-a6e",
+    "name": "Topcon OPUS A6e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a6e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Front_web.png",
+      "alt": "Topcon OPUS A6e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Front_web.png",
+        "alt": "Topcon OPUS A6e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Back_web.png",
+        "alt": "Topcon OPUS A6e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/e/7/csm_Produkte-Banner-OpusA6e_1920x680_02_d6f94b2eac.jpg",
+        "alt": "Topcon OPUS A6e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/b/1/csm_OPUS_A6E_Front_web_7c82baecd7.png",
+        "alt": "Topcon OPUS A6e front view"
+      }
+    ],
+    "summary": "7 inch OPUS A-series touch HMI with CAN-Bus, Ethernet, I/O and IP65/IP66 protection.",
+    "description": "The OPUS A6e is a 7 inch touch-led A-series display for applications that need a readable operator panel with CAN-Bus, Ethernet and I/O support. It works well where the control interface needs to be specified alongside wiring, mounting and software.",
+    "highlights": [
+      "Display: 7 in, 15:9 TFT transmissive; 800 x 480 px, 500 cd/m2; Contrast ratio 600:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND)...",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "7 in, 15:9 TFT transmissive; 800 x 480 px, 500 cd/m2; Contrast ratio 600:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 800 MHz; Freescale I.MX6"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 4.0.0 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "512 MB DDR2 RAM; 4 GB NAND EMMC"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND); Analog/Digital I/O: 4 analog/digital inputs; 3 digital outputs; 1 USB 2.0 high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +65 deg C; storage -40 to +85 deg C; Protection: IP65/IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W223 x H139 x D57.5 mm; excl. connector and cables"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED; 3 Status-LEDs"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND); Output power: approx. 65 mW @32 Ohm; Speaker, approx. 80 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A6e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A6eB.pdf"
+      },
+      {
+        "label": "Topcon OPUS A6e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6eF.pdf"
+      },
+      {
+        "label": "Topcon OPUS A6e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA6G2.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A6e"
+  },
+  {
+    "slug": "topcon-opus-a6s",
+    "name": "Topcon OPUS A6s",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a6s.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Front_web.png",
+      "alt": "Topcon OPUS A6s front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Front_web.png",
+        "alt": "Topcon OPUS A6s front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Back_web.png",
+        "alt": "Topcon OPUS A6s rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/9/csm_Produkte-Banner-OpusA6s_1920x680_01_2b43312f4f.jpg",
+        "alt": "Topcon OPUS A6s banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/a/a/csm_OPUS_A6S_Front_web_f6b9dd4843.png",
+        "alt": "Topcon OPUS A6s front view"
+      }
+    ],
+    "summary": "7 inch OPUS A-series keyed HMI with touchscreen, soft keys, hard keys, encoder and front USB.",
+    "description": "The OPUS A6s pairs the 7 inch A-series display with practical physical controls. It is useful for operator stations where gloves, movement or repeated controls make hard keys and an encoder valuable.",
+    "highlights": [
+      "Display: 7 in, 15:9 TFT transmissive; 800 x 480 px, 500 cd/m2; Contrast ratio 600:1",
+      "Operator controls: 12 softkeys; 4 hardkeys; Encoder; Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND); Analog/Digital I/O...",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "7 in, 15:9 TFT transmissive; 800 x 480 px, 500 cd/m2; Contrast ratio 600:1"
+      },
+      {
+        "label": "User interface",
+        "value": "12 softkeys; 4 hardkeys; Encoder; Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 800 MHz; Freescale I.MX6"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 3.0.0 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "512 MB DDR2 RAM; 4 GB NAND EMMC"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; Ethernet 10/100 Mbit/s Base T; 1 x RS232 (only RxD, TxD, GND); Analog/Digital I/O; 4 analog/digital inputs; 3 digital outputs; 1 USB 2.0 high speed on main connector; 1 USB 2.0 high speed on front"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +65 deg C; storage -40 to +85 deg C; Protection: IP65/IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W267 x H144 x D69.5 mm; excl. connector and cables"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED; 3 status-LEDs"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND); Output power: approx. 65 mW @32 Ohm; Speaker, approx. 80 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A6s basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6sB.pdf"
+      },
+      {
+        "label": "Topcon OPUS A6s full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6sF.pdf"
+      },
+      {
+        "label": "Topcon OPUS A6s operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA6G2.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A6s"
+  },
+  {
+    "slug": "topcon-opus-a8e",
+    "name": "Topcon OPUS A8e",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a8e.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "touchscreen"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Front_web.png",
+      "alt": "Topcon OPUS A8e front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Front_web.png",
+        "alt": "Topcon OPUS A8e front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Back_web.png",
+        "alt": "Topcon OPUS A8e rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/e/7/csm_Produkte-Banner-OpusA8e_1920x680_09c2ed9cbf.jpg",
+        "alt": "Topcon OPUS A8e banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/1/1/csm_OPUS_A8E_Front_web_5742cc7ca5.png",
+        "alt": "Topcon OPUS A8e front view"
+      }
+    ],
+    "summary": "12.1 inch OPUS A-series touch HMI with high-resolution display, CAN-Bus, Ethernet and I/O.",
+    "description": "The OPUS A8e is the large touch-focused A-series HMI for applications that need a generous display area and higher interface complexity. It supports larger visual layouts while keeping the rugged OPUS control-system profile.",
+    "highlights": [
+      "Display: 12.1 in, 16:10 TFT transmissive; 1280 x 800 px, 1000 cd/m2; Contrast ratio 750:1",
+      "Operator controls: Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); Ethernet 10/100 Mbit/s Base T...",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "12.1 in, 16:10 TFT transmissive; 1280 x 800 px, 1000 cd/m2; Contrast ratio 750:1"
+      },
+      {
+        "label": "User interface",
+        "value": "Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 1 GHz; NXP I.MX6 quad"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 4.0.0 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "1 GB DDR2 RAM; 8 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); Ethernet 10/100 Mbit/s Base T; Analog/Digital I/O: 4 analog/digital inputs; 3 digital outputs; 1 USB high speed"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +65 deg C; storage -40 to +85 deg C; Protection: IP65/IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W330 x H214 x D60 mm; excl. connector and cables"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED; 3 Status-LEDs"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND); Output power: approx. 65 mW @ 32 Ohm; Speaker, approx. 80 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A8e basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8e_BASIC.pdf"
+      },
+      {
+        "label": "Topcon OPUS A8e full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8e_FULL.pdf"
+      },
+      {
+        "label": "Topcon OPUS A8e operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA8.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A8e"
+  },
+  {
+    "slug": "topcon-opus-a8s",
+    "name": "Topcon OPUS A8s",
+    "category": "Rugged HMI displays",
+    "family": "Topcon OPUS A series",
+    "template": "hmi",
+    "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a8s.html",
+    "tags": [
+      "topcon",
+      "opus",
+      "hmi",
+      "rugged hmi",
+      "can-bus",
+      "a-series",
+      "keyed controls"
+    ],
+    "image": {
+      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Front_web.png",
+      "alt": "Topcon OPUS A8s front view"
+    },
+    "images": [
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Front_web.png",
+        "alt": "Topcon OPUS A8s front view"
+      },
+      {
+        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Back_web.png",
+        "alt": "Topcon OPUS A8s rear view"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/2/csm_Produkte-Banner-OpusA8s_1920x680_dfa4054416.jpg",
+        "alt": "Topcon OPUS A8s banner image"
+      },
+      {
+        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/2/d/csm_OPUS_A8S_Front_web_e6cc5d37d5.png",
+        "alt": "Topcon OPUS A8s front view"
+      }
+    ],
+    "summary": "12.1 inch OPUS A-series keyed HMI with touchscreen, soft keys, hard keys and encoder for larger control consoles.",
+    "description": "The OPUS A8s is the large keyed A-series HMI for demanding operator consoles. It combines a 12.1 inch display with physical controls for machine interfaces where visibility and tactile operation both matter.",
+    "highlights": [
+      "Display: 12.1 in, 16:10 TFT transmissive; 1280 x 800 px, 1000 cd/m2; Contrast ratio 750:1",
+      "Operator controls: 8 softkeys; 4 hardkeys; Encoder; Touchscreen",
+      "Interfaces: 2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); Ethernet 10/100 Mbit/s Base T...",
+      "Rugged rating: operating -30 to +65 deg C, storage -40 to +85 deg C, IP65/IP66 protection",
+      "Protocols: CANopen; CANfreestyle; J1939"
+    ],
+    "specifications": [
+      {
+        "label": "Display",
+        "value": "12.1 in, 16:10 TFT transmissive; 1280 x 800 px, 1000 cd/m2; Contrast ratio 750:1"
+      },
+      {
+        "label": "User interface",
+        "value": "8 softkeys; 4 hardkeys; Encoder; Touchscreen"
+      },
+      {
+        "label": "Processor",
+        "value": "32-bit, 1 GHz; NXP I.MX6 quad"
+      },
+      {
+        "label": "Operating system",
+        "value": "Linux Kernel 4.0.0 or higher"
+      },
+      {
+        "label": "Memory",
+        "value": "1 GB DDR2 RAM; 8 GB NAND flash"
+      },
+      {
+        "label": "Interfaces",
+        "value": "2 x CAN-Bus ISO 11898; CAN specification 2.0 B active; 1 x RS232 (only RxD, TxD, GND); Ethernet 10/100 Mbit/s Base T; Analog/Digital I/O: 4 analog/digital inputs; 3 digital outputs; 1 USB 2.0 high speed on main connector; 1 USB 2.0 high speed on front"
+      },
+      {
+        "label": "Supported protocols",
+        "value": "CANopen; CANfreestyle; J1939"
+      },
+      {
+        "label": "Power supply",
+        "value": "9 to 36 V DC"
+      },
+      {
+        "label": "Environmental conditions",
+        "value": "operating -30 to +65 deg C; storage -40 to +85 deg C; Protection: IP65/IP66; Mechanical Shock: Level 2; Random Vibration: Level 2; Sinusoidal Vibration: Level 2"
+      },
+      {
+        "label": "Housing",
+        "value": "Orientation landscape or portrait; W376 x H214 x D76 mm; excl. connector and cables"
+      },
+      {
+        "label": "Sensors and indicators",
+        "value": "Light sensor; Multicolor-LED; 3 Status-LEDs"
+      },
+      {
+        "label": "Audio",
+        "value": "1 x Audio output (left, right, GND); Output power: approx. 65 mW @32 Ohm; Speaker, approx. 80 dB(A)"
+      },
+      {
+        "label": "Connectors",
+        "value": "Main: AMP Seal, 26 pin; Video: M12 round, 5 pole, B-coded; Ethernet: M12 round, 4 pole, D-coded"
+      }
+    ],
+    "documents": [
+      {
+        "label": "Topcon OPUS A8s basic datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8s_BASIC.pdf"
+      },
+      {
+        "label": "Topcon OPUS A8s full datasheet",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8s_FULL.pdf"
+      },
+      {
+        "label": "Topcon OPUS A8s operating manual",
+        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA8.pdf"
+      }
+    ],
+    "enquiryPrompt": "Discuss OPUS A8s"
+  }
+]

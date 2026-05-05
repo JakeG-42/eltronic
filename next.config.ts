@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       "./src/app/**/*.ts",
       "./src/components/**/*.tsx",
       "./src/content/**/*.ts",
+      "./src/content/**/*.json",
       "./src/lib/**/*.ts",
       "./src/app/globals.css",
     ],

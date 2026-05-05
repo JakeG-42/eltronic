@@ -375,8 +375,11 @@
     }
   ],
   "productModel": {
-    "sourceType": "TypeScript",
+    "sourceType": "TypeScript + JSON",
     "typeFile": "src/content/products.ts",
+    "topconDataFile": "src/content/topcon-products.json",
+    "topconSourceCsv": "docs/topcon_product_catalogue_import.csv",
+    "topconSyncCommand": "npm run products:topcon:sync",
     "templates": [
       "hmi",
       "data-logger",
@@ -426,13 +429,13 @@
     ],
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
-      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries, not hidden runtime fallbacks.",
+      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; Topcon uses CSV-backed manufacturer image URLs.",
       "generatedManifest": "src/content/product-gallery-assets.json",
       "generatedAssets": "public/product-images/generated/*.svg",
       "generator": "npm run images:products",
       "syncCommand": "npm run images:products:sync"
     },
-    "primaryImageAssets": "public/product-images"
+    "primaryImageAssets": "public/product-images or trusted source URLs in managed product data"
   },
   "projectCaseStudyModel": {
     "sourceType": "TypeScript",

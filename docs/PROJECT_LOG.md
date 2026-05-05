@@ -10,6 +10,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Deployment: Vercel project `project-5v5cr` is connected and deployed.
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
 - Product content: initial structured product data lives in `src/content/products.ts`; live editable data is read through `src/lib/managed-data.ts`.
+- Topcon catalogue source: `docs/topcon_product_catalogue_import.csv` and `src/content/topcon-products.json`; sync to Neon with `npm run products:topcon:sync`.
 - Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, templates and contact submissions.
 - Contact handling: `/contact` now stores enquiries through the managed data layer.
 - SEO: sitemap, robots rules, canonical metadata, structured data and project/case-study scaffolding are in place.
@@ -17,6 +18,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 ## What Has Happened So Far
 
 - Removed the separate Console CMS and `/v2` new-site sandbox for now, including the CMS route groups, builder code, generated types, migrations, related dependencies and `new.eltronic.co.uk` rewrite. Current work is focused on the public site and `/studio`.
+- Replaced the stale 9-product Topcon seed/catalogue with 14 CSV-sourced Topcon OPUS products, including real Topcon image URLs, datasheets, operating manuals, highlights and technical data. Added `npm run products:topcon:sync` to replace Topcon records in Neon while preserving non-Topcon products and writing a local backup.
 - Crawled the public `eltronic.co.uk` site for product, contact, homepage and guide/data-sheet content.
 - Ported the first real product catalogue into `src/content/products.ts`.
 - Started adapting the UI toward the dark code-inspired direction provided by Jake, while keeping it product-led rather than portfolio/CV-led.

@@ -19,6 +19,7 @@ out/
 
 # Logs
 npm-debug.log*
+*.tsbuildinfo
 
 # Local admin storage
 .data/
