@@ -121,6 +121,17 @@ export type BuilderProduct = {
   summary?: string;
 };
 
+export type BuilderMenuItem = {
+  label: string;
+  url: string;
+};
+
+export type BuilderMenu = {
+  handle: string;
+  items: BuilderMenuItem[];
+  title: string;
+};
+
 export type BuilderRootProps = {
   accentColor?: string;
   backgroundColor?: string;
@@ -189,6 +200,12 @@ export type BuilderComponents = {
     linkLabel?: string;
     linkUrl?: string;
   };
+  MenuBlock: BuilderAdvancedStyle & {
+    heading?: string;
+    menuHandle?: string;
+    orientation?: "horizontal" | "vertical";
+    showHeading?: boolean;
+  };
   ProductGridBlock: BuilderAdvancedStyle & {
     columns?: "2" | "3" | "4";
     heading: string;
@@ -197,6 +214,25 @@ export type BuilderComponents = {
   };
   RichTextBlock: BuilderAdvancedStyle & {
     body: string;
+  };
+  SectionBlock: BuilderAdvancedStyle & {
+    body?: string;
+    eyebrow?: string;
+    fullWidth?: boolean;
+    heading: string;
+    primaryLabel?: string;
+    primaryUrl?: string;
+    secondaryLabel?: string;
+    secondaryUrl?: string;
+    variant?: "band" | "panel" | "plain";
+  };
+  SiteHeaderBlock: BuilderAdvancedStyle & {
+    brandLabel?: string;
+    ctaLabel?: string;
+    ctaUrl?: string;
+    fullWidth?: boolean;
+    menuHandle?: string;
+    sticky?: boolean;
   };
   SpecTableBlock: BuilderAdvancedStyle & {
     heading: string;
@@ -207,6 +243,6 @@ export type BuilderComponents = {
   };
 };
 
-export type BuilderCategoryName = "commerce" | "content" | "media" | "structure";
+export type BuilderCategoryName = "commerce" | "content" | "media" | "navigation" | "structure";
 export type BuilderConfig = Config<BuilderComponents, BuilderRootProps, BuilderCategoryName>;
 export type BuilderData = Data<BuilderComponents, BuilderRootProps>;

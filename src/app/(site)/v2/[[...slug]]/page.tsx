@@ -4,6 +4,8 @@ import { getPayload } from "payload";
 
 import { PayloadPageRenderer } from "@/components/payload/payload-page-renderer";
 import { PuckBuilderRenderer } from "@/components/payload/puck-builder-renderer";
+import { getBuilderMenus, productsToBuilderProducts } from "@/payload/builder/metadata";
+import type { BuilderMenu } from "@/payload/builder/types";
 import type { Page, Product } from "@/payload-types";
 
 export const dynamic = "force-dynamic";
@@ -119,14 +121,25 @@ async function getFeaturedProducts(): Promise<Product[]> {
   }
 }
 
+async function getMenus(): Promise<BuilderMenu[]> {
+  try {
+    const payload = await getPayload({ config });
+
+    return getBuilderMenus(payload);
+  } catch (error) {
+    console.error("Unable to load Payload menus for v2.", error);
+    return [];
+  }
+}
+
 export default async function PayloadV2Page({ params }: PayloadV2PageProps) {
   const { slug: segments } = await params;
   const slug = getSlugFromSegments(segments);
-  const [page, featuredProducts] = await Promise.all([getPayloadPage(slug), getFeaturedProducts()]);
+  const [page, featuredProducts, menus] = await Promise.all([getPayloadPage(slug), getFeaturedProducts(), getMenus()]);
 
   if (page) {
     if ("builderData" in page && page.builderData) {
-      return <PuckBuilderRenderer data={page.builderData} featuredProducts={featuredProducts} />;
+      return <PuckBuilderRenderer data={page.builderData} featuredProducts={productsToBuilderProducts(featuredProducts)} menus={menus} />;
     }
 
     return <PayloadPageRenderer featuredProducts={featuredProducts} page={page} />;

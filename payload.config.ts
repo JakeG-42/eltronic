@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import { ConsoleUsers } from "./src/payload/collections/ConsoleUsers.ts";
 import { Documents } from "./src/payload/collections/Documents.ts";
 import { Media } from "./src/payload/collections/Media.ts";
+import { Menus } from "./src/payload/collections/Menus.ts";
 import { Pages } from "./src/payload/collections/Pages.ts";
 import { Posts } from "./src/payload/collections/Posts.ts";
 import { ProductCategories } from "./src/payload/collections/ProductCategories.ts";
@@ -121,11 +122,12 @@ export default buildConfig({
     },
     user: ConsoleUsers.slug,
   },
-  collections: [ConsoleUsers, Media, Documents, ProductCategories, Products, Pages, Posts],
+  collections: [ConsoleUsers, Media, Documents, ProductCategories, Products, Menus, Pages, Posts],
   db: postgresAdapter({
     pool: {
       connectionString: getPayloadDatabaseUrl(),
     },
+    push: false,
     schemaName: process.env.PAYLOAD_DATABASE_SCHEMA ?? "payload",
   }),
   graphQL: {

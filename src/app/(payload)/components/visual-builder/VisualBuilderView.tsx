@@ -1,6 +1,7 @@
 import type { DocumentViewServerProps, Payload } from "payload";
 
 import { pageToBuilderData } from "@/payload/builder/convert";
+import { getBuilderMenus } from "@/payload/builder/metadata";
 import type { BuilderProduct } from "@/payload/builder/types";
 
 import { VisualBuilderClient } from "./VisualBuilderClient";
@@ -73,11 +74,14 @@ export async function VisualBuilderView({ doc, initPageResult }: DocumentViewSer
   };
   const slug = page.slug ?? "home";
   const title = page.title ?? "Untitled page";
+  const payload = initPageResult.req.payload;
+  const [featuredProducts, menus] = await Promise.all([getFeaturedProducts(payload), getBuilderMenus(payload)]);
 
   return (
     <VisualBuilderClient
       builderData={pageToBuilderData(page)}
-      featuredProducts={await getFeaturedProducts(initPageResult.req.payload)}
+      featuredProducts={featuredProducts}
+      menus={menus}
       pageId={String(page.id)}
       previewUrl={getPreviewUrl(slug)}
       slug={slug}

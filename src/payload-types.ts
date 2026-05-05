@@ -72,6 +72,7 @@ export interface Config {
     documents: Document;
     'product-categories': ProductCategory;
     products: Product;
+    menus: Menu;
     pages: Page;
     posts: Post;
     'payload-kv': PayloadKv;
@@ -86,6 +87,7 @@ export interface Config {
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    menus: MenusSelect<false> | MenusSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -286,6 +288,30 @@ export interface Product {
     description?: string | null;
     image?: (number | null) | Media;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menus".
+ */
+export interface Menu {
+  id: number;
+  name: string;
+  /**
+   * Short key used by the WYSIWYG editor, for example main-menu or footer-links.
+   */
+  handle: string;
+  /**
+   * Add, remove, rename and reorder the links in this menu.
+   */
+  items?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -697,6 +723,10 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null)
     | ({
+        relationTo: 'menus';
+        value: number | Menu;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -865,6 +895,23 @@ export interface ProductsSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menus_select".
+ */
+export interface MenusSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  items?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { CustomFieldRender } from "@puckeditor/core";
+import Link from "next/link";
 
 import type {
   BuilderAdvancedStyle,
@@ -9,6 +10,7 @@ import type {
   BuilderEffectControls,
   BuilderHoverEffect,
   BuilderHoverControls,
+  BuilderMenu,
   BuilderProduct,
   BuilderSectionShadow,
   BuilderRootProps,
@@ -84,6 +86,11 @@ const widthOptions = [
   { label: "Full width", value: "full" },
 ] as const;
 
+const menuOrientationOptions = [
+  { label: "Horizontal", value: "horizontal" },
+  { label: "Vertical", value: "vertical" },
+] as const;
+
 function rangeField({ fallback, label, max, min, step }: { fallback: number; label: string; max: number; min: number; step: number }) {
   const render: CustomFieldRender<number | undefined> = ({ field, id, onChange, readOnly, value }) => {
     const numberValue = typeof value === "number" && Number.isFinite(value) ? value : fallback;
@@ -104,6 +111,25 @@ function rangeField({ fallback, label, max, min, step }: { fallback: number; lab
           type="range"
           value={numberValue}
         />
+      </label>
+    );
+  };
+
+  return {
+    label,
+    render,
+    type: "custom",
+  } as const;
+}
+
+function toggleField(label: string) {
+  const render: CustomFieldRender<boolean | undefined> = ({ field, id, onChange, readOnly, value }) => {
+    const checked = Boolean(value);
+
+    return (
+      <label className="puck-toggle-field" htmlFor={id}>
+        <span>{field.label}</span>
+        <input disabled={readOnly} id={id} onChange={(event) => onChange(event.currentTarget.checked)} type="checkbox" checked={checked} />
       </label>
     );
   };
@@ -475,6 +501,60 @@ function getFeaturedProducts(metadata: Record<string, unknown>): BuilderProduct[
   });
 }
 
+function getBuilderMenus(metadata: Record<string, unknown>): BuilderMenu[] {
+  const menus = metadata.menus;
+
+  if (!Array.isArray(menus)) {
+    return [];
+  }
+
+  return menus.filter((menu): menu is BuilderMenu => {
+    return (
+      typeof menu === "object" &&
+      menu !== null &&
+      "handle" in menu &&
+      "title" in menu &&
+      "items" in menu &&
+      typeof menu.handle === "string" &&
+      typeof menu.title === "string" &&
+      Array.isArray(menu.items)
+    );
+  });
+}
+
+function getMenuOptions(metadata: Record<string, unknown>) {
+  const menus = getBuilderMenus(metadata);
+
+  if (!menus.length) {
+    return [{ label: "Primary navigation", value: "primary" }];
+  }
+
+  return menus.map((menu) => ({
+    label: menu.title,
+    value: menu.handle,
+  }));
+}
+
+function getMenu(metadata: Record<string, unknown>, handle: string | undefined) {
+  const menus = getBuilderMenus(metadata);
+  return menus.find((menu) => menu.handle === handle) ?? menus[0] ?? null;
+}
+
+function withFullWidth<T extends BuilderAdvancedStyle & { fullWidth?: boolean }>(props: T): T {
+  if (!props.fullWidth) {
+    return props;
+  }
+
+  return {
+    ...props,
+    sectionWidth: "full",
+    spacingControls: {
+      ...props.spacingControls,
+      sectionWidth: "full",
+    },
+  };
+}
+
 function Root({ children, ...props }: BuilderRootProps & { children: ReactNode }) {
   return (
     <main
@@ -504,13 +584,18 @@ export const builderConfig: BuilderConfig = {
       title: "Commerce",
     },
     content: {
-      components: ["RichTextBlock", "ImageTextBlock", "CardGridBlock", "SpecTableBlock", "CallToActionBlock"],
+      components: ["SectionBlock", "RichTextBlock", "ImageTextBlock", "CardGridBlock", "SpecTableBlock", "CallToActionBlock"],
       defaultExpanded: true,
       title: "Content",
     },
     media: {
       components: ["GalleryBlock", "DownloadsBlock"],
       title: "Media",
+    },
+    navigation: {
+      components: ["SiteHeaderBlock", "MenuBlock"],
+      defaultExpanded: true,
+      title: "Navigation",
     },
     structure: {
       components: ["HeroBlock"],
@@ -724,6 +809,57 @@ export const builderConfig: BuilderConfig = {
         );
       },
     },
+    SiteHeaderBlock: {
+      defaultProps: {
+        ...defaultDesign,
+        brandLabel: "ELTRONIC",
+        ctaLabel: "Contact",
+        ctaUrl: "/contact",
+        fullWidth: true,
+        menuHandle: "primary",
+        sectionPaddingX: 2,
+        spacingControls: { ...defaultDesign.spacingControls, sectionPaddingX: 2 },
+        sticky: false,
+      },
+      fields: {
+        brandLabel: { contentEditable: true, label: "Brand label", type: "text" },
+        menuHandle: { label: "Menu", options: [{ label: "Primary navigation", value: "primary" }], type: "select" },
+        ctaLabel: { label: "CTA label", type: "text" },
+        ctaUrl: { label: "CTA URL", type: "text" },
+        fullWidth: toggleField("Full width header"),
+        sticky: toggleField("Sticky header"),
+        ...sharedDesignFields,
+      },
+      label: "Site header",
+      resolveFields: (_data, params) => ({
+        ...params.fields,
+        menuHandle: {
+          label: "Menu",
+          options: getMenuOptions(params.metadata),
+          type: "select",
+        },
+      }),
+      render: (props) => {
+        const menu = getMenu(props.puck.metadata, props.menuHandle);
+        const headerProps = withFullWidth(props);
+
+        return (
+          <header className={getSectionClassName(headerProps, `puck-site-header ${props.sticky ? "puck-site-header-sticky" : ""}`)} style={getSectionStyle(headerProps)}>
+            <Link className="puck-site-brand" href="/">
+              {textValue(props.brandLabel, "ELTRONIC")}
+            </Link>
+            <nav aria-label={menu?.title ?? "Site menu"} className="puck-menu puck-menu-horizontal">
+              {(menu?.items ?? []).map((item, index) => (
+                <a href={item.url} key={`${item.label}-${index}`}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <BuilderButton link={{ label: props.ctaLabel, url: props.ctaUrl }} />
+          </header>
+        );
+      },
+    },
     HeroBlock: {
       defaultProps: {
         ...defaultDesign,
@@ -814,6 +950,52 @@ export const builderConfig: BuilderConfig = {
         </section>
       ),
     },
+    MenuBlock: {
+      defaultProps: {
+        ...defaultDesign,
+        heading: "Menu",
+        menuHandle: "primary",
+        orientation: "horizontal",
+        showHeading: false,
+      },
+      fields: {
+        heading: { contentEditable: true, label: "Heading", type: "text" },
+        menuHandle: { label: "Menu", options: [{ label: "Primary navigation", value: "primary" }], type: "select" },
+        orientation: { label: "Orientation", options: menuOrientationOptions, type: "select" },
+        showHeading: toggleField("Show heading"),
+        ...sharedDesignFields,
+      },
+      label: "Menu",
+      resolveFields: (_data, params) => ({
+        ...params.fields,
+        menuHandle: {
+          label: "Menu",
+          options: getMenuOptions(params.metadata),
+          type: "select",
+        },
+      }),
+      render: (props) => {
+        const menu = getMenu(props.puck.metadata, props.menuHandle);
+        const items = menu?.items ?? [];
+
+        return (
+          <section className={getSectionClassName(props, "puck-menu-section")} style={getSectionStyle(props)}>
+            {props.showHeading ? (
+              <div className="puck-section-heading">
+                <h2>{textValue(props.heading, menu?.title ?? "Menu")}</h2>
+              </div>
+            ) : null}
+            <nav aria-label={menu?.title ?? "Menu"} className={`puck-menu puck-menu-${props.orientation ?? "horizontal"}`}>
+              {items.map((item, index) => (
+                <a href={item.url} key={`${item.label}-${index}`}>
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+          </section>
+        );
+      },
+    },
     ProductGridBlock: {
       defaultProps: {
         ...defaultDesign,
@@ -864,6 +1046,69 @@ export const builderConfig: BuilderConfig = {
                   {product.summary ? <p>{product.summary}</p> : null}
                 </a>
               ))}
+            </div>
+          </section>
+        );
+      },
+    },
+    SectionBlock: {
+      defaultProps: {
+        ...defaultDesign,
+        backgroundColor: "rgba(23, 32, 51, 0.78)",
+        body: "Use this section to introduce a service, product family, process step or key message.",
+        borderControls: {
+          ...defaultDesign.borderControls,
+          sectionBorderColor: "rgba(139, 211, 255, 0.18)",
+          sectionBorderRadius: 8,
+          sectionBorderStyle: "solid",
+          sectionBorderWidth: 1,
+        },
+        colorControls: { ...defaultDesign.colorControls, backgroundColor: "rgba(23, 32, 51, 0.78)" },
+        eyebrow: "New section",
+        fullWidth: false,
+        heading: "Build a new section",
+        primaryLabel: "Primary action",
+        primaryUrl: "/contact",
+        secondaryLabel: "",
+        secondaryUrl: "",
+        sectionBorderColor: "rgba(139, 211, 255, 0.18)",
+        sectionBorderRadius: 8,
+        sectionBorderStyle: "solid",
+        sectionBorderWidth: 1,
+        variant: "panel",
+      },
+      fields: {
+        eyebrow: { contentEditable: true, label: "Eyebrow", type: "text" },
+        heading: { contentEditable: true, label: "Heading", type: "text" },
+        body: { contentEditable: true, label: "Leading text", type: "textarea" },
+        primaryLabel: { label: "Primary button label", type: "text" },
+        primaryUrl: { label: "Primary button URL", type: "text" },
+        secondaryLabel: { label: "Secondary button label", type: "text" },
+        secondaryUrl: { label: "Secondary button URL", type: "text" },
+        fullWidth: toggleField("Full width section"),
+        variant: {
+          label: "Section style",
+          options: [
+            { label: "Plain", value: "plain" },
+            { label: "Panel", value: "panel" },
+            { label: "Band", value: "band" },
+          ],
+          type: "select",
+        },
+        ...sharedDesignFields,
+      },
+      label: "Section",
+      render: (props) => {
+        const sectionProps = withFullWidth(props);
+
+        return (
+          <section className={getSectionClassName(sectionProps, `puck-builder-section puck-builder-section-${props.variant ?? "panel"}`)} style={getSectionStyle(sectionProps)}>
+            {textValue(props.eyebrow) ? <span className="puck-kicker">{textValue(props.eyebrow)}</span> : null}
+            <h2>{textValue(props.heading, "Build a new section")}</h2>
+            {textValue(props.body) ? <p>{textValue(props.body)}</p> : null}
+            <div className="puck-actions">
+              <BuilderButton link={{ label: props.primaryLabel, url: props.primaryUrl }} />
+              <BuilderButton link={{ label: props.secondaryLabel, url: props.secondaryUrl }} secondary />
             </div>
           </section>
         );
