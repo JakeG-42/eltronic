@@ -403,6 +403,48 @@
   --console-nav-icon: var(--console-nav-icon-settings);
 }
 
+.table {
+  overflow: auto;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 8px;
+  background: var(--theme-elevation-0);
+}
+
+.table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table thead {
+  background: color-mix(in srgb, var(--theme-elevation-100) 82%, var(--theme-bg));
+}
+
+.table tbody tr:nth-child(odd) {
+  background: color-mix(in srgb, var(--theme-elevation-50) 86%, var(--theme-bg));
+}
+
+.table tbody tr:nth-child(even) {
+  background: var(--theme-elevation-0);
+}
+
+.table tbody tr:hover {
+  background: color-mix(in srgb, var(--console-group-accent, #8bd3ff) 10%, var(--theme-elevation-100));
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--theme-elevation-150);
+}
+
+.table th:not(:last-child),
+.table td:not(:last-child) {
+  border-inline-end: 1px solid color-mix(in srgb, var(--theme-elevation-150) 72%, transparent);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 :root {
   --console-nav-icon-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16v16H4z'/%3E%3Cpath d='M8 8h8M8 12h8M8 16h5'/%3E%3C/svg%3E");
   --console-nav-icon-article: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 4h14v16H5z'/%3E%3Cpath d='M8 8h8M8 12h8M8 16h5'/%3E%3C/svg%3E");
