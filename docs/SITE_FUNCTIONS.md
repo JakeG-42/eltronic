@@ -5,7 +5,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 ## App Structure
 
 - Framework: Next.js with App Router.
-- Route-specific root layouts: `src/app/(site)/layout.tsx`, `src/app/studio/layout.tsx`, and `src/app/(payload)/layout.tsx`.
+- Route-specific root layouts: `src/app/(site)/layout.tsx` and `src/app/studio/layout.tsx`.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
 - Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
@@ -25,7 +25,6 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
-- Payload Console: `payload.config.ts`, `src/payload/collections`, and `src/app/(payload)`.
 - Public navigation: brand link to `/`, desktop icon-labelled links for `/products`, `/solutions`, `/software-it`, `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
@@ -49,7 +48,6 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
 - `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
-- `/v2`: Payload-backed new-site route, also used by `new.eltronic.co.uk`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -64,22 +62,12 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/studio/settings`: Studio settings and notes.
 - `/studio/users`: protected user management for Studio roles and password resets.
 - `/studio/account`: protected self-service profile/password page for the current Studio user.
-- `/console`: Payload CMS admin, branded as Eltronic Console.
-- `/console-api`: Payload REST API route. Payload GraphQL is disabled.
+## Removed Console Experiment
 
-## Payload Console Behavior
-
-- Payload CMS is installed alongside the current public site and Studio; it does not currently drive the production homepage, product catalogue or Studio.
-- The Console admin route is `/console`; the API route is `/console-api`.
-- Payload stores data in the same Neon database as the current app, but in the separate Postgres schema `payload`.
-- `PAYLOAD_DATABASE_URL` can override the DB connection. Without it, Payload falls back to the same standard/prefixed Neon environment variables used by the managed data layer.
-- Payload collections are being expanded into a full CMS: admin-only `console-users`, `media`, `documents`, `product-categories`, `products`, `pages`, `posts`, themes, page layouts, menus and `code-snippets`.
-- Payload globals cover `site-settings` and theme settings. Legacy `navigation` and `footer` globals remain in code/data but are hidden from the Console sidebar because the new-site header/footer should be built in the WYSIWYG/theme system.
-- `Theme > Code workspace` is a protected repo browser for admins. It can explore allowed project files from the Console, but source files are read-only because Vercel deployments are immutable.
-- `Theme > Custom CSS` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
-- Payload page/post building is block-based with hero, rich text, image/text, card grid, product grid, gallery, downloads, specification table and CTA band sections.
-- The `/v2` route reads a Payload page with slug `home` if one exists, otherwise it renders a safe placeholder. It has its own route-group layout and does not use the old public `SiteShell` header/footer. It is noindex and excluded from robots on the old domain.
-- `PAYLOAD_SECRET` is configured in Vercel for Production and the `dev` Preview branch; keep it present before relying on Console auth in production.
+- The separate Console CMS and new-site sandbox have been removed for now.
+- Removed routes: `/console`, `/console-api`, and `/v2`.
+- Removed host behavior: `new.eltronic.co.uk` no longer rewrites into this application.
+- Keep work focused on the current public site and `/studio` unless Jake explicitly asks to reintroduce a second CMS or builder.
 
 ## Product Data Model
 
@@ -204,7 +192,6 @@ Each product currently has:
 - Without persistent storage, local development writes to `.data/eltronic-data.json`.
 - `.data/` is gitignored because it may contain contact submissions.
 - On Vercel, use Neon/Postgres `DATABASE_URL`, integration-prefixed `eltronic_db_1_DATABASE_URL`, or Redis `KV_REST_API_URL` and `KV_REST_API_TOKEN` to persist products and submissions.
-- Payload Console uses the same Neon database but keeps its own tables under the `payload` schema.
 - Without persistent production storage, public pages fall back to seeded product content and admin/contact writes are blocked.
 - As of 2026-04-27, Neon database `eltronic_db_1` is connected to Vercel with prefixed environment variables, storage smoke tests pass, and production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j` is live.
 - Use `npm run storage:check` after `npx vercel env pull .env.local` to confirm the live database credentials work before trusting admin/product/submission writes.

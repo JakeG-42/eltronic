@@ -17,9 +17,7 @@ Use this before pointing `eltronic.co.uk` at Vercel.
 - The I&Q CAN-Bus module copy no longer shows unfinished `TBU`/`To be updated` content.
 - Empty Projects page copy no longer mentions source-code editing, and the Projects index is omitted from the sitemap until a project is published.
 - Contact storage errors use neutral customer-facing copy.
-- Payload CMS has been added as Eltronic Console under `/console`, with its API under `/console-api` and its tables isolated in the existing Neon database's `payload` schema.
-- A hidden `/v2` Payload-backed sandbox page exists for rebuilding/porting content without changing the current public site.
-- `PAYLOAD_SECRET` has been configured in Vercel for Production and the `dev` Preview branch.
+- Removed the separate Console CMS and `/v2` sandbox so launch work stays focused on the current public site and `/studio`.
 
 ## Manual Before Public Launch
 
@@ -29,7 +27,7 @@ Use this before pointing `eltronic.co.uk` at Vercel.
 - Add real project case studies with photos before linking Projects publicly.
 - Confirm product document links: replace request-only document cards with real datasheets where possible.
 - Set `NEXT_PUBLIC_SITE_URL=https://eltronic.co.uk` in Vercel after DNS is ready, then redeploy.
-- Confirm `PAYLOAD_SECRET` is still present in Vercel before relying on Console accounts in production.
+- Remove unused Console/new-site env vars and domain wiring from Vercel/IONOS if they are still configured.
 - Submit `https://eltronic.co.uk/sitemap.xml` in Google Search Console after the domain is live.
 - Decide whether email notifications remain paused or Resend is re-enabled with a verified Eltronic sender.
 - Do a final mobile check of the homepage, product detail pages, gallery gestures, contact form and footer.

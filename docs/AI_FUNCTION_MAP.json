@@ -6,8 +6,6 @@
     "framework": "Next.js App Router",
     "productionUrl": "https://project-5v5cr.vercel.app",
     "adminUrl": "https://project-5v5cr.vercel.app/studio",
-    "payloadConsoleUrl": "https://project-5v5cr.vercel.app/console",
-    "payloadNewSiteUrl": "https://new.eltronic.co.uk",
     "vercelProject": "project-5v5cr"
   },
   "agentInstructions": {
@@ -41,7 +39,10 @@
     },
     "env": {
       "secret": "ELTRONIC_ADMIN_SECRET",
-      "alternateSecrets": ["AUTH_SECRET", "NEXTAUTH_SECRET"],
+      "alternateSecrets": [
+        "AUTH_SECRET",
+        "NEXTAUTH_SECRET"
+      ],
       "fallbackSecret": "temporary-eltronic-admin-secret"
     },
     "files": {
@@ -66,7 +67,11 @@
       "valueShape": "<userId>.<sessionVersion>.<issuedAt>.<signature>",
       "signature": "HMAC-SHA256(userId.sessionVersion.issuedAt, adminSecret)",
       "maxAgeSeconds": 604800,
-      "flags": ["HttpOnly", "SameSite=Lax", "Secure in production"],
+      "flags": [
+        "HttpOnly",
+        "SameSite=Lax",
+        "Secure in production"
+      ],
       "invalidation": "Password changes and resets bump sessionVersion for that user."
     },
     "roles": {
@@ -109,8 +114,14 @@
         "<integration-prefix>_DATABASE_URL",
         "<integration-prefix>_POSTGRES_URL"
       ],
-      "kvUrl": ["KV_REST_API_URL", "UPSTASH_REDIS_REST_URL"],
-      "kvToken": ["KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN"],
+      "kvUrl": [
+        "KV_REST_API_URL",
+        "UPSTASH_REDIS_REST_URL"
+      ],
+      "kvToken": [
+        "KV_REST_API_TOKEN",
+        "UPSTASH_REDIS_REST_TOKEN"
+      ],
       "allowLocalProductionWrites": "ELTRONIC_ALLOW_LOCAL_WRITES"
     },
     "smokeTest": "npm run storage:check runs scripts/check-storage.mjs after env vars are pulled locally and verifies Neon/Postgres or Redis write/read/delete access.",
@@ -141,58 +152,6 @@
       "productFromFormData"
     ]
   },
-  "payloadConsole": {
-    "id": "payload-console",
-    "purpose": "Add Payload CMS beside the current public site and custom Studio for a future Payload-backed version of the site.",
-    "routes": {
-      "admin": "/console",
-      "api": "/console-api",
-      "sandbox": "/v2",
-      "graphQL": "disabled"
-    },
-    "files": {
-      "config": "payload.config.ts",
-      "routeGroup": "src/app/(payload)",
-      "collections": "src/payload/collections",
-      "sandboxPage": "src/app/(new-site)/v2/[[...slug]]/page.tsx",
-      "generatedTypes": "src/payload-types.ts"
-    },
-    "database": {
-      "adapter": "@payloadcms/db-postgres",
-      "sameNeonDatabase": true,
-      "schema": "payload",
-      "schemaEnvOverride": "PAYLOAD_DATABASE_SCHEMA",
-      "preferredUrlEnv": "PAYLOAD_DATABASE_URL",
-      "fallbackUrlEnv": "DATABASE_URL, POSTGRES_URL, DATABASE_URL_UNPOOLED, POSTGRES_URL_NON_POOLING, or integration-prefixed variants"
-    },
-    "auth": {
-      "collection": "console-users",
-      "secretEnv": "PAYLOAD_SECRET",
-      "fallbackSecrets": ["ELTRONIC_ADMIN_SECRET", "AUTH_SECRET", "NEXTAUTH_SECRET"],
-      "localDevelopmentFallback": "local-development-payload-secret"
-    },
-    "collections": ["products", "product-categories", "pages", "posts", "themes", "page-templates", "code-snippets", "menus", "media", "documents", "console-users"],
-    "globals": ["theme-settings", "site-settings", "navigation hidden", "footer hidden"],
-    "pageBuilderBlocks": [
-      "hero",
-      "richText",
-      "imageText",
-      "cardGrid",
-      "productGrid",
-      "gallery",
-      "downloads",
-      "specTable",
-      "callToAction"
-    ],
-    "notes": [
-      "The current public site and /studio still read/write through the existing managed-data layer.",
-      "The /v2 route reads a Payload page with slug home when present and otherwise renders a placeholder. new.eltronic.co.uk rewrites to this isolated new-site route.",
-      "Theme > Code workspace is a protected admin repo browser. Source files are read-only because Vercel deployments are immutable.",
-      "Theme > Custom CSS stores CSS snippets in Payload and injects active global/theme/page snippets into the new-site renderer.",
-      "Console users support admin and editor roles. Jake and Dad are admins; no editor users are planned yet.",
-      "PAYLOAD_SECRET is configured in Vercel for Production and the dev Preview branch; keep it present before treating Console auth as production-ready."
-    ]
-  },
   "routes": [
     {
       "path": "/",
@@ -211,8 +170,13 @@
       "file": "src/app/(site)/products/[slug]/page.tsx",
       "kind": "public",
       "dataSource": "getProductBySlug(slug), getProductImages(product)",
-      "clientComponents": ["src/components/site/product-media-gallery.tsx"],
-      "structuredData": ["Product", "BreadcrumbList"]
+      "clientComponents": [
+        "src/components/site/product-media-gallery.tsx"
+      ],
+      "structuredData": [
+        "Product",
+        "BreadcrumbList"
+      ]
     },
     {
       "path": "/projects",
@@ -225,7 +189,10 @@
       "file": "src/app/(site)/projects/[slug]/page.tsx",
       "kind": "public-content",
       "dataSource": "src/content/projects.ts#getProjectCaseStudyBySlug",
-      "structuredData": ["Article", "BreadcrumbList"]
+      "structuredData": [
+        "Article",
+        "BreadcrumbList"
+      ]
     },
     {
       "path": "/solutions",
@@ -306,7 +273,12 @@
       "file": "src/app/studio/(admin)/submissions/page.tsx",
       "kind": "admin-submission-inbox",
       "guard": "isAdminAuthenticated()",
-      "features": ["type filters", "collapsed repeated blocked attempts", "bulk status/delete actions", "auto refresh"]
+      "features": [
+        "type filters",
+        "collapsed repeated blocked attempts",
+        "bulk status/delete actions",
+        "auto refresh"
+      ]
     },
     {
       "path": "/api/studio/submissions/summary",
@@ -405,7 +377,11 @@
   "productModel": {
     "sourceType": "TypeScript",
     "typeFile": "src/content/products.ts",
-    "templates": ["hmi", "data-logger", "module"],
+    "templates": [
+      "hmi",
+      "data-logger",
+      "module"
+    ],
     "fields": [
       "slug",
       "name",
@@ -491,7 +467,10 @@
     "icon": "src/app/icon.svg",
     "publicMetadataHelper": "src/lib/seo.ts#createPageMetadata",
     "structuredDataComponent": "src/components/site/structured-data.tsx",
-    "studioNoIndex": ["src/app/studio/(admin)/layout.tsx", "src/app/studio/login/page.tsx"],
+    "studioNoIndex": [
+      "src/app/studio/(admin)/layout.tsx",
+      "src/app/studio/login/page.tsx"
+    ],
     "behavior": "Public pages have canonical URLs, descriptions, keyword hints, Open Graph/Twitter metadata and JSON-LD where useful. Studio and API routes are excluded from normal crawling."
   },
   "contactSubmissionModel": {
@@ -500,8 +479,18 @@
     "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts stores captcha failures and populated website honeypot values as blocked records when storage is available; src/lib/managed-data.ts suppresses rapid duplicate blocked attempts.",
     "studioPresentation": "src/app/studio/(admin)/submissions/page.tsx collapses repeated blocked attempts by fingerprint; src/components/studio/submission-card.tsx and src/app/globals.css render green enquiry, amber captcha and red honeypot markers. Bulk selection uses src/components/studio/submission-bulk-select.tsx and bulkSubmissionAction(). Auto-refresh uses src/components/studio/submissions-auto-refresh.tsx and pauses while checkboxes are selected.",
     "tester": "npm run test:contact-bot runs scripts/test-contact-antispam.mjs against production by default and only exercises rejected bot paths unless -- --valid is passed.",
-    "types": ["enquiry", "captcha_failed", "honeypot_spam"],
-    "statuses": ["new", "reviewed", "replied", "archived", "blocked"],
+    "types": [
+      "enquiry",
+      "captcha_failed",
+      "honeypot_spam"
+    ],
+    "statuses": [
+      "new",
+      "reviewed",
+      "replied",
+      "archived",
+      "blocked"
+    ],
     "fields": [
       "id",
       "name",
@@ -537,8 +526,18 @@
     "publicNavIcons": {
       "file": "src/components/site/site-shell.tsx",
       "type": "inline SVG",
-      "primaryItems": ["Products", "Solutions", "Software", "About", "Contact"],
-      "secondaryItems": ["Projects", "Sectors", "Data & specification in footer/page CTAs"],
+      "primaryItems": [
+        "Products",
+        "Solutions",
+        "Software",
+        "About",
+        "Contact"
+      ],
+      "secondaryItems": [
+        "Projects",
+        "Sectors",
+        "Data & specification in footer/page CTAs"
+      ],
       "mobileBehavior": "Full desktop nav collapses to a native details hamburger menu under the mobile breakpoint. src/components/site/mobile-nav-auto-close.tsx closes it on link click, outside tap and Escape."
     },
     "publicFooter": {
@@ -548,7 +547,10 @@
     },
     "publicWorkflowCopy": {
       "contentFile": "src/content/site.ts",
-      "exports": ["workflowModules", "softwareWorkflowModules"],
+      "exports": [
+        "workflowModules",
+        "softwareWorkflowModules"
+      ],
       "tone": "Professional delivery for complex systems, presented as controlled, clear and easy for customers to move through. Avoid generic IT-support language. Prefer precise terms like specialist equipment, operating environment, application, full-stack software, embedded services, connected devices, platform, control system and operational workflow over repeated generic machine/machinery phrasing."
     },
     "productMediaGallery": {
@@ -558,7 +560,12 @@
     "publicTechnicalVisuals": {
       "file": "src/components/site/technical-visuals.tsx",
       "type": "code-native SVG",
-      "variants": ["display", "network", "sectors", "data"]
+      "variants": [
+        "display",
+        "network",
+        "sectors",
+        "data"
+      ]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
     "studioSidebar": "Grouped under Overview, Content, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
@@ -580,7 +587,11 @@
       "behavior": "Protected WordPress Theme File Editor-style source viewer/editor. Uses a whitelist of src files only. Saves are local-development-only; production/Vercel is read-only. next.config.ts traces src files for this route."
     },
     "classicWooStyleBackend": {
-      "routes": ["/studio/classic/products", "/studio/classic/products/new", "/studio/classic/products/[slug]/edit"],
+      "routes": [
+        "/studio/classic/products",
+        "/studio/classic/products/new",
+        "/studio/classic/products/[slug]/edit"
+      ],
       "shell": "src/components/studio/studio-shell.tsx",
       "editor": "src/components/studio/classic/woocommerce-product-editor.tsx",
       "styleFile": "src/app/globals.css",
@@ -601,12 +612,23 @@
     "studioProductImageManager": {
       "file": "src/components/studio/product-image-manager.tsx",
       "parser": "src/lib/managed-data.ts#productFromFormData",
-      "fields": ["imageSrc", "imageAlt"],
+      "fields": [
+        "imageSrc",
+        "imageAlt"
+      ],
       "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",
-      "sections": ["Product data", "Inventory, pricing and tags", "Product modules", "Public copy", "Images and gallery", "Technical content", "Variables and variants"],
+      "sections": [
+        "Product data",
+        "Inventory, pricing and tags",
+        "Product modules",
+        "Public copy",
+        "Images and gallery",
+        "Technical content",
+        "Variables and variants"
+      ],
       "behavior": "WooCommerce-style two-column editor with collapsible details/summary sections. Main product fields sit left; publish, commerce and module controls sit in a sticky sidebar on desktop. Saves admin-only SKU, price, tags, module switches and enhanced variant rows without displaying them publicly yet."
     }
   },
@@ -615,5 +637,15 @@
     "buildCommand": "npm run build",
     "lintCommand": "npm run lint",
     "lastKnownProductionAlias": "https://project-5v5cr.vercel.app"
+  },
+  "removedConsoleExperiment": {
+    "status": "removed",
+    "removedRoutes": [
+      "/console",
+      "/console-api",
+      "/v2"
+    ],
+    "removedHostRewrite": "new.eltronic.co.uk no longer rewrites into this app",
+    "note": "Current production work is focused on the public site and /studio. Do not reintroduce a second CMS or builder unless Jake explicitly asks."
   }
 }

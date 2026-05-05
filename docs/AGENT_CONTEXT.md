@@ -12,8 +12,6 @@ Always verify current code before changing behavior. Treat this document as a ma
 
 - Production site: `https://project-5v5cr.vercel.app`
 - Admin portal: `https://project-5v5cr.vercel.app/studio`
-- Payload Console: `https://project-5v5cr.vercel.app/console`
-- Payload/new-site route: `https://project-5v5cr.vercel.app/v2` and `https://new.eltronic.co.uk`
 - Vercel project: `project-5v5cr`
 - GitHub repo: `JakeG-42/eltronic`
 
@@ -21,10 +19,6 @@ Always verify current code before changing behavior. Treat this document as a ma
 
 - `src/lib/admin-auth.ts`: admin credential and cookie session logic.
 - `src/lib/managed-data.ts`: product/submission storage abstraction.
-- `payload.config.ts`: Payload CMS config mounted as Eltronic Console.
-- `src/payload/collections`: Payload Console collections.
-- `src/app/(payload)`: Payload Console admin/API route group.
-- `src/app/(new-site)/v2/[[...slug]]/page.tsx`: Payload-backed new-site route with its own layout, separate from the old public `SiteShell`.
 - `src/app/studio/(admin)/layout.tsx`: protected Studio shell wrapper.
 - `src/app/studio/(admin)/page.tsx`: Studio dashboard.
 - `src/app/studio/(admin)/products/page.tsx`: product table and quick-edit drawer.
@@ -116,30 +110,15 @@ The `.data/` folder is gitignored because it can contain contact submissions and
 
 Managed data also stores Studio users under `adminUsers`; this means Neon/JSON persistence is required for user changes to survive deployment.
 
-## Payload Console
+## Removed Console Experiment
 
-Payload CMS is installed alongside the existing site and Studio rather than replacing them.
+The separate Console CMS and `/v2` new-site experiment have been removed from the app. The production surface is the current public site plus Eltronic Studio.
 
-- Console admin route: `/console`.
-- Payload REST route: `/console-api`.
-- Payload GraphQL is disabled in `payload.config.ts`.
-- Payload-backed new-site route: `/v2`, marked noindex and excluded in robots on the old domain. `new.eltronic.co.uk` rewrites to this route without using the old public header/footer.
-- Payload collections live in `src/payload/collections`; the CMS foundation includes admin-only `console-users`, `media`, `documents`, `product-categories`, `products`, `pages`, `posts`, themes, page layouts, menus and `code-snippets`.
-- Payload globals live in `src/payload/globals`; current visible globals are `theme-settings` and `site-settings`. Legacy `navigation` and `footer` globals remain but are hidden from the Console sidebar because the new-site header/footer should be built in WYSIWYG/theme layouts.
-- `Theme > Code workspace` is a protected repo browser for admins. It can explore allowed project files from the Console, but source files are read-only because Vercel deployments are immutable.
-- `Theme > Custom CSS` stores safe CSS snippets in Payload. Snippets can be global, theme-specific or page-specific, and only active snippets are injected into the new Payload site.
-- Page/post builder blocks live in `src/payload/blocks`; current blocks include hero, rich text, image/text, card grid, product grid, gallery, downloads, specification table and CTA band.
-- Jake and Dad are existing admins. The `editor` role remains available in Console users for future limited-access accounts, but no editor users are planned yet.
-- `next.config.ts` is wrapped with `withPayload()`.
-- `tsconfig.json` maps `@payload-config` to `payload.config.ts`.
-- The previous app-wide root layout was split so `(site)`, `(new-site)`, `/studio` and `(payload)` can each own the correct root layout boundary. Public URLs are unchanged.
-
-Payload uses the same Neon database as the current app but stores its tables under a separate Postgres schema:
-
-- Schema: `payload`.
-- Config env override: `PAYLOAD_DATABASE_SCHEMA`.
-- Preferred DB env: `PAYLOAD_DATABASE_URL`; falls back to the same Neon/Postgres env discovery used by managed data.
-- `PAYLOAD_SECRET` is configured in Vercel for Production and the `dev` Preview branch. Local development falls back to a development-only secret unless a local `PAYLOAD_SECRET` is added.
+- Removed routes: `/console`, `/console-api`, `/v2`.
+- Removed host rewrite: `new.eltronic.co.uk` no longer rewrites into this application.
+- Removed code: `payload.config.ts`, `src/app/(payload)`, `src/app/(new-site)`, `src/payload`, `src/migrations`, `src/payload-types.ts`, `src/components/payload`, and the Console code-workspace API.
+- Removed packages: Payload CMS packages and Puck.
+- Do not reintroduce a second CMS or builder unless Jake explicitly asks for it. Continue improving the current public site and `/studio` first.
 
 ## Studio Layout
 
@@ -316,8 +295,7 @@ Before relying on live admin writes, configure persistent database env vars in V
 
 - `DATABASE_URL` or integration-prefixed `eltronic_db_1_DATABASE_URL`
 - Fallback Redis support still accepts `KV_REST_API_URL` and `KV_REST_API_TOKEN`
-- Payload Console can reuse the same Neon database through `PAYLOAD_DATABASE_URL` or the existing prefixed Neon env vars, but keeps its tables in the `payload` Postgres schema.
-- Keep `PAYLOAD_SECRET` configured before treating `/console` as production-ready.
+- The removed Console experiment previously used a separate database schema. Do not run destructive database cleanup unless Jake explicitly asks; leaving old tables orphaned is safer than deleting potential backup data.
 
 As of 2026-04-27, the Neon database `eltronic_db_1` is connected to Vercel and injects prefixed env vars such as `eltronic_db_1_DATABASE_URL`. `npm run storage:check` passes locally after pulling Vercel env vars, production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j` is live, and the safe contact bot tester confirmed blocked attempts are saved in Neon.
 
