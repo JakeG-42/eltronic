@@ -51,6 +51,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
+- `/studio/media`: protected product media overview derived from managed product galleries.
 - `/studio/tools`: redirects to `/studio/tools/qr-code`.
 - `/studio/tools/qr-code`: protected QR code generator for links/text and Wi-Fi network join codes.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -86,7 +87,7 @@ Each product currently has:
 - `tags`: optional admin/product-management tags.
 - `modules`: admin module switches for gallery, highlights, specifications, documents, variants and enquiry; stored but not wired into public rendering yet.
 - `image`: `{ src, alt }` used by listings and detail pages.
-- `images`: optional ordered gallery of `{ src, alt }`; public product galleries use managed images only, with `image` as the fallback primary image. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and are explicit seed/managed gallery entries.
+- `images`: optional ordered gallery of `{ src, alt, fileName }`; public product galleries use managed images only, with `image` as the fallback primary image. `fileName` is used for uploaded inline images in Studio. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and are explicit seed/managed gallery entries.
 - `summary`: short card/listing copy.
 - `description`: product detail intro copy.
 - `highlights`: list of product or template highlights.
@@ -191,7 +192,7 @@ Each product currently has:
 - Product forms use a two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
-- Product image editing uses a visual preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt` fallback fields. Each image row supports a URL field plus a compact local upload button that fills the same image source. Uploaded raster files are resized client-side and stored as inline image data in the managed product record. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
+- Product image editing uses a visual preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt`/`imageFileName` fallback fields. Each image row supports a URL field plus a compact local upload button that fills the same image source. Uploaded raster files are resized client-side and stored as inline image data in the managed product record, with a normalized filename stored for Studio display. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
 - Template assignment is managed with a select field on each product.
 - Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 

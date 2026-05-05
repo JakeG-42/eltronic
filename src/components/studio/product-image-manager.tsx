@@ -26,11 +26,25 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
       id: `${idPrefix}-existing-${index}`,
     })),
   );
-  const serializedImages = JSON.stringify(items.map(({ alt, src }) => ({ alt, src })));
+  const serializedImages = JSON.stringify(
+    items.map((image) => ({
+      alt: image.alt,
+      fileName: isInlineImageSource(image.src) ? displayImageSource(image) : image.fileName,
+      src: image.src,
+    })),
+  );
 
   function updateImage(index: number, field: "src" | "alt", value: string) {
     setItems((current) =>
-      current.map((item, itemIndex) => (itemIndex === index ? { ...item, [field]: value } : item)),
+      current.map((item, itemIndex) =>
+        itemIndex === index
+          ? {
+              ...item,
+              [field]: value,
+              ...(field === "src" ? { fileName: undefined } : {}),
+            }
+          : item,
+      ),
     );
   }
 
@@ -41,6 +55,7 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
 
     const src = await fileToManagedImageSource(file);
     const fallbackAlt = imageAltFromFile(file);
+    const fileName = normalizeUploadFileName(file.name);
 
     setItems((current) =>
       current.map((item, itemIndex) =>
@@ -48,6 +63,7 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
           ? {
               ...item,
               alt: item.alt || fallbackAlt,
+              fileName,
               src,
             }
           : item,
@@ -109,6 +125,8 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
       <div className="studio-image-list">
         {items.map((image, index) => (
           <article className="studio-image-card" key={image.id}>
+            <input name="imageSrc" type="hidden" value={image.src} />
+            <input name="imageFileName" type="hidden" value={displayImageSource(image)} />
             <div
               aria-label={image.alt || image.src || `Product image ${index + 1}`}
               className="studio-image-preview"
@@ -125,10 +143,9 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
                 <div className="studio-image-source-row">
                   <Input
                     id={`image-src-${image.id}`}
-                    name="imageSrc"
                     placeholder="/product-images/example.jpg"
                     required={requireFirst && index === 0}
-                    value={image.src}
+                    value={displayImageSource(image)}
                     onChange={(event) => updateImage(index, "src", event.target.value)}
                   />
                   <input
@@ -200,10 +217,59 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
 }
 
 function imageAltFromFile(file: File) {
-  return file.name
+  return normalizeUploadFileName(file.name)
     .replace(/\.[^.]+$/, "")
-    .replace(/[-_]+/g, " ")
+    .replace(/_+/g, " ")
     .trim();
+}
+
+function displayImageSource(image: ProductImage) {
+  if (!isInlineImageSource(image.src)) {
+    return image.src;
+  }
+
+  return image.fileName || inlineFileNameFromAlt(image.alt, image.src);
+}
+
+function inlineFileNameFromAlt(alt: string, src: string) {
+  const extension = extensionFromInlineImageSource(src);
+  const baseName = alt.trim() || "uploaded_image";
+
+  return normalizeUploadFileName(`${baseName}.${extension}`);
+}
+
+function extensionFromInlineImageSource(src: string) {
+  const match = src.match(/^data:image\/([a-z0-9.+-]+)[;,]/i);
+  const extension = match?.[1]?.toLowerCase();
+
+  if (!extension) {
+    return "image";
+  }
+
+  if (extension === "jpeg") {
+    return "jpg";
+  }
+
+  if (extension === "svg+xml") {
+    return "svg";
+  }
+
+  return extension.replace(/[^a-z0-9]+/g, "");
+}
+
+function isInlineImageSource(src: string) {
+  return /^(data|blob):/i.test(src);
+}
+
+function normalizeUploadFileName(fileName: string) {
+  const cleanName = fileName
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-zA-Z0-9._-]/g, "_")
+    .replace(/_+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  return cleanName || "uploaded_image";
 }
 
 async function fileToManagedImageSource(file: File) {

@@ -6,6 +6,7 @@ export type ProductTemplate = "hmi" | "data-logger" | "module";
 export type ProductImage = {
   src: string;
   alt: string;
+  fileName?: string;
 };
 
 export type ProductSpec = {
@@ -187,6 +188,7 @@ function mergeProductImages(images: ProductImage[], fallbackAlt: string) {
     .map((image) => ({
       src: image.src,
       alt: image.alt || fallbackAlt,
+      fileName: image.fileName,
     }))
     .filter((image) => {
       if (seen.has(image.src)) {

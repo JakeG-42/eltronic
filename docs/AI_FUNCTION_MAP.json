@@ -250,6 +250,18 @@
       "guard": "isAdminAuthenticated()"
     },
     {
+      "path": "/studio/media",
+      "file": "src/app/studio/(admin)/media/page.tsx",
+      "kind": "admin-media-overview",
+      "guard": "isAdminAuthenticated()",
+      "dataSource": "getProducts(), getProductImages(product)",
+      "features": [
+        "product gallery media overview",
+        "inline upload filename display",
+        "links back to product edit pages"
+      ]
+    },
+    {
       "path": "/studio/tools",
       "file": "src/app/studio/(admin)/tools/page.tsx",
       "kind": "admin-tool-redirect",
@@ -427,6 +439,7 @@
       "image.alt",
       "images[].src",
       "images[].alt",
+      "images[].fileName",
       "summary",
       "description",
       "highlights[]",
@@ -642,7 +655,7 @@
         "imageSrc",
         "imageAlt"
       ],
-      "behavior": "Visual image preview and ordering UI. Each row has a compact URL field plus upload button. Uploads are resized in the browser and stored as inline image data in the ordered galleryImagesJson payload. Repeated imageSrc/imageAlt fields are retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
+      "behavior": "Visual image preview and ordering UI. Each row has a compact URL field plus upload button. Uploads are resized in the browser and stored as inline image data in the ordered galleryImagesJson payload with a normalized fileName so Studio does not show raw data URLs. Repeated imageSrc/imageAlt/imageFileName fields are retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

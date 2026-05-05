@@ -8,6 +8,7 @@ import {
   ExternalLink,
   FileCode2,
   Home,
+  ImageIcon,
   Inbox,
   LayoutDashboard,
   LogOut,
@@ -45,6 +46,7 @@ const navGroups: Array<{
       { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
       { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
       { href: "/studio/templates", label: "Templates", icon: FileCode2, roles: ["super_admin", "admin"] },
+      { href: "/studio/media", label: "Media", icon: ImageIcon, roles: ["super_admin", "admin"] },
     ],
   },
   {
@@ -198,6 +200,7 @@ export function StudioShell({
 function currentModeLabel(pathname: string) {
   if (pathname.startsWith("/studio/builder")) return "Website Builder";
   if (pathname.startsWith("/studio/templates")) return "Template Editor";
+  if (pathname.startsWith("/studio/media")) return "Media";
   if (pathname.startsWith("/studio/products")) return "Products";
   if (pathname.startsWith("/studio/tools")) return "Tools";
   if (pathname.startsWith("/studio/submissions")) return "Enquiries";

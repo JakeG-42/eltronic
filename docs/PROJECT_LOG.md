@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Added `/studio/media` under the Content sidebar group to review product gallery media, and changed uploaded product image rows to display normalized filenames instead of raw inline `data:image/...` payloads.
 - Added per-row Studio product image uploads beside the URL field. Uploaded images are resized in the browser, stored as inline managed image data, and rendered through a shared managed-image component that supports both URLs and inline uploads.
 - Made product galleries explicitly open-ended across templates by changing the public thumbnail strip to horizontal scrolling, replacing the stale fixed-slot Studio summary, and posting ordered `galleryImagesJson` from the image manager so dynamically added rows persist reliably.
 - Added a protected Studio Tools section with `/studio/tools/qr-code`, a client-side QR code generator for links/text and Wi-Fi network join codes. It supports square, rounded and circular dots, foreground/background colours, centre logo upload, and PNG/SVG export.

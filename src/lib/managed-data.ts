@@ -678,6 +678,7 @@ export function getProductImages(product: Product): ProductImage[] {
     .map((image) => ({
       src: image.src,
       alt: image.alt || product.name,
+      fileName: image.fileName,
     }));
 }
 
@@ -1038,12 +1039,22 @@ function parseProductImages(formData: FormData, fallbackAlt: string): ProductIma
 
   const sources = formData.getAll("imageSrc").map((value) => String(value ?? "").trim());
   const alts = formData.getAll("imageAlt").map((value) => String(value ?? "").trim());
+  const fileNames = formData.getAll("imageFileName").map((value) => String(value ?? "").trim());
 
   return sources
-    .map((src, index) => ({
-      src,
-      alt: alts[index] || fallbackAlt,
-    }))
+    .map((src, index) => {
+      const image: ProductImage = {
+        src,
+        alt: alts[index] || fallbackAlt,
+      };
+      const fileName = normalizeStoredImageFileName(fileNames[index], src);
+
+      if (fileName) {
+        image.fileName = fileName;
+      }
+
+      return image;
+    })
     .filter((image) => image.src);
 }
 
@@ -1060,20 +1071,50 @@ function parseSerializedProductImages(value: FormDataEntryValue | null, fallback
     }
 
     return parsed
-      .map((image) => {
+      .map((image): ProductImage | null => {
         if (!image || typeof image !== "object") {
           return null;
         }
 
         const source = "src" in image ? String(image.src ?? "").trim() : "";
         const alt = "alt" in image ? String(image.alt ?? "").trim() : "";
+        const fileName = "fileName" in image ? String(image.fileName ?? "").trim() : "";
 
-        return source ? { src: source, alt: alt || fallbackAlt } : null;
+        if (!source) {
+          return null;
+        }
+
+        const nextImage: ProductImage = {
+          src: source,
+          alt: alt || fallbackAlt,
+        };
+        const normalizedFileName = normalizeStoredImageFileName(fileName, source);
+
+        if (normalizedFileName) {
+          nextImage.fileName = normalizedFileName;
+        }
+
+        return nextImage;
       })
       .filter((image): image is ProductImage => Boolean(image));
   } catch {
     return [];
   }
+}
+
+function normalizeStoredImageFileName(fileName: string | undefined, source: string) {
+  if (!/^(data|blob):/i.test(source) || !fileName) {
+    return undefined;
+  }
+
+  const normalized = fileName
+    .trim()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-zA-Z0-9._-]/g, "_")
+    .replace(/_+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  return normalized || undefined;
 }
 
 function parseRows(value: FormDataEntryValue | null, columns: number) {
