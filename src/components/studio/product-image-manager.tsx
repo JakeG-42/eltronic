@@ -26,6 +26,7 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
       id: `${idPrefix}-existing-${index}`,
     })),
   );
+  const serializedImages = JSON.stringify(items.map(({ alt, src }) => ({ alt, src })));
 
   function updateImage(index: number, field: "src" | "alt", value: string) {
     setItems((current) =>
@@ -68,6 +69,7 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
 
   return (
     <div className="studio-image-manager">
+      <input name="galleryImagesJson" type="hidden" value={serializedImages} />
       <div className="studio-image-manager-header">
         <div>
           <Label>Gallery images</Label>

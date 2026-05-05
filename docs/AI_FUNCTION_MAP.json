@@ -638,7 +638,7 @@
         "imageSrc",
         "imageAlt"
       ],
-      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
+      "behavior": "Visual image preview and ordering UI. Ordered galleryImagesJson is saved first, with repeated imageSrc/imageAlt fields retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

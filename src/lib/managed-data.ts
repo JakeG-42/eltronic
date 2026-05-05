@@ -1030,6 +1030,12 @@ function parseProductVariants(value: FormDataEntryValue | null): ProductVariant[
 }
 
 function parseProductImages(formData: FormData, fallbackAlt: string): ProductImage[] {
+  const serializedImages = parseSerializedProductImages(formData.get("galleryImagesJson"), fallbackAlt);
+
+  if (serializedImages.length > 0) {
+    return serializedImages;
+  }
+
   const sources = formData.getAll("imageSrc").map((value) => String(value ?? "").trim());
   const alts = formData.getAll("imageAlt").map((value) => String(value ?? "").trim());
 
@@ -1039,6 +1045,35 @@ function parseProductImages(formData: FormData, fallbackAlt: string): ProductIma
       alt: alts[index] || fallbackAlt,
     }))
     .filter((image) => image.src);
+}
+
+function parseSerializedProductImages(value: FormDataEntryValue | null, fallbackAlt: string): ProductImage[] {
+  if (typeof value !== "string" || !value.trim()) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(value) as unknown;
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed
+      .map((image) => {
+        if (!image || typeof image !== "object") {
+          return null;
+        }
+
+        const source = "src" in image ? String(image.src ?? "").trim() : "";
+        const alt = "alt" in image ? String(image.alt ?? "").trim() : "";
+
+        return source ? { src: source, alt: alt || fallbackAlt } : null;
+      })
+      .filter((image): image is ProductImage => Boolean(image));
+  } catch {
+    return [];
+  }
 }
 
 function parseRows(value: FormDataEntryValue | null, columns: number) {

@@ -26,7 +26,6 @@ export function ProductForm({
 }) {
   const formId = product?.slug ?? "new";
   const imageItems = editableImages(product);
-  const imageSlotCount = imageItems.length || 1;
   const submitText = submitLabel ?? (product ? "Save product" : "Create product");
 
   return (
@@ -162,7 +161,7 @@ export function ProductForm({
             </div>
             <div>
               <dt>Gallery</dt>
-              <dd>{imageSlotCount} image slot{imageSlotCount === 1 ? "" : "s"}</dd>
+              <dd>{imageItems.length || 1} saved, no image limit</dd>
             </div>
             <div>
               <dt>Status</dt>

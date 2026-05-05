@@ -190,7 +190,7 @@ Each product currently has:
 - Product forms use a two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
-- Product image editing uses a visual preview/order manager with repeated `imageSrc` and `imageAlt` fields. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
+- Product image editing uses a visual preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt` fallback fields. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
 - Template assignment is managed with a select field on each product.
 - Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 
