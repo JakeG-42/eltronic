@@ -565,6 +565,8 @@ function Root({ children, ...props }: BuilderRootProps & { children: ReactNode }
         {
           "--builder-accent": props.accentColor || "#8bd3ff",
           "--builder-bg": props.backgroundColor || "#020617",
+          "--builder-page-padding-bottom": cssRem(props.pagePaddingBottom),
+          "--builder-page-padding-top": cssRem(props.pagePaddingTop),
           "--builder-surface": props.surfaceColor || "23, 32, 51",
           "--builder-surface-fill": `rgba(${props.surfaceColor || "23, 32, 51"}, ${props.surfaceOpacity ?? 0.78})`,
           "--builder-surface-opacity": String(props.surfaceOpacity ?? 0.78),
@@ -1197,6 +1199,8 @@ export const builderConfig: BuilderConfig = {
       accentColor: "#8bd3ff",
       backgroundColor: "#020617",
       fontFamily: "display",
+      pagePaddingBottom: 0,
+      pagePaddingTop: 0,
       pageTitle: "New Eltronic page",
       sectionSpacing: "normal",
       surfaceColor: "23, 32, 51",
@@ -1219,6 +1223,8 @@ export const builderConfig: BuilderConfig = {
       backgroundColor: { label: "Page background", type: "text" },
       textColor: { label: "Text colour", type: "text" },
       accentColor: { label: "Accent colour", type: "text" },
+      pagePaddingTop: { label: "Page top padding (rem)", max: 10, min: 0, step: 0.25, type: "number" },
+      pagePaddingBottom: { label: "Page bottom padding (rem)", max: 10, min: 0, step: 0.25, type: "number" },
       surfaceColor: {
         label: "Surface RGB",
         placeholder: "23, 32, 51",

@@ -167,6 +167,8 @@ function rootProps(page: PageLike): BuilderRootProps {
     accentColor: "#8bd3ff",
     backgroundColor: "#020617",
     fontFamily: "display",
+    pagePaddingBottom: 0,
+    pagePaddingTop: 0,
     pageTitle: asString(page.title, "New Eltronic page"),
     sectionSpacing: "normal",
     surfaceColor: "23, 32, 51",

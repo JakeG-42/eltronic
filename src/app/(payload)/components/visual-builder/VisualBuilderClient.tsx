@@ -100,6 +100,8 @@ function createStarterBuilderData(title: string, theme: BuilderTheme): BuilderDa
         accentColor: "#8bd3ff",
         backgroundColor: "#020617",
         fontFamily: "display",
+        pagePaddingBottom: 0,
+        pagePaddingTop: 0,
         pageTitle: title,
         sectionSpacing: "normal",
         surfaceColor: "23, 32, 51",

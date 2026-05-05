@@ -136,6 +136,8 @@ export type BuilderRootProps = {
   accentColor?: string;
   backgroundColor?: string;
   fontFamily?: "code" | "display" | "sans";
+  pagePaddingBottom?: number;
+  pagePaddingTop?: number;
   pageTitle?: string;
   sectionSpacing?: "compact" | "normal" | "spacious";
   surfaceColor?: string;
