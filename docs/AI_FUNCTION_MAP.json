@@ -451,7 +451,7 @@
     ],
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
-      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; Topcon uses CSV-backed manufacturer image URLs.",
+      "behavior": "Returns every valid managed product.images entry in order, or product.image as the single fallback. Do not slice or cap by product template. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; Topcon uses CSV-backed manufacturer image URLs.",
       "generatedManifest": "src/content/product-gallery-assets.json",
       "generatedAssets": "public/product-images/generated/*.svg",
       "generator": "npm run images:products",
@@ -580,7 +580,7 @@
     },
     "productMediaGallery": {
       "file": "src/components/site/product-media-gallery.tsx",
-      "behavior": "Client-side selected image state, thumbnail switching, touch swipe and desktop click-drag switching, keyboard-friendly zoom overlay, previous/next controls."
+      "behavior": "Client-side selected image state, thumbnail switching, touch swipe and desktop click-drag switching, keyboard-friendly zoom overlay, previous/next controls. Thumbnail layout scrolls horizontally so product galleries can contain more than four images without changing the hero height."
     },
     "publicTechnicalVisuals": {
       "file": "src/components/site/technical-visuals.tsx",
@@ -638,7 +638,7 @@
         "imageSrc",
         "imageAlt"
       ],
-      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
+      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

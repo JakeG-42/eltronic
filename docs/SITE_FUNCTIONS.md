@@ -125,7 +125,7 @@ Each product currently has:
 - `generateMetadata()` sets product-specific page title, description, canonical URL, Open Graph and Twitter metadata.
 - Unknown product slugs call `notFound()`.
 - The detail page displays family, category, name, description, template-specific heading, image, highlights, enquiry prompt, specifications, documents and variants where available.
-- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data, generated manifest entries or Studio edits.
+- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data, generated manifest entries or Studio edits, and should support any number of managed images rather than a fixed four-image template.
 - Product detail pages emit product and breadcrumb JSON-LD structured data.
 - Template headings are currently mapped in `src/app/(site)/products/[slug]/page.tsx`.
 
@@ -190,7 +190,7 @@ Each product currently has:
 - Product forms use a two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
-- Product image editing uses a visual preview/order manager with repeated `imageSrc` and `imageAlt` fields. The first image is saved as the primary image.
+- Product image editing uses a visual preview/order manager with repeated `imageSrc` and `imageAlt` fields. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
 - Template assignment is managed with a select field on each product.
 - Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 

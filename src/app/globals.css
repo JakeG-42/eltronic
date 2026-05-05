@@ -1500,15 +1500,19 @@ h3 {
 }
 
 .thumbnail-strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
   gap: 0.65rem;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scroll-padding-inline: 0.25rem;
+  scroll-snap-type: x proximity;
 }
 
 .thumbnail-button {
   position: relative;
-  min-height: 5.25rem;
-  width: 100%;
+  flex: 0 0 clamp(5rem, 7vw, 6.4rem);
+  aspect-ratio: 1 / 0.82;
   padding: 0;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -1516,6 +1520,7 @@ h3 {
   background: #050816;
   cursor: pointer;
   opacity: 0.72;
+  scroll-snap-align: start;
   transition:
     border-color var(--transition),
     opacity var(--transition),
@@ -2728,6 +2733,18 @@ h3 {
   font-size: 0.9rem;
 }
 
+.studio-image-count {
+  flex: 0 0 auto;
+  align-self: center;
+  padding: 0.35rem 0.58rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  border-radius: 999px;
+  color: var(--primary);
+  font-family: var(--font-code), monospace;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
 .studio-image-manager {
   display: grid;
   gap: 1rem;
@@ -3839,13 +3856,11 @@ h3 {
   }
 
   .thumbnail-strip {
-    grid-template-columns: repeat(4, minmax(4.5rem, 1fr));
-    overflow-x: auto;
-    padding-bottom: 0.2rem;
+    gap: 0.5rem;
   }
 
   .thumbnail-button {
-    min-height: 4.7rem;
+    flex-basis: 4.7rem;
   }
 
   .gallery-caption {

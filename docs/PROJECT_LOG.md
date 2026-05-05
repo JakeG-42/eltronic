@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Made product galleries explicitly open-ended across templates by changing the public thumbnail strip to horizontal scrolling and clarifying Studio image management copy/counts. The managed data parser already accepts repeated image rows and should not be template-capped.
 - Added a protected Studio Tools section with `/studio/tools/qr-code`, a client-side QR code generator for links/text and Wi-Fi network join codes. It supports square, rounded and circular dots, foreground/background colours, centre logo upload, and PNG/SVG export.
 - Removed the separate Console CMS and `/v2` new-site sandbox for now, including the CMS route groups, builder code, generated types, migrations, related dependencies and `new.eltronic.co.uk` rewrite. Current work is focused on the public site and `/studio`.
 - Removed the WordPress/WooCommerce-style classic Studio backend under `/studio/classic`, including its product routes, shell switcher, editor component and dedicated CSS. Product management now stays on the current Studio product table, quick-edit drawer and full editor.

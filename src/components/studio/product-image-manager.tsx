@@ -71,8 +71,12 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
       <div className="studio-image-manager-header">
         <div>
           <Label>Gallery images</Label>
-          <p>Preview, edit and order the product gallery. The first image becomes the main product image.</p>
+          <p>
+            Preview, edit and order the product gallery. Add as many images as the product needs; the first image
+            becomes the main product image.
+          </p>
         </div>
+        <span className="studio-image-count">{items.length} image{items.length === 1 ? "" : "s"}</span>
         <Button type="button" variant="secondary" onClick={addImage}>
           <ImagePlus className="size-4" />
           Add image
