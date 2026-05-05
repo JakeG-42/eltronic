@@ -7,6 +7,7 @@ import {
   productModuleDefinitions,
   products as seededProducts,
   type Product,
+  type ProductDocument,
   type ProductImage,
   type ProductModules,
   type ProductTemplate,
@@ -21,6 +22,18 @@ import {
   type SiteThemePreset,
   type SiteVisualDensity,
 } from "@/content/site-builder";
+import {
+  createSeedAdminUsers,
+  hashAdminPassword,
+  normalizeAdminRole,
+  normalizeAdminStatus,
+  normalizeAdminUsers,
+  toPublicAdminUser,
+  verifyAdminPassword,
+  type AdminRole,
+  type AdminUser,
+  type AdminUserStatus,
+} from "@/lib/admin-user-model";
 
 const DATA_KEY = "eltronic:managed-data:v1";
 const LOCAL_DATA_PATH = path.join(process.cwd(), ".data", "eltronic-data.json");
@@ -60,6 +73,7 @@ export type ContactSubmissionWriteResult = {
 };
 
 type ManagedData = {
+  adminUsers: AdminUser[];
   contactNotifications: ContactNotificationSettings;
   products: Product[];
   siteBuilder: SiteBuilderSettings;
@@ -116,6 +130,7 @@ function getPrefixedPostgresConnectionString() {
 
 function createEmptyData(): ManagedData {
   return {
+    adminUsers: createSeedAdminUsers(),
     contactNotifications: getDefaultContactNotificationSettings(),
     products: normalizeProducts(seededProducts),
     siteBuilder: normalizeSiteBuilderSettings(),
@@ -126,6 +141,7 @@ function createEmptyData(): ManagedData {
 
 function normalizeData(data: Partial<ManagedData> | null | undefined): ManagedData {
   return {
+    adminUsers: normalizeAdminUsers(data?.adminUsers),
     contactNotifications: normalizeContactNotificationSettings(data?.contactNotifications),
     products:
       Array.isArray(data?.products) && data.products.length > 0
@@ -175,17 +191,70 @@ function normalizeContactNotificationSettings(settings?: {
 }
 
 function normalizeProducts(products: Product[]) {
-  return products.map((product) => {
+  return products.map((storedProduct) => {
+    const product = normalizeLaunchProductContent(storedProduct);
     const images = getProductImages(product);
 
     return {
       ...product,
       image: images[0] ?? product.image,
       images,
+      documents: normalizeProductDocuments(product.documents),
       tags: Array.isArray(product.tags) ? product.tags.filter(Boolean) : [],
       modules: normalizeProductModules(product.modules),
     };
   });
+}
+
+function normalizeLaunchProductContent(product: Product): Product {
+  if (product.slug !== "eltronic-iq-can-bus-module") {
+    return product;
+  }
+
+  const containsUnfinishedCopy =
+    product.highlights.some((highlight) => /owned product page|technical data sections/i.test(highlight)) ||
+    product.variants?.some((variant) => /to be updated|tbu/i.test(`${variant.details} ${variant.articleNumber}`));
+
+  if (!containsUnfinishedCopy) {
+    return product;
+  }
+
+  return {
+    ...product,
+    summary:
+      "Application-specific CAN-Bus I/O expansion for control projects that need extra inputs, outputs or interface points.",
+    description:
+      "The I&Q CAN-Bus I/O Module supports control-system expansion where additional equipment inputs, outputs and CAN connectivity need to be specified around the application, enclosure, operator interface and support requirements.",
+    highlights: [
+      "CAN-Bus I/O expansion for application-specific control projects",
+      "Useful where additional signals, operator controls or interface points need to be brought into a wider system",
+      "Configuration, housing and connection details are confirmed during technical enquiry",
+    ],
+    specifications: [
+      { label: "Product family", value: "Eltronic CAN-Bus I/O expansion" },
+      { label: "Interface", value: "CAN-Bus control-system integration" },
+      { label: "Housing", value: "Specified around the operating environment" },
+      { label: "User interface", value: "Defined during project scoping" },
+      { label: "Configuration", value: "Confirmed against I/O, wiring and support requirements" },
+    ],
+    variants: undefined,
+  };
+}
+
+function normalizeProductDocuments(documents?: ProductDocument[]) {
+  if (!Array.isArray(documents)) {
+    return undefined;
+  }
+
+  const normalizedDocuments = documents.filter(
+    (document, index, list) =>
+      document.label &&
+      document.url &&
+      list.findIndex((item) => item.url === document.url && (item.url === "/contact" || item.label === document.label)) ===
+        index,
+  );
+
+  return normalizedDocuments.length > 0 ? normalizedDocuments : undefined;
 }
 
 function normalizeProductModules(modules?: Partial<ProductModules>): ProductModules {
@@ -386,6 +455,141 @@ export async function getProducts() {
   return data.products;
 }
 
+export async function getAdminUsers() {
+  const data = await readManagedData();
+  return data.adminUsers;
+}
+
+export async function getPublicAdminUsers() {
+  const users = await getAdminUsers();
+  return users.map(toPublicAdminUser).sort((a, b) => a.displayName.localeCompare(b.displayName));
+}
+
+export async function getAdminUserById(id: string) {
+  const users = await getAdminUsers();
+  return users.find((user) => user.id === id);
+}
+
+export async function findAdminUserByIdentifier(identifier: string) {
+  const normalizedIdentifier = identifier.trim().toLowerCase();
+  const users = await getAdminUsers();
+
+  return users.find(
+    (user) => user.username.toLowerCase() === normalizedIdentifier || user.email.toLowerCase() === normalizedIdentifier,
+  );
+}
+
+export async function saveAdminUser(input: {
+  displayName: string;
+  email: string;
+  id?: string;
+  password?: string;
+  role: AdminRole;
+  status: AdminUserStatus;
+  username: string;
+}) {
+  const data = await readManagedData();
+  const now = new Date().toISOString();
+  const normalizedEmail = input.email.trim().toLowerCase();
+  const normalizedUsername = input.username.trim().toLowerCase() || normalizedEmail;
+  const existing = input.id ? data.adminUsers.find((user) => user.id === input.id) : undefined;
+
+  if (!normalizedEmail || !normalizedUsername || !input.displayName.trim()) {
+    throw new Error("Name, email and username are required.");
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    throw new Error("A valid email address is required.");
+  }
+
+  const duplicate = data.adminUsers.find(
+    (user) =>
+      user.id !== input.id &&
+      (user.email.toLowerCase() === normalizedEmail || user.username.toLowerCase() === normalizedUsername),
+  );
+
+  if (duplicate) {
+    throw new Error("Another user already uses that email or username.");
+  }
+
+  if (!existing && !input.password) {
+    throw new Error("A password is required for new users.");
+  }
+
+  const nextUser: AdminUser = {
+    createdAt: existing?.createdAt ?? now,
+    displayName: input.displayName.trim(),
+    email: normalizedEmail,
+    id: existing?.id ?? crypto.randomUUID(),
+    passwordHash: input.password ? hashAdminPassword(input.password) : existing?.passwordHash ?? "",
+    role: normalizeAdminRole(input.role),
+    sessionVersion: input.password ? crypto.randomUUID() : existing?.sessionVersion ?? crypto.randomUUID(),
+    status: normalizeAdminStatus(input.status),
+    updatedAt: now,
+    username: normalizedUsername,
+  };
+
+  const nextUsers = existing
+    ? data.adminUsers.map((user) => (user.id === existing.id ? nextUser : user))
+    : [...data.adminUsers, nextUser];
+
+  ensureElevatedAdminRemains(nextUsers);
+  await writeManagedData({
+    ...data,
+    adminUsers: nextUsers,
+  });
+
+  return toPublicAdminUser(nextUser);
+}
+
+export async function updateOwnAdminAccount(input: {
+  currentPassword?: string;
+  displayName: string;
+  email: string;
+  id: string;
+  newPassword?: string;
+  username: string;
+}) {
+  const existing = await getAdminUserById(input.id);
+
+  if (!existing) {
+    throw new Error("Your account could not be found.");
+  }
+
+  if (input.newPassword && !input.currentPassword) {
+    throw new Error("Enter your current password before setting a new password.");
+  }
+
+  if (input.newPassword && !verifyAdminPassword(input.currentPassword ?? "", existing.passwordHash)) {
+    throw new Error("Current password did not match.");
+  }
+
+  return saveAdminUser({
+    displayName: input.displayName,
+    email: input.email,
+    id: input.id,
+    password: input.newPassword,
+    role: existing.role,
+    status: existing.status,
+    username: input.username,
+  });
+}
+
+export async function deleteAdminUser(id: string) {
+  const data = await readManagedData();
+  const nextUsers = data.adminUsers.filter((user) => user.id !== id);
+
+  if (nextUsers.length === data.adminUsers.length) {
+    throw new Error("User not found.");
+  }
+
+  ensureElevatedAdminRemains(nextUsers);
+  await writeManagedData({
+    ...data,
+    adminUsers: nextUsers,
+  });
+}
+
 export async function getSiteBuilderSettings() {
   const data = await readManagedData();
   return data.siteBuilder;
@@ -462,12 +666,12 @@ export async function getFeaturedProducts() {
 
 export function getProductImages(product: Product): ProductImage[] {
   const images = Array.isArray(product.images)
-    ? product.images.filter((image) => image.src && !image.src.startsWith("/product-gallery/"))
+    ? product.images.filter((image) => image.src && isPublicProductImage(image.src))
     : [];
   const mergedImages =
     images.length > 0
       ? images
-      : [product.image].filter((image) => image?.src && !image.src.startsWith("/product-gallery/"));
+      : [product.image].filter((image) => image?.src && isPublicProductImage(image.src));
 
   return mergedImages
     .filter((image, index, gallery) => gallery.findIndex((item) => item.src === image.src) === index)
@@ -475,6 +679,10 @@ export function getProductImages(product: Product): ProductImage[] {
       src: image.src,
       alt: image.alt || product.name,
     }));
+}
+
+function isPublicProductImage(src: string) {
+  return !src.startsWith("/product-gallery/") && !src.startsWith("/product-images/placeholders/");
 }
 
 export async function upsertProduct(product: Product, previousSlug?: string) {
@@ -610,12 +818,21 @@ export async function createBlockedContactSubmission(input: {
 }
 
 export async function updateSubmissionStatus(id: string, status: ContactSubmissionStatus) {
+  await updateSubmissionStatuses([id], status);
+}
+
+export async function updateSubmissionStatuses(ids: string[], status: ContactSubmissionStatus) {
   const data = await readManagedData();
+  const selectedIds = new Set(ids.filter(Boolean));
+
+  if (selectedIds.size === 0) {
+    return;
+  }
 
   await writeManagedData({
     ...data,
     submissions: data.submissions.map((submission) =>
-      submission.id === id
+      selectedIds.has(submission.id)
         ? {
             ...submission,
             status,
@@ -627,11 +844,20 @@ export async function updateSubmissionStatus(id: string, status: ContactSubmissi
 }
 
 export async function deleteSubmission(id: string) {
+  await deleteSubmissions([id]);
+}
+
+export async function deleteSubmissions(ids: string[]) {
   const data = await readManagedData();
+  const selectedIds = new Set(ids.filter(Boolean));
+
+  if (selectedIds.size === 0) {
+    return;
+  }
 
   await writeManagedData({
     ...data,
-    submissions: data.submissions.filter((submission) => submission.id !== id),
+    submissions: data.submissions.filter((submission) => !selectedIds.has(submission.id)),
   });
 }
 
@@ -892,6 +1118,16 @@ function normalizeRolePhrases(value: unknown) {
 function normalizeOrder(value: unknown, fallback: number) {
   const order = Number(value);
   return Number.isFinite(order) && order > 0 ? order : fallback;
+}
+
+function ensureElevatedAdminRemains(users: AdminUser[]) {
+  const hasActiveElevatedUser = users.some(
+    (user) => user.status === "active" && (user.role === "super_admin" || user.role === "admin"),
+  );
+
+  if (!hasActiveElevatedUser) {
+    throw new Error("At least one active super admin or admin must remain.");
+  }
 }
 
 function normalizeSubmissionStatus(value: unknown): ContactSubmissionStatus {

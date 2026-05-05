@@ -70,18 +70,30 @@ export default async function DataSpecificationPage() {
           {documents.length === 0 ? (
             <article className="panel">
               <h3>No documents attached yet</h3>
-              <p>Attach document links in Studio and they will appear here.</p>
+              <p>Technical documents can be requested with a product enquiry.</p>
             </article>
           ) : null}
           {documents.map((document) => (
             <a className="document-card" href={document.url} key={`${document.product}-${document.label}`}>
               <span>{document.product}</span>
               <strong>{document.label}</strong>
-              <small>{document.url}</small>
+              <small>{formatDocumentDestination(document.url)}</small>
             </a>
           ))}
         </div>
       </section>
     </main>
   );
+}
+
+function formatDocumentDestination(url: string) {
+  if (url.startsWith("/contact")) {
+    return "Available on request";
+  }
+
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return "Product resource";
+  }
 }

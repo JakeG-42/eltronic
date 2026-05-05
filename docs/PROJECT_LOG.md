@@ -5,7 +5,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 ## Current Status
 
 - Repository: standalone GitHub repo `JakeG-42/eltronic`.
-- Active branch: `main`.
+- Active branch: `dev` for launch-hardening work; `main` remains the stable baseline until merged.
 - App scaffold: Next.js app using the App Router under `src/app`.
 - Deployment: Vercel project `project-5v5cr` is connected and deployed.
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
@@ -13,6 +13,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, templates and contact submissions.
 - Contact handling: `/contact` now stores enquiries through the managed data layer.
 - SEO: sitemap, robots rules, canonical metadata, structured data and project/case-study scaffolding are in place.
+- Payload CMS has been added as Eltronic Console at `/console`, with API routes under `/console-api` and an isolated `payload` schema in the existing Neon database.
 
 ## What Has Happened So Far
 
@@ -74,6 +75,12 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Deployed Neon-backed storage support to production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j`; `npm run storage:check` passes and the safe contact bot tester saved two blocked records in Neon.
 - Added SEO foundations: shared metadata helpers, dynamic `/sitemap.xml`, `/robots.txt`, favicon/manifest, Open Graph image, public page canonical metadata, noindex Studio metadata and structured data for products/projects.
 - Added `/projects` and `/projects/[slug]` case-study scaffolding plus `docs/PROJECT_CASE_STUDY_TEMPLATE.md` so future project write-ups with photos can be added cleanly.
+- Created local offline backups in `/Users/jake/Documents/Eltronic_backups` and branched `dev` from `main` for launch-hardening work.
+- Added managed Studio users with `super_admin`, `admin` and `moderator` roles, hashed passwords, session-version invalidation, `/studio/users` and `/studio/account`.
+- Cleaned launch-facing content issues: removed public Studio footer link, filtered placeholder gallery images from public output, tightened I&Q CAN-Bus module copy, softened empty Projects/Data/Contact copy and added `docs/LAUNCH_CHECKLIST.md`.
+- Added repeatable generated product gallery assets: 33 technical SVG illustrations across 11 products, a `src/content/product-gallery-assets.json` manifest, `npm run images:products`, and `npm run images:products:sync` to sync the gallery paths into Neon managed product records.
+- Added Studio submission bulk actions, auto-refresh, an authenticated submission summary API and coloured sidebar `+N` enquiry badges; also grouped and reduced the Studio sidebar navigation.
+- Added Payload CMS alongside the existing site and Studio: `/console` for the CMS admin, `/console-api` for REST, disabled GraphQL, `console-users` and `pages` collections, a hidden `/v2` sandbox page and a separate `payload` Postgres schema in the existing Neon database. Configured `PAYLOAD_SECRET` in Vercel for Production and the `dev` Preview branch.
 
 ## Future Considerations
 
@@ -82,6 +89,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Production persistence needs a passing `npm run storage:check` and a fresh Vercel deployment before live admin writes and contact submissions should be trusted.
 - Future admin improvements could include image uploads, per-page builder screens, richer product template fields, and richer email delivery logs.
 - Future SEO/content work should add real project case studies, original project photos, final-domain `NEXT_PUBLIC_SITE_URL`, Search Console submission and domain-specific Open Graph preview checks.
+- Replace generated product technical illustrations with real additional product/application photography when available, or keep them as controlled supporting diagrams where photography is missing.
 - Keep AI-facing docs current when auth, route, storage or product-template behavior changes.
 
 ## Update Notes

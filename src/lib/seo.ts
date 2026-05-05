@@ -46,6 +46,7 @@ export function createPageMetadata({
   title: string;
 }): Metadata {
   return {
+    metadataBase: new URL(siteConfig.url),
     title,
     description,
     alternates: {

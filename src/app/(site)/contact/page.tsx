@@ -29,7 +29,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     params?.error === "required"
       ? "Please add your name, email and message before sending."
       : params?.error === "storage"
-        ? "The message could not be stored because persistent storage is not configured yet. Please email sales@eltronic.co.uk for now."
+        ? "The message could not be sent right now. Please email sales@eltronic.co.uk if this continues."
         : params?.error === "captcha"
           ? "Please solve the quick anti-spam question before sending."
           : params?.error === "spam"

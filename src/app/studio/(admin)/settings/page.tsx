@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getContactEmailDeliveryStatus } from "@/lib/email-notifications";
+import { getCurrentAdminUser, userCanManageUsers } from "@/lib/admin-auth";
 import { getContactNotificationSettings } from "@/lib/managed-data";
+import { redirect } from "next/navigation";
 
 type StudioSettingsPageProps = {
   searchParams?: Promise<{
@@ -20,11 +22,16 @@ export const metadata = {
 };
 
 export default async function StudioSettingsPage({ searchParams }: StudioSettingsPageProps) {
-  const [notificationSettings, deliveryStatus, params] = await Promise.all([
+  const [currentUser, notificationSettings, deliveryStatus, params] = await Promise.all([
+    getCurrentAdminUser(),
     getContactNotificationSettings(),
     Promise.resolve(getContactEmailDeliveryStatus()),
     searchParams,
   ]);
+
+  if (!currentUser || !userCanManageUsers(currentUser)) {
+    redirect("/studio");
+  }
   const recipients = notificationSettings.recipients.join(", ");
 
   return (
@@ -143,15 +150,14 @@ export default async function StudioSettingsPage({ searchParams }: StudioSetting
               </div>
               <div>
                 <CardTitle>Authentication</CardTitle>
-                <CardDescription>Current temporary login is intentionally simple while the admin is private.</CardDescription>
+                <CardDescription>User accounts are now managed inside Studio.</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             <p className="mb-0 text-sm text-muted-foreground">
-              Defaults are <code>admin</code> / <code>password</code>. Override later with
-              <code> ELTRONIC_ADMIN_USERNAME</code>, <code> ELTRONIC_ADMIN_PASSWORD</code> and
-              <code> ELTRONIC_ADMIN_SECRET</code>.
+              Use <code>/studio/users</code> to add users, reset passwords and assign roles. Keep
+              <code> ELTRONIC_ADMIN_SECRET</code> strong because it signs Studio session cookies.
             </p>
           </CardContent>
         </Card>

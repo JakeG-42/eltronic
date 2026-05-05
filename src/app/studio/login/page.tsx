@@ -38,7 +38,7 @@ export default async function StudioLoginPage({ searchParams }: LoginPageProps) 
             </div>
             <CardTitle>Eltronic Studio</CardTitle>
             <CardDescription>
-              Sign in to manage products, product templates and contact enquiries.
+              Sign in to manage products, templates, enquiries, users and launch settings.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -61,7 +61,7 @@ export default async function StudioLoginPage({ searchParams }: LoginPageProps) 
                   defaultValue="admin"
                   id="username"
                   name="username"
-                  placeholder="admin"
+                  placeholder="admin or email@example.com"
                   required
                 />
               </div>

@@ -1,0 +1,124 @@
+import { postgresAdapter } from "@payloadcms/db-postgres";
+import { existsSync, readFileSync } from "fs";
+import path from "path";
+import { buildConfig } from "payload";
+import { fileURLToPath } from "url";
+
+import { ConsoleUsers } from "./src/payload/collections/ConsoleUsers.ts";
+import { Pages } from "./src/payload/collections/Pages.ts";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+function getLocalEnv() {
+  const envPath = path.resolve(dirname, ".env.local");
+
+  if (!existsSync(envPath)) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    readFileSync(envPath, "utf8")
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter((line) => line && !line.startsWith("#"))
+      .map((line) => {
+        const separatorIndex = line.indexOf("=");
+
+        if (separatorIndex === -1) {
+          return null;
+        }
+
+        const key = line.slice(0, separatorIndex);
+        let value = line.slice(separatorIndex + 1).trim();
+
+        if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+
+        return [key, value] as const;
+      })
+      .filter((entry): entry is readonly [string, string] => Boolean(entry)),
+  );
+}
+
+const localEnv = getLocalEnv();
+
+function getEnvValue(key: string) {
+  return process.env[key] ?? localEnv[key];
+}
+
+function getPayloadDatabaseUrl() {
+  const directConnection =
+    getEnvValue("PAYLOAD_DATABASE_URL") ??
+    getEnvValue("DATABASE_URL") ??
+    getEnvValue("POSTGRES_URL") ??
+    getEnvValue("DATABASE_URL_UNPOOLED") ??
+    getEnvValue("POSTGRES_URL_NON_POOLING");
+
+  if (directConnection) {
+    return directConnection;
+  }
+
+  const preferredSuffixes = ["DATABASE_URL", "POSTGRES_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING"];
+  const envKeys = new Set([...Object.keys(localEnv), ...Object.keys(process.env)]);
+
+  for (const suffix of preferredSuffixes) {
+    const key = Array.from(envKeys).find((envKey) => envKey.endsWith(`_${suffix}`));
+    const value = key ? getEnvValue(key) : undefined;
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return "";
+}
+
+function getPayloadSecret() {
+  const configuredSecret =
+    getEnvValue("PAYLOAD_SECRET") ??
+    getEnvValue("ELTRONIC_ADMIN_SECRET") ??
+    getEnvValue("AUTH_SECRET") ??
+    getEnvValue("NEXTAUTH_SECRET");
+
+  if (configuredSecret) {
+    return configuredSecret;
+  }
+
+  return process.env.NODE_ENV === "production" ? "" : "local-development-payload-secret";
+}
+
+export default buildConfig({
+  admin: {
+    importMap: {
+      baseDir: path.resolve(dirname, "src/app/(payload)"),
+      importMapFile: path.resolve(dirname, "src/app/(payload)/console/importMap.js"),
+    },
+    meta: {
+      titleSuffix: "- Eltronic Console",
+    },
+    user: ConsoleUsers.slug,
+  },
+  collections: [ConsoleUsers, Pages],
+  db: postgresAdapter({
+    pool: {
+      connectionString: getPayloadDatabaseUrl(),
+    },
+    schemaName: process.env.PAYLOAD_DATABASE_SCHEMA ?? "payload",
+  }),
+  graphQL: {
+    disable: true,
+  },
+  routes: {
+    admin: "/console",
+    api: "/console-api",
+    graphQL: "/console-api/graphql",
+    graphQLPlayground: "/console-api/graphql-playground",
+  },
+  secret: getPayloadSecret(),
+  serverURL: process.env.NEXT_PUBLIC_SITE_URL,
+  typescript: {
+    outputFile: path.resolve(dirname, "src/payload-types.ts"),
+  },
+});

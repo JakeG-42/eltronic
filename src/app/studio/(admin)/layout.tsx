@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { StudioShell } from "@/components/studio/studio-shell";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getCurrentAdminUser } from "@/lib/admin-auth";
+import { toPublicAdminUser } from "@/lib/admin-user-model";
 import { getStorageMode, hasPersistentStorage } from "@/lib/managed-data";
 
 export const metadata: Metadata = {
@@ -17,12 +18,18 @@ export default async function StudioAdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  if (!(await isAdminAuthenticated())) {
+  const currentUser = await getCurrentAdminUser();
+
+  if (!currentUser) {
     redirect("/studio/login");
   }
 
   return (
-    <StudioShell storageConfigured={hasPersistentStorage()} storageMode={getStorageMode()}>
+    <StudioShell
+      currentUser={toPublicAdminUser(currentUser)}
+      storageConfigured={hasPersistentStorage()}
+      storageMode={getStorageMode()}
+    >
       {children}
     </StudioShell>
   );

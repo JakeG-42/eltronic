@@ -48,10 +48,10 @@ export default function ProjectsPage() {
         <section className="section">
           <article className="panel">
             <span className="section-number">case.studies</span>
-            <h2>Project pages are ready for content.</h2>
+            <h2>Project write-ups are being prepared.</h2>
             <p>
-              Add project entries in <code>src/content/projects.ts</code> when the write-ups, photos and outcomes are
-              ready. Published projects will automatically appear here and in the sitemap.
+              Detailed examples will be added once the photos, outcomes and customer context are ready to publish.
+              For now, the best route is to talk through the application directly.
             </p>
             <div className="actions">
               <Link className="button" href="/contact">

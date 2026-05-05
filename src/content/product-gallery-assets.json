@@ -1,0 +1,156 @@
+{
+  "autopi-can-fd-pro": [
+    {
+      "src": "/product-images/generated/autopi-can-fd-pro-overview.svg",
+      "alt": "AutoPi CAN-FD Pro technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/autopi-can-fd-pro-interfaces.svg",
+      "alt": "AutoPi CAN-FD Pro interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/autopi-can-fd-pro-application.svg",
+      "alt": "AutoPi CAN-FD Pro application context illustration"
+    }
+  ],
+  "eltronic-iq-can-bus-module": [
+    {
+      "src": "/product-images/generated/eltronic-iq-can-bus-module-overview.svg",
+      "alt": "I&Q CAN-Bus I/O Module technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/eltronic-iq-can-bus-module-interfaces.svg",
+      "alt": "I&Q CAN-Bus I/O Module interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/eltronic-iq-can-bus-module-application.svg",
+      "alt": "I&Q CAN-Bus I/O Module application context illustration"
+    }
+  ],
+  "topcon-opus-b6e": [
+    {
+      "src": "/product-images/generated/topcon-opus-b6e-overview.svg",
+      "alt": "TOPCON OPUS B6e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b6e-interfaces.svg",
+      "alt": "TOPCON OPUS B6e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b6e-application.svg",
+      "alt": "TOPCON OPUS B6e application context illustration"
+    }
+  ],
+  "topcon-opus-b4e": [
+    {
+      "src": "/product-images/generated/topcon-opus-b4e-overview.svg",
+      "alt": "TOPCON OPUS B4e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b4e-interfaces.svg",
+      "alt": "TOPCON OPUS B4e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b4e-application.svg",
+      "alt": "TOPCON OPUS B4e application context illustration"
+    }
+  ],
+  "topcon-opus-b3e": [
+    {
+      "src": "/product-images/generated/topcon-opus-b3e-overview.svg",
+      "alt": "TOPCON OPUS B3e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b3e-interfaces.svg",
+      "alt": "TOPCON OPUS B3e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-b3e-application.svg",
+      "alt": "TOPCON OPUS B3e application context illustration"
+    }
+  ],
+  "topcon-opus-a8s": [
+    {
+      "src": "/product-images/generated/topcon-opus-a8s-overview.svg",
+      "alt": "TOPCON OPUS A8s technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a8s-interfaces.svg",
+      "alt": "TOPCON OPUS A8s interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a8s-application.svg",
+      "alt": "TOPCON OPUS A8s application context illustration"
+    }
+  ],
+  "topcon-opus-a8e": [
+    {
+      "src": "/product-images/generated/topcon-opus-a8e-overview.svg",
+      "alt": "TOPCON OPUS A8e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a8e-interfaces.svg",
+      "alt": "TOPCON OPUS A8e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a8e-application.svg",
+      "alt": "TOPCON OPUS A8e application context illustration"
+    }
+  ],
+  "topcon-opus-a6s": [
+    {
+      "src": "/product-images/generated/topcon-opus-a6s-overview.svg",
+      "alt": "TOPCON OPUS A6s technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a6s-interfaces.svg",
+      "alt": "TOPCON OPUS A6s interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a6s-application.svg",
+      "alt": "TOPCON OPUS A6s application context illustration"
+    }
+  ],
+  "topcon-opus-a6e": [
+    {
+      "src": "/product-images/generated/topcon-opus-a6e-overview.svg",
+      "alt": "TOPCON OPUS A6e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a6e-interfaces.svg",
+      "alt": "TOPCON OPUS A6e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a6e-application.svg",
+      "alt": "TOPCON OPUS A6e application context illustration"
+    }
+  ],
+  "topcon-opus-a3e": [
+    {
+      "src": "/product-images/generated/topcon-opus-a3e-overview.svg",
+      "alt": "TOPCON OPUS A3e technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a3e-interfaces.svg",
+      "alt": "TOPCON OPUS A3e interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a3e-application.svg",
+      "alt": "TOPCON OPUS A3e application context illustration"
+    }
+  ],
+  "topcon-opus-a3s": [
+    {
+      "src": "/product-images/generated/topcon-opus-a3s-overview.svg",
+      "alt": "TOPCON OPUS A3s technical overview illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a3s-interfaces.svg",
+      "alt": "TOPCON OPUS A3s interface and connection illustration"
+    },
+    {
+      "src": "/product-images/generated/topcon-opus-a3s-application.svg",
+      "alt": "TOPCON OPUS A3s application context illustration"
+    }
+  ]
+}

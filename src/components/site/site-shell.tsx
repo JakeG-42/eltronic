@@ -53,31 +53,22 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <Link className="footer-logo gradient-text" href="/">
                 Eltronic
               </Link>
-              <p>
-                HMI displays, CAN-Bus data, control integration and software systems for specialist equipment
-                and connected operations.
-              </p>
-              <div className="footer-status">
-                <span />
-                Quote-led engineering support
-              </div>
             </div>
 
-            <details className="footer-group" open>
-              <summary>Explore</summary>
+            <nav className="footer-group" aria-label="Explore">
+              <h2 className="footer-group-title">Explore</h2>
               <Link href="/products">Products</Link>
               <Link href="/solutions">Solutions</Link>
               <Link href="/software-it">Software & Systems</Link>
-              <Link href="/projects">Projects</Link>
-            </details>
+            </nav>
 
-            <details className="footer-group" open>
-              <summary>Resources</summary>
+            <nav className="footer-group" aria-label="Resources">
+              <h2 className="footer-group-title">Resources</h2>
               <Link href="/sectors">Sectors</Link>
               <Link href="/data-specification">Data & specification</Link>
               <Link href="/about">About Eltronic</Link>
               <Link href="/contact">Start an enquiry</Link>
-            </details>
+            </nav>
 
             <div className="footer-contact-card">
               <span className="section-number">contact.signal</span>
@@ -90,7 +81,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
           <div className="footer-bottom">
             <p>© 2026 Eltronic. Systems integration and software engineering.</p>
-            <Link href="/studio">Studio</Link>
           </div>
         </div>
       </footer>

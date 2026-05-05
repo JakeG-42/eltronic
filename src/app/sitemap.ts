@@ -15,7 +15,6 @@ const staticRoutes: Array<{
   { path: "/products", priority: 0.9, changeFrequency: "weekly" },
   { path: "/solutions", priority: 0.85, changeFrequency: "monthly" },
   { path: "/software-it", priority: 0.85, changeFrequency: "monthly" },
-  { path: "/projects", priority: 0.8, changeFrequency: "weekly" },
   { path: "/sectors", priority: 0.75, changeFrequency: "monthly" },
   { path: "/data-specification", priority: 0.7, changeFrequency: "monthly" },
   { path: "/about", priority: 0.65, changeFrequency: "monthly" },
@@ -25,6 +24,17 @@ const staticRoutes: Array<{
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const [products, projects] = await Promise.all([getProducts(), getPublishedProjectCaseStudies()]);
+  const projectIndexRoute =
+    projects.length > 0
+      ? [
+          {
+            url: absoluteUrl("/projects"),
+            lastModified: now,
+            changeFrequency: "weekly" as const,
+            priority: 0.8,
+          },
+        ]
+      : [];
 
   const productRoutes = products.map((product) => ({
     url: absoluteUrl(`/products/${product.slug}`),
@@ -49,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     })),
+    ...projectIndexRoute,
     ...productRoutes,
     ...projectRoutes,
   ];

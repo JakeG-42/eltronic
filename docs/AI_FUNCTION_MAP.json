@@ -6,6 +6,8 @@
     "framework": "Next.js App Router",
     "productionUrl": "https://project-5v5cr.vercel.app",
     "adminUrl": "https://project-5v5cr.vercel.app/studio",
+    "payloadConsoleUrl": "https://project-5v5cr.vercel.app/console",
+    "payloadSandboxUrl": "https://project-5v5cr.vercel.app/v2",
     "vercelProject": "project-5v5cr"
   },
   "agentInstructions": {
@@ -31,41 +33,46 @@
     ]
   },
   "auth": {
-    "id": "studio-single-admin-cookie-auth",
-    "purpose": "Protect the Eltronic Studio admin area and server actions.",
-    "temporaryCredentials": {
-      "username": "admin",
-      "password": "password",
-      "securityNote": "Temporary testing defaults only. Override with environment variables before wider sharing."
+    "id": "studio-managed-user-role-auth",
+    "purpose": "Protect the Eltronic Studio admin area and server actions with managed users and roles.",
+    "seededAccounts": {
+      "bootstrapAdmin": "Temporary super-admin account with username admin; delete manually after permanent account is tested.",
+      "permanentSuperAdmin": "Jake's email account is seeded as a super-admin. Plaintext seeded passwords are never documented or returned."
     },
     "env": {
-      "username": "ELTRONIC_ADMIN_USERNAME",
-      "password": "ELTRONIC_ADMIN_PASSWORD",
       "secret": "ELTRONIC_ADMIN_SECRET",
+      "alternateSecrets": ["AUTH_SECRET", "NEXTAUTH_SECRET"],
       "fallbackSecret": "temporary-eltronic-admin-secret"
     },
     "files": {
       "authUtility": "src/lib/admin-auth.ts",
+      "userModel": "src/lib/admin-user-model.ts",
       "loginPage": "src/app/studio/login/page.tsx",
       "loginAction": "src/app/studio/login/actions.ts",
-      "adminGuards": "src/app/studio/(admin)/layout.tsx"
+      "adminGuards": "src/app/studio/(admin)/layout.tsx",
+      "usersPage": "src/app/studio/(admin)/users/page.tsx",
+      "accountPage": "src/app/studio/(admin)/account/page.tsx"
     },
     "functions": {
-      "verify": "verifyAdminCredentials(username, password)",
-      "createSession": "setAdminSession()",
+      "verify": "verifyAdminCredentials(identifier, password)",
+      "createSession": "setAdminSession(user)",
       "destroySession": "clearAdminSession()",
-      "guard": "isAdminAuthenticated()"
+      "currentUser": "getCurrentAdminUser()",
+      "guard": "isAdminAuthenticated()",
+      "roleGuard": "requireAdminRole(roles)"
     },
     "session": {
       "cookieName": "eltronic_admin_session",
-      "valueShape": "<issuedAt>.<signature>",
-      "signature": "HMAC-SHA256(issuedAt, adminSecret)",
+      "valueShape": "<userId>.<sessionVersion>.<issuedAt>.<signature>",
+      "signature": "HMAC-SHA256(userId.sessionVersion.issuedAt, adminSecret)",
       "maxAgeSeconds": 604800,
-      "flags": ["HttpOnly", "SameSite=Lax", "Secure in production"]
+      "flags": ["HttpOnly", "SameSite=Lax", "Secure in production"],
+      "invalidation": "Password changes and resets bump sessionVersion for that user."
     },
-    "futureExtension": {
-      "testUsers": "Extend src/lib/admin-auth.ts with an AdminUser list/source, keep verifyAdminCredentials as the public API, and sign a user-aware session payload.",
-      "roles": "Add role to session payload and expose getCurrentAdminUser() while keeping isAdminAuthenticated() for simple guards."
+    "roles": {
+      "super_admin": "Full control including user management.",
+      "admin": "Full control including user management for now.",
+      "moderator": "Enquiry moderation and own account only."
     }
   },
   "storage": {
@@ -113,6 +120,13 @@
       "result": "Neon database eltronic_db_1 connected with prefixed environment variables; storage smoke test passed and production deployment dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j is live"
     },
     "exports": [
+      "getAdminUsers",
+      "getPublicAdminUsers",
+      "getAdminUserById",
+      "findAdminUserByIdentifier",
+      "saveAdminUser",
+      "updateOwnAdminAccount",
+      "deleteAdminUser",
       "getProducts",
       "getProductBySlug",
       "getProductFamilies",
@@ -125,6 +139,43 @@
       "updateSubmissionStatus",
       "deleteSubmission",
       "productFromFormData"
+    ]
+  },
+  "payloadConsole": {
+    "id": "payload-console",
+    "purpose": "Add Payload CMS beside the current public site and custom Studio for a future Payload-backed version of the site.",
+    "routes": {
+      "admin": "/console",
+      "api": "/console-api",
+      "sandbox": "/v2",
+      "graphQL": "disabled"
+    },
+    "files": {
+      "config": "payload.config.ts",
+      "routeGroup": "src/app/(payload)",
+      "collections": "src/payload/collections",
+      "sandboxPage": "src/app/(site)/v2/page.tsx",
+      "generatedTypes": "src/payload-types.ts"
+    },
+    "database": {
+      "adapter": "@payloadcms/db-postgres",
+      "sameNeonDatabase": true,
+      "schema": "payload",
+      "schemaEnvOverride": "PAYLOAD_DATABASE_SCHEMA",
+      "preferredUrlEnv": "PAYLOAD_DATABASE_URL",
+      "fallbackUrlEnv": "DATABASE_URL, POSTGRES_URL, DATABASE_URL_UNPOOLED, POSTGRES_URL_NON_POOLING, or integration-prefixed variants"
+    },
+    "auth": {
+      "collection": "console-users",
+      "secretEnv": "PAYLOAD_SECRET",
+      "fallbackSecrets": ["ELTRONIC_ADMIN_SECRET", "AUTH_SECRET", "NEXTAUTH_SECRET"],
+      "localDevelopmentFallback": "local-development-payload-secret"
+    },
+    "collections": ["console-users", "pages"],
+    "notes": [
+      "The current public site and /studio still read/write through the existing managed-data layer.",
+      "The /v2 sandbox reads a Payload page with slug home when present and otherwise renders a placeholder.",
+      "PAYLOAD_SECRET is configured in Vercel for Production and the dev Preview branch; keep it present before treating Console auth as production-ready."
     ]
   },
   "routes": [
@@ -239,7 +290,27 @@
       "path": "/studio/submissions",
       "file": "src/app/studio/(admin)/submissions/page.tsx",
       "kind": "admin-submission-inbox",
-      "guard": "isAdminAuthenticated()"
+      "guard": "isAdminAuthenticated()",
+      "features": ["type filters", "collapsed repeated blocked attempts", "bulk status/delete actions", "auto refresh"]
+    },
+    {
+      "path": "/api/studio/submissions/summary",
+      "file": "src/app/api/studio/submissions/summary/route.ts",
+      "kind": "admin-submission-summary-api",
+      "guard": "getCurrentAdminUser() plus submission-management role",
+      "consumer": "src/components/studio/studio-submission-notifier.tsx"
+    },
+    {
+      "path": "/studio/users",
+      "file": "src/app/studio/(admin)/users/page.tsx",
+      "kind": "admin-user-management",
+      "guard": "getCurrentAdminUser() plus super_admin/admin role"
+    },
+    {
+      "path": "/studio/account",
+      "file": "src/app/studio/(admin)/account/page.tsx",
+      "kind": "admin-own-account",
+      "guard": "getCurrentAdminUser()"
     },
     {
       "path": "/studio/settings",
@@ -278,6 +349,30 @@
       "file": "src/app/studio/actions.ts",
       "authRequired": true,
       "effect": "Deletes one contact submission."
+    },
+    {
+      "id": "bulkSubmissionAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Applies a status update or delete operation to selected contact submissions, including collapsed duplicate groups."
+    },
+    {
+      "id": "saveAdminUserAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Creates or updates one Studio user, including role, status and optional password reset."
+    },
+    {
+      "id": "deleteAdminUserAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Deletes one Studio user while preventing removal of the final active admin/super-admin."
+    },
+    {
+      "id": "saveOwnAccountAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Lets the current Studio user update profile fields or change password after current-password verification."
     },
     {
       "id": "logoutAction",
@@ -340,8 +435,11 @@
     ],
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
-      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Placeholder gallery assets must be explicit seed/Studio image entries, not hidden fallback appends.",
-      "seedPlaceholders": "public/product-images/placeholders/images-coming-soon-*.svg"
+      "behavior": "Returns managed product.images in order, or product.image as the single fallback. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries, not hidden runtime fallbacks.",
+      "generatedManifest": "src/content/product-gallery-assets.json",
+      "generatedAssets": "public/product-images/generated/*.svg",
+      "generator": "npm run images:products",
+      "syncCommand": "npm run images:products:sync"
     },
     "primaryImageAssets": "public/product-images"
   },
@@ -385,7 +483,7 @@
     "typeFile": "src/lib/managed-data.ts",
     "typeName": "ContactSubmission",
     "antiSpam": "src/lib/contact-captcha.ts signs a short-lived math challenge; src/app/contact/actions.ts stores captcha failures and populated website honeypot values as blocked records when storage is available; src/lib/managed-data.ts suppresses rapid duplicate blocked attempts.",
-    "studioPresentation": "src/app/studio/(admin)/submissions/page.tsx collapses repeated blocked attempts by fingerprint; src/components/studio/submission-card.tsx and src/app/globals.css render green enquiry, amber captcha and red honeypot markers.",
+    "studioPresentation": "src/app/studio/(admin)/submissions/page.tsx collapses repeated blocked attempts by fingerprint; src/components/studio/submission-card.tsx and src/app/globals.css render green enquiry, amber captcha and red honeypot markers. Bulk selection uses src/components/studio/submission-bulk-select.tsx and bulkSubmissionAction(). Auto-refresh uses src/components/studio/submissions-auto-refresh.tsx and pauses while checkboxes are selected.",
     "tester": "npm run test:contact-bot runs scripts/test-contact-antispam.mjs against production by default and only exercises rejected bot paths unless -- --valid is passed.",
     "types": ["enquiry", "captcha_failed", "honeypot_spam"],
     "statuses": ["new", "reviewed", "replied", "archived", "blocked"],
@@ -448,6 +546,7 @@
       "variants": ["display", "network", "sectors", "data"]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
+    "studioSidebar": "Grouped under Overview, Content, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "websiteBuilder": {
@@ -488,7 +587,7 @@
       "file": "src/components/studio/product-image-manager.tsx",
       "parser": "src/lib/managed-data.ts#productFromFormData",
       "fields": ["imageSrc", "imageAlt"],
-      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI or seed data only."
+      "behavior": "Visual image preview and ordering UI. Repeated imageSrc/imageAlt fields are saved in order; first image becomes product.image. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

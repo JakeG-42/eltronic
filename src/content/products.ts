@@ -1,3 +1,5 @@
+import generatedProductGalleryAssets from "./product-gallery-assets.json";
+
 export type ProductTemplate = "hmi" | "data-logger" | "module";
 
 export type ProductImage = {
@@ -82,25 +84,10 @@ export type Product = {
 };
 
 const topconDocuments: ProductDocument[] = [
-  { label: "Request full data sheet", url: "/contact" },
-  { label: "Request data sheet", url: "/contact" },
+  { label: "Request product data sheet", url: "/contact" },
 ];
 
-function comingSoonImages(productName: string): ProductImage[] {
-  return [1, 2, 3].map((index) => ({
-    src: `/product-images/placeholders/images-coming-soon-${index}.svg`,
-    alt: `${productName} additional image coming soon ${index}`,
-  }));
-}
-
-function withComingSoonImages(product: Product): Product {
-  const baseImages = product.images && product.images.length > 0 ? product.images : [product.image];
-
-  return {
-    ...product,
-    images: [...baseImages, ...comingSoonImages(product.name)],
-  };
-}
+const generatedProductGallery = generatedProductGalleryAssets as Record<string, ProductImage[]>;
 
 const seedProducts: Product[] = [
   {
@@ -156,25 +143,20 @@ const seedProducts: Product[] = [
       alt: "Eltronic I&Q CAN-Bus I/O module",
     },
     summary:
-      "CAN-Bus I/O expansion module for equipment control projects, with configuration details confirmed during enquiry.",
+      "Application-specific CAN-Bus I/O expansion for control projects that need extra inputs, outputs or interface points.",
     description:
-      "The I&Q CAN-Bus I/O Module supports control-system expansion where additional equipment inputs, outputs and CAN connectivity need to be discussed around the application.",
+      "The I&Q CAN-Bus I/O Module supports control-system expansion where additional equipment inputs, outputs and CAN connectivity need to be specified around the application, enclosure, operator interface and support requirements.",
     highlights: [
-      "Eltronic-owned product page for CAN-Bus I/O expansion",
-      "Technical data sections exist for housing, user interface and real time clock",
-      "Version options can be confirmed during enquiry",
+      "CAN-Bus I/O expansion for application-specific control projects",
+      "Useful where additional signals, operator controls or interface points need to be brought into a wider system",
+      "Configuration, housing and connection details are confirmed during technical enquiry",
     ],
     specifications: [
       { label: "Product family", value: "Eltronic CAN-Bus I/O expansion" },
-      { label: "Housing", value: "Application dependent" },
-      { label: "User interface", value: "Project specification" },
-      { label: "Real time clock", value: "Available on request" },
-    ],
-    variants: [
-      { name: "Version A", details: "To be updated", articleNumber: "TBU" },
-      { name: "Version B", details: "To be updated", articleNumber: "TBU" },
-      { name: "Version C", details: "To be updated", articleNumber: "TBU" },
-      { name: "Version D", details: "To be updated", articleNumber: "TBU" },
+      { label: "Interface", value: "CAN-Bus control-system integration" },
+      { label: "Housing", value: "Specified around the operating environment" },
+      { label: "User interface", value: "Defined during project scoping" },
+      { label: "Configuration", value: "Confirmed against I/O, wiring and support requirements" },
     ],
     enquiryPrompt: "Ask about the I&Q CAN-Bus module",
   },
@@ -519,7 +501,43 @@ const seedProducts: Product[] = [
   },
 ];
 
-export const products: Product[] = seedProducts.map(withComingSoonImages);
+export function getGeneratedProductGalleryImages(slug: string) {
+  return generatedProductGallery[slug] ?? [];
+}
+
+function withGeneratedGallery(product: Product): Product {
+  const images = mergeProductImages(
+    [product.image, ...(product.images ?? []), ...getGeneratedProductGalleryImages(product.slug)],
+    product.name,
+  );
+
+  return {
+    ...product,
+    image: images[0] ?? product.image,
+    images,
+  };
+}
+
+function mergeProductImages(images: ProductImage[], fallbackAlt: string) {
+  const seen = new Set<string>();
+
+  return images
+    .filter((image) => image.src)
+    .map((image) => ({
+      src: image.src,
+      alt: image.alt || fallbackAlt,
+    }))
+    .filter((image) => {
+      if (seen.has(image.src)) {
+        return false;
+      }
+
+      seen.add(image.src);
+      return true;
+    });
+}
+
+export const products: Product[] = seedProducts.map(withGeneratedGallery);
 
 export const productFamilies = Array.from(
   new Set(products.map((product) => product.family)),

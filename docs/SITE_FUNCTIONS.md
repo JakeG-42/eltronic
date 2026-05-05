@@ -5,7 +5,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 ## App Structure
 
 - Framework: Next.js with App Router.
-- Global layout: `src/app/layout.tsx`.
+- Route-specific root layouts: `src/app/(site)/layout.tsx`, `src/app/studio/layout.tsx`, and `src/app/(payload)/layout.tsx`.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
 - Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
@@ -19,10 +19,13 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Classic/Woo-style Studio: `/studio/classic/products` uses `src/components/studio/classic/woocommerce-product-editor.tsx` and WordPress/WooCommerce-inspired list/edit screens.
 - Global styles: `src/app/globals.css`.
 - Product seed data: `src/content/products.ts`.
+- Generated product gallery manifest: `src/content/product-gallery-assets.json`.
+- Product gallery generator: `scripts/generate-product-gallery-assets.mjs`.
 - Site page/module content: `src/content/site.ts`.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
+- Payload Console: `payload.config.ts`, `src/payload/collections`, and `src/app/(payload)`.
 - Public navigation: brand link to `/`, desktop icon-labelled links for `/products`, `/solutions`, `/software-it`, `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
@@ -46,6 +49,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
 - `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
+- `/v2`: hidden Payload-backed sandbox page for a future rebuilt version of the site.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -58,6 +62,20 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/studio/classic/products/[slug]/edit`: WordPress/WooCommerce-style edit product editor.
 - `/studio/submissions`: contact submission inbox.
 - `/studio/settings`: Studio settings and notes.
+- `/studio/users`: protected user management for Studio roles and password resets.
+- `/studio/account`: protected self-service profile/password page for the current Studio user.
+- `/console`: Payload CMS admin, branded as Eltronic Console.
+- `/console-api`: Payload REST API route. Payload GraphQL is disabled.
+
+## Payload Console Behavior
+
+- Payload CMS is installed alongside the current public site and Studio; it does not currently drive the production homepage, product catalogue or Studio.
+- The Console admin route is `/console`; the API route is `/console-api`.
+- Payload stores data in the same Neon database as the current app, but in the separate Postgres schema `payload`.
+- `PAYLOAD_DATABASE_URL` can override the DB connection. Without it, Payload falls back to the same standard/prefixed Neon environment variables used by the managed data layer.
+- The initial Payload collections are `console-users` and `pages`.
+- The `/v2` page reads a Payload page with slug `home` if one exists, otherwise it renders a safe placeholder. It is noindex and excluded from robots.
+- `PAYLOAD_SECRET` is configured in Vercel for Production and the `dev` Preview branch; keep it present before relying on Console auth in production.
 
 ## Product Data Model
 
@@ -76,7 +94,7 @@ Each product currently has:
 - `tags`: optional admin/product-management tags.
 - `modules`: admin module switches for gallery, highlights, specifications, documents, variants and enquiry; stored but not wired into public rendering yet.
 - `image`: `{ src, alt }` used by listings and detail pages.
-- `images`: optional ordered gallery of `{ src, alt }`; public product galleries use these managed images only, with `image` as the fallback primary image. Seed products currently include three managed `IMAGES COMING SOON` placeholders so the gallery and Studio image manager have multiple images to work with.
+- `images`: optional ordered gallery of `{ src, alt }`; public product galleries use managed images only, with `image` as the fallback primary image. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and are explicit seed/managed gallery entries.
 - `summary`: short card/listing copy.
 - `description`: product detail intro copy.
 - `highlights`: list of product or template highlights.
@@ -108,7 +126,7 @@ Each product currently has:
 - `generateMetadata()` sets product-specific page title, description, canonical URL, Open Graph and Twitter metadata.
 - Unknown product slugs call `notFound()`.
 - The detail page displays family, category, name, description, template-specific heading, image, highlights, enquiry prompt, specifications, documents and variants where available.
-- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data or Studio edits.
+- Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data, generated manifest entries or Studio edits.
 - Product detail pages emit product and breadcrumb JSON-LD structured data.
 - Template headings are currently mapped in `src/app/(site)/products/[slug]/page.tsx`.
 
@@ -138,6 +156,9 @@ Each product currently has:
 - A hidden `website` honeypot field provides an extra low-friction bot signal.
 - Captcha failures and honeypot hits are stored as blocked contact records when storage is available, with `type` values of `captcha_failed` or `honeypot_spam`; rapid duplicate blocked attempts are suppressed before storage.
 - `/studio/submissions` has filters for Enquiries, Blocked, Captcha, Honeypot and All records, collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents for enquiry, captcha and honeypot types.
+- `/studio/submissions` supports mass-select and mass actions for visible cards: mark new, reviewed, replied, archived, blocked or delete selected. Collapsed duplicate blocked attempts submit all IDs in that collapsed group.
+- `/studio/submissions` auto-refreshes while visible, but skips refresh while submissions are selected for a bulk action.
+- `/api/studio/submissions/summary` is an authenticated Studio-only JSON endpoint used by the sidebar to poll submission totals.
 - Email notifications are configured in `/studio/settings`; admins can enter one or more comma-separated recipient email addresses, and immediate mode sends both enquiries and blocked attempts. Daily/weekly digest modes are handled by `/api/contact-notifications/digest` through Vercel Cron.
 - Email notification sending is currently paused with Studio mode set to `off`; submissions still store in Studio. Resend delivery uses the official `resend` package and requires `RESEND_API_KEY` plus `CONTACT_NOTIFICATION_FROM`. A direct SMTP experiment exists in code but failed in practice and is disabled; launch email should use a verified Eltronic domain sender and the preferred owner inbox. `npm run email:check -- --send --onboarding` sends the Resend first-email test to the account email.
 - There are no third-party captcha scripts, cookies or external anti-spam services.
@@ -152,11 +173,15 @@ Each product currently has:
 ## Admin Behavior
 
 - `/studio` requires an admin session cookie.
-- Temporary login is `admin` / `password`.
-- Production can override this with `ELTRONIC_ADMIN_USERNAME`, `ELTRONIC_ADMIN_PASSWORD`, and `ELTRONIC_ADMIN_SECRET`.
-- Auth is implemented in `src/lib/admin-auth.ts` with HMAC-signed credential comparisons and a signed 7-day `eltronic_admin_session` cookie.
+- Studio auth uses managed users stored in the managed data layer under `adminUsers`.
+- Seeded super-admins include the temporary bootstrap `admin` user and Jake's permanent super-admin email account. Delete the bootstrap account manually once the permanent account is tested.
+- Passwords are salted `scrypt` hashes, not plaintext.
+- Auth is implemented in `src/lib/admin-auth.ts` and `src/lib/admin-user-model.ts` with signed 7-day `eltronic_admin_session` cookies.
+- Session cookies include user id, session version and issue time; password resets bump the session version and invalidate old sessions for that user.
+- Roles are `super_admin`, `admin`, and `moderator`. Super admin/admin currently have full control; moderator can manage enquiries and their own account.
 - Studio is separate from the public site shell; public header/footer do not render in admin routes.
-- Studio has a sidebar, dashboard, products, enquiries and settings modes.
+- Studio has a grouped sidebar with Overview, Content, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
+- Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes a Template Editor mode for inspecting whitelisted source files.
 - Studio has browser-local dark/light mode stored in `localStorage`.
@@ -168,13 +193,14 @@ Each product currently has:
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
 - Product image editing uses a visual preview/order manager with repeated `imageSrc` and `imageAlt` fields. The first image is saved as the primary image.
 - Template assignment is managed with a select field on each product.
-- Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, and deleted.
+- Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 
 ## Storage Behavior
 
 - Without persistent storage, local development writes to `.data/eltronic-data.json`.
 - `.data/` is gitignored because it may contain contact submissions.
 - On Vercel, use Neon/Postgres `DATABASE_URL`, integration-prefixed `eltronic_db_1_DATABASE_URL`, or Redis `KV_REST_API_URL` and `KV_REST_API_TOKEN` to persist products and submissions.
+- Payload Console uses the same Neon database but keeps its own tables under the `payload` schema.
 - Without persistent production storage, public pages fall back to seeded product content and admin/contact writes are blocked.
 - As of 2026-04-27, Neon database `eltronic_db_1` is connected to Vercel with prefixed environment variables, storage smoke tests pass, and production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j` is live.
 - Use `npm run storage:check` after `npx vercel env pull .env.local` to confirm the live database credentials work before trusting admin/product/submission writes.
@@ -193,4 +219,4 @@ Each product currently has:
 - WordPress migration/plugin work is being considered but is not implemented in the current app.
 - Image upload management is not implemented yet; product images currently use URLs.
 - Generated public-page imagery is currently code-native SVG, not bitmap media uploads.
-- Product galleries do not append hidden fallback images; any placeholders should be explicit seed/Studio image entries so they are visible in the admin image manager.
+- Product galleries do not append hidden fallback images; generated product illustrations are explicit gallery records and can be reordered/removed in Studio. Replace them with real product/application photography when available.

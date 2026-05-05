@@ -1,6 +1,6 @@
 # Eltronic
 
-Personal website and product showcase for Eltronic.
+Public website, product showcase and Studio admin for Eltronic.
 
 ## Local Development
 

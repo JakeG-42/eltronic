@@ -12,6 +12,8 @@ Always verify current code before changing behavior. Treat this document as a ma
 
 - Production site: `https://project-5v5cr.vercel.app`
 - Admin portal: `https://project-5v5cr.vercel.app/studio`
+- Payload Console: `https://project-5v5cr.vercel.app/console`
+- Payload sandbox: `https://project-5v5cr.vercel.app/v2`
 - Vercel project: `project-5v5cr`
 - GitHub repo: `JakeG-42/eltronic`
 
@@ -19,6 +21,10 @@ Always verify current code before changing behavior. Treat this document as a ma
 
 - `src/lib/admin-auth.ts`: admin credential and cookie session logic.
 - `src/lib/managed-data.ts`: product/submission storage abstraction.
+- `payload.config.ts`: Payload CMS config mounted as Eltronic Console.
+- `src/payload/collections`: Payload Console collections.
+- `src/app/(payload)`: Payload Console admin/API route group.
+- `src/app/(site)/v2/page.tsx`: hidden Payload-backed sandbox page.
 - `src/app/studio/(admin)/layout.tsx`: protected Studio shell wrapper.
 - `src/app/studio/(admin)/page.tsx`: Studio dashboard.
 - `src/app/studio/(admin)/products/page.tsx`: product table and quick-edit drawer.
@@ -26,6 +32,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/app/studio/actions.ts`: admin server actions.
 - `src/app/contact/actions.ts`: public contact form submission action.
 - `src/content/products.ts`: seed catalogue from the crawled WordPress site.
+- `src/content/product-gallery-assets.json`: generated supplemental gallery assets for each product.
 - `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
 - `src/content/site-builder.ts`: Website Builder defaults for homepage theme, hero and section controls.
 - `src/content/projects.ts`: public project/case-study content scaffold.
@@ -39,69 +46,59 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/components/site/product-media-gallery.tsx`: interactive product image selection and zoom.
 - `src/components/studio/product-image-manager.tsx`: Studio visual image preview/order editor.
 - `public/product-images`: local product image assets used by the public catalogue.
-- `public/product-images/placeholders`: explicit seed gallery placeholders that appear in Studio like normal managed images.
+- `public/product-images/generated`: generated technical product gallery illustrations.
+- `public/product-images/placeholders`: legacy placeholder assets filtered out of public product galleries.
+- `scripts/generate-product-gallery-assets.mjs`: repeatable generator/sync script for supplemental product gallery SVGs.
 - `docs/AI_FUNCTION_MAP.json`: machine-readable feature map.
 - `docs/PROJECT_CASE_STUDY_TEMPLATE.md`: checklist and object shape for future project write-ups.
+- `docs/LAUNCH_CHECKLIST.md`: pre-domain public launch checklist and manual media/content tasks.
 
 ## Auth Model
 
-Auth is intentionally simple at this stage: one admin login, no database-backed users yet.
+Auth now uses managed Studio users with roles, stored in the existing managed data JSON/Neon record.
 
 - Login page: `src/app/studio/login/page.tsx`.
 - Login action: `src/app/studio/login/actions.ts`.
 - Auth utility: `src/lib/admin-auth.ts`.
-- Studio guard: `src/app/studio/(admin)/layout.tsx` calls `isAdminAuthenticated()`.
+- User model and password hashing: `src/lib/admin-user-model.ts`.
+- Studio guard: `src/app/studio/(admin)/layout.tsx` calls `getCurrentAdminUser()`.
 - Admin mutations: `src/app/studio/actions.ts` calls `requireAdminAction()` before writes.
+- User management page: `src/app/studio/(admin)/users/page.tsx`.
+- Own-account page: `src/app/studio/(admin)/account/page.tsx`.
 
 ### Credential Sources
 
-Credentials can be overridden by environment variables:
+Studio users are stored under `adminUsers` in `src/lib/managed-data.ts`. The first normalized data read seeds two super-admin users:
 
-- `ELTRONIC_ADMIN_USERNAME`
-- `ELTRONIC_ADMIN_PASSWORD`
-- `ELTRONIC_ADMIN_SECRET`
+- Bootstrap `admin` user with the temporary legacy password.
+- Jake's permanent super-admin email account.
 
-Current temporary defaults are:
-
-- login: `admin`
-- password: `password`
-
-The defaults are for testing only. Replace them before sharing the admin URL beyond the project team.
+Only salted `scrypt` password hashes are stored in source/data. Do not add plaintext passwords to docs or code. Keep `ELTRONIC_ADMIN_SECRET`, `AUTH_SECRET`, or `NEXTAUTH_SECRET` strong because it signs session cookies.
 
 ### Verification Flow
 
-`verifyAdminCredentials(username, password)` compares the provided username and password against configured values.
+`verifyAdminCredentials(identifier, password)` looks up an active managed user by username or email.
 
-- Values are HMAC-signed with SHA-256 using the admin secret.
-- Signed values are compared with `timingSafeEqual`.
-- This avoids plain string comparison timing leaks, but it is still a simple single-user auth system.
-- No user record is currently stored.
-- No role or permission model exists yet.
+- Passwords are verified with salted `scrypt` hashes and `timingSafeEqual`.
+- Roles are `super_admin`, `admin`, and `moderator`.
+- Super admin and admin currently have full control, including user resets.
+- Moderator can access enquiries/moderation and their own account.
 
 ### Session Cookie
 
 Successful login calls `setAdminSession()`.
 
 - Cookie name: `eltronic_admin_session`.
-- Cookie value shape: `<issuedAt>.<signature>`.
-- Signature: HMAC-SHA256 of `issuedAt`.
+- Cookie value shape: `<userId>.<sessionVersion>.<issuedAt>.<signature>`.
+- Signature: HMAC-SHA256 of `userId.sessionVersion.issuedAt`.
 - Max age: 7 days.
 - Flags: `HttpOnly`, `SameSite=Lax`, `Secure` in production.
-- Validation: `isAdminAuthenticated()` checks cookie presence, expiry and signature.
+- Validation: `getCurrentAdminUser()` checks cookie presence, expiry, signature, active status and matching user `sessionVersion`.
+- Password changes or admin resets bump `sessionVersion`, invalidating old sessions for that user.
 
-### Future Test Users
+### Launch Note
 
-If Jake asks to inject test users later, do not bolt a second auth system beside this one. Extend `src/lib/admin-auth.ts` so the rest of the app can keep calling the same functions.
-
-Recommended path:
-
-- Add an `AdminUser` type with `username`, `passwordHash` or `password`, and optional `role`.
-- Replace `getAdminUsername()` and `getAdminPassword()` with `getAdminUsers()`.
-- Keep `verifyAdminCredentials(username, password)` as the public verification API.
-- Make the session payload include a user id or username, then sign the payload instead of only `issuedAt`.
-- Keep `isAdminAuthenticated()` available for simple guards.
-- Optionally add `getCurrentAdminUser()` if role-aware UI is needed.
-- Update `docs/AI_FUNCTION_MAP.json` when the auth model changes.
+Keep the bootstrap `admin` account until Jake has tested the permanent super-admin account, then delete it manually from `/studio/users`.
 
 ## Managed Data Model
 
@@ -117,6 +114,28 @@ Storage selection:
 
 The `.data/` folder is gitignored because it can contain contact submissions and edited content.
 
+Managed data also stores Studio users under `adminUsers`; this means Neon/JSON persistence is required for user changes to survive deployment.
+
+## Payload Console
+
+Payload CMS is installed alongside the existing site and Studio rather than replacing them.
+
+- Console admin route: `/console`.
+- Payload REST route: `/console-api`.
+- Payload GraphQL is disabled in `payload.config.ts`.
+- Experimental Payload-backed page route: `/v2`, marked noindex and excluded in robots.
+- Payload collections live in `src/payload/collections`; the initial collections are `console-users` and `pages`.
+- `next.config.ts` is wrapped with `withPayload()`.
+- `tsconfig.json` maps `@payload-config` to `payload.config.ts`.
+- The previous app-wide root layout was split so `(site)`, `/studio` and `(payload)` can each own the correct root layout boundary. Public URLs are unchanged.
+
+Payload uses the same Neon database as the current app but stores its tables under a separate Postgres schema:
+
+- Schema: `payload`.
+- Config env override: `PAYLOAD_DATABASE_SCHEMA`.
+- Preferred DB env: `PAYLOAD_DATABASE_URL`; falls back to the same Neon/Postgres env discovery used by managed data.
+- `PAYLOAD_SECRET` is configured in Vercel for Production and the `dev` Preview branch. Local development falls back to a development-only secret unless a local `PAYLOAD_SECRET` is added.
+
 ## Studio Layout
 
 Studio is intentionally separate from the public site chrome.
@@ -124,7 +143,9 @@ Studio is intentionally separate from the public site chrome.
 - Public pages live under the `(site)` route group and use `src/components/site/site-shell.tsx`.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
-- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/submissions`, and `/studio/settings`.
+- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- The current Studio sidebar groups links under Overview, Content, Messages and Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
 
 ## Product Management
@@ -133,7 +154,15 @@ Public catalogue pages read through `getProducts()` and `getProductBySlug()` fro
 
 Admin product edits are handled by `saveProductAction()` in `src/app/studio/actions.ts`.
 
-Product gallery editing in Studio uses `src/components/studio/product-image-manager.tsx`, which posts ordered repeated `imageSrc` and `imageAlt` fields. Product galleries should be managed through seed data or Studio image fields only; generated fallback gallery assets are not part of the public media model. `productFromFormData()` in `src/lib/managed-data.ts` keeps backward compatibility with legacy newline `images` form data, but the UI should stay visual rather than returning to textarea-based image ordering.
+Product gallery editing in Studio uses `src/components/studio/product-image-manager.tsx`, which posts ordered repeated `imageSrc` and `imageAlt` fields. Product galleries should be managed through seed data, Studio image fields or the generated-gallery manifest only. `productFromFormData()` in `src/lib/managed-data.ts` keeps backward compatibility with legacy newline `images` form data, but the UI should stay visual rather than returning to textarea-based image ordering.
+
+Supplemental launch gallery images are generated by `npm run images:products`.
+
+- The generator writes SVG assets to `public/product-images/generated`.
+- The generator writes the manifest to `src/content/product-gallery-assets.json`.
+- `src/content/products.ts` merges the manifest into seed product galleries.
+- `npm run images:products:sync` also syncs those generated image paths into existing managed product records in Neon/Redis/local data.
+- These assets are technical illustrations, not manufacturer photos. Replace or reorder them through Studio as real product/project photography becomes available.
 
 Website Builder settings are stored in `src/lib/managed-data.ts` under `siteBuilder`. Defaults are in `src/content/site-builder.ts`. `/studio/builder` saves through `saveSiteBuilderAction()` and the homepage uses `getSiteBuilderSettings()` to render theme variables, hero copy, section visibility and section order. Treat it as the internal Elementor/Colibri-style builder foundation; do not add a public admin toolbar unless Jake explicitly asks for one.
 
@@ -168,8 +197,9 @@ Product templates are currently:
 Gallery behavior:
 
 - `getProductImages(product)` returns managed media only: ordered `product.images` first, or the primary `product.image` if no gallery images are set.
-- Placeholder gallery assets should be explicit `product.images` entries, not appended by hidden fallback logic.
-- If a product needs multiple images, add them through Studio or seed data so the admin UI remains the source of truth.
+- Generated technical gallery assets are explicit seed/managed `product.images` entries, not hidden runtime fallbacks.
+- Placeholder gallery assets are filtered from public output.
+- If a product needs replacement images, add them through Studio or seed data so the admin UI remains the source of truth.
 - Product detail pages render `ProductMediaGallery`, a client component with thumbnail switching, keyboard-friendly zoom, and previous/next controls.
 - Primary product images are local files under `public/product-images`; keep public pages off legacy media URLs.
 
@@ -211,7 +241,7 @@ Submissions are stored through `createContactSubmission()` in `src/lib/managed-d
 
 Before normal enquiry storage, the contact action verifies a local maths captcha from `src/lib/contact-captcha.ts` and checks the hidden `website` honeypot field. The captcha token is HMAC-signed and short-lived. Failed captcha and honeypot attempts are stored as blocked submission records when storage is available, with `type` values `captcha_failed` and `honeypot_spam`. Recent duplicate blocked attempts are suppressed in `createBlockedContactSubmission()`. Keep this third-party-free unless Jake explicitly asks for an external captcha service.
 
-The Studio submissions inbox collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents: green for real enquiries, amber for captcha failures and red for honeypot spam.
+The Studio submissions inbox collapses repeated blocked attempts by fingerprint and uses coloured dots/card accents: green for real enquiries, amber for captcha failures and red for honeypot spam. `/studio/submissions` also supports mass-select with bulk status/delete actions through `bulkSubmissionAction()`. The page auto-refreshes through `src/components/studio/submissions-auto-refresh.tsx`, but pauses refresh while any submission checkbox is selected so it does not interrupt a bulk action.
 
 Use `npm run test:contact-bot` to run the safe fake-bot tester in `scripts/test-contact-antispam.mjs`. By default it targets production and only tests rejected bot paths. A valid submission test requires `-- --valid`, and remote valid submissions require `-- --valid --allow-remote-valid`.
 
@@ -281,6 +311,8 @@ Before relying on live admin writes, configure persistent database env vars in V
 
 - `DATABASE_URL` or integration-prefixed `eltronic_db_1_DATABASE_URL`
 - Fallback Redis support still accepts `KV_REST_API_URL` and `KV_REST_API_TOKEN`
+- Payload Console can reuse the same Neon database through `PAYLOAD_DATABASE_URL` or the existing prefixed Neon env vars, but keeps its tables in the `payload` Postgres schema.
+- Keep `PAYLOAD_SECRET` configured before treating `/console` as production-ready.
 
 As of 2026-04-27, the Neon database `eltronic_db_1` is connected to Vercel and injects prefixed env vars such as `eltronic_db_1_DATABASE_URL`. `npm run storage:check` passes locally after pulling Vercel env vars, production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j` is live, and the safe contact bot tester confirmed blocked attempts are saved in Neon.
 

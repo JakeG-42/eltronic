@@ -3,25 +3,41 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { clearAdminSession, isAdminAuthenticated } from "@/lib/admin-auth";
+import {
+  clearAdminSession,
+  getCurrentAdminUser,
+  userCanManageSiteContent,
+  userCanManageSubmissions,
+  userCanManageUsers,
+} from "@/lib/admin-auth";
 import {
   contactNotificationSettingsFromFormData,
+  deleteAdminUser,
   deleteProduct,
   deleteSubmission,
+  deleteSubmissions,
   productFromFormData,
+  saveAdminUser,
   siteBuilderFromFormData,
+  updateOwnAdminAccount,
   updateContactNotificationSettings,
   updateSubmissionStatus,
+  updateSubmissionStatuses,
   updateSiteBuilderSettings,
   upsertProduct,
   type ContactSubmissionStatus,
 } from "@/lib/managed-data";
+import { normalizeAdminRole, normalizeAdminStatus } from "@/lib/admin-user-model";
 import { writeTemplateFile } from "@/lib/template-editor";
 
 async function requireAdminAction() {
-  if (!(await isAdminAuthenticated())) {
+  const user = await getCurrentAdminUser();
+
+  if (!user) {
     redirect("/studio/login");
   }
+
+  return user;
 }
 
 function getReturnTo(formData: FormData, fallback = "/studio/products") {
@@ -30,7 +46,7 @@ function getReturnTo(formData: FormData, fallback = "/studio/products") {
   return returnTo.startsWith("/studio") ? returnTo : fallback;
 }
 
-function redirectWithError(message: string, returnTo = "/studio/products") {
+function redirectWithError(message: string, returnTo = "/studio/products"): never {
   const separator = returnTo.includes("?") ? "&" : "?";
   redirect(`${returnTo}${separator}error=${encodeURIComponent(message)}`);
 }
@@ -46,9 +62,14 @@ function revalidateManagedPages() {
 }
 
 export async function saveProductAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
 
   const returnTo = getReturnTo(formData);
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot manage product content.", returnTo);
+  }
+
   const previousSlug = String(formData.get("previousSlug") ?? "") || undefined;
   const product = productFromFormData(formData);
 
@@ -71,8 +92,12 @@ export async function saveProductAction(formData: FormData) {
 }
 
 export async function deleteProductAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
   const returnTo = getReturnTo(formData);
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot delete products.", returnTo);
+  }
 
   try {
     const slug = String(formData.get("slug") ?? "");
@@ -86,9 +111,14 @@ export async function deleteProductAction(formData: FormData) {
 }
 
 export async function saveSiteBuilderAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
 
   const returnTo = getReturnTo(formData, "/studio/builder");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot manage the website builder.", returnTo);
+  }
+
   const settings = siteBuilderFromFormData(formData);
 
   try {
@@ -107,10 +137,15 @@ export async function saveSiteBuilderAction(formData: FormData) {
 }
 
 export async function saveTemplateFileAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
 
   const file = String(formData.get("file") ?? "");
   const returnTo = getReturnTo(formData, `/studio/templates?file=${encodeURIComponent(file)}`);
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot edit templates.", returnTo);
+  }
+
   const content = String(formData.get("content") ?? "");
 
   try {
@@ -133,9 +168,14 @@ export async function saveTemplateFileAction(formData: FormData) {
 }
 
 export async function saveContactNotificationSettingsAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
 
   const returnTo = getReturnTo(formData, "/studio/settings");
+
+  if (!userCanManageUsers(user)) {
+    redirectWithError("This account cannot manage Studio settings.", returnTo);
+  }
+
   const settings = contactNotificationSettingsFromFormData(formData);
   const invalidRecipients = settings.recipients.filter((recipient) => !isEmailAddress(recipient));
 
@@ -159,8 +199,12 @@ function isEmailAddress(value: string) {
 }
 
 export async function updateSubmissionStatusAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
   const returnTo = getReturnTo(formData, "/studio/submissions");
+
+  if (!userCanManageSubmissions(user)) {
+    redirectWithError("This account cannot manage enquiries.", returnTo);
+  }
 
   try {
     const id = String(formData.get("id") ?? "");
@@ -175,8 +219,12 @@ export async function updateSubmissionStatusAction(formData: FormData) {
 }
 
 export async function deleteSubmissionAction(formData: FormData) {
-  await requireAdminAction();
+  const user = await requireAdminAction();
   const returnTo = getReturnTo(formData, "/studio/submissions");
+
+  if (!userCanManageSubmissions(user)) {
+    redirectWithError("This account cannot delete enquiries.", returnTo);
+  }
 
   try {
     const id = String(formData.get("id") ?? "");
@@ -187,6 +235,140 @@ export async function deleteSubmissionAction(formData: FormData) {
   }
 
   redirect(returnTo);
+}
+
+export async function bulkSubmissionAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/submissions");
+
+  if (!userCanManageSubmissions(user)) {
+    redirectWithError("This account cannot manage enquiries.", returnTo);
+  }
+
+  const ids = Array.from(
+    new Set(
+      formData
+        .getAll("ids")
+        .flatMap((value) => String(value).split(","))
+        .map((id) => id.trim())
+        .filter(Boolean),
+    ),
+  );
+
+  if (ids.length === 0) {
+    redirectWithError("Select at least one submission first.", returnTo);
+  }
+
+  const action = String(formData.get("bulkAction") ?? "");
+  const status = action.startsWith("status:")
+    ? (action.replace("status:", "") as ContactSubmissionStatus)
+    : undefined;
+
+  if (action !== "delete" && (!status || !isSubmissionStatus(status))) {
+    redirectWithError("Choose a valid bulk action.", returnTo);
+  }
+
+  try {
+    if (action === "delete") {
+      await deleteSubmissions(ids);
+    } else {
+      await updateSubmissionStatuses(ids, status as ContactSubmissionStatus);
+    }
+
+    revalidatePath("/studio");
+    revalidatePath("/studio/submissions");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to apply bulk action.", returnTo);
+  }
+
+  redirect(returnTo);
+}
+
+function isSubmissionStatus(value: string): value is ContactSubmissionStatus {
+  return ["new", "reviewed", "replied", "archived", "blocked"].includes(value);
+}
+
+export async function saveAdminUserAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/users");
+
+  if (!userCanManageUsers(user)) {
+    redirectWithError("This account cannot manage users.", returnTo);
+  }
+
+  const password = String(formData.get("password") ?? "").trim();
+
+  try {
+    await saveAdminUser({
+      displayName: String(formData.get("displayName") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      id: String(formData.get("userId") ?? "") || undefined,
+      password: password || undefined,
+      role: normalizeAdminRole(String(formData.get("role") ?? "moderator")),
+      status: normalizeAdminStatus(String(formData.get("status") ?? "active")),
+      username: String(formData.get("username") ?? ""),
+    });
+    revalidatePath("/studio/users");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to save user.", returnTo);
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}saved=users`);
+}
+
+export async function deleteAdminUserAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/users");
+
+  if (!userCanManageUsers(user)) {
+    redirectWithError("This account cannot delete users.", returnTo);
+  }
+
+  const userId = String(formData.get("userId") ?? "");
+
+  if (userId === user.id) {
+    redirectWithError("You cannot delete your own active account.", returnTo);
+  }
+
+  try {
+    await deleteAdminUser(userId);
+    revalidatePath("/studio/users");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to delete user.", returnTo);
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}saved=users`);
+}
+
+export async function saveOwnAccountAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/account");
+  const newPassword = String(formData.get("newPassword") ?? "").trim();
+  const confirmPassword = String(formData.get("confirmPassword") ?? "").trim();
+
+  if (newPassword && newPassword !== confirmPassword) {
+    redirectWithError("New passwords do not match.", returnTo);
+  }
+
+  try {
+    await updateOwnAdminAccount({
+      currentPassword: String(formData.get("currentPassword") ?? ""),
+      displayName: String(formData.get("displayName") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      id: user.id,
+      newPassword: newPassword || undefined,
+      username: String(formData.get("username") ?? ""),
+    });
+    revalidatePath("/studio/account");
+    revalidatePath("/studio/users");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to update your account.", returnTo);
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}saved=account`);
 }
 
 export async function logoutAction() {
