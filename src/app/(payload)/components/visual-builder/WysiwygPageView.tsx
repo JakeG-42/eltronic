@@ -2,7 +2,14 @@ import type { AdminViewServerProps, Payload } from "payload";
 import Link from "next/link";
 
 import { pageToBuilderData } from "@/payload/builder/convert";
-import { getBuilderMenus } from "@/payload/builder/metadata";
+import {
+  applyThemeToBuilderData,
+  getBuilderMenus,
+  getBuilderPageTemplates,
+  getBuilderThemeSettings,
+  getBuilderThemes,
+  getPageBuilderTheme,
+} from "@/payload/builder/metadata";
 import type { BuilderProduct } from "@/payload/builder/types";
 
 import { VisualBuilderClient } from "./VisualBuilderClient";
@@ -85,16 +92,29 @@ export async function WysiwygPageView({ initPageResult, params }: AdminViewServe
   const slug = page.slug ?? "home";
   const title = page.title ?? "Untitled page";
   const payload = initPageResult.req.payload;
-  const [featuredProducts, menus] = await Promise.all([getFeaturedProducts(payload), getBuilderMenus(payload)]);
+  const [featuredProducts, menus, themes, pageTemplates, themeSettings] = await Promise.all([
+    getFeaturedProducts(payload),
+    getBuilderMenus(payload),
+    getBuilderThemes(payload),
+    getBuilderPageTemplates(payload),
+    getBuilderThemeSettings(payload),
+  ]);
+  const activeTheme = getPageBuilderTheme(page, themes, themeSettings.themeId);
+  const activeTemplateId =
+    typeof page.pageTemplate === "number" || typeof page.pageTemplate === "string" ? String(page.pageTemplate) : String(page.pageTemplate?.id ?? themeSettings.templateId ?? "");
 
   return (
     <VisualBuilderClient
-      builderData={pageToBuilderData(page)}
+      activeTemplateId={activeTemplateId}
+      activeThemeId={activeTheme.id}
+      builderData={applyThemeToBuilderData(pageToBuilderData(page), activeTheme)}
       featuredProducts={featuredProducts}
       menus={menus}
+      pageTemplates={pageTemplates}
       pageId={String(page.id)}
       previewUrl={getPreviewUrl(slug)}
       slug={slug}
+      themes={themes}
       title={title}
     />
   );

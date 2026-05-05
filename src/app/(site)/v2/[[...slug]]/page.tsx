@@ -4,8 +4,16 @@ import { getPayload } from "payload";
 
 import { PayloadPageRenderer } from "@/components/payload/payload-page-renderer";
 import { PuckBuilderRenderer } from "@/components/payload/puck-builder-renderer";
-import { getBuilderMenus, productsToBuilderProducts } from "@/payload/builder/metadata";
-import type { BuilderMenu } from "@/payload/builder/types";
+import {
+  applyThemeToBuilderData,
+  getBuilderMenus,
+  getBuilderThemeSettings,
+  getBuilderThemes,
+  getPageBuilderTheme,
+  productsToBuilderProducts,
+} from "@/payload/builder/metadata";
+import { normalizeBuilderData } from "@/payload/builder/convert";
+import type { BuilderMenu, BuilderTheme, BuilderThemeSettings } from "@/payload/builder/types";
 import type { Page, Product } from "@/payload-types";
 
 export const dynamic = "force-dynamic";
@@ -132,14 +140,45 @@ async function getMenus(): Promise<BuilderMenu[]> {
   }
 }
 
+async function getThemes(): Promise<BuilderTheme[]> {
+  try {
+    const payload = await getPayload({ config });
+
+    return getBuilderThemes(payload);
+  } catch (error) {
+    console.error("Unable to load Payload themes for v2.", error);
+    return [];
+  }
+}
+
+async function getThemeSettings(): Promise<BuilderThemeSettings> {
+  try {
+    const payload = await getPayload({ config });
+
+    return getBuilderThemeSettings(payload);
+  } catch (error) {
+    console.error("Unable to load Payload theme settings for v2.", error);
+    return {};
+  }
+}
+
 export default async function PayloadV2Page({ params }: PayloadV2PageProps) {
   const { slug: segments } = await params;
   const slug = getSlugFromSegments(segments);
-  const [page, featuredProducts, menus] = await Promise.all([getPayloadPage(slug), getFeaturedProducts(), getMenus()]);
+  const [page, featuredProducts, menus, themes, themeSettings] = await Promise.all([
+    getPayloadPage(slug),
+    getFeaturedProducts(),
+    getMenus(),
+    getThemes(),
+    getThemeSettings(),
+  ]);
 
   if (page) {
     if ("builderData" in page && page.builderData) {
-      return <PuckBuilderRenderer data={page.builderData} featuredProducts={productsToBuilderProducts(featuredProducts)} menus={menus} />;
+      const builderData = normalizeBuilderData(page.builderData);
+      const themedBuilderData = builderData ? applyThemeToBuilderData(builderData, getPageBuilderTheme(page, themes, themeSettings.themeId)) : page.builderData;
+
+      return <PuckBuilderRenderer data={themedBuilderData} featuredProducts={productsToBuilderProducts(featuredProducts)} menus={menus} />;
     }
 
     return <PayloadPageRenderer featuredProducts={featuredProducts} page={page} />;

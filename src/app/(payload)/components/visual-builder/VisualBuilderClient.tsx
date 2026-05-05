@@ -4,8 +4,9 @@ import { blocksPlugin, outlinePlugin, Puck, type PuckAction } from "@puckeditor/
 import { ExternalLink, FilePlus2, Plus, X } from "lucide-react";
 import { type FormEvent, type ReactNode, useState } from "react";
 
+import { applyThemeToBuilderData, getDefaultBuilderTheme } from "@/payload/builder/metadata";
 import { builderConfig } from "@/payload/builder/puck-config";
-import type { BuilderData, BuilderMenu, BuilderProduct } from "@/payload/builder/types";
+import type { BuilderData, BuilderMenu, BuilderPageTemplate, BuilderProduct, BuilderTheme } from "@/payload/builder/types";
 
 type SaveState = "error" | "idle" | "saved" | "saving";
 
@@ -23,12 +24,16 @@ const editorPlugins = [
 ];
 
 type VisualBuilderClientProps = {
+  activeTemplateId: string;
+  activeThemeId: string;
   builderData: BuilderData;
   featuredProducts: BuilderProduct[];
   menus: BuilderMenu[];
+  pageTemplates: BuilderPageTemplate[];
   pageId: string;
   previewUrl: string;
   slug: string;
+  themes: BuilderTheme[];
   title: string;
 };
 
@@ -38,14 +43,17 @@ type HeaderActionsProps = {
   dispatch: (action: PuckAction) => void;
   message: string;
   onOpenNewPage: () => void;
+  onThemeChange: (themeId: string, data: BuilderData | undefined) => void;
   previewUrl: string;
   saveState: SaveState;
+  selectedThemeId: string;
   state: {
     data?: BuilderData;
     indexes?: {
       zones?: Record<string, { contentIds?: unknown[] }>;
     };
   };
+  themes: BuilderTheme[];
 };
 
 function normalizeSlug(value: string) {
@@ -56,8 +64,21 @@ function normalizeSlug(value: string) {
     .replace(/(^-|-$)/g, "");
 }
 
-function createStarterBuilderData(title: string): BuilderData {
+function withPageTitle(data: BuilderData, title: string) {
   return {
+    ...data,
+    root: {
+      ...data.root,
+      props: {
+        ...data.root.props,
+        pageTitle: title,
+      },
+    },
+  } as BuilderData;
+}
+
+function createStarterBuilderData(title: string, theme: BuilderTheme): BuilderData {
+  const builderData = {
     content: [
       {
         props: {
@@ -89,6 +110,8 @@ function createStarterBuilderData(title: string): BuilderData {
     },
     zones: {},
   } as BuilderData;
+
+  return applyThemeToBuilderData(builderData, theme);
 }
 
 function getCreatedPageId(value: unknown) {
@@ -132,13 +155,43 @@ function insertSection(dispatch: (action: PuckAction) => void, state: HeaderActi
   });
 }
 
-function renderHeaderActions({ children, creatingPage, dispatch, message, onOpenNewPage, previewUrl, saveState, state }: HeaderActionsProps) {
+function payloadRelationshipId(id: string) {
+  return /^\d+$/.test(id) ? Number(id) : undefined;
+}
+
+function renderHeaderActions({
+  children,
+  creatingPage,
+  dispatch,
+  message,
+  onOpenNewPage,
+  onThemeChange,
+  previewUrl,
+  saveState,
+  selectedThemeId,
+  state,
+  themes,
+}: HeaderActionsProps) {
   return (
     <div className="visual-builder-actions">
+      <label className="visual-builder-theme-select">
+        <span>Theme</span>
+        <select disabled={saveState === "saving"} onChange={(event) => onThemeChange(event.currentTarget.value, state.data)} value={selectedThemeId}>
+          {themes.map((theme) => (
+            <option key={theme.id} value={theme.id}>
+              {theme.name}
+            </option>
+          ))}
+        </select>
+      </label>
       <button className="visual-builder-action" disabled={creatingPage} onClick={onOpenNewPage} type="button">
         <FilePlus2 aria-hidden="true" size={15} />
         <span>New page</span>
       </button>
+      <a className="visual-builder-action" href="/console/globals/theme-settings" rel="noreferrer" target="_blank">
+        <ExternalLink aria-hidden="true" size={14} />
+        <span>Theme settings</span>
+      </a>
       <button className="visual-builder-action primary" onClick={() => insertSection(dispatch, state)} type="button">
         <Plus aria-hidden="true" size={15} />
         <span>Add section</span>
@@ -154,21 +207,35 @@ function renderHeaderActions({ children, creatingPage, dispatch, message, onOpen
 }
 
 export function VisualBuilderClient({
+  activeTemplateId,
+  activeThemeId,
   builderData,
   featuredProducts,
   menus,
+  pageTemplates,
   pageId,
   previewUrl,
   slug,
+  themes,
   title,
 }: VisualBuilderClientProps) {
+  const defaultTheme = getDefaultBuilderTheme(themes);
+  const activeTemplate = pageTemplates.find((template) => template.id === activeTemplateId);
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [message, setMessage] = useState("");
+  const [activeBuilderData, setActiveBuilderData] = useState(() => applyThemeToBuilderData(builderData, themes.find((theme) => theme.id === activeThemeId) ?? defaultTheme));
+  const [selectedThemeId, setSelectedThemeId] = useState(activeThemeId || defaultTheme.id);
   const [creatingPage, setCreatingPage] = useState(false);
   const [isNewPageOpen, setIsNewPageOpen] = useState(false);
   const [newPageSlug, setNewPageSlug] = useState("new-page");
+  const [newPageTemplateId, setNewPageTemplateId] = useState(activeTemplateId || "");
+  const [newPageThemeId, setNewPageThemeId] = useState(activeTemplate?.themeId || activeThemeId || defaultTheme.id);
   const [newPageTitle, setNewPageTitle] = useState("New page");
   const [slugWasEdited, setSlugWasEdited] = useState(false);
+
+  function themeForId(themeId: string) {
+    return themes.find((theme) => theme.id === themeId) ?? defaultTheme;
+  }
 
   function updateNewPageTitle(value: string) {
     setNewPageTitle(value);
@@ -183,6 +250,11 @@ export function VisualBuilderClient({
 
     const nextTitle = newPageTitle.trim() || "New page";
     const nextSlug = normalizeSlug(newPageSlug || nextTitle) || "new-page";
+    const selectedTemplate = pageTemplates.find((template) => template.id === newPageTemplateId);
+    const selectedTheme = themeForId(newPageThemeId || selectedTemplate?.themeId || defaultTheme.id);
+    const templateBuilderData = selectedTemplate?.builderData ? withPageTitle(selectedTemplate.builderData, nextTitle) : null;
+    const nextBuilderData = templateBuilderData ? applyThemeToBuilderData(templateBuilderData, selectedTheme) : createStarterBuilderData(nextTitle, selectedTheme);
+    const payloadThemeId = payloadRelationshipId(selectedTheme.id);
 
     setCreatingPage(true);
     setSaveState("saving");
@@ -190,7 +262,7 @@ export function VisualBuilderClient({
 
     const response = await fetch("/console-api/pages", {
       body: JSON.stringify({
-        builderData: createStarterBuilderData(nextTitle),
+        builderData: nextBuilderData,
         layout: [
           {
             blockType: "hero",
@@ -207,9 +279,11 @@ export function VisualBuilderClient({
             },
           },
         ],
+        pageTemplate: payloadRelationshipId(selectedTemplate?.id ?? ""),
         slug: nextSlug,
         status: "draft",
         summary: "",
+        theme: payloadThemeId,
         title: nextTitle,
       }),
       credentials: "same-origin",
@@ -240,6 +314,37 @@ export function VisualBuilderClient({
     window.location.assign(`/console/wysiwyg/${createdPageId}`);
   }
 
+  async function changeTheme(themeId: string, data: BuilderData | undefined) {
+    const theme = themeForId(themeId);
+    const nextBuilderData = applyThemeToBuilderData(data ?? activeBuilderData, theme);
+
+    setSelectedThemeId(theme.id);
+    setActiveBuilderData(nextBuilderData);
+    setSaveState("saving");
+    setMessage(`Switching to ${theme.name}...`);
+
+    const response = await fetch(`/console-api/pages/${pageId}`, {
+      body: JSON.stringify({
+        builderData: nextBuilderData,
+        theme: payloadRelationshipId(theme.id),
+      }),
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+    });
+
+    if (!response.ok) {
+      setSaveState("error");
+      setMessage(`Theme switch failed: ${await response.text()}`);
+      return;
+    }
+
+    setSaveState("saved");
+    setMessage(`${theme.name} applied to this page.`);
+  }
+
   async function save(data: BuilderData) {
     setSaveState("saving");
     setMessage("Saving visual builder data...");
@@ -259,6 +364,7 @@ export function VisualBuilderClient({
       return;
     }
 
+    setActiveBuilderData(data);
     setSaveState("saved");
     setMessage("Saved to Payload. Refresh the preview tab to see the published page update.");
   }
@@ -267,7 +373,7 @@ export function VisualBuilderClient({
     <div className="visual-builder-view">
       <Puck
         config={builderConfig}
-        data={builderData}
+        data={activeBuilderData}
         headerPath={slug === "home" ? "/" : `/${slug}`}
         headerTitle={title}
         height="calc(100vh - 2rem)"
@@ -275,7 +381,8 @@ export function VisualBuilderClient({
           enabled: true,
           waitForStyles: true,
         }}
-        metadata={{ featuredProducts, menus }}
+        key={`${pageId}-${selectedThemeId}`}
+        metadata={{ featuredProducts, menus, pageTemplates, themes }}
         onPublish={save}
         plugins={editorPlugins}
         renderHeaderActions={(props) =>
@@ -284,8 +391,11 @@ export function VisualBuilderClient({
             creatingPage,
             message,
             onOpenNewPage: () => setIsNewPageOpen(true),
+            onThemeChange: changeTheme,
             previewUrl,
             saveState,
+            selectedThemeId,
+            themes,
           })
         }
         ui={{ plugin: { current: "outline" } }}
@@ -322,6 +432,39 @@ export function VisualBuilderClient({
             <label>
               <span>Page title</span>
               <input autoFocus onChange={(event) => updateNewPageTitle(event.currentTarget.value)} required type="text" value={newPageTitle} />
+            </label>
+            <label>
+              <span>Template</span>
+              <select
+                onChange={(event) => {
+                  const nextTemplateId = event.currentTarget.value;
+                  const nextTemplate = pageTemplates.find((template) => template.id === nextTemplateId);
+
+                  setNewPageTemplateId(nextTemplateId);
+
+                  if (nextTemplate?.themeId) {
+                    setNewPageThemeId(nextTemplate.themeId);
+                  }
+                }}
+                value={newPageTemplateId}
+              >
+                <option value="">Blank starter</option>
+                {pageTemplates.map((template) => (
+                  <option key={template.id} value={template.id}>
+                    {template.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <span>Theme</span>
+              <select onChange={(event) => setNewPageThemeId(event.currentTarget.value)} required value={newPageThemeId}>
+                {themes.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.name}
+                  </option>
+                ))}
+              </select>
             </label>
             <label>
               <span>Slug</span>

@@ -58,6 +58,23 @@ export const Pages: CollectionConfig = {
         description: "Short internal/search summary.",
       },
     },
+    {
+      name: "theme",
+      type: "relationship",
+      admin: {
+        description: "Theme used by the new Payload/WYSIWYG site.",
+      },
+      relationTo: "themes",
+    },
+    {
+      name: "pageTemplate",
+      type: "relationship",
+      admin: {
+        description: "Website template this page was created from. Optional; existing pages can stay independent.",
+      },
+      label: "Website template",
+      relationTo: "page-templates",
+    },
     statusField,
     {
       name: "layout",

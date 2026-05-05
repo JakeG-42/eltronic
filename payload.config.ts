@@ -9,13 +9,16 @@ import { ConsoleUsers } from "./src/payload/collections/ConsoleUsers.ts";
 import { Documents } from "./src/payload/collections/Documents.ts";
 import { Media } from "./src/payload/collections/Media.ts";
 import { Menus } from "./src/payload/collections/Menus.ts";
+import { PageTemplates } from "./src/payload/collections/PageTemplates.ts";
 import { Pages } from "./src/payload/collections/Pages.ts";
 import { Posts } from "./src/payload/collections/Posts.ts";
 import { ProductCategories } from "./src/payload/collections/ProductCategories.ts";
 import { Products } from "./src/payload/collections/Products.ts";
+import { Themes } from "./src/payload/collections/Themes.ts";
 import { Footer } from "./src/payload/globals/Footer.ts";
 import { Navigation } from "./src/payload/globals/Navigation.ts";
 import { SiteSettings } from "./src/payload/globals/SiteSettings.ts";
+import { ThemeSettings } from "./src/payload/globals/ThemeSettings.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -122,7 +125,7 @@ export default buildConfig({
     },
     user: ConsoleUsers.slug,
   },
-  collections: [ConsoleUsers, Media, Documents, ProductCategories, Products, Menus, Pages, Posts],
+  collections: [ConsoleUsers, Media, Documents, ProductCategories, Products, Themes, PageTemplates, Menus, Pages, Posts],
   db: postgresAdapter({
     pool: {
       connectionString: getPayloadDatabaseUrl(),
@@ -134,7 +137,7 @@ export default buildConfig({
     disable: true,
   },
   editor: lexicalEditor(),
-  globals: [SiteSettings, Navigation, Footer],
+  globals: [ThemeSettings, SiteSettings, Navigation, Footer],
   routes: {
     admin: "/console",
     api: "/console-api",

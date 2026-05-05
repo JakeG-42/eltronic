@@ -72,6 +72,8 @@ export interface Config {
     documents: Document;
     'product-categories': ProductCategory;
     products: Product;
+    themes: Theme;
+    'page-templates': PageTemplate;
     menus: Menu;
     pages: Page;
     posts: Post;
@@ -87,6 +89,8 @@ export interface Config {
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    themes: ThemesSelect<false> | ThemesSelect<true>;
+    'page-templates': PageTemplatesSelect<false> | PageTemplatesSelect<true>;
     menus: MenusSelect<false> | MenusSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
@@ -100,11 +104,13 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    'theme-settings': ThemeSetting;
     'site-settings': SiteSetting;
     navigation: Navigation;
     footer: Footer;
   };
   globalsSelect: {
+    'theme-settings': ThemeSettingsSelect<false> | ThemeSettingsSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
@@ -293,6 +299,74 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes".
+ */
+export interface Theme {
+  id: number;
+  name: string;
+  /**
+   * Short theme key used by the WYSIWYG editor.
+   */
+  handle: string;
+  status: 'active' | 'draft';
+  /**
+   * Used when a page does not have a theme selected.
+   */
+  isDefault?: boolean | null;
+  description?: string | null;
+  colors: {
+    backgroundColor: string;
+    textColor: string;
+    accentColor: string;
+    /**
+     * RGB values, for example: 23, 32, 51.
+     */
+    surfaceColor: string;
+    surfaceOpacity: number;
+  };
+  typography: {
+    fontFamily: 'display' | 'sans' | 'code';
+  };
+  layout: {
+    sectionSpacing: 'compact' | 'normal' | 'spacious';
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-templates".
+ */
+export interface PageTemplate {
+  id: number;
+  name: string;
+  /**
+   * Short template key used by the whole-site template selector.
+   */
+  handle: string;
+  status: 'active' | 'draft';
+  description?: string | null;
+  /**
+   * Default theme to use when this website template is selected.
+   */
+  theme?: (number | null) | Theme;
+  /**
+   * Reusable WYSIWYG layout data used as the starting point for this website template.
+   */
+  builderData:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menus".
  */
 export interface Menu {
@@ -330,6 +404,14 @@ export interface Page {
    * Short internal/search summary.
    */
   summary?: string | null;
+  /**
+   * Theme used by the new Payload/WYSIWYG site.
+   */
+  theme?: (number | null) | Theme;
+  /**
+   * Website template this page was created from. Optional; existing pages can stay independent.
+   */
+  pageTemplate?: (number | null) | PageTemplate;
   status: 'draft' | 'published';
   layout: (
     | {
@@ -723,6 +805,14 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null)
     | ({
+        relationTo: 'themes';
+        value: number | Theme;
+      } | null)
+    | ({
+        relationTo: 'page-templates';
+        value: number | PageTemplate;
+      } | null)
+    | ({
         relationTo: 'menus';
         value: number | Menu;
       } | null)
@@ -901,6 +991,52 @@ export interface ProductsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "themes_select".
+ */
+export interface ThemesSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  status?: T;
+  isDefault?: T;
+  description?: T;
+  colors?:
+    | T
+    | {
+        backgroundColor?: T;
+        textColor?: T;
+        accentColor?: T;
+        surfaceColor?: T;
+        surfaceOpacity?: T;
+      };
+  typography?:
+    | T
+    | {
+        fontFamily?: T;
+      };
+  layout?:
+    | T
+    | {
+        sectionSpacing?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-templates_select".
+ */
+export interface PageTemplatesSelect<T extends boolean = true> {
+  name?: T;
+  handle?: T;
+  status?: T;
+  description?: T;
+  theme?: T;
+  builderData?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "menus_select".
  */
 export interface MenusSelect<T extends boolean = true> {
@@ -924,6 +1060,8 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   summary?: T;
+  theme?: T;
+  pageTemplate?: T;
   status?: T;
   layout?:
     | T
@@ -1311,6 +1449,23 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "theme-settings".
+ */
+export interface ThemeSetting {
+  id: number;
+  /**
+   * The active whole-website template for the new Payload-built Eltronic site.
+   */
+  activeTemplate?: (number | null) | PageTemplate;
+  /**
+   * The default visual theme used when a page does not have its own override.
+   */
+  activeTheme?: (number | null) | Theme;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings".
  */
 export interface SiteSetting {
@@ -1383,6 +1538,17 @@ export interface Footer {
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "theme-settings_select".
+ */
+export interface ThemeSettingsSelect<T extends boolean = true> {
+  activeTemplate?: T;
+  activeTheme?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

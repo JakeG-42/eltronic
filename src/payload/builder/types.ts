@@ -140,8 +140,34 @@ export type BuilderRootProps = {
   sectionSpacing?: "compact" | "normal" | "spacious";
   surfaceColor?: string;
   surfaceOpacity?: number;
+  themeHandle?: string;
+  themeId?: string;
+  themeName?: string;
   textColor?: string;
   themePreset?: "eltronicDark" | "precisionLight" | "signalContrast";
+};
+
+export type BuilderTheme = {
+  description?: string;
+  handle: string;
+  id: string;
+  isDefault?: boolean;
+  name: string;
+  rootProps: Partial<BuilderRootProps>;
+};
+
+export type BuilderPageTemplate = {
+  builderData: BuilderData | null;
+  description?: string;
+  handle: string;
+  id: string;
+  name: string;
+  themeId?: string;
+};
+
+export type BuilderThemeSettings = {
+  templateId?: string;
+  themeId?: string;
 };
 
 export type BuilderComponents = {
