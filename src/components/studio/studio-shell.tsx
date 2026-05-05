@@ -13,6 +13,7 @@ import {
   LogOut,
   Moon,
   Paintbrush,
+  QrCode,
   Settings,
   Sun,
   UserCircle,
@@ -28,10 +29,10 @@ import { cn } from "@/lib/utils";
 const navGroups: Array<{
   label: string;
   items: Array<{
-  href: string;
-  icon: ComponentType<{ className?: string }>;
-  label: string;
-  roles: AdminRole[];
+    href: string;
+    icon: ComponentType<{ className?: string }>;
+    label: string;
+    roles: AdminRole[];
   }>;
 }> = [
   {
@@ -45,6 +46,10 @@ const navGroups: Array<{
       { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
       { href: "/studio/templates", label: "Templates", icon: FileCode2, roles: ["super_admin", "admin"] },
     ],
+  },
+  {
+    label: "Tools",
+    items: [{ href: "/studio/tools/qr-code", label: "QR Code", icon: QrCode, roles: ["super_admin", "admin", "moderator"] }],
   },
   {
     label: "Messages",
@@ -194,6 +199,7 @@ function currentModeLabel(pathname: string) {
   if (pathname.startsWith("/studio/builder")) return "Website Builder";
   if (pathname.startsWith("/studio/templates")) return "Template Editor";
   if (pathname.startsWith("/studio/products")) return "Products";
+  if (pathname.startsWith("/studio/tools")) return "Tools";
   if (pathname.startsWith("/studio/submissions")) return "Enquiries";
   if (pathname.startsWith("/studio/users")) return "Users";
   if (pathname.startsWith("/studio/account")) return "Account";

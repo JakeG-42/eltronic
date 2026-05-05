@@ -5,18 +5,19 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 ## Current Status
 
 - Repository: standalone GitHub repo `JakeG-42/eltronic`.
-- Active branch: `dev` for launch-hardening work; `main` remains the stable baseline until merged.
+- Active branch: `main` for current production work.
 - App scaffold: Next.js app using the App Router under `src/app`.
 - Deployment: Vercel project `project-5v5cr` is connected and deployed.
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
 - Product content: initial structured product data lives in `src/content/products.ts`; live editable data is read through `src/lib/managed-data.ts`.
 - Topcon catalogue source: `docs/topcon_product_catalogue_import.csv` and `src/content/topcon-products.json`; sync to Neon with `npm run products:topcon:sync`.
-- Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, templates and contact submissions.
+- Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, tools, templates and contact submissions.
 - Contact handling: `/contact` now stores enquiries through the managed data layer.
 - SEO: sitemap, robots rules, canonical metadata, structured data and project/case-study scaffolding are in place.
 
 ## What Has Happened So Far
 
+- Added a protected Studio Tools section with `/studio/tools/qr-code`, a client-side QR code generator for links/text and Wi-Fi network join codes. It supports square, rounded and circular dots, foreground/background colours, centre logo upload, and PNG/SVG export.
 - Removed the separate Console CMS and `/v2` new-site sandbox for now, including the CMS route groups, builder code, generated types, migrations, related dependencies and `new.eltronic.co.uk` rewrite. Current work is focused on the public site and `/studio`.
 - Removed the WordPress/WooCommerce-style classic Studio backend under `/studio/classic`, including its product routes, shell switcher, editor component and dedicated CSS. Product management now stays on the current Studio product table, quick-edit drawer and full editor.
 - Replaced the stale 9-product Topcon seed/catalogue with 14 CSV-sourced Topcon OPUS products, including real Topcon image URLs, datasheets, operating manuals, highlights and technical data. Added `npm run products:topcon:sync` to replace Topcon records in Neon while preserving non-Topcon products and writing a local backup.

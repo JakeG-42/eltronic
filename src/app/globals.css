@@ -3062,6 +3062,172 @@ h3 {
   font-size: 0.76rem;
 }
 
+.qr-tool-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.qr-tool-grid {
+  display: grid;
+  grid-template-areas:
+    "content preview"
+    "style preview";
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.38fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.qr-tool-content {
+  grid-area: content;
+}
+
+.qr-tool-style {
+  grid-area: style;
+}
+
+.qr-field-stack,
+.qr-tool-controls {
+  display: grid;
+  gap: 1rem;
+}
+
+.qr-segmented-control {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--background) 60%, transparent);
+}
+
+.qr-segmented-control button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.35rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: transparent;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 850;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.qr-segmented-control button:hover,
+.qr-segmented-control button.active {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  color: var(--foreground);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 26%, transparent);
+}
+
+.qr-color-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.qr-logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.qr-toggle-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  color: var(--muted-foreground);
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.qr-toggle-row input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--primary);
+}
+
+.qr-slider-field {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted-foreground);
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
+.qr-slider-field input {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+.qr-slider-field strong {
+  color: var(--foreground);
+  text-align: right;
+}
+
+.qr-slider-field.is-disabled {
+  opacity: 0.52;
+}
+
+.qr-preview-panel {
+  position: sticky;
+  top: 5rem;
+  grid-area: preview;
+}
+
+.qr-preview-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+}
+
+.qr-preview-frame {
+  display: grid;
+  min-height: 22rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.95rem;
+  background:
+    linear-gradient(45deg, color-mix(in srgb, var(--border) 42%, transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in srgb, var(--border) 42%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--border) 42%, transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--border) 42%, transparent) 75%),
+    var(--background);
+  background-position: 0 0, 0 0.5rem, 0.5rem -0.5rem, -0.5rem 0;
+  background-size: 1rem 1rem;
+}
+
+.qr-preview-frame svg,
+.qr-preview-frame canvas {
+  display: block;
+  width: min(100%, 20rem);
+  height: auto;
+}
+
+.qr-preview-warning {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+.qr-export-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
 .template-editor-shell {
   display: grid;
   gap: 1rem;
@@ -3279,11 +3445,20 @@ h3 {
   .builder-grid,
   .builder-field-grid,
   .builder-color-row,
-  .builder-preset-notes {
+  .builder-preset-notes,
+  .qr-tool-grid {
     grid-template-columns: 1fr;
   }
 
-  .builder-preview-panel {
+  .qr-tool-grid {
+    grid-template-areas:
+      "content"
+      "style"
+      "preview";
+  }
+
+  .builder-preview-panel,
+  .qr-preview-panel {
     position: static;
   }
 
@@ -3486,6 +3661,19 @@ h3 {
 }
 
 @media (max-width: 680px) {
+  .qr-segmented-control {
+    grid-auto-flow: row;
+  }
+
+  .qr-slider-field {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .qr-slider-field strong {
+    text-align: left;
+  }
+
   :root {
     --site-page-y: clamp(1.75rem, 8vw, 3rem);
     --site-top-gap: 0.8rem;

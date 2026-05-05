@@ -11,6 +11,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
 - Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
+- Studio QR code generator: `src/components/studio/qr-code-generator.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.
 - Website Builder defaults: `src/content/site-builder.ts`.
 - SEO helpers and site configuration: `src/lib/seo.ts`.
@@ -49,6 +50,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
+- `/studio/tools`: redirects to `/studio/tools/qr-code`.
+- `/studio/tools/qr-code`: protected QR code generator for links/text and Wi-Fi network join codes.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
 - `/studio/templates`: protected source/template file viewer and local-development editor.
 - `/studio/products`: product table with quick-edit drawer.
@@ -107,6 +110,14 @@ Each product currently has:
 - It can read public page templates, theme components, content modules, Studio templates and global CSS.
 - Saving is only enabled in local development. On Vercel/production it is read-only because source edits made on a serverless deployment would not be safely versioned or survive normal redeploys.
 - `next.config.ts` includes tracing entries for `/studio/templates` so the whitelisted `src` files can be inspected from production builds.
+
+## Studio Tool Behavior
+
+- `/studio/tools/qr-code` is a client-side QR generator using `qr-code-styling`.
+- It can generate normal URL/text codes or Wi-Fi join codes for WPA/WPA2, WEP and open networks.
+- Wi-Fi QR codes use the standard mobile payload shape, including optional hidden-network support.
+- Styling controls cover dot shape, foreground/background colour and an optional centre logo/image.
+- Exports are downloaded locally as PNG or SVG; the tool does not store generated codes in Neon, Redis or local managed data.
 
 ## Product Detail Behavior
 
@@ -168,10 +179,11 @@ Each product currently has:
 - Session cookies include user id, session version and issue time; password resets bump the session version and invalidate old sessions for that user.
 - Roles are `super_admin`, `admin`, and `moderator`. Super admin/admin currently have full control; moderator can manage enquiries and their own account.
 - Studio is separate from the public site shell; public header/footer do not render in admin routes.
-- Studio has a grouped sidebar with Overview, Content, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
+- Studio has a grouped sidebar with Overview, Content, Tools, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes a Template Editor mode for inspecting whitelisted source files.
+- Studio includes a Tools section with a QR code generator.
 - Studio has browser-local dark/light mode stored in `localStorage`.
 - Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.
 - Product management is table-first with full edit pages and a quick-edit right drawer.

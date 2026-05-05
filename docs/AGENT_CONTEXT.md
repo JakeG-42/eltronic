@@ -21,6 +21,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/lib/managed-data.ts`: product/submission storage abstraction.
 - `src/app/studio/(admin)/layout.tsx`: protected Studio shell wrapper.
 - `src/app/studio/(admin)/page.tsx`: Studio dashboard.
+- `src/app/studio/(admin)/tools/qr-code/page.tsx`: Studio QR Code tool route.
 - `src/app/studio/(admin)/products/page.tsx`: product table and quick-edit drawer.
 - `src/app/studio/(admin)/products/[slug]/edit/page.tsx`: full product editor.
 - `src/app/studio/actions.ts`: admin server actions.
@@ -39,6 +40,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/components/site/technical-visuals.tsx`: code-native public-page technical visuals.
 - `src/components/site/ambient-background.tsx`: subtle public-only floating syntax glyphs.
 - `src/components/site/product-media-gallery.tsx`: interactive product image selection and zoom.
+- `src/components/studio/qr-code-generator.tsx`: client-side Studio QR generator for links/text and Wi-Fi join codes.
 - `src/components/studio/product-image-manager.tsx`: Studio visual image preview/order editor.
 - `public/product-images`: local product image assets used by the public catalogue.
 - `public/product-images/generated`: generated technical product gallery illustrations.
@@ -129,10 +131,20 @@ Studio is intentionally separate from the public site chrome.
 - Public pages live under the `(site)` route group and use `src/components/site/site-shell.tsx`.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
-- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
-- The current Studio sidebar groups links under Overview, Content, Messages and Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- The current Studio sidebar groups links under Overview, Content, Tools, Messages and Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
 - The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
+
+## Studio Tools
+
+The Tools section currently contains `/studio/tools/qr-code`.
+
+- `/studio/tools` redirects to `/studio/tools/qr-code`.
+- The QR generator is a client-only component using `qr-code-styling`; it does not write to the managed data layer.
+- Supported payloads are URL/text and mobile Wi-Fi join codes.
+- Wi-Fi QR payloads use the standard `WIFI:T:<security>;S:<ssid>;P:<password>;;` shape, with hidden-network support and no password field for open networks.
+- Styling is deliberately simple: square/rounded/circular dots, foreground/background colours, optional centre logo image and PNG/SVG export.
 
 ## Product Management
 

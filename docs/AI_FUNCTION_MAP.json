@@ -250,6 +250,28 @@
       "guard": "isAdminAuthenticated()"
     },
     {
+      "path": "/studio/tools",
+      "file": "src/app/studio/(admin)/tools/page.tsx",
+      "kind": "admin-tool-redirect",
+      "guard": "isAdminAuthenticated()",
+      "redirectsTo": "/studio/tools/qr-code"
+    },
+    {
+      "path": "/studio/tools/qr-code",
+      "file": "src/app/studio/(admin)/tools/qr-code/page.tsx",
+      "kind": "admin-qr-code-tool",
+      "guard": "isAdminAuthenticated()",
+      "clientComponent": "src/components/studio/qr-code-generator.tsx",
+      "features": [
+        "URL/text QR payloads",
+        "Wi-Fi QR payloads for WPA/WPA2, WEP and open networks",
+        "square, rounded and circular dot styles",
+        "foreground/background colours",
+        "centre logo upload",
+        "PNG/SVG export"
+      ]
+    },
+    {
       "path": "/studio/products",
       "file": "src/app/studio/(admin)/products/page.tsx",
       "kind": "admin-products-table",
@@ -571,9 +593,16 @@
       ]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
-    "studioSidebar": "Grouped under Overview, Content, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
+    "studioSidebar": "Grouped under Overview, Content, Tools, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
+    "studioQrCodeGenerator": {
+      "route": "/studio/tools/qr-code",
+      "component": "src/components/studio/qr-code-generator.tsx",
+      "package": "qr-code-styling",
+      "styleFile": "src/app/globals.css",
+      "behavior": "Client-only Studio tool for generating URL/text and Wi-Fi QR codes. Wi-Fi mode emits standard mobile WIFI payloads with WPA/WPA2, WEP, open-network and hidden-network options. Exports PNG/SVG locally and does not persist generated codes."
+    },
     "websiteBuilder": {
       "route": "/studio/builder",
       "defaults": "src/content/site-builder.ts",
@@ -597,6 +626,7 @@
       "src/components/ui/label.tsx",
       "src/components/ui/badge.tsx",
       "src/components/ui/separator.tsx",
+      "src/components/studio/qr-code-generator.tsx",
       "src/components/studio/product-form.tsx",
       "src/components/studio/product-image-manager.tsx",
       "src/components/studio/submission-card.tsx"
