@@ -582,6 +582,10 @@
       "file": "src/components/site/product-media-gallery.tsx",
       "behavior": "Client-side selected image state, thumbnail switching, touch swipe and desktop click-drag switching, keyboard-friendly zoom overlay, previous/next controls. Thumbnail layout scrolls horizontally so product galleries can contain more than four images without changing the hero height."
     },
+    "managedImageRenderer": {
+      "file": "src/components/site/managed-image.tsx",
+      "behavior": "Renders normal product image URLs through next/image and inline uploaded image data through a native img element so Studio uploads can display in product cards, admin thumbnails and galleries."
+    },
     "publicTechnicalVisuals": {
       "file": "src/components/site/technical-visuals.tsx",
       "type": "code-native SVG",
@@ -638,7 +642,7 @@
         "imageSrc",
         "imageAlt"
       ],
-      "behavior": "Visual image preview and ordering UI. Ordered galleryImagesJson is saved first, with repeated imageSrc/imageAlt fields retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
+      "behavior": "Visual image preview and ordering UI. Each row has a compact URL field plus upload button. Uploads are resized in the browser and stored as inline image data in the ordered galleryImagesJson payload. Repeated imageSrc/imageAlt fields are retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",

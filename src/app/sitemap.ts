@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 0.82,
-    images: getProductImages(product).map((image) => absoluteUrl(image.src)),
+    images: getProductImages(product).map((image) => sitemapImageUrl(image.src)).filter((src): src is string => Boolean(src)),
   }));
 
   const projectRoutes = projects.map((project) => ({
@@ -63,4 +63,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...productRoutes,
     ...projectRoutes,
   ];
+}
+
+function sitemapImageUrl(src: string) {
+  if (/^(data|blob):/i.test(src)) {
+    return null;
+  }
+
+  return absoluteUrl(src);
 }

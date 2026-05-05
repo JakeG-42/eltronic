@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { HeroRoleTypewriter } from "@/components/site/hero-role-typewriter";
+import { ManagedImage } from "@/components/site/managed-image";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
 import type { Product } from "@/content/products";
 import { sectorModules, serviceModules, workflowModules } from "@/content/site";
@@ -91,7 +91,7 @@ function renderHomeSection(section: SiteBuilderSection, featuredProducts: Produc
           {featuredProducts.map((product) => (
             <Link className="product-card" href={`/products/${product.slug}`} key={product.slug}>
               <div className="product-media">
-                <Image
+                <ManagedImage
                   src={product.image.src}
                   alt={product.image.alt}
                   fill

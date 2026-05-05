@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             },
             category: product.category,
             description: product.summary,
-            image: images.map((image) => absoluteUrl(image.src)),
+            image: images.map((image) => schemaImageUrl(image.src)).filter((src): src is string => Boolean(src)),
             name: product.name,
             sku: product.sku,
             url: absoluteUrl(`/products/${product.slug}`),
@@ -144,3 +144,11 @@ const productTypeLabel = {
   "data-logger": "Data logging",
   module: "Control module",
 };
+
+function schemaImageUrl(src: string) {
+  if (/^(data|blob):/i.test(src)) {
+    return null;
+  }
+
+  return absoluteUrl(src);
+}

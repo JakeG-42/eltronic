@@ -28,7 +28,7 @@ export const siteConfig = {
 };
 
 export function absoluteUrl(path = "/") {
-  if (/^https?:\/\//i.test(path)) {
+  if (/^[a-z][a-z0-9+.-]*:/i.test(path)) {
     return path;
   }
 

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Edit3, Eye, Images, Plus, SlidersHorizontal } from "lucide-react";
 
 import { deleteProductAction } from "@/app/studio/actions";
+import { ManagedImage } from "@/components/site/managed-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -73,7 +73,7 @@ export default async function StudioProductsPage({ searchParams }: ProductsPageP
                     <tr key={product.slug}>
                       <td>
                         <div className="flex items-center gap-3">
-                          <Image
+                          <ManagedImage
                             className="studio-product-thumb"
                             src={primaryImage.src}
                             alt={primaryImage.alt}

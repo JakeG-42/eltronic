@@ -9,6 +9,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
 - Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
+- Product image renderer: `src/components/site/managed-image.tsx` supports normal URLs and inline uploaded image data.
 - Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
 - Studio QR code generator: `src/components/studio/qr-code-generator.tsx`.
@@ -190,7 +191,7 @@ Each product currently has:
 - Product forms use a two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
-- Product image editing uses a visual preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt` fallback fields. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
+- Product image editing uses a visual preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt` fallback fields. Each image row supports a URL field plus a compact local upload button that fills the same image source. Uploaded raster files are resized client-side and stored as inline image data in the managed product record. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
 - Template assignment is managed with a select field on each product.
 - Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 
@@ -215,6 +216,6 @@ Each product currently has:
 - Product content is now seeded from the public `eltronic.co.uk` crawl.
 - Product pages show product copy, local product image assets, specifications, documents where known, and order variants where available.
 - Legacy migration/import work is not implemented in the current app.
-- Image upload management is not implemented yet; product images currently use URLs.
+- Image upload management is currently inline-data based, not a separate object-storage/media-library system.
 - Generated public-page imagery is currently code-native SVG, not bitmap media uploads.
 - Product galleries do not append hidden fallback images; generated product illustrations are explicit gallery records and can be reordered/removed in Studio. Replace them with real product/application photography when available.

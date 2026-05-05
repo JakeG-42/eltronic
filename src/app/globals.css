@@ -2851,6 +2851,18 @@ h3 {
   gap: 0.7rem;
 }
 
+.studio-image-source-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+  max-width: 38rem;
+}
+
+.studio-image-upload-button {
+  border-radius: 999px;
+}
+
 .studio-image-actions {
   display: grid;
   gap: 0.45rem;
@@ -3503,6 +3515,11 @@ h3 {
 
   .studio-image-card {
     grid-template-columns: 1fr;
+  }
+
+  .studio-image-source-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    max-width: none;
   }
 
   .studio-image-actions {

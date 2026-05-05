@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { ManagedImage } from "@/components/site/managed-image";
 import type { ProductImage } from "@/content/products";
 
 type ProductMediaGalleryProps = {
@@ -148,7 +148,7 @@ export function ProductMediaGallery({ images, productName }: ProductMediaGallery
         onPointerMove={trackGalleryGesture}
         onPointerUp={finishGalleryGesture}
       >
-        <Image
+        <ManagedImage
           src={selectedImage.src}
           alt={selectedImage.alt}
           fill
@@ -169,7 +169,7 @@ export function ProductMediaGallery({ images, productName }: ProductMediaGallery
               type="button"
               onClick={() => setSelectedIndex(index)}
             >
-              <Image src={image.src} alt="" fill sizes="96px" />
+              <ManagedImage src={image.src} alt="" fill sizes="96px" />
             </button>
           ))}
         </div>
@@ -199,7 +199,7 @@ export function ProductMediaGallery({ images, productName }: ProductMediaGallery
               onPointerMove={trackGalleryGesture}
               onPointerUp={finishGalleryGesture}
             >
-              <Image src={selectedImage.src} alt={selectedImage.alt} fill sizes="100vw" />
+              <ManagedImage src={selectedImage.src} alt={selectedImage.alt} fill sizes="100vw" />
             </div>
             {hasMultipleImages ? (
               <div className="zoom-controls" aria-label="Zoom gallery controls">

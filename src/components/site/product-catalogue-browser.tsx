@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useDeferredValue, useState } from "react";
+import { ManagedImage } from "@/components/site/managed-image";
 import type { Product } from "@/content/products";
 
 type ProductCatalogueBrowserProps = {
@@ -138,7 +138,7 @@ export function ProductCatalogueBrowser({
             {filteredProducts.map((product) => (
               <Link className="product-card" href={`/products/${product.slug}`} key={product.slug}>
                 <div className="product-media">
-                  <Image
+                  <ManagedImage
                     src={product.image.src}
                     alt={product.image.alt}
                     fill
