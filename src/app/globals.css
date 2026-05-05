@@ -2188,7 +2188,7 @@ h3 {
 .studio-topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3019,7 +3019,7 @@ h3 {
 .builder-header {
   position: sticky;
   top: 0;
-  z-index: 12;
+  z-index: 5;
   backdrop-filter: blur(18px);
 }
 
@@ -3408,7 +3408,7 @@ h3 {
 .template-editor-header {
   position: sticky;
   top: 0;
-  z-index: 12;
+  z-index: 5;
   backdrop-filter: blur(18px);
 }
 
