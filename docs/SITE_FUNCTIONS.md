@@ -55,7 +55,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/studio/tools`: redirects to `/studio/tools/qr-code`.
 - `/studio/tools/qr-code`: protected QR code generator for links/text and Wi-Fi network join codes.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
-- `/studio/templates`: protected source/template file viewer and local-development editor.
+- `/studio/templates`: protected Code Studio source/template file viewer and local-development editor.
 - `/studio/products`: product table with quick-edit drawer.
 - `/studio/products/new`: product creation form.
 - `/studio/products/[slug]/edit`: full product editor.
@@ -105,9 +105,9 @@ Each product currently has:
 - The builder is intentionally inside Studio only. There is no public admin toolbar when logged in.
 - This is the first builder layer; deeper per-page and per-card editing can be added against the same `SiteBuilderSettings` model.
 
-## Template/File Editor Behavior
+## Code Studio Behavior
 
-- `/studio/templates` is a protected template/file editor.
+- `/studio/templates` is a protected Code Studio template/file editor.
 - The editable/viewable file list is whitelisted in `src/lib/template-editor.ts`; it intentionally avoids `.env`, `.git`, `node_modules`, Vercel config, local data and arbitrary filesystem browsing.
 - It can read public page templates, theme components, content modules, Studio templates and global CSS.
 - Saving is only enabled in local development. On Vercel/production it is read-only because source edits made on a serverless deployment would not be safely versioned or survive normal redeploys.
@@ -184,7 +184,7 @@ Each product currently has:
 - Studio has a grouped sidebar with Overview, Content, Tools, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
-- Studio includes a Template Editor mode for inspecting whitelisted source files.
+- Studio includes Code Studio for inspecting whitelisted source files.
 - Studio includes a Tools section with a QR code generator.
 - Studio has browser-local dark/light mode stored in `localStorage`.
 - Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.

@@ -11,12 +11,13 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Vercel config: `vercel.json` sets `"framework": "nextjs"` to keep framework detection explicit.
 - Product content: initial structured product data lives in `src/content/products.ts`; live editable data is read through `src/lib/managed-data.ts`.
 - Topcon catalogue source: `docs/topcon_product_catalogue_import.csv` and `src/content/topcon-products.json`; sync to Neon with `npm run products:topcon:sync`.
-- Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, tools, templates and contact submissions.
+- Admin: `/studio` is a password-protected shadcn/Tailwind admin for products, tools, Code Studio and contact submissions.
 - Contact handling: `/contact` now stores enquiries through the managed data layer.
 - SEO: sitemap, robots rules, canonical metadata, structured data and project/case-study scaffolding are in place.
 
 ## What Has Happened So Far
 
+- Renamed the Studio sidebar Templates item to Code Studio and moved it into the Admin group.
 - Restyled Studio `product.media` editing from row-based image cards into a compact gallery grid with a dedicated add-image tile and a modal editor for URL, upload, filename and alt text.
 - Added `/studio/media` under the Content sidebar group to review product gallery media, and changed uploaded product image rows to display normalized filenames instead of raw inline `data:image/...` payloads.
 - Added per-row Studio product image uploads beside the URL field. Uploaded images are resized in the browser, stored as inline managed image data, and rendered through a shared managed-image component that supports both URLs and inline uploads.

@@ -40,7 +40,7 @@ export default async function StudioDashboardPage() {
           <Button asChild variant="outline">
             <Link href="/studio/templates">
               <FileCode2 className="size-4" />
-              Template editor
+              Code Studio
             </Link>
           </Button>
         </div>

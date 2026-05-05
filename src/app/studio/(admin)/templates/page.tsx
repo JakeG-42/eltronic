@@ -18,7 +18,7 @@ type TemplateEditorPageProps = {
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Template Editor | Eltronic Studio",
+  title: "Code Studio | Eltronic Studio",
 };
 
 export default async function TemplateEditorPage({ searchParams }: TemplateEditorPageProps) {

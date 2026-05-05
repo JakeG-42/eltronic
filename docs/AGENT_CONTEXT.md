@@ -36,7 +36,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/lib/seo.ts`: shared site URL, metadata and JSON-LD helpers.
 - `src/app/sitemap.ts`: dynamic sitemap for public static routes, products and published projects.
 - `src/app/robots.ts`: crawler policy for public pages versus Studio/API routes.
-- `src/lib/template-editor.ts`: whitelisted Studio Template Editor file registry/read-write helpers.
+- `src/lib/template-editor.ts`: whitelisted Studio Code Studio file registry/read-write helpers.
 - `src/lib/contact-captcha.ts`: local signed maths captcha for contact anti-spam.
 - `src/components/site/technical-visuals.tsx`: code-native public-page technical visuals.
 - `src/components/site/ambient-background.tsx`: subtle public-only floating syntax glyphs.
@@ -133,8 +133,8 @@ Studio is intentionally separate from the public site chrome.
 - Public pages live under the `(site)` route group and use `src/components/site/site-shell.tsx`.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
-- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
-- The current Studio sidebar groups links under Overview, Content, Tools, Messages and Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/media`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- The current Studio sidebar groups links under Overview, Content, Tools, Messages and Admin. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
 - The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
 
@@ -168,7 +168,7 @@ Supplemental launch gallery images for AutoPi and the Eltronic I&Q module are ge
 
 Website Builder settings are stored in `src/lib/managed-data.ts` under `siteBuilder`. Defaults are in `src/content/site-builder.ts`. `/studio/builder` saves through `saveSiteBuilderAction()` and the homepage uses `getSiteBuilderSettings()` to render theme variables, hero copy, section visibility and section order. Treat it as the internal Elementor/Colibri-style builder foundation; do not add a public admin toolbar unless Jake explicitly asks for one.
 
-The Template Editor lives at `/studio/templates`. It reads a whitelist from `src/lib/template-editor.ts`. Keep it whitelisted. Do not turn it into arbitrary filesystem access. Saving is local-development-only; production/Vercel should remain read-only so source changes stay versioned through GitHub.
+Code Studio lives at `/studio/templates`. It reads a whitelist from `src/lib/template-editor.ts`. Keep it whitelisted. Do not turn it into arbitrary filesystem access. Saving is local-development-only; production/Vercel should remain read-only so source changes stay versioned through GitHub.
 
 Admin product UI:
 

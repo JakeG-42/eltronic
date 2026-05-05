@@ -45,7 +45,6 @@ const navGroups: Array<{
     items: [
       { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
       { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
-      { href: "/studio/templates", label: "Templates", icon: FileCode2, roles: ["super_admin", "admin"] },
       { href: "/studio/media", label: "Media", icon: ImageIcon, roles: ["super_admin", "admin"] },
     ],
   },
@@ -60,6 +59,7 @@ const navGroups: Array<{
   {
     label: "Admin",
     items: [
+      { href: "/studio/templates", label: "Code Studio", icon: FileCode2, roles: ["super_admin", "admin"] },
       { href: "/studio/users", label: "Users", icon: Users, roles: ["super_admin", "admin"] },
       { href: "/studio/settings", label: "Settings", icon: Settings, roles: ["super_admin", "admin"] },
       { href: "/studio/account", label: "Account", icon: UserCircle, roles: ["super_admin", "admin", "moderator"] },
@@ -199,7 +199,7 @@ export function StudioShell({
 
 function currentModeLabel(pathname: string) {
   if (pathname.startsWith("/studio/builder")) return "Website Builder";
-  if (pathname.startsWith("/studio/templates")) return "Template Editor";
+  if (pathname.startsWith("/studio/templates")) return "Code Studio";
   if (pathname.startsWith("/studio/media")) return "Media";
   if (pathname.startsWith("/studio/products")) return "Products";
   if (pathname.startsWith("/studio/tools")) return "Tools";

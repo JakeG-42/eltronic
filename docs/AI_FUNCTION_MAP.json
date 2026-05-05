@@ -633,7 +633,7 @@
       "registry": "src/lib/template-editor.ts",
       "action": "saveTemplateFileAction in src/app/studio/actions.ts",
       "styleFile": "src/app/globals.css",
-      "behavior": "Protected source/template file viewer/editor. Uses a whitelist of src files only. Saves are local-development-only; production/Vercel is read-only. next.config.ts traces src files for this route."
+      "behavior": "Protected Code Studio source/template file viewer/editor. Uses a whitelist of src files only. Saves are local-development-only; production/Vercel is read-only. next.config.ts traces src files for this route. Sidebar label is Code Studio under Admin."
     },
     "components": [
       "src/components/ui/button.tsx",
