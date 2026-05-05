@@ -1047,7 +1047,7 @@ function parseProductImages(formData: FormData, fallbackAlt: string): ProductIma
         src,
         alt: alts[index] || fallbackAlt,
       };
-      const fileName = normalizeStoredImageFileName(fileNames[index], src);
+      const fileName = normalizeStoredImageFileName(fileNames[index]);
 
       if (fileName) {
         image.fileName = fileName;
@@ -1088,7 +1088,7 @@ function parseSerializedProductImages(value: FormDataEntryValue | null, fallback
           src: source,
           alt: alt || fallbackAlt,
         };
-        const normalizedFileName = normalizeStoredImageFileName(fileName, source);
+        const normalizedFileName = normalizeStoredImageFileName(fileName);
 
         if (normalizedFileName) {
           nextImage.fileName = normalizedFileName;
@@ -1102,8 +1102,8 @@ function parseSerializedProductImages(value: FormDataEntryValue | null, fallback
   }
 }
 
-function normalizeStoredImageFileName(fileName: string | undefined, source: string) {
-  if (!/^(data|blob):/i.test(source) || !fileName) {
+function normalizeStoredImageFileName(fileName: string | undefined) {
+  if (!fileName) {
     return undefined;
   }
 

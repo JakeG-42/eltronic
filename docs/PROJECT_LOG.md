@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Restyled Studio `product.media` editing from row-based image cards into a compact gallery grid with a dedicated add-image tile and a modal editor for URL, upload, filename and alt text.
 - Added `/studio/media` under the Content sidebar group to review product gallery media, and changed uploaded product image rows to display normalized filenames instead of raw inline `data:image/...` payloads.
 - Added per-row Studio product image uploads beside the URL field. Uploaded images are resized in the browser, stored as inline managed image data, and rendered through a shared managed-image component that supports both URLs and inline uploads.
 - Made product galleries explicitly open-ended across templates by changing the public thumbnail strip to horizontal scrolling, replacing the stale fixed-slot Studio summary, and posting ordered `galleryImagesJson` from the image manager so dynamically added rows persist reliably.

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUp, ImagePlus, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, ImagePlus, Pencil, Trash2, X } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,20 +12,25 @@ type ManagedImage = ProductImage & {
   id: string;
 };
 
+type ImageField = "alt" | "fileName" | "src";
+
 type ProductImageManagerProps = {
   idPrefix?: string;
   images: ProductImage[];
   requireFirst?: boolean;
 };
 
-export function ProductImageManager({ idPrefix = "image", images, requireFirst = true }: ProductImageManagerProps) {
+export function ProductImageManager({ idPrefix = "image", images }: ProductImageManagerProps) {
   const initialImages = images.length > 0 ? images : [{ src: "", alt: "" }];
+  const [editingId, setEditingId] = useState<string | null>(initialImages[0] ? `${idPrefix}-existing-0` : null);
   const [items, setItems] = useState<ManagedImage[]>(() =>
     initialImages.map((image, index) => ({
       ...image,
       id: `${idPrefix}-existing-${index}`,
     })),
   );
+  const editingIndex = items.findIndex((item) => item.id === editingId);
+  const editingImage = editingIndex >= 0 ? items[editingIndex] : null;
   const serializedImages = JSON.stringify(
     items.map((image) => ({
       alt: image.alt,
@@ -34,10 +39,10 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
     })),
   );
 
-  function updateImage(index: number, field: "src" | "alt", value: string) {
+  function updateImage(id: string, field: ImageField, value: string) {
     setItems((current) =>
-      current.map((item, itemIndex) =>
-        itemIndex === index
+      current.map((item) =>
+        item.id === id
           ? {
               ...item,
               [field]: value,
@@ -48,7 +53,7 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
     );
   }
 
-  async function uploadImage(index: number, file?: File) {
+  async function uploadImage(id: string, file?: File) {
     if (!file) {
       return;
     }
@@ -58,8 +63,8 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
     const fileName = normalizeUploadFileName(file.name);
 
     setItems((current) =>
-      current.map((item, itemIndex) =>
-        itemIndex === index
+      current.map((item) =>
+        item.id === id
           ? {
               ...item,
               alt: item.alt || fallbackAlt,
@@ -72,21 +77,35 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
   }
 
   function addImage() {
+    const id = `${idPrefix}-${Date.now()}-${items.length}`;
     setItems((current) => [
       ...current,
       {
-        id: `${idPrefix}-${Date.now()}-${current.length}`,
+        id,
         src: "",
         alt: "",
       },
     ]);
+    setEditingId(id);
   }
 
-  function removeImage(index: number) {
-    setItems((current) => {
-      const nextItems = current.filter((_, itemIndex) => itemIndex !== index);
-      return nextItems.length > 0 ? nextItems : [{ id: `${idPrefix}-${Date.now()}-empty`, src: "", alt: "" }];
-    });
+  function removeImage(id: string) {
+    const removeIndex = items.findIndex((item) => item.id === id);
+    const nextItems = items.filter((item) => item.id !== id);
+
+    if (nextItems.length > 0) {
+      setItems(nextItems);
+
+      if (editingId === id) {
+        setEditingId(nextItems[Math.max(0, removeIndex - 1)]?.id ?? nextItems[0].id);
+      }
+
+      return;
+    }
+
+    const emptyItem = { id: `${idPrefix}-${Date.now()}-empty`, src: "", alt: "" };
+    setItems([emptyItem]);
+    setEditingId(emptyItem.id);
   }
 
   function moveImage(index: number, direction: -1 | 1) {
@@ -107,111 +126,172 @@ export function ProductImageManager({ idPrefix = "image", images, requireFirst =
   return (
     <div className="studio-image-manager">
       <input name="galleryImagesJson" type="hidden" value={serializedImages} />
+
+      {items.map((image) => (
+        <span key={image.id}>
+          <input name="imageSrc" type="hidden" value={image.src} />
+          <input name="imageAlt" type="hidden" value={image.alt} />
+          <input name="imageFileName" type="hidden" value={image.fileName ?? ""} />
+        </span>
+      ))}
+
       <div className="studio-image-manager-header">
         <div>
           <Label>Gallery images</Label>
-          <p>
-            Preview, edit and order the product gallery. Add as many images as the product needs; the first image
-            becomes the main product image.
-          </p>
+          <p>Open an image to edit its source, upload a replacement, rename it or adjust alt text.</p>
         </div>
         <span className="studio-image-count">{items.length} image{items.length === 1 ? "" : "s"}</span>
-        <Button type="button" variant="secondary" onClick={addImage}>
-          <ImagePlus className="size-4" />
-          Add image
-        </Button>
       </div>
 
-      <div className="studio-image-list">
+      <div className="studio-image-gallery-grid">
         {items.map((image, index) => (
-          <article className="studio-image-card" key={image.id}>
-            <input name="imageSrc" type="hidden" value={image.src} />
-            <input name="imageFileName" type="hidden" value={displayImageSource(image)} />
-            <div
-              aria-label={image.alt || image.src || `Product image ${index + 1}`}
-              className="studio-image-preview"
-              role="img"
+          <article className="studio-image-tile" key={image.id}>
+            <button
+              aria-label={`Edit image ${index + 1}`}
+              className="studio-image-tile-preview"
               style={{ backgroundImage: image.src ? `url(${JSON.stringify(image.src)})` : undefined }}
+              type="button"
+              onClick={() => setEditingId(image.id)}
             >
               {image.src ? null : <span>No image</span>}
               {index === 0 ? <strong>Primary</strong> : null}
-            </div>
-
-            <div className="studio-image-fields">
-              <div className="grid gap-2">
-                <Label htmlFor={`image-src-${image.id}`}>Image URL</Label>
-                <div className="studio-image-source-row">
-                  <Input
-                    id={`image-src-${image.id}`}
-                    placeholder="/product-images/example.jpg"
-                    required={requireFirst && index === 0}
-                    value={displayImageSource(image)}
-                    onChange={(event) => updateImage(index, "src", event.target.value)}
-                  />
-                  <input
-                    accept="image/*"
-                    className="sr-only"
-                    id={`image-upload-${image.id}`}
-                    type="file"
-                    onChange={(event) => {
-                      void uploadImage(index, event.target.files?.[0]);
-                      event.currentTarget.value = "";
-                    }}
-                  />
-                  <Button
-                    aria-label={`Upload image ${index + 1}`}
-                    className="studio-image-upload-button"
-                    size="icon"
-                    title="Upload image"
-                    type="button"
-                    variant="outline"
-                    onClick={() => document.getElementById(`image-upload-${image.id}`)?.click()}
-                  >
-                    <ImagePlus className="size-4" />
-                  </Button>
-                </div>
+            </button>
+            <div className="studio-image-tile-meta">
+              <button type="button" onClick={() => setEditingId(image.id)}>
+                <span>{displayImageName(image, index)}</span>
+                <small>{image.alt || "Alt text missing"}</small>
+              </button>
+              <div className="studio-image-tile-actions" aria-label={`Manage image ${index + 1}`}>
+                <Button
+                  aria-label="Move image up"
+                  disabled={index === 0}
+                  size="icon"
+                  type="button"
+                  variant="ghost"
+                  onClick={() => moveImage(index, -1)}
+                >
+                  <ArrowUp className="size-4" />
+                </Button>
+                <Button
+                  aria-label="Move image down"
+                  disabled={index === items.length - 1}
+                  size="icon"
+                  type="button"
+                  variant="ghost"
+                  onClick={() => moveImage(index, 1)}
+                >
+                  <ArrowDown className="size-4" />
+                </Button>
+                <Button aria-label="Edit image" size="icon" type="button" variant="ghost" onClick={() => setEditingId(image.id)}>
+                  <Pencil className="size-4" />
+                </Button>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor={`image-alt-${image.id}`}>Alt text</Label>
-                <Input
-                  id={`image-alt-${image.id}`}
-                  name="imageAlt"
-                  placeholder="Describe the product image"
-                  value={image.alt}
-                  onChange={(event) => updateImage(index, "alt", event.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="studio-image-actions" aria-label={`Reorder image ${index + 1}`}>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                disabled={index === 0}
-                onClick={() => moveImage(index, -1)}
-              >
-                <ArrowUp className="size-4" />
-                Up
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                disabled={index === items.length - 1}
-                onClick={() => moveImage(index, 1)}
-              >
-                <ArrowDown className="size-4" />
-                Down
-              </Button>
-              <Button type="button" size="sm" variant="ghost" onClick={() => removeImage(index)}>
-                <Trash2 className="size-4" />
-                Remove
-              </Button>
             </div>
           </article>
         ))}
+
+        <button className="studio-image-add-tile" type="button" onClick={addImage}>
+          <ImagePlus className="size-6" />
+          <span>Add image</span>
+        </button>
       </div>
+
+      {editingImage ? (
+        <div className="studio-image-modal-backdrop" role="presentation">
+          <section
+            aria-label={`Edit gallery image ${editingIndex + 1}`}
+            aria-modal="true"
+            className="studio-image-modal"
+            role="dialog"
+          >
+            <div className="studio-image-modal-header">
+              <div>
+                <span className="studio-eyebrow">product.media</span>
+                <h2>Edit gallery image</h2>
+              </div>
+              <Button aria-label="Close image editor" size="icon" type="button" variant="ghost" onClick={() => setEditingId(null)}>
+                <X className="size-4" />
+              </Button>
+            </div>
+
+            <div className="studio-image-modal-body">
+              <div
+                aria-label={editingImage.alt || displayImageSource(editingImage)}
+                className="studio-image-modal-preview"
+                role="img"
+                style={{ backgroundImage: editingImage.src ? `url(${JSON.stringify(editingImage.src)})` : undefined }}
+              >
+                {editingImage.src ? null : <span>No image selected</span>}
+              </div>
+
+              <div className="studio-image-modal-fields">
+                <div className="grid gap-2">
+                  <Label htmlFor={`${editingImage.id}-source`}>Image URL</Label>
+                  <div className="studio-image-source-row">
+                    <Input
+                      id={`${editingImage.id}-source`}
+                      placeholder={isInlineImageSource(editingImage.src) ? "Uploaded image stored in product data" : "/product-images/example.jpg"}
+                      value={isInlineImageSource(editingImage.src) ? "" : editingImage.src}
+                      onChange={(event) => updateImage(editingImage.id, "src", event.target.value)}
+                    />
+                    <input
+                      accept="image/*"
+                      className="sr-only"
+                      id={`${editingImage.id}-upload`}
+                      type="file"
+                      onChange={(event) => {
+                        void uploadImage(editingImage.id, event.target.files?.[0]);
+                        event.currentTarget.value = "";
+                      }}
+                    />
+                    <Button
+                      aria-label="Upload image"
+                      className="studio-image-upload-button"
+                      size="icon"
+                      title="Upload image"
+                      type="button"
+                      variant="outline"
+                      onClick={() => document.getElementById(`${editingImage.id}-upload`)?.click()}
+                    >
+                      <ImagePlus className="size-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor={`${editingImage.id}-name`}>Name</Label>
+                  <Input
+                    id={`${editingImage.id}-name`}
+                    placeholder="uploaded_image.webp"
+                    value={displayImageName(editingImage, editingIndex)}
+                    onChange={(event) => updateImage(editingImage.id, "fileName", normalizeUploadFileName(event.target.value))}
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor={`${editingImage.id}-alt`}>Alt text</Label>
+                  <Input
+                    id={`${editingImage.id}-alt`}
+                    placeholder="Describe the product image"
+                    value={editingImage.alt}
+                    onChange={(event) => updateImage(editingImage.id, "alt", event.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="studio-image-modal-actions">
+              <Button type="button" variant="outline" onClick={() => removeImage(editingImage.id)}>
+                <Trash2 className="size-4" />
+                Remove
+              </Button>
+              <Button type="button" onClick={() => setEditingId(null)}>
+                Done
+              </Button>
+            </div>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -229,6 +309,24 @@ function displayImageSource(image: ProductImage) {
   }
 
   return image.fileName || inlineFileNameFromAlt(image.alt, image.src);
+}
+
+function displayImageName(image: ProductImage, index: number) {
+  if (image.fileName) {
+    return image.fileName;
+  }
+
+  if (isInlineImageSource(image.src)) {
+    return inlineFileNameFromAlt(image.alt, image.src);
+  }
+
+  if (image.src) {
+    const [cleanSrc] = image.src.split(/[?#]/);
+    const fileName = cleanSrc.split("/").filter(Boolean).at(-1);
+    return fileName || `Image_${index + 1}`;
+  }
+
+  return `Image_${index + 1}`;
 }
 
 function inlineFileNameFromAlt(alt: string, src: string) {

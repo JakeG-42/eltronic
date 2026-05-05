@@ -652,10 +652,12 @@
       "file": "src/components/studio/product-image-manager.tsx",
       "parser": "src/lib/managed-data.ts#productFromFormData",
       "fields": [
+        "galleryImagesJson",
         "imageSrc",
-        "imageAlt"
+        "imageAlt",
+        "imageFileName"
       ],
-      "behavior": "Visual image preview and ordering UI. Each row has a compact URL field plus upload button. Uploads are resized in the browser and stored as inline image data in the ordered galleryImagesJson payload with a normalized fileName so Studio does not show raw data URLs. Repeated imageSrc/imageAlt/imageFileName fields are retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
+      "behavior": "Gallery-style image preview and ordering UI. Image tiles open a modal editor with URL, upload, filename and alt-text controls, and the grid includes a dedicated add-image tile. Uploads are resized in the browser and stored as inline image data in the ordered galleryImagesJson payload with a normalized fileName so Studio does not show raw data URLs. Repeated imageSrc/imageAlt/imageFileName fields are retained as a fallback; first image becomes product.image. There is no intended image-count cap by product template. Product galleries should use managed images from this UI, seed data or generated manifest entries only."
     },
     "studioProductForm": {
       "file": "src/components/studio/product-form.tsx",
