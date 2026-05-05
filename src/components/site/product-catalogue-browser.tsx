@@ -56,7 +56,7 @@ export function ProductCatalogueBrowser({
       <section className="catalogue-hero section">
         <div className="catalogue-intro">
           <p className="code-kicker">products.index</p>
-          <h1 className="catalogue-title">Product catalogue</h1>
+          <h1 className="catalogue-title">Product.Catalogue</h1>
           <p className="lede catalogue-lede">
             Rugged HMI displays, CAN-Bus data logging and control modules for
             quote-led specification, integration and support.
