@@ -1,6 +1,6 @@
 import type { Block } from "payload";
 
-import { optionalLinkFields } from "../fields.ts";
+import { blockDesignFields, optionalLinkFields } from "../fields.ts";
 
 export const CallToActionBlock: Block = {
   slug: "callToAction",
@@ -24,6 +24,7 @@ export const CallToActionBlock: Block = {
       fields: optionalLinkFields,
       label: "Primary link",
     },
+    ...blockDesignFields({ defaultAlignment: "center" }),
   ],
   labels: {
     plural: "CTA bands",

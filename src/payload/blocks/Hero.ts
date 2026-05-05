@@ -1,6 +1,6 @@
 import type { Block } from "payload";
 
-import { optionalLinkFields } from "../fields.ts";
+import { blockDesignFields, optionalLinkFields } from "../fields.ts";
 
 export const HeroBlock: Block = {
   slug: "hero",
@@ -36,6 +36,7 @@ export const HeroBlock: Block = {
       fields: optionalLinkFields,
       label: "Secondary link",
     },
+    ...blockDesignFields(),
   ],
   labels: {
     plural: "Heroes",

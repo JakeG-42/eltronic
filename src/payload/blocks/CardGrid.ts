@@ -1,6 +1,6 @@
 import type { Block } from "payload";
 
-import { optionalLinkFields } from "../fields.ts";
+import { blockDesignFields, optionalLinkFields } from "../fields.ts";
 
 export const CardGridBlock: Block = {
   slug: "cardGrid",
@@ -35,6 +35,7 @@ export const CardGridBlock: Block = {
       ],
       minRows: 1,
     },
+    ...blockDesignFields({ includeColumns: true }),
   ],
   labels: {
     plural: "Card grids",

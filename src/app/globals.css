@@ -3774,6 +3774,69 @@ h3 {
   padding-top: var(--site-top-gap);
 }
 
+.payload-section {
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.payload-section.payload-spacing-compact {
+  padding-top: clamp(1.8rem, 4vw, 3rem);
+  padding-bottom: clamp(1.8rem, 4vw, 3rem);
+}
+
+.payload-section.payload-spacing-spacious {
+  padding-top: clamp(4rem, 9vw, 7.5rem);
+  padding-bottom: clamp(4rem, 9vw, 7.5rem);
+}
+
+.payload-bg-panel {
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  border-color: var(--border);
+  background: rgba(23, 32, 51, 0.44);
+  box-shadow: var(--shadow-lg);
+}
+
+.payload-bg-soft {
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  border-color: rgba(139, 211, 255, 0.14);
+  background:
+    radial-gradient(circle at top right, rgba(139, 211, 255, 0.1), transparent 20rem),
+    rgba(15, 23, 42, 0.38);
+}
+
+.payload-bg-contrast {
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  border-color: transparent;
+  background:
+    linear-gradient(rgba(23, 32, 51, 0.72), rgba(23, 32, 51, 0.72)) padding-box,
+    var(--halogen-edge) border-box;
+  box-shadow: var(--shadow-halogen);
+}
+
+.payload-align-center {
+  text-align: center;
+}
+
+.payload-align-center .hero-copy,
+.payload-align-center .lede,
+.payload-align-center .section-heading p,
+.payload-align-center .payload-rich-text,
+.payload-align-center .actions {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.payload-align-center .section-heading {
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.payload-align-center .actions,
+.payload-align-center .tag-row {
+  justify-content: center;
+}
+
 .payload-hero {
   min-height: min(42rem, calc(100vh - 6.25rem));
 }
@@ -3891,6 +3954,18 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.payload-columns-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.payload-columns-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.payload-columns-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .payload-gallery-item {

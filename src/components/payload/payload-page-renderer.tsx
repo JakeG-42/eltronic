@@ -10,6 +10,12 @@ type LinkFields = {
   label?: string | null;
   url?: string | null;
 };
+type DesignFields = {
+  alignment?: "center" | "left" | null;
+  backgroundStyle?: "contrast" | "default" | "panel" | "soft" | null;
+  columns?: "2" | "3" | "4" | null;
+  spacing?: "compact" | "normal" | "spacious" | null;
+};
 type LexicalNode = {
   children?: LexicalNode[];
   fields?: {
@@ -177,6 +183,33 @@ function productCategoryLabel(product: Product) {
   return isDocument(product.category) ? product.category.name : product.template;
 }
 
+function getDesign(block: PageBlock): Required<Omit<DesignFields, "columns">> & { columns: "2" | "3" | "4" } {
+  const design = block as PageBlock & DesignFields;
+
+  return {
+    alignment: design.alignment ?? "left",
+    backgroundStyle: design.backgroundStyle ?? "default",
+    columns: design.columns ?? "3",
+    spacing: design.spacing ?? "normal",
+  };
+}
+
+function getSectionClassName(block: PageBlock, className = "section") {
+  const design = getDesign(block);
+
+  return [
+    className,
+    "payload-section",
+    `payload-bg-${design.backgroundStyle}`,
+    `payload-spacing-${design.spacing}`,
+    `payload-align-${design.alignment}`,
+  ].join(" ");
+}
+
+function getColumnsClassName(block: PageBlock, className: string) {
+  return `${className} payload-columns-${getDesign(block).columns}`;
+}
+
 function ProductCard({ product }: { product: Product }) {
   const media = product.gallery?.find(isMediaWithUrl);
 
@@ -213,7 +246,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "hero") {
     return (
-      <section className="hero payload-hero" key={key}>
+      <section className={getSectionClassName(block, "hero payload-hero")} key={key}>
         <div className="hero-copy">
           {block.eyebrow ? <p className="code-kicker">{block.eyebrow}</p> : null}
           <h1 className="hero-title">
@@ -232,7 +265,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "richText") {
     return (
-      <section className="section payload-copy-section" key={key}>
+      <section className={getSectionClassName(block, "section payload-copy-section")} key={key}>
         <RichText content={block.content} />
       </section>
     );
@@ -240,7 +273,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "imageText") {
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         <div className={`split-module ${block.imageSide === "right" ? "reverse" : ""}`}>
           <CmsMedia alt={block.heading} media={block.image} />
           <div>
@@ -256,7 +289,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "cardGrid") {
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         <div className="section-heading">
           <div>
             <span className="section-number">content.grid</span>
@@ -264,7 +297,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
           </div>
           {block.intro ? <p>{block.intro}</p> : null}
         </div>
-        <div className="capability-grid payload-card-grid">
+        <div className={getColumnsClassName(block, "capability-grid payload-card-grid")}>
           {(block.cards ?? []).map((card) => (
             <article className="capability-card panel" key={card.id ?? card.title}>
               <h3>{card.title}</h3>
@@ -282,7 +315,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
     const products = block.mode === "manual" ? manualProducts : featuredProducts;
 
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         <div className="section-heading">
           <div>
             <span className="section-number">product.range</span>
@@ -291,7 +324,9 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
           {block.intro ? <p>{block.intro}</p> : null}
         </div>
         {products.length ? (
-          <div className="product-grid">{products.map((product) => <ProductCard key={product.id} product={product} />)}</div>
+          <div className={getColumnsClassName(block, "product-grid")}>
+            {products.map((product) => <ProductCard key={product.id} product={product} />)}
+          </div>
         ) : (
           <div className="panel payload-empty-block">
             <p>Add featured products in Console to populate this section.</p>
@@ -305,7 +340,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
     const images = block.images.filter((image): image is Media => isDocument(image));
 
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         {block.heading ? (
           <div className="section-heading">
             <div>
@@ -314,7 +349,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
             </div>
           </div>
         ) : null}
-        <div className="payload-gallery-grid">
+        <div className={getColumnsClassName(block, "payload-gallery-grid")}>
           {images.map((image) => (
             <CmsMedia alt={image.alt} className="payload-gallery-item" key={image.id} media={image} />
           ))}
@@ -327,14 +362,14 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
     const documents = (block.documents ?? []).filter((document): document is PayloadDocument => isDocument(document));
 
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         <div className="section-heading">
           <div>
             <span className="section-number">resource.downloads</span>
             <h2>{block.heading}</h2>
           </div>
         </div>
-        <div className="document-grid">
+        <div className={getColumnsClassName(block, "document-grid")}>
           {documents.map((document) => (
             <a className="document-card" href={document.url ?? "#"} key={document.id}>
               <span>{document.mimeType ?? "Document"}</span>
@@ -349,7 +384,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "specTable") {
     return (
-      <section className="section payload-spec-section" key={key}>
+      <section className={getSectionClassName(block, "section payload-spec-section")} key={key}>
         <div className="section-heading">
           <div>
             <span className="section-number">technical.data</span>
@@ -370,7 +405,7 @@ function renderBlock(block: PageBlock, featuredProducts: Product[], index: numbe
 
   if (block.blockType === "callToAction") {
     return (
-      <section className="section" key={key}>
+      <section className={getSectionClassName(block)} key={key}>
         <div className="cta-module payload-cta">
           <div>
             {block.eyebrow ? <span className="section-number">{block.eyebrow}</span> : null}

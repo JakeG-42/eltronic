@@ -1,6 +1,6 @@
 import type { Block } from "payload";
 
-import { optionalLinkFields } from "../fields.ts";
+import { blockDesignFields, optionalLinkFields } from "../fields.ts";
 
 export const ImageTextBlock: Block = {
   slug: "imageText",
@@ -41,6 +41,7 @@ export const ImageTextBlock: Block = {
       type: "group",
       fields: optionalLinkFields,
     },
+    ...blockDesignFields(),
   ],
   labels: {
     plural: "Image text sections",

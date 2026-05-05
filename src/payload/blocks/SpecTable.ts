@@ -1,5 +1,7 @@
 import type { Block } from "payload";
 
+import { blockDesignFields } from "../fields.ts";
+
 export const SpecTableBlock: Block = {
   slug: "specTable",
   fields: [
@@ -25,6 +27,7 @@ export const SpecTableBlock: Block = {
       ],
       minRows: 1,
     },
+    ...blockDesignFields(),
   ],
   labels: {
     plural: "Specification tables",

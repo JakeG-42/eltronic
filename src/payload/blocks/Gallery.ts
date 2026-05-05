@@ -1,5 +1,7 @@
 import type { Block } from "payload";
 
+import { blockDesignFields } from "../fields.ts";
+
 export const GalleryBlock: Block = {
   slug: "gallery",
   fields: [
@@ -14,6 +16,7 @@ export const GalleryBlock: Block = {
       relationTo: "media",
       required: true,
     },
+    ...blockDesignFields({ includeColumns: true }),
   ],
   labels: {
     plural: "Galleries",

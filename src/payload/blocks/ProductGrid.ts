@@ -1,5 +1,7 @@
 import type { Block } from "payload";
 
+import { blockDesignFields } from "../fields.ts";
+
 export const ProductGridBlock: Block = {
   slug: "productGrid",
   fields: [
@@ -37,6 +39,7 @@ export const ProductGridBlock: Block = {
       hasMany: true,
       relationTo: "products",
     },
+    ...blockDesignFields({ includeColumns: true }),
   ],
   labels: {
     plural: "Product grids",

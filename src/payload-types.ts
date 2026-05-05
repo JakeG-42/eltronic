@@ -319,6 +319,9 @@ export interface Page {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
@@ -339,6 +342,9 @@ export interface Page {
           };
           [k: string]: unknown;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'richText';
@@ -352,6 +358,9 @@ export interface Page {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'imageText';
@@ -370,6 +379,10 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'cardGrid';
@@ -379,6 +392,10 @@ export interface Page {
         intro?: string | null;
         mode: 'featured' | 'manual';
         products?: (number | Product)[] | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'productGrid';
@@ -386,6 +403,10 @@ export interface Page {
     | {
         heading?: string | null;
         images: (number | Media)[];
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'gallery';
@@ -393,6 +414,10 @@ export interface Page {
     | {
         heading: string;
         documents?: (number | Document)[] | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'downloads';
@@ -406,6 +431,9 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'specTable';
@@ -418,6 +446,9 @@ export interface Page {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'callToAction';
@@ -463,6 +494,9 @@ export interface Post {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'hero';
@@ -483,6 +517,9 @@ export interface Post {
           };
           [k: string]: unknown;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'richText';
@@ -496,6 +533,9 @@ export interface Post {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'imageText';
@@ -514,6 +554,10 @@ export interface Post {
               id?: string | null;
             }[]
           | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'cardGrid';
@@ -523,6 +567,10 @@ export interface Post {
         intro?: string | null;
         mode: 'featured' | 'manual';
         products?: (number | Product)[] | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'productGrid';
@@ -530,6 +578,10 @@ export interface Post {
     | {
         heading?: string | null;
         images: (number | Media)[];
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'gallery';
@@ -537,6 +589,10 @@ export interface Post {
     | {
         heading: string;
         documents?: (number | Document)[] | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
+        columns: '2' | '3' | '4';
         id?: string | null;
         blockName?: string | null;
         blockType: 'downloads';
@@ -550,6 +606,9 @@ export interface Post {
               id?: string | null;
             }[]
           | null;
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'specTable';
@@ -562,6 +621,9 @@ export interface Post {
           label?: string | null;
           url?: string | null;
         };
+        backgroundStyle: 'default' | 'panel' | 'soft' | 'contrast';
+        spacing: 'compact' | 'normal' | 'spacious';
+        alignment: 'left' | 'center';
         id?: string | null;
         blockName?: string | null;
         blockType: 'callToAction';
@@ -826,6 +888,9 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -833,6 +898,9 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -849,6 +917,9 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -870,6 +941,10 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -880,6 +955,10 @@ export interface PagesSelect<T extends boolean = true> {
               intro?: T;
               mode?: T;
               products?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -888,6 +967,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               images?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -896,6 +979,10 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               documents?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -910,6 +997,9 @@ export interface PagesSelect<T extends boolean = true> {
                     value?: T;
                     id?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -925,6 +1015,9 @@ export interface PagesSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -972,6 +1065,9 @@ export interface PostsSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -979,6 +1075,9 @@ export interface PostsSelect<T extends boolean = true> {
           | T
           | {
               content?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -995,6 +1094,9 @@ export interface PostsSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -1016,6 +1118,10 @@ export interface PostsSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1026,6 +1132,10 @@ export interface PostsSelect<T extends boolean = true> {
               intro?: T;
               mode?: T;
               products?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1034,6 +1144,10 @@ export interface PostsSelect<T extends boolean = true> {
           | {
               heading?: T;
               images?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1042,6 +1156,10 @@ export interface PostsSelect<T extends boolean = true> {
           | {
               heading?: T;
               documents?: T;
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1056,6 +1174,9 @@ export interface PostsSelect<T extends boolean = true> {
                     value?: T;
                     id?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };
@@ -1071,6 +1192,9 @@ export interface PostsSelect<T extends boolean = true> {
                     label?: T;
                     url?: T;
                   };
+              backgroundStyle?: T;
+              spacing?: T;
+              alignment?: T;
               id?: T;
               blockName?: T;
             };

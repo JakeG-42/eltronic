@@ -88,3 +88,111 @@ export const linkFields = createLinkFields({ required: true });
 export const optionalLinkFields = createLinkFields({ required: false });
 
 export const requiredLinkFields = createLinkFields({ required: true });
+
+export function blockDesignFields({
+  defaultAlignment = "left",
+  includeColumns = false,
+}: {
+  defaultAlignment?: "center" | "left";
+  includeColumns?: boolean;
+} = {}): Field[] {
+  return [
+    {
+      type: "collapsible",
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: "backgroundStyle",
+          type: "select",
+          defaultValue: "default",
+          label: "Background",
+          options: [
+            {
+              label: "Default",
+              value: "default",
+            },
+            {
+              label: "Panel",
+              value: "panel",
+            },
+            {
+              label: "Soft",
+              value: "soft",
+            },
+            {
+              label: "Contrast",
+              value: "contrast",
+            },
+          ],
+          required: true,
+        },
+        {
+          name: "spacing",
+          type: "select",
+          defaultValue: "normal",
+          label: "Spacing",
+          options: [
+            {
+              label: "Compact",
+              value: "compact",
+            },
+            {
+              label: "Normal",
+              value: "normal",
+            },
+            {
+              label: "Spacious",
+              value: "spacious",
+            },
+          ],
+          required: true,
+        },
+        {
+          name: "alignment",
+          type: "select",
+          defaultValue: defaultAlignment,
+          label: "Text alignment",
+          options: [
+            {
+              label: "Left",
+              value: "left",
+            },
+            {
+              label: "Center",
+              value: "center",
+            },
+          ],
+          required: true,
+        },
+        ...(includeColumns
+          ? [
+              {
+                name: "columns",
+                type: "select",
+                defaultValue: "3",
+                label: "Columns",
+                options: [
+                  {
+                    label: "2 columns",
+                    value: "2",
+                  },
+                  {
+                    label: "3 columns",
+                    value: "3",
+                  },
+                  {
+                    label: "4 columns",
+                    value: "4",
+                  },
+                ],
+                required: true,
+              } satisfies Field,
+            ]
+          : []),
+      ],
+      label: "Design",
+    },
+  ];
+}

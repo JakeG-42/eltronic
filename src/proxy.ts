@@ -22,7 +22,7 @@ export function proxy(request: NextRequest) {
   }
 
   const url = request.nextUrl.clone();
-  url.pathname = "/v2";
+  url.pathname = request.nextUrl.pathname === "/" ? "/v2" : `/v2${request.nextUrl.pathname}`;
 
   return NextResponse.rewrite(url);
 }

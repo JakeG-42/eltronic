@@ -1,5 +1,7 @@
 import type { Block } from "payload";
 
+import { blockDesignFields } from "../fields.ts";
+
 export const DownloadsBlock: Block = {
   slug: "downloads",
   fields: [
@@ -14,6 +16,7 @@ export const DownloadsBlock: Block = {
       hasMany: true,
       relationTo: "documents",
     },
+    ...blockDesignFields({ includeColumns: true }),
   ],
   labels: {
     plural: "Download sections",
