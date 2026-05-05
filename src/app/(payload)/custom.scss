@@ -249,6 +249,10 @@
   --console-group-accent: #fbbf24;
 }
 
+.nav-group.Tools {
+  --console-group-accent: #fb7185;
+}
+
 .nav-group.Assets {
   --console-group-accent: #a78bfa;
 }
@@ -264,6 +268,7 @@
 }
 
 .nav__link,
+.console-tools-nav-link,
 .code-workspace-nav-link {
   position: relative;
   min-height: 2.25rem;
@@ -299,7 +304,11 @@
 
 .nav__link:hover,
 .nav__link:focus-visible,
+.console-tools-nav-link:hover,
+.console-tools-nav-link:focus-visible,
+.console-tools-nav-link.active,
 .code-workspace-nav-link:hover,
+.code-workspace-nav-link:focus-visible,
 .code-workspace-nav-link.active {
   background: color-mix(in srgb, var(--console-group-accent, #8bd3ff) 12%, var(--theme-elevation-100));
   color: var(--theme-elevation-950);
@@ -676,6 +685,7 @@
   }
 }
 
+.console-tools-nav-link,
 .code-workspace-nav-link {
   display: flex;
   align-items: center;
@@ -689,7 +699,11 @@
   text-decoration: none;
 }
 
+.console-tools-nav-link:hover,
+.console-tools-nav-link:focus-visible,
+.console-tools-nav-link.active,
 .code-workspace-nav-link:hover,
+.code-workspace-nav-link:focus-visible,
 .code-workspace-nav-link.active {
   background: var(--theme-elevation-100);
   color: var(--theme-elevation-900);

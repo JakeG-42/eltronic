@@ -27,7 +27,7 @@ export const CodeSnippets: CollectionConfig = {
   },
   admin: {
     defaultColumns: ["title", "scope", "status", "priority", "updatedAt"],
-    group: "Theme",
+    hidden: true,
     useAsTitle: "title",
   },
   labels: {
