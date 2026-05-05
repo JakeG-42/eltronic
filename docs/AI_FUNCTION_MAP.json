@@ -587,18 +587,7 @@
       "registry": "src/lib/template-editor.ts",
       "action": "saveTemplateFileAction in src/app/studio/actions.ts",
       "styleFile": "src/app/globals.css",
-      "behavior": "Protected WordPress Theme File Editor-style source viewer/editor. Uses a whitelist of src files only. Saves are local-development-only; production/Vercel is read-only. next.config.ts traces src files for this route."
-    },
-    "classicWooStyleBackend": {
-      "routes": [
-        "/studio/classic/products",
-        "/studio/classic/products/new",
-        "/studio/classic/products/[slug]/edit"
-      ],
-      "shell": "src/components/studio/studio-shell.tsx",
-      "editor": "src/components/studio/classic/woocommerce-product-editor.tsx",
-      "styleFile": "src/app/globals.css",
-      "behavior": "Protected WordPress/WooCommerce-inspired backend. Existing Studio shows a Switch to new button. Classic shell has WP-like admin bar/menu, product list table, Screen Options/Help tabs, product data panels, publish box, taxonomy boxes, product image and product gallery boxes. Saves through existing saveProductAction."
+      "behavior": "Protected source/template file viewer/editor. Uses a whitelist of src files only. Saves are local-development-only; production/Vercel is read-only. next.config.ts traces src files for this route."
     },
     "components": [
       "src/components/ui/button.tsx",
@@ -632,7 +621,7 @@
         "Technical content",
         "Variables and variants"
       ],
-      "behavior": "WooCommerce-style two-column editor with collapsible details/summary sections. Main product fields sit left; publish, commerce and module controls sit in a sticky sidebar on desktop. Saves admin-only SKU, price, tags, module switches and enhanced variant rows without displaying them publicly yet."
+      "behavior": "Two-column editor with collapsible details/summary sections. Main product fields sit left; publish, commerce and module controls sit in a sticky sidebar on desktop. Saves admin-only SKU, price, tags, module switches and enhanced variant rows without displaying them publicly yet."
     }
   },
   "deployment": {

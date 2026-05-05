@@ -32,8 +32,8 @@ export default async function TemplateEditorPage({ searchParams }: TemplateEdito
     <div className="template-editor-shell">
       <section className="studio-page-header template-editor-header">
         <p>
-          WordPress-style template file browser for the current Next.js site. Files are whitelisted so you can inspect
-          pages, theme components, content modules and styles without exposing secrets.
+          Whitelisted template file browser for the current Next.js site. You can inspect pages, theme components,
+          content modules and styles without exposing secrets.
         </p>
         <div className="flex flex-wrap gap-3">
           {file.publicRoute ? (

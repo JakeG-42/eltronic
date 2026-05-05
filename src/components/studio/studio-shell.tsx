@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, type ComponentType } from "react";
 import {
   Boxes,
-  ChevronDown,
   ExternalLink,
   FileCode2,
   Home,
@@ -73,7 +72,6 @@ export function StudioShell({
   storageMode: string;
 }) {
   const pathname = usePathname();
-  const isClassicAdmin = pathname.startsWith("/studio/classic");
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     if (typeof window !== "undefined") {
       const savedTheme = window.localStorage.getItem("eltronic-studio-theme");
@@ -89,71 +87,6 @@ export function StudioShell({
   useEffect(() => {
     window.localStorage.setItem("eltronic-studio-theme", theme);
   }, [theme]);
-
-  if (isClassicAdmin) {
-    return (
-      <div className="wp-admin-clone">
-        <header className="wp-admin-bar">
-          <Link className="wp-admin-bar-brand" href="/studio/classic/products">
-            Eltronic
-          </Link>
-          <Link href="/">Visit site</Link>
-          <Link href="/studio/classic/products/new">+ New</Link>
-          <span className="wp-admin-bar-spacer" />
-          <Link href="/studio/account">{currentUser.displayName}</Link>
-          {!storageConfigured ? <span>{storageMode}</span> : null}
-          <Link href="/studio/products">Switch to current</Link>
-          <form action={logoutAction}>
-            <button type="submit">Log out</button>
-          </form>
-        </header>
-
-        <aside className="wp-admin-menu" aria-label="WordPress-style admin navigation">
-          <Link className="wp-admin-menu-logo" href="/studio/classic/products">
-            <span>W</span>
-            <strong>Eltronic Admin</strong>
-          </Link>
-          <ClassicMenuLink href="/studio/classic" pathname={pathname}>
-            Dashboard
-          </ClassicMenuLink>
-          <ClassicMenuLink href="/studio/classic/products" pathname={pathname} primary>
-            Products
-            <ChevronDown className="size-3" />
-          </ClassicMenuLink>
-          <div className="wp-admin-submenu">
-            <Link href="/studio/classic/products">All Products</Link>
-            <Link href="/studio/classic/products/new">Add New</Link>
-            <span>Categories</span>
-            <span>Tags</span>
-            <span>Attributes</span>
-          </div>
-          <span>Media</span>
-          <span>Pages</span>
-          <span>Comments</span>
-          <span>WooCommerce</span>
-          <Link href="/studio/builder">Website Builder</Link>
-          <span>Analytics</span>
-          <span>Marketing</span>
-          <span>Appearance</span>
-          <Link href="/studio/templates">Theme File Editor</Link>
-          <span>Plugins</span>
-          <Link href="/studio/users">Users</Link>
-          <span>Tools</span>
-          <span>Settings</span>
-        </aside>
-
-        <main className="wp-admin-main">
-          {!storageConfigured ? (
-            <div className="wp-notice">
-              Storage is currently <strong>{storageMode}</strong>. Configure Neon/Postgres or Redis before relying on
-              live admin writes.
-            </div>
-          ) : null}
-          {children}
-        </main>
-      </div>
-    );
-  }
 
   return (
     <div className="studio-app" data-theme={theme} suppressHydrationWarning>
@@ -232,9 +165,6 @@ export function StudioShell({
                 View site
               </Link>
             </Button>
-            <Button asChild size="sm">
-              <Link href="/studio/classic/products">Switch to new</Link>
-            </Button>
             <Button
               aria-label="Toggle Studio theme"
               onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
@@ -260,28 +190,7 @@ export function StudioShell({
   );
 }
 
-function ClassicMenuLink({
-  children,
-  href,
-  pathname,
-  primary = false,
-}: {
-  children: React.ReactNode;
-  href: string;
-  pathname: string;
-  primary?: boolean;
-}) {
-  const active = href === "/studio/classic" ? pathname === href : pathname.startsWith(href);
-
-  return (
-    <Link className={cn("wp-admin-menu-link", active && "active", primary && "primary")} href={href}>
-      {children}
-    </Link>
-  );
-}
-
 function currentModeLabel(pathname: string) {
-  if (pathname.startsWith("/studio/classic")) return "New Studio";
   if (pathname.startsWith("/studio/builder")) return "Website Builder";
   if (pathname.startsWith("/studio/templates")) return "Template Editor";
   if (pathname.startsWith("/studio/products")) return "Products";

@@ -18,6 +18,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 ## What Has Happened So Far
 
 - Removed the separate Console CMS and `/v2` new-site sandbox for now, including the CMS route groups, builder code, generated types, migrations, related dependencies and `new.eltronic.co.uk` rewrite. Current work is focused on the public site and `/studio`.
+- Removed the WordPress/WooCommerce-style classic Studio backend under `/studio/classic`, including its product routes, shell switcher, editor component and dedicated CSS. Product management now stays on the current Studio product table, quick-edit drawer and full editor.
 - Replaced the stale 9-product Topcon seed/catalogue with 14 CSV-sourced Topcon OPUS products, including real Topcon image URLs, datasheets, operating manuals, highlights and technical data. Added `npm run products:topcon:sync` to replace Topcon records in Neon while preserving non-Topcon products and writing a local backup.
 - Crawled the public `eltronic.co.uk` site for product, contact, homepage and guide/data-sheet content.
 - Ported the first real product catalogue into `src/content/products.ts`.
@@ -50,15 +51,15 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Restored the public grid background by keeping the site shell transparent instead of covering the body background.
 - Reworked the About page into a stronger company positioning page and simplified primary navigation to the main customer journeys.
 - Added and tuned a subtle public ambient background with floating syntax glyphs and no cursor glow.
-- Upgraded Studio product management with collapsible WooCommerce-style sections plus admin-only SKU, price, tags, enhanced variants and product module switches.
+- Upgraded Studio product management with collapsible sections plus admin-only SKU, price, tags, enhanced variants and product module switches.
 - Added mobile hamburger auto-close behavior for link clicks, outside taps and Escape.
 - Added swipe/drag switching to product galleries and reshaped the Studio product editor into a main column plus sticky management sidebar.
 - Refined public content tone away from repeated machine/machinery phrasing, reduced oversized public headings and added restrained magenta/purple halogen edge accents to selected cards.
 - Replaced large duplicate Studio page titles with compact action rows, shortened the About hero heading, tightened homepage hero spacing and added a role typewriter above the Eltronic wordmark.
 - Reduced the oversized About page approach quote card so it reads as supporting content instead of a dominant headline.
-- Added a protected WordPress/WooCommerce-style product backend under `/studio/classic/products`, plus a `Switch to new` button from the current Studio and `Switch to current` from the classic shell.
+- Previously added a protected WordPress/WooCommerce-style product backend under `/studio/classic/products`, then removed it to reduce Studio clutter.
 - Added `/studio/builder`, a protected Website Builder for homepage theme, hero content, section visibility and section ordering, backed by the managed data layer.
-- Added `/studio/templates`, a protected WordPress-style template/file editor with a whitelisted source file tree and local-development-only save support.
+- Added `/studio/templates`, a protected template/file editor with a whitelisted source file tree and local-development-only save support.
 - Added a local anti-spam layer to the contact form with a signed maths captcha and hidden honeypot field.
 - Updated contact anti-spam to capture blocked captcha and honeypot attempts in the Studio submissions inbox with type filters.
 - Added duplicate suppression for blocked contact attempts and colour-coded Studio submission markers for enquiries, captcha failures and honeypot spam.
@@ -86,8 +87,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## Future Considerations
 
-- WordPress migration work is being considered for any content that is not publicly crawlable.
-- A possible temporary WordPress plugin could provide a controlled JSON/ZIP export from wp-admin.
+- Legacy-site migration work can be considered for any content that is not publicly crawlable.
 - Production persistence needs a passing `npm run storage:check` and a fresh Vercel deployment before live admin writes and contact submissions should be trusted.
 - Future admin improvements could include image uploads, per-page builder screens, richer product template fields, and richer email delivery logs.
 - Future SEO/content work should add real project case studies, original project photos, final-domain `NEXT_PUBLIC_SITE_URL`, Search Console submission and domain-specific Open Graph preview checks.

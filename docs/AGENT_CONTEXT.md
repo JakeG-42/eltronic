@@ -154,7 +154,7 @@ Supplemental launch gallery images for AutoPi and the Eltronic I&Q module are ge
 
 Website Builder settings are stored in `src/lib/managed-data.ts` under `siteBuilder`. Defaults are in `src/content/site-builder.ts`. `/studio/builder` saves through `saveSiteBuilderAction()` and the homepage uses `getSiteBuilderSettings()` to render theme variables, hero copy, section visibility and section order. Treat it as the internal Elementor/Colibri-style builder foundation; do not add a public admin toolbar unless Jake explicitly asks for one.
 
-The Template Editor lives at `/studio/templates`. It reads a whitelist from `src/lib/template-editor.ts` and is intended to feel like the WordPress Theme File Editor. Keep it whitelisted. Do not turn it into arbitrary filesystem access. Saving is local-development-only; production/Vercel should remain read-only so source changes stay versioned through GitHub.
+The Template Editor lives at `/studio/templates`. It reads a whitelist from `src/lib/template-editor.ts`. Keep it whitelisted. Do not turn it into arbitrary filesystem access. Saving is local-development-only; production/Vercel should remain read-only so source changes stay versioned through GitHub.
 
 Admin product UI:
 
@@ -174,7 +174,7 @@ Product form parsing uses `productFromFormData()`:
 - Documents: `Label | URL` per line.
 - Variants: preferred format is `Name | SKU | Price | Details | Article number` per line. Legacy `Name | Details | Article number` rows are still accepted.
 
-The Studio product form uses a WooCommerce-style two-column editing flow: main product sections on the left, with publish, commerce and module controls in a sticky sidebar on desktop. Keep sections collapsible when adding new product-management panels so the form remains manageable in the quick-edit drawer.
+The Studio product form uses a two-column editing flow: main product sections on the left, with publish, commerce and module controls in a sticky sidebar on desktop. Keep sections collapsible when adding new product-management panels so the form remains manageable in the quick-edit drawer.
 
 Product templates are currently:
 
@@ -269,7 +269,7 @@ The admin uses Tailwind CSS v4 plus local shadcn-style primitives:
 
 Studio page bodies should avoid large duplicate `h1` titles because `src/components/studio/studio-shell.tsx` already shows the current mode in the sticky top bar. Prefer compact `.studio-page-header` rows for short descriptions and actions.
 
-The protected classic backend lives under `/studio/classic/products`. `src/components/studio/studio-shell.tsx` switches to a WordPress-style shell for that route and the existing Studio topbar links to it with `Switch to new`. The classic product editor is `src/components/studio/classic/woocommerce-product-editor.tsx`; it saves through the same `saveProductAction` and should keep using the managed product data model unless a deliberate schema migration is planned. Treat it as a WordPress/WooCommerce-inspired management surface for Eltronic, not a real WooCommerce install.
+The old WordPress/WooCommerce-style classic backend under `/studio/classic` has been removed. Keep Studio focused on the current product table, quick-edit drawer and full product editor unless Jake explicitly asks for another admin surface.
 
 - `src/components/ui/button.tsx`
 - `src/components/ui/card.tsx`

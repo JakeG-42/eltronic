@@ -138,25 +138,18 @@ export const templateFiles: TemplateFile[] = [
     description: "Current Studio product editor.",
   },
   {
-    path: "src/components/studio/classic/woocommerce-product-editor.tsx",
-    label: "Classic product editor",
-    group: "Admin templates",
-    language: "tsx",
-    description: "WordPress/WooCommerce-style product editor.",
-  },
-  {
     path: "src/components/studio/studio-shell.tsx",
     label: "Studio shell",
     group: "Admin templates",
     language: "tsx",
-    description: "Studio sidebar, top bar and classic admin shell switcher.",
+    description: "Studio sidebar and top bar.",
   },
   {
     path: "src/app/globals.css",
     label: "Global stylesheet",
     group: "Global styles",
     language: "css",
-    description: "Public theme, Studio, classic admin and builder styles.",
+    description: "Public theme, Studio and builder styles.",
   },
 ];
 
