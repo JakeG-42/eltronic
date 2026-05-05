@@ -31,6 +31,7 @@ export const Pages: CollectionConfig = {
             },
             path: "/visual-builder",
             tab: {
+              href: "/visual-builder",
               label: "Visual Builder",
               order: 150,
             },
