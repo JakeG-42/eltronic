@@ -119,6 +119,14 @@ function getSectionClassName(style: BuilderAdvancedStyle = {}, className = "") {
     .join(" ");
 }
 
+function textValue(value: unknown, fallback = "") {
+  return typeof value === "string" ? value : fallback;
+}
+
+function arrayValue<T>(value: T[] | unknown): T[] {
+  return Array.isArray(value) ? value : [];
+}
+
 function BuilderButton({ link, secondary = false }: { link: { label?: string; url?: string }; secondary?: boolean }) {
   if (!link.label || !link.url) {
     return null;
@@ -290,23 +298,27 @@ export const builderConfig: BuilderConfig = {
         ...sharedDesignFields,
       },
       label: "Card grid",
-      render: (props) => (
-        <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
-          <div className="puck-section-heading">
-            <h2>{props.heading}</h2>
-            {props.intro ? <p>{props.intro}</p> : null}
-          </div>
-          <div className={`puck-card-grid puck-columns-${props.columns ?? "3"}`}>
-            {(props.cards ?? []).map((card, index) => (
-              <article className="puck-card" key={`${card.title}-${index}`}>
-                <h3>{card.title}</h3>
-                {card.body ? <p>{card.body}</p> : null}
-                {card.url ? <a href={card.url}>View</a> : null}
-              </article>
-            ))}
-          </div>
-        </section>
-      ),
+      render: (props) => {
+        const cards = arrayValue<NonNullable<typeof props.cards>[number]>(props.cards);
+
+        return (
+          <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
+            <div className="puck-section-heading">
+              <h2>{textValue(props.heading, "Content grid")}</h2>
+              {textValue(props.intro) ? <p>{textValue(props.intro)}</p> : null}
+            </div>
+            <div className={`puck-card-grid puck-columns-${props.columns ?? "3"}`}>
+              {cards.map((card, index) => (
+                <article className="puck-card" key={`${textValue(card.title, "card")}-${index}`}>
+                  <h3>{textValue(card.title, "Card")}</h3>
+                  {textValue(card.body) ? <p>{textValue(card.body)}</p> : null}
+                  {textValue(card.url) ? <a href={textValue(card.url)}>View</a> : null}
+                </article>
+              ))}
+            </div>
+          </section>
+        );
+      },
     },
     DownloadsBlock: {
       defaultProps: {
@@ -340,21 +352,25 @@ export const builderConfig: BuilderConfig = {
         ...sharedDesignFields,
       },
       label: "Downloads",
-      render: (props) => (
-        <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
-          <div className="puck-section-heading">
-            <h2>{props.heading}</h2>
-          </div>
-          <div className="puck-card-grid puck-columns-3">
-            {(props.documents ?? []).map((document, index) => (
-              <a className="puck-card" href={document.url || "#"} key={`${document.title}-${index}`}>
-                <h3>{document.title}</h3>
-                {document.description ? <p>{document.description}</p> : null}
-              </a>
-            ))}
-          </div>
-        </section>
-      ),
+      render: (props) => {
+        const documents = arrayValue<NonNullable<typeof props.documents>[number]>(props.documents);
+
+        return (
+          <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
+            <div className="puck-section-heading">
+              <h2>{textValue(props.heading, "Downloads")}</h2>
+            </div>
+            <div className="puck-card-grid puck-columns-3">
+              {documents.map((document, index) => (
+                <a className="puck-card" href={textValue(document.url, "#") || "#"} key={`${textValue(document.title, "document")}-${index}`}>
+                  <h3>{textValue(document.title, "Document")}</h3>
+                  {textValue(document.description) ? <p>{textValue(document.description)}</p> : null}
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      },
     },
     GalleryBlock: {
       defaultProps: {
@@ -380,20 +396,24 @@ export const builderConfig: BuilderConfig = {
         ...sharedDesignFields,
       },
       label: "Gallery",
-      render: (props) => (
-        <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
-          {props.heading ? (
-            <div className="puck-section-heading">
-              <h2>{props.heading}</h2>
+      render: (props) => {
+        const images = arrayValue<NonNullable<typeof props.images>[number]>(props.images);
+
+        return (
+          <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
+            {textValue(props.heading) ? (
+              <div className="puck-section-heading">
+                <h2>{textValue(props.heading)}</h2>
+              </div>
+            ) : null}
+            <div className="puck-gallery">
+              {images.map((image, index) => (
+                <BuilderMedia alt={textValue(image.alt)} key={`${textValue(image.url)}-${index}`} url={textValue(image.url)} />
+              ))}
             </div>
-          ) : null}
-          <div className="puck-gallery">
-            {(props.images ?? []).map((image, index) => (
-              <BuilderMedia alt={image.alt} key={`${image.url}-${index}`} url={image.url} />
-            ))}
-          </div>
-        </section>
-      ),
+          </section>
+        );
+      },
     },
     HeroBlock: {
       defaultProps: {
@@ -544,15 +564,19 @@ export const builderConfig: BuilderConfig = {
         ...sharedDesignFields,
       },
       label: "Rich text",
-      render: (props) => (
-        <section className={getSectionClassName(props, "puck-rich-section")} style={getSectionStyle(props)}>
-          <div className="puck-rich-text">
-            {props.body.split("\n").map((paragraph, index) => (
-              <p key={`${paragraph}-${index}`}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-      ),
+      render: (props) => {
+        const body = textValue(props.body, "Add body copy here.");
+
+        return (
+          <section className={getSectionClassName(props, "puck-rich-section")} style={getSectionStyle(props)}>
+            <div className="puck-rich-text">
+              {body.split("\n").map((paragraph, index) => (
+                <p key={`${paragraph}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        );
+      },
     },
     SpecTableBlock: {
       defaultProps: {
@@ -583,21 +607,25 @@ export const builderConfig: BuilderConfig = {
         ...sharedDesignFields,
       },
       label: "Spec table",
-      render: (props) => (
-        <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
-          <div className="puck-section-heading">
-            <h2>{props.heading}</h2>
-          </div>
-          <dl className="puck-spec-table">
-            {(props.rows ?? []).map((row, index) => (
-              <div key={`${row.label}-${index}`}>
-                <dt>{row.label}</dt>
-                <dd>{row.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ),
+      render: (props) => {
+        const rows = arrayValue<NonNullable<typeof props.rows>[number]>(props.rows);
+
+        return (
+          <section className={getSectionClassName(props)} style={getSectionStyle(props)}>
+            <div className="puck-section-heading">
+              <h2>{textValue(props.heading, "Specifications")}</h2>
+            </div>
+            <dl className="puck-spec-table">
+              {rows.map((row, index) => (
+                <div key={`${textValue(row.label, "row")}-${index}`}>
+                  <dt>{textValue(row.label, "Label")}</dt>
+                  <dd>{textValue(row.value, "Value")}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        );
+      },
     },
   },
   root: {
