@@ -1,3 +1,5 @@
+import { InteractiveCodeMark } from "@/components/site/interactive-code-mark";
+
 type TechnicalVisualVariant = "network" | "display" | "sectors" | "data";
 
 export function TechnicalVisual({
@@ -11,48 +13,33 @@ export function TechnicalVisual({
 }) {
   const isCodeMark = codeMark && variant === "display";
 
+  if (isCodeMark) {
+    return <InteractiveCodeMark label={label} />;
+  }
+
   return (
-    <figure className={`technical-visual ${variant}${isCodeMark ? " code-mark" : ""}`}>
-      <svg aria-label={label} viewBox={isCodeMark ? "0 0 720 720" : "0 0 720 460"} role="img">
+    <figure className={`technical-visual ${variant}`}>
+      <svg aria-label={label} viewBox="0 0 720 460" role="img">
         <defs>
           <linearGradient id={`${variant}-line`} x1="0%" x2="100%" y1="0%" y2="100%">
-            <stop offset="0%" stopColor={isCodeMark ? "#f0abfc" : "#8bd3ff"} />
-            <stop offset="55%" stopColor={isCodeMark ? "#d946ef" : "#b7a3ff"} />
-            <stop offset="100%" stopColor={isCodeMark ? "#a855f7" : "#fbbf24"} />
+            <stop offset="0%" stopColor="#8bd3ff" />
+            <stop offset="55%" stopColor="#b7a3ff" />
+            <stop offset="100%" stopColor="#fbbf24" />
           </linearGradient>
           <radialGradient id={`${variant}-glow`} cx="50%" cy="45%" r="60%">
-            <stop offset="0%" stopColor={isCodeMark ? "#d946ef" : "#8bd3ff"} stopOpacity={isCodeMark ? "0.2" : "0.24"} />
+            <stop offset="0%" stopColor="#8bd3ff" stopOpacity="0.24" />
             <stop offset="100%" stopColor="#020617" stopOpacity="0" />
           </radialGradient>
         </defs>
-        {isCodeMark ? (
-          <>
-            <circle className="visual-bg" cx="360" cy="360" r="330" />
-            <circle fill={`url(#${variant}-glow)`} cx="360" cy="360" r="330" />
-            <path
-              className="visual-grid visual-grid-radial"
-              d="M140 360H580M360 140V580M204 204L516 516M516 204L204 516"
-            />
-          </>
-        ) : (
-          <>
-            <rect className="visual-bg" width="720" height="460" rx="28" />
-            <rect fill={`url(#${variant}-glow)`} width="720" height="460" rx="28" />
-            <path className="visual-grid" d="M60 80H660M60 150H660M60 220H660M60 290H660M60 360H660M120 40V420M220 40V420M320 40V420M420 40V420M520 40V420M620 40V420" />
-          </>
-        )}
-        {variant === "display" ? (
-          isCodeMark ? (
-            <CodeMarkVisual id={variant} />
-          ) : (
-            <DisplayVisual id={variant} />
-          )
-        ) : null}
+        <rect className="visual-bg" width="720" height="460" rx="28" />
+        <rect fill={`url(#${variant}-glow)`} width="720" height="460" rx="28" />
+        <path className="visual-grid" d="M60 80H660M60 150H660M60 220H660M60 290H660M60 360H660M120 40V420M220 40V420M320 40V420M420 40V420M520 40V420M620 40V420" />
+        {variant === "display" ? <DisplayVisual id={variant} /> : null}
         {variant === "network" ? <NetworkVisual id={variant} /> : null}
         {variant === "sectors" ? <SectorsVisual id={variant} /> : null}
         {variant === "data" ? <DataVisual id={variant} /> : null}
       </svg>
-      {isCodeMark ? null : <figcaption>{label}</figcaption>}
+      <figcaption>{label}</figcaption>
     </figure>
   );
 }
@@ -67,29 +54,6 @@ function DisplayVisual({ id }: { id: string }) {
       <circle className="visual-node" cx="426" cy="168" r="8" />
       <path className="visual-softkey" d="M150 144H118M150 198H118M150 252H118M570 144H602M570 198H602M570 252H602" />
       <circle className="visual-accent" cx="545" cy="354" r="34" />
-    </>
-  );
-}
-
-function CodeMarkVisual({ id }: { id: string }) {
-  return (
-    <>
-      <circle className="visual-code-ring visual-code-ring-outer" cx="360" cy="360" r="238" />
-      <circle className="visual-code-ring visual-code-ring-middle" cx="360" cy="360" r="184" />
-      <path
-        className="visual-code-arc"
-        d="M188 360C208 258 278 188 360 188C442 188 512 258 532 360"
-        stroke={`url(#${id}-line)`}
-      />
-      <path
-        className="visual-code-arc reverse"
-        d="M532 360C512 462 442 532 360 532C278 532 208 462 188 360"
-        stroke={`url(#${id}-line)`}
-      />
-      <circle className="visual-code-core" cx="360" cy="360" r="132" />
-      <text className="visual-code-mark" x="360" y="388" textAnchor="middle">
-        {"</>"}
-      </text>
     </>
   );
 }

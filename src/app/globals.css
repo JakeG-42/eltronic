@@ -685,13 +685,19 @@ h3 {
 }
 
 .technical-visual.code-mark {
+  --code-core-x: 0px;
+  --code-core-y: 0px;
+  --code-glow-x: 50%;
+  --code-glow-y: 48%;
+  --code-mark-angle: 0deg;
+  --code-scroll-y: 0px;
   justify-self: center;
   width: min(100%, 31rem);
   aspect-ratio: 1;
   border-color: rgba(217, 70, 239, 0.32);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 48%, rgba(217, 70, 239, 0.16), transparent 45%),
+    radial-gradient(circle at var(--code-glow-x) var(--code-glow-y), rgba(217, 70, 239, 0.18), transparent 45%),
     radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.18), transparent 64%),
     linear-gradient(rgba(240, 171, 252, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(240, 171, 252, 0.06) 1px, transparent 1px),
@@ -705,6 +711,21 @@ h3 {
     border-color var(--transition),
     box-shadow var(--transition),
     transform var(--transition);
+  isolation: isolate;
+}
+
+.technical-visual.code-mark::before {
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at var(--code-glow-x) var(--code-glow-y), rgba(240, 171, 252, 0.2), transparent 34%),
+    radial-gradient(circle, rgba(168, 85, 247, 0.16), transparent 62%);
+  content: "";
+  opacity: 0.44;
+  pointer-events: none;
+  animation: codeGlowBreath 6.4s ease-in-out infinite;
 }
 
 .technical-visual.code-mark:hover {
@@ -717,6 +738,8 @@ h3 {
 }
 
 .technical-visual svg {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
@@ -818,10 +841,16 @@ h3 {
 
 .visual-code-ring,
 .visual-code-core,
-.visual-code-arc {
+.visual-code-arc,
+.visual-code-inner {
   fill: none;
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.visual-code-inner {
+  transform: translate(var(--code-core-x), calc(var(--code-core-y) + var(--code-scroll-y)))
+    rotate(var(--code-mark-angle));
 }
 
 .visual-code-ring {
@@ -856,12 +885,13 @@ h3 {
   stroke: rgba(240, 171, 252, 0.34);
   stroke-width: 2;
   filter: drop-shadow(0 0 18px rgba(217, 70, 239, 0.14));
+  animation: codeCoreBreath 6.4s ease-in-out infinite;
 }
 
 .visual-code-mark {
   fill: #f0abfc;
   font-family: var(--font-code), monospace;
-  font-size: 92px;
+  font-size: 78px;
   font-weight: 800;
   letter-spacing: 0;
   filter: drop-shadow(0 0 8px rgba(217, 70, 239, 0.22));
@@ -880,6 +910,32 @@ h3 {
 @keyframes codeRingSpin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes codeGlowBreath {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 0.62;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes codeCoreBreath {
+  0%,
+  100% {
+    stroke: rgba(240, 171, 252, 0.3);
+    filter: drop-shadow(0 0 14px rgba(217, 70, 239, 0.12));
+  }
+
+  50% {
+    stroke: rgba(245, 208, 254, 0.48);
+    filter: drop-shadow(0 0 24px rgba(217, 70, 239, 0.22));
   }
 }
 
@@ -4432,7 +4488,9 @@ h3 {
   }
 
   .visual-code-ring-outer,
-  .visual-code-ring-middle {
+  .visual-code-ring-middle,
+  .visual-code-core,
+  .technical-visual.code-mark::before {
     animation: none;
   }
 }

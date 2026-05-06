@@ -606,6 +606,8 @@
     "publicTechnicalVisuals": {
       "file": "src/components/site/technical-visuals.tsx",
       "type": "code-native SVG",
+      "homepageCodeMark": "src/components/site/interactive-code-mark.tsx",
+      "homepageCodeMarkBehavior": "Client-side circular < / > hero visual with cursor tracking, inner glyph drift, rotation toward the pointer, breathing magenta/purple glow and gentle scroll parallax. Respects prefers-reduced-motion.",
       "variants": [
         "display",
         "network",
