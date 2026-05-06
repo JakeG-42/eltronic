@@ -32,7 +32,7 @@ export default function SoftwareItPage() {
             </Link>
           </div>
         </div>
-        <TechnicalVisual label="Software, hardware and system integration" variant="network" />
+        <TechnicalVisual codeMark label="Software, hardware and system integration" variant="display" />
       </section>
 
       <section className="section">

@@ -68,7 +68,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <TechnicalVisual label="Eltronic data and systems architecture" variant="network" />
+        <TechnicalVisual codeMark label="Eltronic data and systems architecture" variant="display" />
       </section>
 
       <section className="about-intro-grid section">

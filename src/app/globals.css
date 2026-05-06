@@ -1221,6 +1221,15 @@ h3 {
   transform: rotate(1deg);
 }
 
+.compact-hero .technical-visual.code-mark,
+.about-hero .technical-visual.code-mark {
+  width: min(100%, 27rem);
+}
+
+.about-hero .technical-visual.code-mark {
+  transform: none;
+}
+
 .about-intro-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
@@ -4444,10 +4453,49 @@ h3 {
     min-height: auto;
   }
 
+  .compact-hero,
+  .about-hero {
+    gap: 1.6rem;
+    overflow: hidden;
+  }
+
+  .hero-copy,
+  .about-hero > div:first-child {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .compact-hero h1 {
-    max-width: 17ch;
-    font-size: clamp(2.05rem, 10vw, 3.05rem);
-    line-height: 1.06;
+    max-width: 100%;
+    font-size: clamp(1.95rem, 9vw, 2.35rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .about-hero h1 {
+    max-width: 100%;
+    font-size: clamp(1.95rem, 9vw, 2.35rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .compact-hero .lede,
+  .about-hero .lede {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .compact-hero .button,
+  .about-hero .button {
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .compact-hero .technical-visual.code-mark,
+  .about-hero .technical-visual.code-mark {
+    justify-self: center;
+    width: min(78vw, 20rem);
   }
 
   .gallery-stage {
