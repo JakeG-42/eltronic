@@ -12,16 +12,19 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Product image renderer: `src/components/site/managed-image.tsx` supports normal URLs and inline uploaded image data.
 - Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
+- Studio file manager: `src/components/studio/file-library-manager.tsx`.
 - Studio QR code generator: `src/components/studio/qr-code-generator.tsx`.
 - Studio shell: `src/app/studio/(admin)/layout.tsx` and `src/components/studio/studio-shell.tsx`.
 - Website Builder defaults: `src/content/site-builder.ts`.
 - SEO helpers and site configuration: `src/lib/seo.ts`.
 - Project/case-study content scaffold: `src/content/projects.ts` and `docs/PROJECT_CASE_STUDY_TEMPLATE.md`.
 - Template/file editor registry: `src/lib/template-editor.ts`.
+- Local Studio file library: `src/lib/studio-files.ts`.
 - Global styles: `src/app/globals.css`.
 - Product seed data: `src/content/products.ts`.
 - Generated product gallery manifest: `src/content/product-gallery-assets.json`.
 - Product gallery generator: `scripts/generate-product-gallery-assets.mjs`.
+- Product asset localizer: `scripts/localize-product-assets.mjs`.
 - Site page/module content: `src/content/site.ts`.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
@@ -53,6 +56,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
 - `/studio/media`: protected product media manager derived from managed product galleries, with compact grid/table views and bulk removal of selected image references.
+- `/studio/files`: protected local file library for uploads under `public/media`, with compact grid/table views and bulk deletion.
 - `/studio/tools`: redirects to `/studio/tools/qr-code`.
 - `/studio/tools/qr-code`: protected QR code generator for links/text and Wi-Fi network join codes.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -88,12 +92,12 @@ Each product currently has:
 - `tags`: optional admin/product-management tags.
 - `modules`: admin module switches for gallery, highlights, specifications, documents, variants and enquiry; stored but not wired into public rendering yet.
 - `image`: `{ src, alt }` used by listings and detail pages.
-- `images`: optional ordered gallery of `{ src, alt, fileName }`; public product galleries use managed images only, with `image` as the fallback primary image. `fileName` is used for uploaded inline images in Studio. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and are explicit seed/managed gallery entries.
+- `images`: optional ordered gallery of `{ src, alt, fileName }`; public product galleries use managed images only, with `image` as the fallback primary image. `fileName` is used for uploaded inline images in Studio. Launch placeholder images are filtered out of public galleries/sitemaps. Generated launch illustrations live under `public/product-images/generated` and imported manufacturer/product assets live under `public/media/products`.
 - `summary`: short card/listing copy.
 - `description`: product detail intro copy.
 - `highlights`: list of product or template highlights.
 - `specifications`: list of `{ label, value }` rows shown on detail pages.
-- `documents`: optional list of data sheet/document links.
+- `documents`: optional list of data sheet/document links. Imported product PDFs are stored locally under `public/media/products`.
 - `variants`: optional order/variant list with optional SKU, price and article number.
 - `enquiryPrompt`: detail-page call-to-action label.
 
@@ -121,6 +125,16 @@ Each product currently has:
 - Wi-Fi QR codes use the standard mobile payload shape, including optional hidden-network support.
 - Styling controls cover dot shape, foreground/background colour and an optional centre logo/image.
 - Exports are downloaded locally as PNG or SVG; the tool does not store generated codes in Neon, Redis or local managed data.
+
+## Studio File Behavior
+
+- `/studio/files` is a protected local file manager for assets under `public/media`.
+- Uploads are handled by `uploadStudioFilesAction()` in `src/app/studio/actions.ts` and saved by `src/lib/studio-files.ts`.
+- The upload form accepts images, PDFs, office-style documents, text/CSV/Markdown files and zip archives, with a current 40 MB per-file limit.
+- Files can be uploaded into a chosen subfolder such as `uploads`, `products/<slug>/images` or `products/<slug>/files`.
+- The manager supports compact grid/table views, image thumbnails, file type icons, selectable files and bulk deletion through `deleteStudioFilesAction()`.
+- Studio Files is a standalone local asset library. `/studio/media` remains the product-gallery reference manager for images attached to product records.
+- `npm run assets:localize` downloads remote product images/PDFs into `public/media/products` and rewrites seed/local managed URLs to local `/media/...` paths. `npm run assets:localize:sync` also updates the configured managed storage where matching remote URLs exist.
 
 ## Product Detail Behavior
 
@@ -188,6 +202,7 @@ Each product currently has:
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes Code Studio for inspecting whitelisted source files.
 - Studio Media shows images as product-gallery references rather than standalone assets. Images can be selected in a compact grid or table and removed in bulk from their attached product galleries; the final image on a product is protected from deletion.
+- Studio Files manages standalone local files under `public/media`, including uploaded files and localized product images/PDFs. It shares the compact grid/table management pattern with Studio Media.
 - Studio includes a Tools section with a QR code generator.
 - Studio has browser-local dark/light mode stored in `localStorage`.
 - Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.
@@ -204,6 +219,7 @@ Each product currently has:
 - Without persistent storage, local development writes to `.data/eltronic-data.json`.
 - `.data/` is gitignored because it may contain contact submissions.
 - On Vercel, use Neon/Postgres `DATABASE_URL`, integration-prefixed `eltronic_db_1_DATABASE_URL`, or Redis `KV_REST_API_URL` and `KV_REST_API_TOKEN` to persist products and submissions.
+- Public files under `public/media` are versioned local assets. Product image/PDF URLs should prefer `/media/...` paths rather than remote manufacturer URLs once assets have been localized.
 - Without persistent production storage, public pages fall back to seeded product content and admin/contact writes are blocked.
 - As of 2026-04-27, Neon database `eltronic_db_1` is connected to Vercel with prefixed environment variables, storage smoke tests pass, and production deployment `dpl_DfWPHsfjnjTYoAuB8zkHqFRzni2j` is live.
 - Use `npm run storage:check` after `npx vercel env pull .env.local` to confirm the live database credentials work before trusting admin/product/submission writes.
@@ -218,8 +234,8 @@ Each product currently has:
 ## Known Placeholders
 
 - Product content is now seeded from the public `eltronic.co.uk` crawl.
-- Product pages show product copy, local product image assets, specifications, documents where known, and order variants where available.
+- Product pages show product copy, local product image/PDF assets, specifications, documents where known, and order variants where available.
 - Legacy migration/import work is not implemented in the current app.
-- Image upload management is currently inline-data based, not a separate object-storage/media-library system.
+- Product gallery uploads still store inline image data on product records, while Studio Files manages standalone local assets under `public/media`.
 - Generated public-page imagery is currently code-native SVG, not bitmap media uploads.
 - Product galleries do not append hidden fallback images; generated product illustrations are explicit gallery records and can be reordered/removed in Studio. Replace them with real product/application photography when available.

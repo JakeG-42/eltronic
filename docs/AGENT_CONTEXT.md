@@ -23,13 +23,16 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/app/studio/(admin)/page.tsx`: Studio dashboard.
 - `src/app/studio/(admin)/media/page.tsx`: product media manager derived from managed product galleries.
 - `src/components/studio/media-library-manager.tsx`: selectable grid/table manager for removing product-gallery image references in bulk.
+- `src/app/studio/(admin)/files/page.tsx`: local Studio file manager for `public/media`.
+- `src/components/studio/file-library-manager.tsx`: selectable grid/table manager for local files, uploads and bulk deletion.
+- `src/lib/studio-files.ts`: local file library scanner/upload/delete helpers for `public/media`.
 - `src/app/studio/(admin)/tools/qr-code/page.tsx`: Studio QR Code tool route.
 - `src/app/studio/(admin)/products/page.tsx`: product table and quick-edit drawer.
 - `src/app/studio/(admin)/products/[slug]/edit/page.tsx`: full product editor.
 - `src/app/studio/actions.ts`: admin server actions.
 - `src/app/contact/actions.ts`: public contact form submission action.
 - `src/content/products.ts`: seed catalogue wrapper for Eltronic/AutoPi products plus imported Topcon data.
-- `src/content/topcon-products.json`: CSV-backed Topcon OPUS catalogue records with real image and document URLs.
+- `src/content/topcon-products.json`: CSV-backed Topcon OPUS catalogue records with localized image and document URLs.
 - `src/content/product-gallery-assets.json`: generated supplemental gallery assets for non-Topcon seed products.
 - `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
 - `src/content/site-builder.ts`: Website Builder defaults for homepage theme, hero and section controls.
@@ -48,7 +51,9 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `public/product-images`: local product image assets used by the public catalogue.
 - `public/product-images/generated`: generated technical product gallery illustrations.
 - `public/product-images/placeholders`: legacy placeholder assets filtered out of public product galleries.
+- `public/media`: local uploaded/downloaded media and file assets managed from Studio Files.
 - `scripts/generate-product-gallery-assets.mjs`: repeatable generator/sync script for supplemental product gallery SVGs.
+- `scripts/localize-product-assets.mjs`: downloads remote product images/PDFs into `public/media/products` and rewrites matching URLs to local `/media/...` paths.
 - `scripts/sync-topcon-products.mjs`: replaces managed Topcon products in Neon/Redis/local data from `src/content/topcon-products.json`.
 - `docs/AI_FUNCTION_MAP.json`: machine-readable feature map.
 - `docs/PROJECT_CASE_STUDY_TEMPLATE.md`: checklist and object shape for future project write-ups.
@@ -134,7 +139,7 @@ Studio is intentionally separate from the public site chrome.
 - Public pages live under the `(site)` route group and use `src/components/site/site-shell.tsx`.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
-- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/media`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/media`, `/studio/files`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
 - The current Studio sidebar groups links under Overview, Messages, Content, Tools and Admin. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. The QR tool nav label is QR Code Generator. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
 - The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
@@ -155,11 +160,13 @@ Public catalogue pages read through `getProducts()` and `getProductBySlug()` fro
 
 Admin product edits are handled by `saveProductAction()` in `src/app/studio/actions.ts`.
 
-Topcon product data is sourced from `docs/topcon_product_catalogue_import.csv` and normalized into `src/content/topcon-products.json`. The current import contains 14 Topcon OPUS products with manufacturer-hosted front/rear/banner image URLs, datasheets, operating manuals, highlights and selected technical specs. Run `npm run products:topcon:sync -- --dry-run` before applying, then `npm run products:topcon:sync` to replace managed Topcon records while preserving AutoPi, Eltronic and the rest of the managed data. The sync writes a backup under `.data/backups/`.
+Topcon product data is sourced from `docs/topcon_product_catalogue_import.csv` and normalized into `src/content/topcon-products.json`. The current import contains 14 Topcon OPUS products with localized front/rear/banner image URLs, datasheets, operating manuals, highlights and selected technical specs. Run `npm run assets:localize` after changing imported remote asset URLs, then `npm run products:topcon:sync -- --dry-run` before applying `npm run products:topcon:sync` to replace managed Topcon records while preserving AutoPi, Eltronic and the rest of the managed data. The sync writes a backup under `.data/backups/`.
 
 Product gallery editing in Studio uses `src/components/studio/product-image-manager.tsx`, which posts an ordered `galleryImagesJson` payload plus repeated `imageSrc`, `imageAlt` and `imageFileName` fields for compatibility. The UI is a gallery grid with image tiles, a dedicated add-image tile and a modal editor for URL, local upload, filename and alt text; uploaded raster files are resized in the browser and stored as inline image data in the managed product record, with a normalized `fileName` stored so Studio does not display the raw data URL. Product galleries are intentionally open-ended: do not add a template-specific image cap. Product galleries should be managed through seed data, Studio image fields or the generated-gallery manifest only. `productFromFormData()` in `src/lib/managed-data.ts` keeps backward compatibility with legacy newline `images` form data, but the UI should stay visual rather than returning to textarea-based image ordering.
 
 The Studio Media page is a product-gallery reference manager, not a standalone asset library. It supports compact grid/table views, selectable images and bulk removal through `deleteProductMediaAction()`. The data layer protects the final image on a product from deletion so catalogue cards do not lose their required primary image.
+
+The Studio Files page is the standalone local asset library under `/studio/files`. It scans `public/media`, supports uploads into chosen subfolders, has compact grid/table views, and can bulk-delete selected local files through `deleteStudioFilesAction()`. Product imports should use local `/media/...` URLs where possible. `npm run assets:localize` downloads remote product images/PDFs into `public/media/products` and rewrites seed/local managed URLs; `npm run assets:localize:sync` also updates configured managed storage for matching URL replacements.
 
 Supplemental launch gallery images for AutoPi and the Eltronic I&Q module are generated by `npm run images:products`.
 
@@ -167,7 +174,7 @@ Supplemental launch gallery images for AutoPi and the Eltronic I&Q module are ge
 - The generator writes the manifest to `src/content/product-gallery-assets.json`.
 - `src/content/products.ts` merges the manifest into seed product galleries.
 - `npm run images:products:sync` also syncs those generated image paths into existing managed product records in Neon/Redis/local data.
-- These generated assets are technical illustrations, not manufacturer photos. Topcon uses the real manufacturer image URLs from the CSV-backed catalogue data.
+- These generated assets are technical illustrations, not manufacturer photos. Topcon uses real manufacturer assets localized under `public/media/products`.
 
 Website Builder settings are stored in `src/lib/managed-data.ts` under `siteBuilder`. Defaults are in `src/content/site-builder.ts`. `/studio/builder` saves through `saveSiteBuilderAction()` and the homepage uses `getSiteBuilderSettings()` to render theme variables, hero copy, section visibility and section order. Treat it as the internal Elementor/Colibri-style builder foundation; do not add a public admin toolbar unless Jake explicitly asks for one.
 

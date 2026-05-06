@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Added `/studio/files` under Content as a local `public/media` file manager with upload, compact grid/table views and bulk deletion; localized Topcon/AutoPi product images and PDFs into `public/media/products`, rewrote product/document URLs to `/media/...`, and synced the managed product catalogue in Neon.
 - Added interactive circular `< / >` code-mark hero visuals to `/sectors` and `/data-specification`, with lime/violet themes and subtle inner sector/data motifs.
 - Thickened the homepage hero `Eltronic` wordmark treatment using a subtle text-stroke/faux-weight style without changing the hero font size.
 - Repositioned `/software-it` toward industrial software, PLC-adjacent applications, PCB/control-unit programming support, HMI workflows and operational IT; repositioned `/web-connected-platforms` toward websites, CRM-style platforms, UI/UX, finance/warehouse/manufacturing integrations, IoT dashboards and IT agency-style support.
@@ -39,7 +40,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 - Added a protected Studio Tools section with `/studio/tools/qr-code`, a client-side QR code generator for links/text and Wi-Fi network join codes. It supports square, rounded and circular dots, foreground/background colours, centre logo upload, and PNG/SVG export.
 - Removed the separate Console CMS and `/v2` new-site sandbox for now, including the CMS route groups, builder code, generated types, migrations, related dependencies and `new.eltronic.co.uk` rewrite. Current work is focused on the public site and `/studio`.
 - Removed the WordPress/WooCommerce-style classic Studio backend under `/studio/classic`, including its product routes, shell switcher, editor component and dedicated CSS. Product management now stays on the current Studio product table, quick-edit drawer and full editor.
-- Replaced the stale 9-product Topcon seed/catalogue with 14 CSV-sourced Topcon OPUS products, including real Topcon image URLs, datasheets, operating manuals, highlights and technical data. Added `npm run products:topcon:sync` to replace Topcon records in Neon while preserving non-Topcon products and writing a local backup.
+- Replaced the stale 9-product Topcon seed/catalogue with 14 CSV-sourced Topcon OPUS products, including real Topcon images, datasheets, operating manuals, highlights and technical data. Added `npm run products:topcon:sync` to replace Topcon records in Neon while preserving non-Topcon products and writing a local backup.
 - Crawled the public `eltronic.co.uk` site for product, contact, homepage and guide/data-sheet content.
 - Ported the first real product catalogue into `src/content/products.ts`.
 - Started adapting the UI toward the dark code-inspired direction provided by Jake, while keeping it product-led rather than portfolio/CV-led.

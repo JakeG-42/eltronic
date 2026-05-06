@@ -168,7 +168,7 @@ const seedProducts: Product[] = [
     documents: [
       {
         label: "AutoPi CAN-FD Pro datasheet",
-        url: "https://www.autopi.io/static/pdf/autopi_CAN_FD_Pro_datasheet.pdf",
+        url: "/media/products/autopi-can-fd-pro/files/autopi_CAN_FD_Pro_datasheet.pdf",
       },
     ],
     enquiryPrompt: "Plan a CAN data logging setup",

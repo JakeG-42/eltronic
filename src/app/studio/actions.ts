@@ -29,6 +29,7 @@ import {
   type ContactSubmissionStatus,
 } from "@/lib/managed-data";
 import { normalizeAdminRole, normalizeAdminStatus } from "@/lib/admin-user-model";
+import { deleteStudioFiles, saveStudioUploadedFiles } from "@/lib/studio-files";
 import { writeTemplateFile } from "@/lib/template-editor";
 
 async function requireAdminAction() {
@@ -57,6 +58,7 @@ function revalidateManagedPages() {
   revalidatePath("/products");
   revalidatePath("/products/[slug]", "page");
   revalidatePath("/studio");
+  revalidatePath("/studio/files");
   revalidatePath("/studio/media");
   revalidatePath("/studio/products");
   revalidatePath("/studio/builder");
@@ -140,6 +142,79 @@ export async function deleteProductMediaAction(formData: FormData) {
 
   if (result.deleted === 0 && result.skipped === 0) {
     redirectWithError("No matching product media was found.", returnTo);
+  }
+
+  const params = new URLSearchParams({ deleted: result.deleted.toString() });
+
+  if (result.skipped > 0) {
+    params.set("skipped", result.skipped.toString());
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}${params.toString()}`);
+}
+
+export async function uploadStudioFilesAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/files");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot upload files.", returnTo);
+  }
+
+  const files = formData
+    .getAll("files")
+    .filter((file): file is File => file instanceof File && file.size > 0);
+
+  if (files.length === 0) {
+    redirectWithError("Choose at least one file to upload.", returnTo);
+  }
+
+  let result: Awaited<ReturnType<typeof saveStudioUploadedFiles>>;
+
+  try {
+    result = await saveStudioUploadedFiles(files, String(formData.get("folder") ?? "uploads"));
+    revalidateManagedPages();
+    revalidatePath("/data-specification");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to upload files.", returnTo);
+  }
+
+  const params = new URLSearchParams({ uploaded: result.files.length.toString() });
+
+  if (result.skipped > 0) {
+    params.set("skipped", result.skipped.toString());
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}${params.toString()}`);
+}
+
+export async function deleteStudioFilesAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/files");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot delete files.", returnTo);
+  }
+
+  const fileIds = formData
+    .getAll("fileIds")
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  if (fileIds.length === 0) {
+    redirectWithError("Select at least one file first.", returnTo);
+  }
+
+  let result: Awaited<ReturnType<typeof deleteStudioFiles>>;
+
+  try {
+    result = await deleteStudioFiles(fileIds);
+    revalidateManagedPages();
+    revalidatePath("/data-specification");
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to delete selected files.", returnTo);
   }
 
   const params = new URLSearchParams({ deleted: result.deleted.toString() });

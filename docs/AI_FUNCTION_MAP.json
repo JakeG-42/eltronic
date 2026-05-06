@@ -270,6 +270,20 @@
       ]
     },
     {
+      "path": "/studio/files",
+      "file": "src/app/studio/(admin)/files/page.tsx",
+      "kind": "admin-file-manager",
+      "guard": "isAdminAuthenticated()",
+      "dataSource": "src/lib/studio-files.ts#getStudioFiles",
+      "features": [
+        "local public/media file upload",
+        "compact grid/table file manager",
+        "image thumbnails and file type icons",
+        "selectable files",
+        "bulk delete selected local files"
+      ]
+    },
+    {
       "path": "/studio/tools",
       "file": "src/app/studio/(admin)/tools/page.tsx",
       "kind": "admin-tool-redirect",
@@ -474,13 +488,13 @@
     "templateBehavior": "Supported product templates are default, hmi, data-logger and module. Studio product forms expose a real selector, and src/lib/managed-data.ts preserves supported values while normalizing unknown values to default. Public product technical data is full-width under Highlights.",
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
-      "behavior": "Returns every valid managed product.images entry in order, or product.image as the single fallback. Do not slice or cap by product template. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; Topcon uses CSV-backed manufacturer image URLs.",
+      "behavior": "Returns every valid managed product.images entry in order, or product.image as the single fallback. Do not slice or cap by product template. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; localized Topcon images live under public/media/products.",
       "generatedManifest": "src/content/product-gallery-assets.json",
       "generatedAssets": "public/product-images/generated/*.svg",
       "generator": "npm run images:products",
       "syncCommand": "npm run images:products:sync"
     },
-    "primaryImageAssets": "public/product-images or trusted source URLs in managed product data"
+    "primaryImageAssets": "public/product-images and public/media; remote source URLs should be localized where possible"
   },
   "projectCaseStudyModel": {
     "sourceType": "TypeScript",
@@ -623,7 +637,7 @@
       ]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
-    "studioSidebar": "Grouped under Overview, Messages, Content, Tools and Admin with compact link typography. The QR tool link is labelled QR Code Generator. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
+    "studioSidebar": "Grouped under Overview, Messages, Content, Tools and Admin with compact link typography. Media and Files sit under Content; Code Studio sits under Admin; the QR tool link is labelled QR Code Generator. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "studioQrCodeGenerator": {
@@ -632,6 +646,17 @@
       "package": "qr-code-styling",
       "styleFile": "src/app/globals.css",
       "behavior": "Client-only Studio tool for generating URL/text and Wi-Fi QR codes. Wi-Fi mode emits standard mobile WIFI payloads with WPA/WPA2, WEP, open-network and hidden-network options. Exports PNG/SVG locally and does not persist generated codes."
+    },
+    "studioFiles": {
+      "route": "/studio/files",
+      "component": "src/components/studio/file-library-manager.tsx",
+      "library": "src/lib/studio-files.ts",
+      "storage": "public/media",
+      "actions": [
+        "uploadStudioFilesAction",
+        "deleteStudioFilesAction"
+      ],
+      "behavior": "Protected local file library for public/media. Lists files recursively, uploads accepted file types into a chosen subfolder, supports compact grid/table views, shows image thumbnails or file type icons, and bulk-deletes selected local files."
     },
     "websiteBuilder": {
       "route": "/studio/builder",

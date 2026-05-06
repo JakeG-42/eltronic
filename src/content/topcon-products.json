@@ -16,25 +16,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Front_web.png",
-      "alt": "Topcon OPUS A3e front view"
+      "src": "/media/products/topcon-opus-a3e/images/OPUS_A3E_Front_web.png",
+      "alt": "Topcon OPUS A3e front view",
+      "fileName": "OPUS_A3E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Front_web.png",
-        "alt": "Topcon OPUS A3e front view"
+        "src": "/media/products/topcon-opus-a3e/images/OPUS_A3E_Front_web.png",
+        "alt": "Topcon OPUS A3e front view",
+        "fileName": "OPUS_A3E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3E_Back_web.png",
-        "alt": "Topcon OPUS A3e rear view"
+        "src": "/media/products/topcon-opus-a3e/images/OPUS_A3E_Back_web.png",
+        "alt": "Topcon OPUS A3e rear view",
+        "fileName": "OPUS_A3E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/c/7/csm_Produkte-Banner-OpusA3e_1920x680_c8788f6996.jpg",
-        "alt": "Topcon OPUS A3e banner image"
+        "src": "/media/products/topcon-opus-a3e/images/csm_Produkte-Banner-OpusA3e_1920x680_c8788f6996.jpg",
+        "alt": "Topcon OPUS A3e banner image",
+        "fileName": "csm_Produkte-Banner-OpusA3e_1920x680_c8788f6996.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/d/csm_OPUS_A3E_Front_web_1b244084cf.png",
-        "alt": "Topcon OPUS A3e front view"
+        "src": "/media/products/topcon-opus-a3e/images/csm_OPUS_A3E_Front_web_1b244084cf.png",
+        "alt": "Topcon OPUS A3e front view",
+        "fileName": "csm_OPUS_A3E_Front_web_1b244084cf.png"
       }
     ],
     "summary": "Compact 4.3 inch OPUS A-series HMI for cost-sensitive control projects that still need CAN-Bus, USB and I/O.",
@@ -82,15 +87,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A3e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3e_BASIC.pdf"
+        "url": "/media/products/topcon-opus-a3e/files/TDS_A3e_BASIC.pdf"
       },
       {
         "label": "Topcon OPUS A3e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3e_FULL.pdf"
+        "url": "/media/products/topcon-opus-a3e/files/TDS_A3e_FULL.pdf"
       },
       {
         "label": "Topcon OPUS A3e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA3.pdf"
+        "url": "/media/products/topcon-opus-a3e/files/BA_OPUSA3.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A3e"
@@ -112,25 +117,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Front_web.png",
-      "alt": "Topcon OPUS A3s front view"
+      "src": "/media/products/topcon-opus-a3s/images/OPUS_A3S_Front_web.png",
+      "alt": "Topcon OPUS A3s front view",
+      "fileName": "OPUS_A3S_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Front_web.png",
-        "alt": "Topcon OPUS A3s front view"
+        "src": "/media/products/topcon-opus-a3s/images/OPUS_A3S_Front_web.png",
+        "alt": "Topcon OPUS A3s front view",
+        "fileName": "OPUS_A3S_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A3S_Back_web.png",
-        "alt": "Topcon OPUS A3s rear view"
+        "src": "/media/products/topcon-opus-a3s/images/OPUS_A3S_Back_web.png",
+        "alt": "Topcon OPUS A3s rear view",
+        "fileName": "OPUS_A3S_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/4/csm_Produkte-Banner-OpusA3s_1920x680neu_fba43f5c59.jpg",
-        "alt": "Topcon OPUS A3s banner image"
+        "src": "/media/products/topcon-opus-a3s/images/csm_Produkte-Banner-OpusA3s_1920x680neu_fba43f5c59.jpg",
+        "alt": "Topcon OPUS A3s banner image",
+        "fileName": "csm_Produkte-Banner-OpusA3s_1920x680neu_fba43f5c59.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/2/c/csm_OPUS_A3S_Front_web_6d4e4e8a5d.png",
-        "alt": "Topcon OPUS A3s front view"
+        "src": "/media/products/topcon-opus-a3s/images/csm_OPUS_A3S_Front_web_6d4e4e8a5d.png",
+        "alt": "Topcon OPUS A3s front view",
+        "fileName": "csm_OPUS_A3S_Front_web_6d4e4e8a5d.png"
       }
     ],
     "summary": "Compact 4.3 inch keyed OPUS A-series HMI with touchscreen, soft keys, hard keys and encoder.",
@@ -199,15 +209,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A3s basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3s_BASIC.pdf"
+        "url": "/media/products/topcon-opus-a3s/files/TDS_A3s_BASIC.pdf"
       },
       {
         "label": "Topcon OPUS A3s full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A3s_FULL.pdf"
+        "url": "/media/products/topcon-opus-a3s/files/TDS_A3s_FULL.pdf"
       },
       {
         "label": "Topcon OPUS A3s operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA3.pdf"
+        "url": "/media/products/topcon-opus-a3s/files/BA_OPUSA3.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A3s"
@@ -229,25 +239,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Front_web.png",
-      "alt": "Topcon OPUS B6e front view"
+      "src": "/media/products/topcon-opus-b6e/images/OPUS_B6E_Front_web.png",
+      "alt": "Topcon OPUS B6e front view",
+      "fileName": "OPUS_B6E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Front_web.png",
-        "alt": "Topcon OPUS B6e front view"
+        "src": "/media/products/topcon-opus-b6e/images/OPUS_B6E_Front_web.png",
+        "alt": "Topcon OPUS B6e front view",
+        "fileName": "OPUS_B6E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B6E_Back_web.png",
-        "alt": "Topcon OPUS B6e rear view"
+        "src": "/media/products/topcon-opus-b6e/images/OPUS_B6E_Back_web.png",
+        "alt": "Topcon OPUS B6e rear view",
+        "fileName": "OPUS_B6E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/1/csm_B6_Banner_dcc53ad67f.jpg",
-        "alt": "Topcon OPUS B6e banner image"
+        "src": "/media/products/topcon-opus-b6e/images/csm_B6_Banner_dcc53ad67f.jpg",
+        "alt": "Topcon OPUS B6e banner image",
+        "fileName": "csm_B6_Banner_dcc53ad67f.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/1/csm_OPUS_B6E_Front_web_e44709014f.png",
-        "alt": "Topcon OPUS B6e front view"
+        "src": "/media/products/topcon-opus-b6e/images/csm_OPUS_B6E_Front_web_e44709014f.png",
+        "alt": "Topcon OPUS B6e front view",
+        "fileName": "csm_OPUS_B6E_Front_web_e44709014f.png"
       }
     ],
     "summary": "Large 10.1 inch OPUS B-series HMI with a high-brightness display, aluminium housing and broad CAN-Bus connectivity.",
@@ -316,15 +331,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B6e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B6eB.pdf"
+        "url": "/media/products/topcon-opus-b6e/files/TDS_OPUS_B6eB.pdf"
       },
       {
         "label": "Topcon OPUS B6e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B6eF.pdf"
+        "url": "/media/products/topcon-opus-b6e/files/TDS_OPUS_B6eF.pdf"
       },
       {
         "label": "Topcon OPUS B6e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB6.pdf"
+        "url": "/media/products/topcon-opus-b6e/files/BA_OPUSB6.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B6e"
@@ -346,25 +361,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/C_Series_Front.png",
-      "alt": "Topcon OPUS C Series front view"
+      "src": "/media/products/topcon-opus-c-series/images/C_Series_Front.png",
+      "alt": "Topcon OPUS C Series front view",
+      "fileName": "C_Series_Front.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/C_Series_Front.png",
-        "alt": "Topcon OPUS C Series front view"
+        "src": "/media/products/topcon-opus-c-series/images/C_Series_Front.png",
+        "alt": "Topcon OPUS C Series front view",
+        "fileName": "C_Series_Front.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUSC07_rear2.jpg",
-        "alt": "Topcon OPUS C Series rear view"
+        "src": "/media/products/topcon-opus-c-series/images/OPUSC07_rear2.jpg",
+        "alt": "Topcon OPUS C Series rear view",
+        "fileName": "OPUSC07_rear2.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/b/6/csm_C_Banner_ecb212af9b.jpg",
-        "alt": "Topcon OPUS C Series banner image"
+        "src": "/media/products/topcon-opus-c-series/images/csm_C_Banner_ecb212af9b.jpg",
+        "alt": "Topcon OPUS C Series banner image",
+        "fileName": "csm_C_Banner_ecb212af9b.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/7/d/csm_C_Series_Front_5dd3187dd4.png",
-        "alt": "Topcon OPUS C Series front view"
+        "src": "/media/products/topcon-opus-c-series/images/csm_C_Series_Front_5dd3187dd4.png",
+        "alt": "Topcon OPUS C Series front view",
+        "fileName": "csm_C_Series_Front_5dd3187dd4.png"
       }
     ],
     "summary": "Scalable OPUS C-series HMI family covering 7, 10, 12 and 15 inch formats for demanding operator interfaces.",
@@ -433,11 +453,11 @@
     "documents": [
       {
         "label": "Topcon OPUS C Series technical data sheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_C-Series.pdf"
+        "url": "/media/products/topcon-opus-c-series/files/TDS_OPUS_C-Series.pdf"
       },
       {
         "label": "Topcon OPUS C Series operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSC-Series.pdf"
+        "url": "/media/products/topcon-opus-c-series/files/BA_OPUSC-Series.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS C Series"
@@ -459,25 +479,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Front_web.png",
-      "alt": "Topcon OPUS B2s front view"
+      "src": "/media/products/topcon-opus-b2s/images/OPUS_B2S_Front_web.png",
+      "alt": "Topcon OPUS B2s front view",
+      "fileName": "OPUS_B2S_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Front_web.png",
-        "alt": "Topcon OPUS B2s front view"
+        "src": "/media/products/topcon-opus-b2s/images/OPUS_B2S_Front_web.png",
+        "alt": "Topcon OPUS B2s front view",
+        "fileName": "OPUS_B2S_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2S_Back_web.png",
-        "alt": "Topcon OPUS B2s rear view"
+        "src": "/media/products/topcon-opus-b2s/images/OPUS_B2S_Back_web.png",
+        "alt": "Topcon OPUS B2s rear view",
+        "fileName": "OPUS_B2S_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/4/8/csm_B2S_Banner_636189c453.jpg",
-        "alt": "Topcon OPUS B2s banner image"
+        "src": "/media/products/topcon-opus-b2s/images/csm_B2S_Banner_636189c453.jpg",
+        "alt": "Topcon OPUS B2s banner image",
+        "fileName": "csm_B2S_Banner_636189c453.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/f/5/csm_OPUS_B2S_Front_web_23d2393fb7.png",
-        "alt": "Topcon OPUS B2s front view"
+        "src": "/media/products/topcon-opus-b2s/images/csm_OPUS_B2S_Front_web_23d2393fb7.png",
+        "alt": "Topcon OPUS B2s front view",
+        "fileName": "csm_OPUS_B2S_Front_web_23d2393fb7.png"
       }
     ],
     "summary": "4.3 inch OPUS B2 standard HMI with touchscreen, soft keys and a compact IP66/IP67 housing.",
@@ -542,15 +567,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B2s basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Basic.pdf"
+        "url": "/media/products/topcon-opus-b2s/files/TDS_OPUS-B2_Basic.pdf"
       },
       {
         "label": "Topcon OPUS B2s full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Full.pdf"
+        "url": "/media/products/topcon-opus-b2s/files/TDS_OPUS-B2_Full.pdf"
       },
       {
         "label": "Topcon OPUS B2s operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+        "url": "/media/products/topcon-opus-b2s/files/BA_OPUSB2_B2Plus.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B2s"
@@ -572,21 +597,25 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Front_web.png",
-      "alt": "Topcon OPUS B3e front view"
+      "src": "/media/products/topcon-opus-b3e/images/OPUS_B3E_Front_web.png",
+      "alt": "Topcon OPUS B3e front view",
+      "fileName": "OPUS_B3E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Front_web.png",
-        "alt": "Topcon OPUS B3e front view"
+        "src": "/media/products/topcon-opus-b3e/images/OPUS_B3E_Front_web.png",
+        "alt": "Topcon OPUS B3e front view",
+        "fileName": "OPUS_B3E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B3E_Back_web.png",
-        "alt": "Topcon OPUS B3e rear view"
+        "src": "/media/products/topcon-opus-b3e/images/OPUS_B3E_Back_web.png",
+        "alt": "Topcon OPUS B3e rear view",
+        "fileName": "OPUS_B3E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/f/csm_OPUS_B3E_Front_web_70c5591db5.png",
-        "alt": "Topcon OPUS B3e front view"
+        "src": "/media/products/topcon-opus-b3e/images/csm_OPUS_B3E_Front_web_70c5591db5.png",
+        "alt": "Topcon OPUS B3e front view",
+        "fileName": "csm_OPUS_B3E_Front_web_70c5591db5.png"
       }
     ],
     "summary": "Compact 5 inch OPUS B-series touch HMI with aluminium housing, Ethernet and dual CAN-Bus.",
@@ -655,15 +684,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B3e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B3eB.pdf"
+        "url": "/media/products/topcon-opus-b3e/files/TDS_OPUS_B3eB.pdf"
       },
       {
         "label": "Topcon OPUS B3e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B3eF.pdf"
+        "url": "/media/products/topcon-opus-b3e/files/TDS_OPUS_B3eF.pdf"
       },
       {
         "label": "Topcon OPUS B3e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB3.pdf"
+        "url": "/media/products/topcon-opus-b3e/files/BA_OPUSB3.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B3e"
@@ -685,25 +714,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Front_web.png",
-      "alt": "Topcon OPUS B2+s front view"
+      "src": "/media/products/topcon-opus-b2-plus-s/images/OPUS_B2SP_Front_web.png",
+      "alt": "Topcon OPUS B2+s front view",
+      "fileName": "OPUS_B2SP_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Front_web.png",
-        "alt": "Topcon OPUS B2+s front view"
+        "src": "/media/products/topcon-opus-b2-plus-s/images/OPUS_B2SP_Front_web.png",
+        "alt": "Topcon OPUS B2+s front view",
+        "fileName": "OPUS_B2SP_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B2SP_Back_web.png",
-        "alt": "Topcon OPUS B2+s rear view"
+        "src": "/media/products/topcon-opus-b2-plus-s/images/OPUS_B2SP_Back_web.png",
+        "alt": "Topcon OPUS B2+s rear view",
+        "fileName": "OPUS_B2SP_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/5/7/csm_B2PS_Banner_94c9fc68a6.jpg",
-        "alt": "Topcon OPUS B2+s banner image"
+        "src": "/media/products/topcon-opus-b2-plus-s/images/csm_B2PS_Banner_94c9fc68a6.jpg",
+        "alt": "Topcon OPUS B2+s banner image",
+        "fileName": "csm_B2PS_Banner_94c9fc68a6.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/7/9/csm_OPUS_B2SP_Front_web_26135ac1d0.png",
-        "alt": "Topcon OPUS B2+s front view"
+        "src": "/media/products/topcon-opus-b2-plus-s/images/csm_OPUS_B2SP_Front_web_26135ac1d0.png",
+        "alt": "Topcon OPUS B2+s front view",
+        "fileName": "csm_OPUS_B2SP_Front_web_26135ac1d0.png"
       }
     ],
     "summary": "7 inch OPUS B2 Plus standard HMI with soft keys, touchscreen and compact Deutsch connector architecture.",
@@ -768,15 +802,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B2+s basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Basic.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-s/files/TDS_OPUS-B2_Basic.pdf"
       },
       {
         "label": "Topcon OPUS B2+s full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Full.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-s/files/TDS_OPUS-B2_Full.pdf"
       },
       {
         "label": "Topcon OPUS B2+s operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-s/files/BA_OPUSB2_B2Plus.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B2+s"
@@ -798,25 +832,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/B2EFront.png",
-      "alt": "Topcon OPUS B2e front view"
+      "src": "/media/products/topcon-opus-b2e/images/B2EFront.png",
+      "alt": "Topcon OPUS B2e front view",
+      "fileName": "B2EFront.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/B2EFront.png",
-        "alt": "Topcon OPUS B2e front view"
+        "src": "/media/products/topcon-opus-b2e/images/B2EFront.png",
+        "alt": "Topcon OPUS B2e front view",
+        "fileName": "B2EFront.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/B2EBack.png",
-        "alt": "Topcon OPUS B2e rear view"
+        "src": "/media/products/topcon-opus-b2e/images/B2EBack.png",
+        "alt": "Topcon OPUS B2e rear view",
+        "fileName": "B2EBack.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/8/9/csm_B2E_Banner_b5681a3964.jpg",
-        "alt": "Topcon OPUS B2e banner image"
+        "src": "/media/products/topcon-opus-b2e/images/csm_B2E_Banner_b5681a3964.jpg",
+        "alt": "Topcon OPUS B2e banner image",
+        "fileName": "csm_B2E_Banner_b5681a3964.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/6/1/csm_B2EFront_eeebf46f13.png",
-        "alt": "Topcon OPUS B2e front view"
+        "src": "/media/products/topcon-opus-b2e/images/csm_B2EFront_eeebf46f13.png",
+        "alt": "Topcon OPUS B2e front view",
+        "fileName": "csm_B2EFront_eeebf46f13.png"
       }
     ],
     "summary": "4.3 inch OPUS B2 Eco touch HMI for compact machine-control and vehicle display applications.",
@@ -881,15 +920,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B2e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Basic.pdf"
+        "url": "/media/products/topcon-opus-b2e/files/TDS_OPUS-B2_Basic.pdf"
       },
       {
         "label": "Topcon OPUS B2e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2_Full.pdf"
+        "url": "/media/products/topcon-opus-b2e/files/TDS_OPUS-B2_Full.pdf"
       },
       {
         "label": "Topcon OPUS B2e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+        "url": "/media/products/topcon-opus-b2e/files/BA_OPUSB2_B2Plus.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B2e"
@@ -912,25 +951,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/B2PEFront_01.png",
-      "alt": "Topcon OPUS B2+e front view"
+      "src": "/media/products/topcon-opus-b2-plus-e/images/B2PEFront_01.png",
+      "alt": "Topcon OPUS B2+e front view",
+      "fileName": "B2PEFront_01.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/B2PEFront_01.png",
-        "alt": "Topcon OPUS B2+e front view"
+        "src": "/media/products/topcon-opus-b2-plus-e/images/B2PEFront_01.png",
+        "alt": "Topcon OPUS B2+e front view",
+        "fileName": "B2PEFront_01.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/B2EPBack.png",
-        "alt": "Topcon OPUS B2+e rear view"
+        "src": "/media/products/topcon-opus-b2-plus-e/images/B2EPBack.png",
+        "alt": "Topcon OPUS B2+e rear view",
+        "fileName": "B2EPBack.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/4/7/csm_B2PE_Banner_7bc17af560.jpg",
-        "alt": "Topcon OPUS B2+e banner image"
+        "src": "/media/products/topcon-opus-b2-plus-e/images/csm_B2PE_Banner_7bc17af560.jpg",
+        "alt": "Topcon OPUS B2+e banner image",
+        "fileName": "csm_B2PE_Banner_7bc17af560.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/2/csm_B2PEFront_01_8b0567724f.png",
-        "alt": "Topcon OPUS B2+e front view"
+        "src": "/media/products/topcon-opus-b2-plus-e/images/csm_B2PEFront_01_8b0567724f.png",
+        "alt": "Topcon OPUS B2+e front view",
+        "fileName": "csm_B2PEFront_01_8b0567724f.png"
       }
     ],
     "summary": "7 inch OPUS B2 Plus Eco touch HMI for rugged applications needing a brighter, larger operator display.",
@@ -995,15 +1039,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B2+e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Basic.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-e/files/TDS_OPUS-B2_Basic.pdf"
       },
       {
         "label": "Topcon OPUS B2+e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS-B2__Full.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-e/files/TDS_OPUS-B2_Full.pdf"
       },
       {
         "label": "Topcon OPUS B2+e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB2_B2Plus.pdf"
+        "url": "/media/products/topcon-opus-b2-plus-e/files/BA_OPUSB2_B2Plus.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B2+e"
@@ -1025,25 +1069,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Front_web.png",
-      "alt": "Topcon OPUS B4e front view"
+      "src": "/media/products/topcon-opus-b4e/images/OPUS_B4E_Front_web.png",
+      "alt": "Topcon OPUS B4e front view",
+      "fileName": "OPUS_B4E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Front_web.png",
-        "alt": "Topcon OPUS B4e front view"
+        "src": "/media/products/topcon-opus-b4e/images/OPUS_B4E_Front_web.png",
+        "alt": "Topcon OPUS B4e front view",
+        "fileName": "OPUS_B4E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_B4E_Back_web.png",
-        "alt": "Topcon OPUS B4e rear view"
+        "src": "/media/products/topcon-opus-b4e/images/OPUS_B4E_Back_web.png",
+        "alt": "Topcon OPUS B4e rear view",
+        "fileName": "OPUS_B4E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/a/1/csm_B4_Banner_46efaf3cfe.jpg",
-        "alt": "Topcon OPUS B4e banner image"
+        "src": "/media/products/topcon-opus-b4e/images/csm_B4_Banner_46efaf3cfe.jpg",
+        "alt": "Topcon OPUS B4e banner image",
+        "fileName": "csm_B4_Banner_46efaf3cfe.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/c/6/csm_OPUS_B4E_Front_web_52f7b88cea.png",
-        "alt": "Topcon OPUS B4e front view"
+        "src": "/media/products/topcon-opus-b4e/images/csm_OPUS_B4E_Front_web_52f7b88cea.png",
+        "alt": "Topcon OPUS B4e front view",
+        "fileName": "csm_OPUS_B4E_Front_web_52f7b88cea.png"
       }
     ],
     "summary": "7 inch OPUS B-series Eco touch HMI with aluminium housing, Ethernet, USB and dual CAN-Bus.",
@@ -1112,15 +1161,15 @@
     "documents": [
       {
         "label": "Topcon OPUS B4e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B4eB.pdf"
+        "url": "/media/products/topcon-opus-b4e/files/TDS_OPUS_B4eB.pdf"
       },
       {
         "label": "Topcon OPUS B4e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_B4eF.pdf"
+        "url": "/media/products/topcon-opus-b4e/files/TDS_OPUS_B4eF.pdf"
       },
       {
         "label": "Topcon OPUS B4e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSB4.pdf"
+        "url": "/media/products/topcon-opus-b4e/files/BA_OPUSB4.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS B4e"
@@ -1142,25 +1191,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Front_web.png",
-      "alt": "Topcon OPUS A6e front view"
+      "src": "/media/products/topcon-opus-a6e/images/OPUS_A6E_Front_web.png",
+      "alt": "Topcon OPUS A6e front view",
+      "fileName": "OPUS_A6E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Front_web.png",
-        "alt": "Topcon OPUS A6e front view"
+        "src": "/media/products/topcon-opus-a6e/images/OPUS_A6E_Front_web.png",
+        "alt": "Topcon OPUS A6e front view",
+        "fileName": "OPUS_A6E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6E_Back_web.png",
-        "alt": "Topcon OPUS A6e rear view"
+        "src": "/media/products/topcon-opus-a6e/images/OPUS_A6E_Back_web.png",
+        "alt": "Topcon OPUS A6e rear view",
+        "fileName": "OPUS_A6E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/e/7/csm_Produkte-Banner-OpusA6e_1920x680_02_d6f94b2eac.jpg",
-        "alt": "Topcon OPUS A6e banner image"
+        "src": "/media/products/topcon-opus-a6e/images/csm_Produkte-Banner-OpusA6e_1920x680_02_d6f94b2eac.jpg",
+        "alt": "Topcon OPUS A6e banner image",
+        "fileName": "csm_Produkte-Banner-OpusA6e_1920x680_02_d6f94b2eac.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/b/1/csm_OPUS_A6E_Front_web_7c82baecd7.png",
-        "alt": "Topcon OPUS A6e front view"
+        "src": "/media/products/topcon-opus-a6e/images/csm_OPUS_A6E_Front_web_7c82baecd7.png",
+        "alt": "Topcon OPUS A6e front view",
+        "fileName": "csm_OPUS_A6E_Front_web_7c82baecd7.png"
       }
     ],
     "summary": "7 inch OPUS A-series touch HMI with CAN-Bus, Ethernet, I/O and IP65/IP66 protection.",
@@ -1229,15 +1283,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A6e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A6eB.pdf"
+        "url": "/media/products/topcon-opus-a6e/files/TDS_A6eB.pdf"
       },
       {
         "label": "Topcon OPUS A6e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6eF.pdf"
+        "url": "/media/products/topcon-opus-a6e/files/TDS_OPUS_A6eF.pdf"
       },
       {
         "label": "Topcon OPUS A6e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA6G2.pdf"
+        "url": "/media/products/topcon-opus-a6e/files/BA_OPUSA6G2.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A6e"
@@ -1259,25 +1313,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Front_web.png",
-      "alt": "Topcon OPUS A6s front view"
+      "src": "/media/products/topcon-opus-a6s/images/OPUS_A6S_Front_web.png",
+      "alt": "Topcon OPUS A6s front view",
+      "fileName": "OPUS_A6S_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Front_web.png",
-        "alt": "Topcon OPUS A6s front view"
+        "src": "/media/products/topcon-opus-a6s/images/OPUS_A6S_Front_web.png",
+        "alt": "Topcon OPUS A6s front view",
+        "fileName": "OPUS_A6S_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A6S_Back_web.png",
-        "alt": "Topcon OPUS A6s rear view"
+        "src": "/media/products/topcon-opus-a6s/images/OPUS_A6S_Back_web.png",
+        "alt": "Topcon OPUS A6s rear view",
+        "fileName": "OPUS_A6S_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/d/9/csm_Produkte-Banner-OpusA6s_1920x680_01_2b43312f4f.jpg",
-        "alt": "Topcon OPUS A6s banner image"
+        "src": "/media/products/topcon-opus-a6s/images/csm_Produkte-Banner-OpusA6s_1920x680_01_2b43312f4f.jpg",
+        "alt": "Topcon OPUS A6s banner image",
+        "fileName": "csm_Produkte-Banner-OpusA6s_1920x680_01_2b43312f4f.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/a/a/csm_OPUS_A6S_Front_web_f6b9dd4843.png",
-        "alt": "Topcon OPUS A6s front view"
+        "src": "/media/products/topcon-opus-a6s/images/csm_OPUS_A6S_Front_web_f6b9dd4843.png",
+        "alt": "Topcon OPUS A6s front view",
+        "fileName": "csm_OPUS_A6S_Front_web_f6b9dd4843.png"
       }
     ],
     "summary": "7 inch OPUS A-series keyed HMI with touchscreen, soft keys, hard keys, encoder and front USB.",
@@ -1346,15 +1405,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A6s basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6sB.pdf"
+        "url": "/media/products/topcon-opus-a6s/files/TDS_OPUS_A6sB.pdf"
       },
       {
         "label": "Topcon OPUS A6s full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_OPUS_A6sF.pdf"
+        "url": "/media/products/topcon-opus-a6s/files/TDS_OPUS_A6sF.pdf"
       },
       {
         "label": "Topcon OPUS A6s operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA6G2.pdf"
+        "url": "/media/products/topcon-opus-a6s/files/BA_OPUSA6G2.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A6s"
@@ -1376,25 +1435,30 @@
       "touchscreen"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Front_web.png",
-      "alt": "Topcon OPUS A8e front view"
+      "src": "/media/products/topcon-opus-a8e/images/OPUS_A8E_Front_web.png",
+      "alt": "Topcon OPUS A8e front view",
+      "fileName": "OPUS_A8E_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Front_web.png",
-        "alt": "Topcon OPUS A8e front view"
+        "src": "/media/products/topcon-opus-a8e/images/OPUS_A8E_Front_web.png",
+        "alt": "Topcon OPUS A8e front view",
+        "fileName": "OPUS_A8E_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8E_Back_web.png",
-        "alt": "Topcon OPUS A8e rear view"
+        "src": "/media/products/topcon-opus-a8e/images/OPUS_A8E_Back_web.png",
+        "alt": "Topcon OPUS A8e rear view",
+        "fileName": "OPUS_A8E_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/e/7/csm_Produkte-Banner-OpusA8e_1920x680_09c2ed9cbf.jpg",
-        "alt": "Topcon OPUS A8e banner image"
+        "src": "/media/products/topcon-opus-a8e/images/csm_Produkte-Banner-OpusA8e_1920x680_09c2ed9cbf.jpg",
+        "alt": "Topcon OPUS A8e banner image",
+        "fileName": "csm_Produkte-Banner-OpusA8e_1920x680_09c2ed9cbf.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/1/1/csm_OPUS_A8E_Front_web_5742cc7ca5.png",
-        "alt": "Topcon OPUS A8e front view"
+        "src": "/media/products/topcon-opus-a8e/images/csm_OPUS_A8E_Front_web_5742cc7ca5.png",
+        "alt": "Topcon OPUS A8e front view",
+        "fileName": "csm_OPUS_A8E_Front_web_5742cc7ca5.png"
       }
     ],
     "summary": "12.1 inch OPUS A-series touch HMI with high-resolution display, CAN-Bus, Ethernet and I/O.",
@@ -1463,15 +1527,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A8e basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8e_BASIC.pdf"
+        "url": "/media/products/topcon-opus-a8e/files/TDS_A8e_BASIC.pdf"
       },
       {
         "label": "Topcon OPUS A8e full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8e_FULL.pdf"
+        "url": "/media/products/topcon-opus-a8e/files/TDS_A8e_FULL.pdf"
       },
       {
         "label": "Topcon OPUS A8e operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA8.pdf"
+        "url": "/media/products/topcon-opus-a8e/files/BA_OPUSA8.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A8e"
@@ -1493,25 +1557,30 @@
       "keyed controls"
     ],
     "image": {
-      "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Front_web.png",
-      "alt": "Topcon OPUS A8s front view"
+      "src": "/media/products/topcon-opus-a8s/images/OPUS_A8S_Front_web.png",
+      "alt": "Topcon OPUS A8s front view",
+      "fileName": "OPUS_A8S_Front_web.png"
     },
     "images": [
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Front_web.png",
-        "alt": "Topcon OPUS A8s front view"
+        "src": "/media/products/topcon-opus-a8s/images/OPUS_A8S_Front_web.png",
+        "alt": "Topcon OPUS A8s front view",
+        "fileName": "OPUS_A8S_Front_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/uploads/pics/OPUS_A8S_Back_web.png",
-        "alt": "Topcon OPUS A8s rear view"
+        "src": "/media/products/topcon-opus-a8s/images/OPUS_A8S_Back_web.png",
+        "alt": "Topcon OPUS A8s rear view",
+        "fileName": "OPUS_A8S_Back_web.png"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/0/2/csm_Produkte-Banner-OpusA8s_1920x680_dfa4054416.jpg",
-        "alt": "Topcon OPUS A8s banner image"
+        "src": "/media/products/topcon-opus-a8s/images/csm_Produkte-Banner-OpusA8s_1920x680_dfa4054416.jpg",
+        "alt": "Topcon OPUS A8s banner image",
+        "fileName": "csm_Produkte-Banner-OpusA8s_1920x680_dfa4054416.jpg"
       },
       {
-        "src": "https://topcon-electronics.de/typo3temp/assets/_processed_/2/d/csm_OPUS_A8S_Front_web_e6cc5d37d5.png",
-        "alt": "Topcon OPUS A8s front view"
+        "src": "/media/products/topcon-opus-a8s/images/csm_OPUS_A8S_Front_web_e6cc5d37d5.png",
+        "alt": "Topcon OPUS A8s front view",
+        "fileName": "csm_OPUS_A8S_Front_web_e6cc5d37d5.png"
       }
     ],
     "summary": "12.1 inch OPUS A-series keyed HMI with touchscreen, soft keys, hard keys and encoder for larger control consoles.",
@@ -1580,15 +1649,15 @@
     "documents": [
       {
         "label": "Topcon OPUS A8s basic datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8s_BASIC.pdf"
+        "url": "/media/products/topcon-opus-a8s/files/TDS_A8s_BASIC.pdf"
       },
       {
         "label": "Topcon OPUS A8s full datasheet",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/TDS_A8s_FULL.pdf"
+        "url": "/media/products/topcon-opus-a8s/files/TDS_A8s_FULL.pdf"
       },
       {
         "label": "Topcon OPUS A8s operating manual",
-        "url": "https://topcon-electronics.de/fileadmin/user_upload/BA_OPUSA8.pdf"
+        "url": "/media/products/topcon-opus-a8s/files/BA_OPUSA8.pdf"
       }
     ],
     "enquiryPrompt": "Discuss OPUS A8s"

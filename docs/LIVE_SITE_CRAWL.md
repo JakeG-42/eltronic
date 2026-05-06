@@ -52,4 +52,4 @@ Date crawled: 2026-04-26
 - Structured product data now lives in `src/content/products.ts`.
 - Product pages in the new app are generated from that data through `/products/[slug]`.
 - Old WordPress URLs are preserved in each product as `sourceUrl` for traceability.
-- Product image URLs currently point to public WordPress uploads; these can later be downloaded into the Next.js repo if desired.
+- Product image/document URLs should be localized into the Next.js repo where possible; current migrated product assets live under `public/media/products`.
