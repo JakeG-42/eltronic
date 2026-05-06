@@ -26,13 +26,13 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
-- Public navigation: brand link to `/`, desktop icon-labelled links for `/products`, `/solutions`, `/software-it`, `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
+- Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Products (`/products`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.
 - Public footer: `src/components/site/site-shell.tsx` renders a simple static footer; avoid sticky/reveal footer effects unless they are tested across full-page layouts.
 - AI context pack: future agents should start with `docs/AGENT_CONTEXT.md` and `docs/AI_FUNCTION_MAP.json`.
-- Public content tone: prefer precise wording such as specialist equipment, operating environment, application, platform, control system, full-stack software, embedded services, connected devices and operational workflow instead of generic IT-support or machine/machinery phrasing.
+- Public content tone: present Eltronic as a practical technical systems, prototyping, product, electronics, software and integration partner. Product catalogue language should frame products as modules/building blocks for wider systems, not the whole business.
 
 ## Current Routes
 
@@ -41,9 +41,9 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/products/[slug]`: dynamic product detail page generated from the managed catalogue.
 - `/projects`: public project/case-study index generated from `src/content/projects.ts`.
 - `/projects/[slug]`: public project/case-study detail page with article and breadcrumb structured data.
-- `/solutions`: public solution/service page for HMI, CAN-Bus and bespoke control integration.
-- `/software-it`: public service page for full-stack internal platforms, API/shipping integrations, embedded and IoT/device services, backend infrastructure and technical consultation.
-- `/sectors`: public sector page for agriculture, construction, logistics and industrial automation.
+- `/solutions`: public Services page for bespoke systems, prototypes, electronics, CAN/screens, product support, business systems and integration.
+- `/software-it`: public service page for internal platforms, API/shipping/warehouse integrations, plugins, embedded/device services, remote access and operational IT support.
+- `/sectors`: public applications page for specialist vehicles, fleet systems, simulators/test rigs and business operations.
 - `/data-specification`: public resource page for data sheets, guides and product documents.
 - `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.

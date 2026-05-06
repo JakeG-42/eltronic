@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "About",
   description:
-    "About Eltronic engineering, product supply, systems integration and software support for equipment projects.",
+    "About Eltronic prototyping, product supply, electronics, systems integration and software support.",
   path: "/about",
 });
 
@@ -15,13 +15,13 @@ const strengths = [
     code: "application.context",
     title: "We start with the application",
     summary:
-      "The right answer depends on environment, operators, protocols, duty cycle, support needs and what already exists on site.",
+      "The right answer depends on users, environment, hardware, software, data, support needs and what already exists.",
   },
   {
     code: "practical.integration",
     title: "Products become working systems",
     summary:
-      "Displays, CAN data, I/O, harnesses, software and documentation are treated as one integration problem, not separate boxes.",
+      "Displays, electronics, CAN data, plugins, APIs, internal tools and documentation are treated as one integration problem, not separate boxes.",
   },
   {
     code: "customer.clarity",
@@ -38,11 +38,12 @@ const strengths = [
 ];
 
 const capabilities = [
+  "Prototype design, technical architecture and product development support",
   "Rugged HMI displays and operator interfaces",
   "CAN-Bus, CAN-FD, data logging and diagnostics",
-  "Custom harnesses, wiring and control integration",
-  "Full-stack software, embedded services, APIs and dashboards",
-  "Specification support, documentation and lifecycle improvement",
+  "Electronics, PCB support, sensors, devices and control integration",
+  "Internal software, APIs, plugins, dashboards and business workflows",
+  "Remote access, infrastructure, website and lifecycle support",
 ];
 
 export default function AboutPage() {
@@ -51,19 +52,18 @@ export default function AboutPage() {
       <section className="about-hero section">
         <div>
           <p className="code-kicker">about.eltronic</p>
-          <h1>Control systems, displays and connected data.</h1>
+          <h1>Practical technical systems, from prototype to support.</h1>
           <p className="lede">
-            Eltronic supports mobile plant, specialist vehicles and fixed
-            industrial equipment with rugged HMI displays, CAN data, bespoke
-            integration and software systems that reduce friction between
-            hardware, operators and business workflows.
+            Eltronic supports businesses with prototypes, technical products,
+            electronics, operator interfaces, CAN systems, software, plugins and
+            internal tools that connect hardware, people and operations.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
               Start a project conversation
             </Link>
             <Link className="button secondary" href="/products">
-              Browse products
+              Browse product catalogue
             </Link>
           </div>
         </div>
@@ -74,17 +74,18 @@ export default function AboutPage() {
       <section className="about-intro-grid section">
         <article className="about-statement panel">
           <span className="section-number">why.eltronic</span>
-          <h2>System-level engineering between hardware and operations.</h2>
+          <h2>System-level engineering between ideas, hardware and operations.</h2>
           <p>
-            A product only matters once it is specified correctly, wired into the
-            real operating environment, configured around the operator and
-            supported by clear information. That is the space Eltronic works in.
+            A product or prototype only matters once it is specified correctly,
+            connected to the real operating environment, configured around the
+            user and supported by clear information. That is the space Eltronic
+            works in.
           </p>
           <p>
-            The work can involve an HMI display, CAN logging, a control module,
-            a custom workflow, an internal system or all of them together. The
-            aim is the same: make the technical path controlled, understandable
-            and reliable.
+            The work can involve an HMI display, CAN logging, electronics, a
+            tracking system, a Shopify plugin, a Sage workflow, a website, an
+            internal platform or all of them together. The aim is the same: make
+            the technical path controlled, understandable and reliable.
           </p>
         </article>
 
@@ -115,7 +116,7 @@ export default function AboutPage() {
             <h3>Core capability</h3>
             <p>
               Eltronic connects product supply, equipment integration and
-              full-stack software delivery, helping customers make sound
+              software delivery, helping customers make sound
               technical decisions without adding unnecessary complexity.
             </p>
           </div>
@@ -160,9 +161,10 @@ export default function AboutPage() {
             <span className="section-number">where.it.fits</span>
             <h2>Built around practical environments.</h2>
             <p>
-              Agriculture, construction, logistics and industrial automation all
-              have different pressures. The common thread is reliability,
-              operator clarity and systems that can be maintained.
+              Specialist vehicles, fleet operations, simulator projects,
+              internal business systems and product ideas all have different
+              pressures. The common thread is reliability, clarity and systems
+              that can be maintained.
             </p>
             <div className="tag-row">
               {sectorModules.map((sector) => (

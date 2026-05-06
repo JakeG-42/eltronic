@@ -4,7 +4,8 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: "Products",
-  description: "Browse Eltronic HMI, CAN data logging and control products.",
+  description:
+    "Browse Eltronic product modules, hardware, devices and technical products for wider systems and integration projects.",
   path: "/products",
 });
 

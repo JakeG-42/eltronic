@@ -1,44 +1,75 @@
 export const serviceModules = [
   {
-    slug: "hmi-solutions",
-    title: "Touch screen HMI solutions",
-    eyebrow: "operator.interface",
+    slug: "prototyping-design",
+    title: "Prototype and system design",
+    eyebrow: "prototype.design",
     summary:
-      "Rugged touch screens for demanding vehicle, plant and industrial environments, with CAN-Bus, Ethernet and serial communications.",
-    bullets: ["TOPCON OPUS display supply", "Operator workflow design", "CoDeSys, C/Qt and OPUS Projektor support"],
+      "Practical design and development for working prototypes, demonstrators and first-build systems that need to prove an idea in the real world.",
+    bullets: ["Proof-of-concept builds", "Technical architecture", "Prototype refinement"],
   },
   {
-    slug: "can-bus-integration",
-    title: "CAN-Bus integration and diagnostics",
-    eyebrow: "equipment.network",
+    slug: "screens-can-controls",
+    title: "Screens, CAN and control interfaces",
+    eyebrow: "equipment.interface",
     summary:
-      "Control-system integration, CAN data capture and diagnostics for mobile equipment, fixed installations and specialist vehicles.",
-    bullets: ["CANopen, CANfreestyle and J1939", "CAN-FD data logging", "Remote diagnostics and data workflows"],
+      "Operator screens, CAN-Bus, data capture and control interfaces for vehicles, machines, simulators and specialist equipment.",
+    bullets: ["HMI and touchscreen workflows", "CAN/CAN-FD integration", "Control and monitoring interfaces"],
   },
   {
-    slug: "bespoke-control",
-    title: "Bespoke control systems",
-    eyebrow: "project.specific",
+    slug: "electronics-device-systems",
+    title: "Electronics and device systems",
+    eyebrow: "electronics.device",
     summary:
-      "Custom software, wiring, harnesses and integration around the application, not around a generic parts list.",
-    bullets: ["Custom harnesses", "Existing control-system integration", "Quote-led engineering support"],
+      "Hardware-aware development across sensors, PCB support, embedded devices, gateways and the software needed to make them useful.",
+    bullets: ["Sensor and I/O integration", "PCB and electronics support", "Embedded and gateway software"],
+  },
+  {
+    slug: "tracking-monitoring",
+    title: "Tracking, fleet and monitoring tools",
+    eyebrow: "asset.telemetry",
+    summary:
+      "Connected systems for tracking, reporting and managing technical assets, from tractor tracking to fleet and remote equipment monitoring.",
+    bullets: ["Asset and vehicle tracking", "Dashboards and alerts", "Device data pipelines"],
+  },
+  {
+    slug: "business-systems",
+    title: "Business systems and integrations",
+    eyebrow: "operations.software",
+    summary:
+      "Internal platforms, APIs, plugins and integrations that connect operational software, ecommerce, warehouse tools and finance systems.",
+    bullets: ["Shopify and bespoke plugins", "Shipping and warehouse APIs", "Sage and business-system support"],
+  },
+  {
+    slug: "support-infrastructure",
+    title: "IT, infrastructure and support",
+    eyebrow: "support.infrastructure",
+    summary:
+      "Reliable support around internal systems, remote access, websites, infrastructure and the day-to-day tools a business depends on.",
+    bullets: ["Remote desktop support", "Internal infrastructure", "Website and platform support"],
   },
 ];
 
 export const softwareServiceModules = [
   {
-    title: "Full-stack internal platforms",
+    title: "Internal platforms and dashboards",
     code: "systems.backend",
     summary:
-      "Admin portals, workflow tools, CRM extensions, dashboards and operational platforms built around the way the business actually runs.",
-    examples: ["Admin portals", "CRM extensions", "Quoting systems", "Operations dashboards"],
+      "Admin portals, workflow tools, dashboards and operational platforms built around the way the business actually runs.",
+    examples: ["Admin portals", "Quoting tools", "Operations dashboards", "Reporting views"],
   },
   {
-    title: "Systems, API and data integration",
+    title: "API, middleware and data integration",
     code: "integration.api",
     summary:
       "Connect shipping, stock, CRM, customer portals, finance tools and third-party services so data moves cleanly without double entry.",
-    examples: ["Shipping workflows", "CRM automation", "Stock and order sync", "Customer portals"],
+    examples: ["Shipping workflows", "Stock and order sync", "Customer portals", "Middleware services"],
+  },
+  {
+    title: "Plugins, ecommerce and business tools",
+    code: "plugins.commerce",
+    summary:
+      "Bespoke plugins and practical extensions for Shopify, websites, internal tools and operational systems that need to fit a specific process.",
+    examples: ["Shopify plugins", "Website tools", "CRM extensions", "Customer-facing portals"],
   },
   {
     title: "Embedded, IoT and device services",
@@ -48,11 +79,11 @@ export const softwareServiceModules = [
     examples: ["MQTT/HTTP services", "Device telemetry", "Edge gateways", "Command/status APIs"],
   },
   {
-    title: "Backend platforms and infrastructure",
-    code: "platform.internal",
+    title: "Business software support",
+    code: "support.business",
     summary:
-      "Server-side engineering for databases, background jobs, secure access, reporting and internal services that need to keep running.",
-    examples: ["Internal servers", "Databases", "Scheduled jobs", "Secure access"],
+      "Support for the systems companies already rely on, including Sage workflows, remote desktop access, internal servers and operational IT.",
+    examples: ["Sage support", "Remote desktop", "Internal servers", "Secure access"],
   },
   {
     title: "Technical consultancy and process improvement",
@@ -73,7 +104,7 @@ export const softwareServiceModules = [
 export const softwareWorkflowModules = [
   {
     step: "01",
-    title: "Operational and technical discovery",
+    title: "Problem and workflow discovery",
     summary:
       "We map the real process, users, devices, existing systems, failure points and the places where time or accuracy is being lost.",
     outcome: "A precise view of the work, the friction and the systems already in play.",
@@ -103,56 +134,56 @@ export const softwareWorkflowModules = [
 
 export const sectorModules = [
   {
-    title: "Agriculture and farming",
+    title: "Agriculture and specialist vehicles",
     code: "sector.agri",
     summary:
-      "Display, monitoring and control solutions for harvesters, field collectors, spreaders and specialist agricultural equipment.",
-    examples: ["Potato harvester", "Strawberry harvester", "Hay block field collectors", "Salt spreader"],
+      "Tracking, display, monitoring and control solutions for tractors, harvesters, spreaders and specialist mobile equipment.",
+    examples: ["Tractor tracking", "Potato harvesters", "Field collection", "Salt spreaders"],
   },
   {
-    title: "Construction and heavy equipment",
-    code: "sector.heavy",
+    title: "Fleet, logistics and asset operations",
+    code: "sector.fleet",
     summary:
-      "Rugged operator interfaces and CAN-Bus control for equipment working in vibration, dust, weather and long duty cycles.",
-    examples: ["Utility vehicles", "Construction equipment", "Recovery track safety", "Hydraulic systems"],
+      "Tools for monitoring, reporting and connecting vehicles, assets, warehouse processes and operational software.",
+    examples: ["Fleet dashboards", "Warehouse links", "Vehicle data", "Remote support"],
   },
   {
-    title: "Logistics and material handling",
-    code: "sector.logistics",
+    title: "Machinery, simulators and test rigs",
+    code: "sector.machine",
     summary:
-      "Interfaces, diagnostics and control integration for moving equipment, operator stations and fleet-facing assets.",
-    examples: ["Material handling", "Vehicle data", "Operator feedback", "Remote support"],
+      "Operator interfaces, simulation tools, control panels and device integration for technical equipment and validation environments.",
+    examples: ["Simulator interfaces", "Test rigs", "Operator screens", "Control panels"],
   },
   {
-    title: "Manufacturing and industrial automation",
-    code: "sector.automation",
+    title: "Business operations and internal systems",
+    code: "sector.operations",
     summary:
-      "Fixed equipment and automation integration where reliability, clear operator control and maintainable systems matter.",
-    examples: ["Industrial HMIs", "Control panels", "Diagnostics", "Equipment retrofits"],
+      "Internal platforms, plugins, ecommerce integrations, remote access and support systems for companies that need cleaner operations.",
+    examples: ["Shopify plugins", "Sage workflows", "Internal tools", "Website systems"],
   },
 ];
 
 export const workflowModules = [
   {
     step: "01",
-    title: "Operational and technical discovery",
+    title: "Define the real requirement",
     summary:
-      "We build a clear picture of the operating environment, workflow, protocols, I/O and constraints before recommending hardware.",
-    outcome: "A grounded scope that reflects the real application, not a generic product list.",
+      "We build a clear picture of the application, workflow, users, devices, existing systems and constraints before choosing the technical route.",
+    outcome: "A grounded scope that reflects the real problem, not a generic product list.",
   },
   {
     step: "02",
-    title: "Specification, architecture and risk planning",
+    title: "Prototype, specify and de-risk",
     summary:
-      "HMI choice, CAN interfaces, harnessing, data requirements and support expectations are specified with practical risk and maintainability in mind.",
-    outcome: "A specification that makes decisions, responsibilities and constraints clear.",
+      "Early design, prototype work, hardware choices, interfaces, APIs and support expectations are shaped before the build becomes expensive.",
+    outcome: "A practical plan with clear decisions, responsibilities and risks.",
   },
   {
     step: "03",
-    title: "Controlled integration and validation",
+    title: "Build and integrate the system",
     summary:
-      "Software, wiring, configuration and testing are brought together in controlled stages so the finished system is reliable in the real environment.",
-    outcome: "A working integration proven through staged checks, not assumptions.",
+      "Software, electronics, screens, data, plugins, infrastructure and third-party systems are brought together in controlled stages.",
+    outcome: "A working system proven through staged checks, not assumptions.",
   },
   {
     step: "04",
@@ -165,12 +196,12 @@ export const workflowModules = [
 
 export const resourceModules = [
   {
-    title: "Product data sheets",
-    summary: "Technical documents for TOPCON OPUS displays, AutoPi data logging and Eltronic modules.",
+    title: "Product and module data",
+    summary: "Technical documents for displays, modules, devices and product building blocks used in wider systems.",
   },
   {
     title: "Project enquiry support",
-    summary: "Use the product pages and contact form to start a quote-led discussion around the right hardware.",
+    summary: "Use the product pages and contact form to start a quote-led discussion around the right system or module.",
   },
   {
     title: "Guides and specification notes",

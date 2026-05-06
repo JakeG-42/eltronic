@@ -4,9 +4,9 @@ import { sectorModules } from "@/content/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Sectors",
+  title: "Applications",
   description:
-    "Eltronic application sectors including agriculture, construction, logistics and industrial automation.",
+    "Eltronic application areas including specialist vehicles, fleet systems, simulators, internal tools and business operations.",
   path: "/sectors",
 });
 
@@ -16,17 +16,18 @@ export default function SectorsPage() {
       <section className="hero compact-hero">
         <div className="hero-copy">
           <p className="code-kicker">sectors.map</p>
-          <h1>Control systems for real working environments.</h1>
+          <h1>Technical systems for real working environments.</h1>
           <p className="lede">
-            Eltronic supports specialist equipment across sectors where clear
-            operator feedback, reliable data and rugged control matter.
+            Eltronic supports applications where hardware, software, data and
+            practical operations need to work together without becoming harder
+            to manage.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
               Discuss your sector
             </Link>
             <Link className="button secondary" href="/solutions">
-              View solutions
+              View services
             </Link>
           </div>
         </div>
@@ -59,8 +60,9 @@ export default function SectorsPage() {
             <h2>Not seeing your exact application?</h2>
             <p>
               The site is quote-led by design. If the project involves
-              specialist equipment, operator interfaces, CAN-Bus or control integration,
-              it is worth starting a conversation.
+              specialist equipment, operator interfaces, tracking, plugins,
+              electronics, business systems or software integration, it is worth
+              starting a conversation.
             </p>
           </div>
           <Link className="button" href="/contact">

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Eltronic systems integration, HMI and software engineering";
+export const alt = "Eltronic prototypes, systems integration and software engineering";
 export const size = {
   width: 1200,
   height: 630,
@@ -37,7 +37,7 @@ export default function OpenGraphImage() {
           }}
         >
           <div style={{ color: "#67e8f9", display: "flex", fontSize: 30, letterSpacing: "0.18em" }}>
-            SYSTEMS.INTEGRATION
+            PROTOTYPES.INTEGRATION
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div
@@ -55,7 +55,7 @@ export default function OpenGraphImage() {
               Eltronic
             </div>
             <div style={{ color: "#cbd5e1", display: "flex", fontSize: 42, maxWidth: 850 }}>
-              Rugged HMI, CAN-Bus data, control integration and software systems.
+              Bespoke technical systems, products, software and integrations.
             </div>
           </div>
           <div style={{ color: "#94a3b8", display: "flex", fontSize: 28 }}>eltronic.co.uk</div>

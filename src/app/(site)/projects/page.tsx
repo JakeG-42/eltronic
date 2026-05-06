@@ -21,7 +21,7 @@ export default function ProjectsPage() {
             <h1>Project write-ups</h1>
           </div>
           <p>
-            A home for practical examples of Eltronic work across control systems, full-stack software,
+            A home for practical examples of Eltronic work across prototypes, products, electronics, software,
             connected devices, APIs, dashboards and operational improvements.
           </p>
         </div>

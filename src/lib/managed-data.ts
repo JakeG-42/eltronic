@@ -280,6 +280,7 @@ function normalizeSiteBuilderSettings(settings?: Partial<SiteBuilderSettings> | 
   const sectionsByKey = new Map(
     (Array.isArray(settings?.home?.sections) ? settings.home.sections : []).map((section) => [section.key, section]),
   );
+  const savedHero = settings?.home?.hero;
 
   return {
     theme: {
@@ -291,12 +292,7 @@ function normalizeSiteBuilderSettings(settings?: Partial<SiteBuilderSettings> | 
       visualDensity: normalizeVisualDensity(settings?.theme?.visualDensity),
     },
     home: {
-      hero: {
-        ...defaults.home.hero,
-        ...settings?.home?.hero,
-        rolePhrases: normalizeRolePhrases(settings?.home?.hero?.rolePhrases),
-        visualVariant: normalizeHeroVisualVariant(settings?.home?.hero?.visualVariant),
-      },
+      hero: normalizeBuilderHero(savedHero),
       sections: defaults.home.sections.map((defaultSection) =>
         normalizeBuilderSection(defaultSection, sectionsByKey.get(defaultSection.key)),
       ),
@@ -304,18 +300,144 @@ function normalizeSiteBuilderSettings(settings?: Partial<SiteBuilderSettings> | 
   };
 }
 
+const legacyBuilderHeroValues = {
+  lede: [
+    "Intelligent HMI displays, CAN data logging, custom harnesses and full-stack software integration for mobile equipment, fixed installations and specialist vehicles.",
+    "Intelligent HMI displays, CAN data logging, custom harnesses and software integration for mobile equipment, fixed installations and specialist vehicles.",
+  ],
+  primaryCtaHref: ["/products"],
+  primaryCtaLabel: ["Browse products"],
+  rolePhrases: [
+    "systems integrator|systems consultant|control systems partner|software systems engineer",
+    "systems integrator|systems consultant|control systems partner|software integration support",
+  ],
+  secondaryCtaHref: ["/contact"],
+  secondaryCtaLabel: ["Start an enquiry"],
+  visualLabel: ["HMI, CAN-Bus and control-system architecture"],
+};
+
+const legacyBuilderSectionValues: Partial<
+  Record<
+    SiteBuilderSection["key"],
+    Partial<Record<"ctaLabel" | "panelEyebrow" | "panelSummary" | "panelTitle" | "summary" | "title", string[]>>
+  >
+> = {
+  products: {
+    summary: ["A focused selection of displays, data logging tools and control modules for quote-led equipment projects."],
+    title: ["Featured products"],
+  },
+  sectors: {
+    panelTitle: ["Application sectors"],
+    summary: [
+      "Agriculture, construction, logistics and industrial automation each have different pressures around reliability, operator feedback and maintainable control systems.",
+    ],
+    title: ["Application sectors"],
+  },
+  services: {
+    ctaLabel: ["Explore solutions"],
+    summary: [
+      "Rugged HMIs, CAN data capture and bespoke integration work come together around the operator, environment and project requirement.",
+    ],
+    title: ["Application-ready systems"],
+  },
+  software: {
+    ctaLabel: ["Explore Software & Systems"],
+    panelEyebrow: ["software.systems"],
+    panelSummary: [
+      "From shipping and CRM integrations to MQTT services, HTTP APIs, internal servers, dashboards and connected hardware workflows, Eltronic helps reduce errors, manual admin and wasted time.",
+    ],
+    panelTitle: ["Internal platforms, data and connected devices."],
+    summary: [
+      "Full-stack internal platforms, API integration, embedded services and technical consultancy for more efficient operations.",
+      "Bespoke internal systems, API integration, embedded services and practical consulting for more efficient operations.",
+    ],
+    title: ["Software, systems and device integration", "Software and systems integration"],
+  },
+  workflow: {
+    summary: [
+      "The engineering can be detailed. The customer experience should still feel clear, structured and easy to move through.",
+    ],
+    title: ["Complex projects, made straightforward"],
+  },
+};
+
+function normalizeBuilderHero(hero?: Partial<SiteBuilderSettings["home"]["hero"]>) {
+  const defaults = defaultSiteBuilderSettings.home.hero;
+  const rolePhrases = normalizeRolePhrases(hero?.rolePhrases);
+
+  return {
+    ...defaults,
+    ...hero,
+    lede: replaceLegacyBuilderValue(hero?.lede, defaults.lede, legacyBuilderHeroValues.lede),
+    primaryCtaHref: replaceLegacyBuilderValue(
+      hero?.primaryCtaHref,
+      defaults.primaryCtaHref,
+      legacyBuilderHeroValues.primaryCtaHref,
+    ),
+    primaryCtaLabel: replaceLegacyBuilderValue(
+      hero?.primaryCtaLabel,
+      defaults.primaryCtaLabel,
+      legacyBuilderHeroValues.primaryCtaLabel,
+    ),
+    rolePhrases:
+      legacyBuilderHeroValues.rolePhrases.includes(rolePhrases.join("|")) ? defaults.rolePhrases : rolePhrases,
+    secondaryCtaHref: replaceLegacyBuilderValue(
+      hero?.secondaryCtaHref,
+      defaults.secondaryCtaHref,
+      legacyBuilderHeroValues.secondaryCtaHref,
+    ),
+    secondaryCtaLabel: replaceLegacyBuilderValue(
+      hero?.secondaryCtaLabel,
+      defaults.secondaryCtaLabel,
+      legacyBuilderHeroValues.secondaryCtaLabel,
+    ),
+    visualLabel: replaceLegacyBuilderValue(hero?.visualLabel, defaults.visualLabel, legacyBuilderHeroValues.visualLabel),
+    visualVariant: normalizeHeroVisualVariant(hero?.visualVariant),
+  };
+}
+
 function normalizeBuilderSection(
   defaultSection: SiteBuilderSection,
   section?: Partial<SiteBuilderSection>,
 ): SiteBuilderSection {
+  const legacyValues = legacyBuilderSectionValues[defaultSection.key] ?? {};
+
   return {
     ...defaultSection,
     ...section,
     key: defaultSection.key,
     label: defaultSection.label,
+    ctaLabel: replaceLegacyOptionalBuilderValue(section?.ctaLabel, defaultSection.ctaLabel, legacyValues.ctaLabel),
     enabled: section?.enabled ?? defaultSection.enabled,
     order: normalizeOrder(section?.order, defaultSection.order),
+    panelEyebrow: replaceLegacyOptionalBuilderValue(
+      section?.panelEyebrow,
+      defaultSection.panelEyebrow,
+      legacyValues.panelEyebrow,
+    ),
+    panelSummary: replaceLegacyOptionalBuilderValue(
+      section?.panelSummary,
+      defaultSection.panelSummary,
+      legacyValues.panelSummary,
+    ),
+    panelTitle: replaceLegacyOptionalBuilderValue(section?.panelTitle, defaultSection.panelTitle, legacyValues.panelTitle),
+    summary: replaceLegacyBuilderValue(section?.summary, defaultSection.summary, legacyValues.summary),
+    title: replaceLegacyBuilderValue(section?.title, defaultSection.title, legacyValues.title),
   };
+}
+
+function replaceLegacyBuilderValue(value: unknown, fallback: string, legacyValues?: string[]) {
+  const text = typeof value === "string" ? value : fallback;
+
+  return legacyValues?.includes(text) ? fallback : text;
+}
+
+function replaceLegacyOptionalBuilderValue(value: unknown, fallback?: string, legacyValues?: string[]) {
+  if (typeof value !== "string") {
+    return fallback;
+  }
+
+  return legacyValues?.includes(value) ? fallback : value;
 }
 
 function getRedisClient() {

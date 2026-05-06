@@ -4,9 +4,9 @@ import { serviceModules, workflowModules } from "@/content/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Solutions",
+  title: "Services",
   description:
-    "HMI, CAN-Bus, harness, software and bespoke control-system integration solutions for specialist equipment.",
+    "Bespoke technical systems, prototypes, electronics, software and integration services from Eltronic.",
   path: "/solutions",
 });
 
@@ -16,18 +16,18 @@ export default function SolutionsPage() {
       <section className="hero compact-hero">
         <div className="hero-copy">
           <p className="code-kicker">solutions.stack</p>
-          <h1>Integrated systems for demanding applications.</h1>
+          <h1>Bespoke systems, prototypes and integration.</h1>
           <p className="lede">
-            Eltronic combines rugged operator interfaces, CAN-Bus integration,
-            custom software and project-specific harnessing for mobile and
-            stationary equipment.
+            Eltronic helps turn technical requirements into working systems:
+            prototypes, screens, CAN interfaces, electronics, backend software,
+            plugins, APIs and the support needed to keep them useful.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
               Start a project enquiry
             </Link>
             <Link className="button secondary" href="/products">
-              Browse products
+              Browse product modules
             </Link>
           </div>
         </div>
@@ -38,11 +38,12 @@ export default function SolutionsPage() {
         <div className="section-heading">
           <div>
             <span className="section-number">01</span>
-            <h2>Core solution modules</h2>
+            <h2>What we help design, build and connect</h2>
           </div>
           <p>
-            A practical view of the services that sit around every successful
-            HMI, CAN-Bus or control-system project.
+            The work can start as a prototype, a product idea, a machine
+            interface, an internal system or a messy integration problem. The
+            service is shaped around the application rather than a fixed package.
           </p>
         </div>
         <div className="module-grid">
@@ -63,18 +64,18 @@ export default function SolutionsPage() {
 
       <section className="section">
         <div className="split-module reverse">
-          <TechnicalVisual label="HMI interface architecture" variant="display" />
+          <TechnicalVisual label="Technical system architecture" variant="display" />
           <div>
             <span className="section-number">02</span>
-            <h2>From display choice to working system.</h2>
+            <h2>Products are building blocks, not the boundary.</h2>
             <p className="lede">
-              The product catalogue gives the hardware options. The solution
-              work connects that hardware to CAN protocols, operator tasks,
-              environmental requirements and service expectations.
+              The catalogue shows some of the hardware, modules and products we
+              can supply or build around. The wider value is in adapting,
+              connecting and supporting those pieces inside a complete system.
             </p>
             <div className="actions">
-              <Link className="button secondary" href="/data-specification">
-                View data resources
+              <Link className="button secondary" href="/products">
+                View product catalogue
               </Link>
             </div>
           </div>
@@ -85,10 +86,10 @@ export default function SolutionsPage() {
         <div className="cta-module">
           <div>
             <span className="section-number">software.systems</span>
-            <h2>Need the software layer around it too?</h2>
+            <h2>Need the software, data or business layer too?</h2>
             <p>
-              Eltronic also builds internal platforms, API integrations,
-              embedded services, device data workflows, CRMs and server-side
+              Eltronic also builds internal tools, API integrations, Shopify and
+              bespoke plugins, dashboards, remote access workflows and server-side
               systems that connect the technical work to daily operations.
             </p>
           </div>
@@ -105,8 +106,9 @@ export default function SolutionsPage() {
             <h2>Professional delivery, made straightforward</h2>
           </div>
           <p>
-            Integration projects have moving parts. The process keeps decisions,
-            risks and next steps clear from enquiry through support.
+            Mixed hardware, software and product work can have a lot of moving
+            parts. The process keeps decisions, risks and next steps clear from
+            enquiry through support.
           </p>
         </div>
         <div className="process-grid">

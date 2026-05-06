@@ -569,9 +569,9 @@
       "file": "src/components/site/site-shell.tsx",
       "type": "inline SVG",
       "primaryItems": [
-        "Products",
-        "Solutions",
+        "Services",
         "Software",
+        "Products",
         "About",
         "Contact"
       ],
@@ -593,7 +593,7 @@
         "workflowModules",
         "softwareWorkflowModules"
       ],
-      "tone": "Professional delivery for complex systems, presented as controlled, clear and easy for customers to move through. Avoid generic IT-support language. Prefer precise terms like specialist equipment, operating environment, application, full-stack software, embedded services, connected devices, platform, control system and operational workflow over repeated generic machine/machinery phrasing."
+      "tone": "Professional delivery for complex systems, presented as controlled, clear and easy for customers to move through. Public copy should position Eltronic as a practical prototyping, technical systems, electronics, software, product and integration partner. Product catalogue language should describe products as modules/building blocks Eltronic can sell, adapt or integrate, not the whole company."
     },
     "productMediaGallery": {
       "file": "src/components/site/product-media-gallery.tsx",

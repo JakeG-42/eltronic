@@ -3,9 +3,9 @@ import { AmbientBackground } from "@/components/site/ambient-background";
 import { MobileNavAutoClose } from "@/components/site/mobile-nav-auto-close";
 
 const navItems = [
-  { href: "/products", label: "Products", icon: "products" },
-  { href: "/solutions", label: "Solutions", icon: "solutions" },
+  { href: "/solutions", label: "Services", icon: "solutions" },
   { href: "/software-it", label: "Software", icon: "software" },
+  { href: "/products", label: "Products", icon: "products" },
   { href: "/about", label: "About", icon: "about" },
   { href: "/contact", label: "Contact", icon: "contact" },
 ] as const;
@@ -57,9 +57,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
             <nav className="footer-group" aria-label="Explore">
               <h2 className="footer-group-title">Explore</h2>
-              <Link href="/products">Products</Link>
-              <Link href="/solutions">Solutions</Link>
+              <Link href="/solutions">Services</Link>
               <Link href="/software-it">Software & Systems</Link>
+              <Link href="/products">Product catalogue</Link>
             </nav>
 
             <nav className="footer-group" aria-label="Resources">
@@ -73,14 +73,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="footer-contact-card">
               <span className="section-number">contact.signal</span>
               <h2>Have a system to discuss?</h2>
-              <p>Send the product, control or software problem and we will help shape the next step.</p>
+              <p>Send the prototype, product, software or operations problem and we will help shape the next step.</p>
               <a href="mailto:sales@eltronic.co.uk">sales@eltronic.co.uk</a>
               <a href="tel:+447935239421">+44 (0) 79 3523 9421</a>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>© 2026 Eltronic. Systems integration and software engineering.</p>
+            <p>© 2026 Eltronic. Prototyping, systems integration and software engineering.</p>
           </div>
         </div>
       </footer>

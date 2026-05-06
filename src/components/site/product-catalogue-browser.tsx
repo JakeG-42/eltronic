@@ -58,8 +58,8 @@ export function ProductCatalogueBrowser({
           <p className="code-kicker">products.index</p>
           <h1 className="catalogue-title">Product.Catalogue</h1>
           <p className="lede catalogue-lede">
-            Rugged HMI displays, CAN-Bus data logging and control modules for
-            quote-led specification, integration and support.
+            Hardware, modules, devices and technical products that can be
+            supplied, adapted or integrated into wider Eltronic systems.
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export function ProductCatalogueBrowser({
             <input
               aria-label="Search products"
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search HMI, CAN-Bus, I/O..."
+              placeholder="Search displays, CAN, modules, plugins..."
               type="search"
               value={query}
             />
@@ -130,7 +130,7 @@ export function ProductCatalogueBrowser({
             Showing <strong>{filteredProducts.length}</strong> matching product
             {filteredProducts.length === 1 ? "" : "s"}
           </p>
-          <span>Open a product to review gallery, highlights and technical data.</span>
+          <span>Open a product to review gallery, highlights, documents and integration detail.</span>
         </div>
 
         {filteredProducts.length > 0 ? (
@@ -159,7 +159,7 @@ export function ProductCatalogueBrowser({
         ) : (
           <div className="catalogue-empty panel">
             <h2>No matching products</h2>
-            <p>Try clearing the filters, or send the application details and we can point you in the right direction.</p>
+            <p>Try clearing the filters, or send the application details and we can point you towards a suitable product or build route.</p>
             <div className="actions">
               <button className="button secondary" onClick={clearFilters} type="button">
                 Clear filters
