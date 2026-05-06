@@ -31,7 +31,7 @@ export default function SolutionsPage() {
             </Link>
           </div>
         </div>
-        <TechnicalVisual label="Control-system network" variant="network" />
+        <TechnicalVisual codeMark codeTheme="emerald" label="Eltronic service architecture" variant="display" />
       </section>
 
       <section className="section">

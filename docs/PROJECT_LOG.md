@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Added themed circular `< / >` code-mark visuals with particles across Services, Software, About and Web & Connected Platforms while preserving the original homepage magenta treatment.
 - Added `/web-connected-platforms` to present bespoke web platforms, website rebuilds/migrations, legacy system modernisation, API/platform integrations, IoT dashboards, IT support and consultancy without crowding the primary navigation.
 - Began repositioning public content from HMI/product-led toward broader prototyping, technical systems, electronics, software, plugins, infrastructure and integration services while keeping the interactive homepage code mark untouched.
 - Updated the homepage circular code mark so it tracks the cursor across the whole viewport, not only when hovering the element.

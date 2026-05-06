@@ -5,7 +5,10 @@ import type { CSSProperties } from "react";
 
 type InteractiveCodeMarkProps = {
   label: string;
+  theme?: CodeMarkTheme;
 };
+
+export type CodeMarkTheme = "amber" | "cyan" | "emerald" | "magenta" | "teal";
 
 type MotionPoint = {
   angle: number;
@@ -55,8 +58,11 @@ const codeParticles: CodeParticle[] = [
   { x: 266, y: 392, radius: 1.8, opacity: 0.42, delay: -11.2, duration: 9.6, driftX: 11, driftY: -8 },
 ];
 
-export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
-  const coreClipId = `code-core-${useId().replace(/:/g, "")}`;
+export function InteractiveCodeMark({ label, theme = "magenta" }: InteractiveCodeMarkProps) {
+  const codeMarkId = useId().replace(/:/g, "");
+  const coreClipId = `code-core-${codeMarkId}`;
+  const glowGradientId = `code-glow-${codeMarkId}`;
+  const lineGradientId = `code-line-${codeMarkId}`;
   const figureRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -136,16 +142,16 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
   }, []);
 
   return (
-    <figure className="technical-visual display code-mark interactive-code-mark" ref={figureRef}>
+    <figure className={`technical-visual display code-mark code-mark-${theme} interactive-code-mark`} ref={figureRef}>
       <svg aria-label={label} viewBox="0 0 720 720" role="img">
         <defs>
-          <linearGradient id="display-line" x1="0%" x2="100%" y1="0%" y2="100%">
-            <stop offset="0%" stopColor="#f0abfc" />
-            <stop offset="55%" stopColor="#d946ef" />
-            <stop offset="100%" stopColor="#a855f7" />
+          <linearGradient id={lineGradientId} x1="0%" x2="100%" y1="0%" y2="100%">
+            <stop offset="0%" stopColor="var(--code-tone-light)" />
+            <stop offset="55%" stopColor="var(--code-tone-mid)" />
+            <stop offset="100%" stopColor="var(--code-tone-deep)" />
           </linearGradient>
-          <radialGradient id="display-glow" cx="50%" cy="45%" r="60%">
-            <stop offset="0%" stopColor="#d946ef" stopOpacity="0.2" />
+          <radialGradient id={glowGradientId} cx="50%" cy="45%" r="60%">
+            <stop offset="0%" stopColor="var(--code-tone-mid)" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#020617" stopOpacity="0" />
           </radialGradient>
           <clipPath id={coreClipId}>
@@ -153,7 +159,7 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
           </clipPath>
         </defs>
         <circle className="visual-bg" cx="360" cy="360" r="330" />
-        <circle fill="url(#display-glow)" cx="360" cy="360" r="330" />
+        <circle fill={`url(#${glowGradientId})`} cx="360" cy="360" r="330" />
         <path
           className="visual-grid visual-grid-radial"
           d="M140 360H580M360 140V580M204 204L516 516M516 204L204 516"
@@ -163,12 +169,12 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
         <path
           className="visual-code-arc"
           d="M188 360C208 258 278 188 360 188C442 188 512 258 532 360"
-          stroke="url(#display-line)"
+          stroke={`url(#${lineGradientId})`}
         />
         <path
           className="visual-code-arc reverse"
           d="M532 360C512 462 442 532 360 532C278 532 208 462 188 360"
-          stroke="url(#display-line)"
+          stroke={`url(#${lineGradientId})`}
         />
         <g className="visual-code-inner">
           <circle className="visual-code-core" cx="360" cy="360" r="132" />

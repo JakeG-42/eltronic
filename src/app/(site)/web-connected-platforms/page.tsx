@@ -108,7 +108,7 @@ export default function WebConnectedPlatformsPage() {
             </Link>
           </div>
         </div>
-        <TechnicalVisual codeMark label="Web and connected platform architecture" variant="display" />
+        <TechnicalVisual codeMark codeTheme="teal" label="Web and connected platform architecture" variant="display" />
       </section>
 
       <section className="section">

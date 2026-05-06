@@ -262,7 +262,7 @@ The public site uses the existing custom CSS in `src/app/globals.css`.
 Public page visuals are code-native SVG modules, not bitmap files:
 
 - Component: `src/components/site/technical-visuals.tsx`.
-- Homepage code mark: `src/components/site/interactive-code-mark.tsx`; it is the client-side circular `< / >` hero visual with viewport-wide cursor tracking, breathing glow and gentle scroll parallax.
+- Homepage/subpage code mark: `src/components/site/interactive-code-mark.tsx`; it is the client-side circular `< / >` hero visual with viewport-wide cursor tracking, breathing glow, subtle inner particles, gentle scroll parallax and optional colour themes. Keep the homepage on the default magenta theme unless Jake explicitly asks to change it.
 - Variants: `display`, `network`, `sectors`, `data`.
 - Preferred for now because visuals remain editable, versioned and deployable without a media library.
 
