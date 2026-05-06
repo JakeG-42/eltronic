@@ -51,7 +51,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
-- `/studio/media`: protected product media overview derived from managed product galleries.
+- `/studio/media`: protected product media manager derived from managed product galleries, with compact grid/table views and bulk removal of selected image references.
 - `/studio/tools`: redirects to `/studio/tools/qr-code`.
 - `/studio/tools/qr-code`: protected QR code generator for links/text and Wi-Fi network join codes.
 - `/studio/builder`: protected Website Builder for homepage theme, hero, section visibility and section order.
@@ -185,6 +185,7 @@ Each product currently has:
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes Code Studio for inspecting whitelisted source files.
+- Studio Media shows images as product-gallery references rather than standalone assets. Images can be selected in a compact grid or table and removed in bulk from their attached product galleries; the final image on a product is protected from deletion.
 - Studio includes a Tools section with a QR code generator.
 - Studio has browser-local dark/light mode stored in `localStorage`.
 - Studio page titles are intentionally compact: the sticky top bar carries the current mode, while page bodies use small action/description rows instead of large duplicate headings.

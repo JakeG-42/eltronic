@@ -1,10 +1,15 @@
-import Link from "next/link";
-
-import { ManagedImage } from "@/components/site/managed-image";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { MediaLibraryManager, type StudioMediaItem } from "@/components/studio/media-library-manager";
 import type { ProductImage } from "@/content/products";
-import { getProductImages, getProducts } from "@/lib/managed-data";
+import { getProductImages, getProductMediaReferenceId, getProducts } from "@/lib/managed-data";
+
+type StudioMediaPageProps = {
+  searchParams?: Promise<{
+    deleted?: string;
+    error?: string;
+    skipped?: string;
+  }>;
+};
 
 export const dynamic = "force-dynamic";
 
@@ -12,87 +17,54 @@ export const metadata = {
   title: "Media | Eltronic Studio",
 };
 
-export default async function StudioMediaPage() {
+export default async function StudioMediaPage({ searchParams }: StudioMediaPageProps) {
+  const params = await searchParams;
   const products = await getProducts();
-  const mediaItems = products.flatMap((product) =>
-    getProductImages(product).map((image, index) => ({
-      image,
-      index,
+  const mediaItems: StudioMediaItem[] = products.flatMap((product) =>
+    getProductImages(product).map((image) => ({
+      alt: image.alt,
+      id: getProductMediaReferenceId(product.slug, image.src),
       productName: product.name,
       productSlug: product.slug,
+      sourceLabel: displayMediaSource(image),
+      sourceType: isInlineImageSource(image.src) ? "Upload" : "URL",
+      src: image.src,
     })),
   );
-  const inlineUploadCount = mediaItems.filter((item) => isInlineImageSource(item.image.src)).length;
+  const inlineUploadCount = mediaItems.filter((item) => item.sourceType === "Upload").length;
   const productsWithMediaCount = new Set(mediaItems.map((item) => item.productSlug)).size;
+  const deletedCount = Number(params?.deleted ?? 0);
 
   return (
     <div className="grid gap-6">
       <section className="studio-page-header">
         <p>
-          Product media used across catalogue cards and product galleries. Uploaded images show their filename here
-          rather than the inline stored image data.
+          Product media is attached to product galleries. Select images here to remove those image references from
+          the products they belong to.
         </p>
-        <Button asChild>
-          <Link href="/studio/products">Manage products</Link>
-        </Button>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>{mediaItems.length}</CardTitle>
-            <CardDescription>Total gallery images</CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{inlineUploadCount}</CardTitle>
-            <CardDescription>Studio uploads</CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{productsWithMediaCount}</CardTitle>
-            <CardDescription>Products with managed media</CardDescription>
-          </CardHeader>
-        </Card>
-      </section>
+      {params?.deleted ? (
+        <div className="studio-storage-alert builder-success">
+          {deletedCount > 0
+            ? `Removed ${params.deleted} image reference${params.deleted === "1" ? "" : "s"} from product galleries.`
+            : "No image references were removed."}
+          {params.skipped ? ` ${params.skipped} image${params.skipped === "1" ? "" : "s"} kept because every product needs at least one image.` : ""}
+        </div>
+      ) : null}
+      {params?.error ? <div className="studio-storage-alert">{params.error}</div> : null}
 
       <Card>
         <CardHeader>
           <CardTitle>Media library</CardTitle>
-          <CardDescription>Images are currently attached to products, not stored as separate reusable assets.</CardDescription>
+          <CardDescription>Compact gallery view with table mode for checking filenames, products and alt text.</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {mediaItems.map((item) => (
-              <article
-                className="overflow-hidden rounded-2xl border border-border bg-background/40"
-                key={`${item.productSlug}-${item.index}-${item.image.src.slice(0, 48)}`}
-              >
-                <div className="relative aspect-video bg-muted">
-                  <ManagedImage
-                    alt={item.image.alt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    src={item.image.src}
-                  />
-                </div>
-                <div className="grid gap-2 p-4">
-                  <div>
-                    <strong className="block break-all text-sm">{displayMediaSource(item.image)}</strong>
-                    <span className="text-xs text-muted-foreground">{item.image.alt}</span>
-                  </div>
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-                    <span>{item.productName}</span>
-                    <Button asChild size="sm" variant="outline">
-                      <Link href={`/studio/products/${item.productSlug}/edit`}>Edit product</Link>
-                    </Button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <MediaLibraryManager
+            inlineUploadCount={inlineUploadCount}
+            items={mediaItems}
+            productsWithMediaCount={productsWithMediaCount}
+          />
         </CardContent>
       </Card>
     </div>

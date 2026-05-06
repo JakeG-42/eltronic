@@ -256,9 +256,11 @@
       "guard": "isAdminAuthenticated()",
       "dataSource": "getProducts(), getProductImages(product)",
       "features": [
-        "product gallery media overview",
+        "compact product gallery media manager",
         "inline upload filename display",
-        "links back to product edit pages"
+        "selectable image references",
+        "bulk delete selected references",
+        "grid/table view toggle"
       ]
     },
     {

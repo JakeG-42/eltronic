@@ -1,5 +1,6 @@
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 import { Redis } from "@upstash/redis";
+import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 
@@ -664,6 +665,12 @@ export async function getFeaturedProducts() {
   return featured.length > 0 ? featured : products.slice(0, 4);
 }
 
+export function getProductMediaReferenceId(productSlug: string, src: string) {
+  const sourceHash = createHash("sha256").update(src).digest("base64url").slice(0, 18);
+
+  return `${productSlug}:${sourceHash}`;
+}
+
 export function getProductImages(product: Product): ProductImage[] {
   const images = Array.isArray(product.images)
     ? product.images.filter((image) => image.src && isPublicProductImage(image.src))
@@ -704,6 +711,52 @@ export async function deleteProduct(slug: string) {
     ...data,
     products: data.products.filter((product) => product.slug !== slug),
   });
+}
+
+export async function deleteProductMediaReferences(mediaIds: string[]) {
+  const targetIds = new Set(mediaIds.map((id) => id.trim()).filter(Boolean));
+
+  if (targetIds.size === 0) {
+    return { deleted: 0, skipped: 0 };
+  }
+
+  const data = await readManagedData();
+  let deleted = 0;
+  let skipped = 0;
+
+  const products = data.products.map((product) => {
+    const currentImages = getProductImages(product);
+    const nextImages = currentImages.filter(
+      (image) => !targetIds.has(getProductMediaReferenceId(product.slug, image.src)),
+    );
+    const removedCount = currentImages.length - nextImages.length;
+
+    if (removedCount === 0) {
+      return product;
+    }
+
+    if (nextImages.length === 0) {
+      skipped += removedCount;
+      return product;
+    }
+
+    deleted += removedCount;
+
+    return {
+      ...product,
+      image: nextImages[0],
+      images: nextImages,
+    };
+  });
+
+  if (deleted > 0) {
+    await writeManagedData({
+      ...data,
+      products,
+    });
+  }
+
+  return { deleted, skipped };
 }
 
 export async function getSubmissions() {

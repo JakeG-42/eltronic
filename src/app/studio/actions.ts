@@ -14,6 +14,7 @@ import {
   contactNotificationSettingsFromFormData,
   deleteAdminUser,
   deleteProduct,
+  deleteProductMediaReferences,
   deleteSubmission,
   deleteSubmissions,
   productFromFormData,
@@ -56,6 +57,7 @@ function revalidateManagedPages() {
   revalidatePath("/products");
   revalidatePath("/products/[slug]", "page");
   revalidatePath("/studio");
+  revalidatePath("/studio/media");
   revalidatePath("/studio/products");
   revalidatePath("/studio/builder");
   revalidatePath("/studio/submissions");
@@ -108,6 +110,46 @@ export async function deleteProductAction(formData: FormData) {
   }
 
   redirect(returnTo);
+}
+
+export async function deleteProductMediaAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/media");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot delete product media.", returnTo);
+  }
+
+  const mediaIds = formData
+    .getAll("mediaIds")
+    .map((value) => String(value).trim())
+    .filter(Boolean);
+
+  if (mediaIds.length === 0) {
+    redirectWithError("Select at least one image first.", returnTo);
+  }
+
+  let result: Awaited<ReturnType<typeof deleteProductMediaReferences>>;
+
+  try {
+    result = await deleteProductMediaReferences(mediaIds);
+    revalidateManagedPages();
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to delete selected media.", returnTo);
+  }
+
+  if (result.deleted === 0 && result.skipped === 0) {
+    redirectWithError("No matching product media was found.", returnTo);
+  }
+
+  const params = new URLSearchParams({ deleted: result.deleted.toString() });
+
+  if (result.skipped > 0) {
+    params.set("skipped", result.skipped.toString());
+  }
+
+  const separator = returnTo.includes("?") ? "&" : "?";
+  redirect(`${returnTo}${separator}${params.toString()}`);
 }
 
 export async function saveSiteBuilderAction(formData: FormData) {
