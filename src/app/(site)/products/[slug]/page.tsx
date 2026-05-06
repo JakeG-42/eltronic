@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArticleCard } from "@/components/site/article-card";
 import { ProductMediaGallery } from "@/components/site/product-media-gallery";
 import { StructuredData } from "@/components/site/structured-data";
 import { productTemplateLabels } from "@/content/products";
-import { getProductBySlug, getProductImages } from "@/lib/managed-data";
+import { getProductBySlug, getProductImages, getRelatedArticlesForProduct } from "@/lib/managed-data";
 import { absoluteUrl, breadcrumbJsonLd, createPageMetadata, siteConfig } from "@/lib/seo";
 
 type ProductPageProps = {
@@ -37,6 +38,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
   const images = getProductImages(product);
+  const relatedArticles = await getRelatedArticlesForProduct(product, 3);
 
   return (
     <main className={`page product-detail-page product-template-${product.template}`}>
@@ -127,6 +129,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <a className="button secondary" href={document.url} key={document.label}>
                   {document.label}
                 </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {relatedArticles.length > 0 ? (
+          <section className="panel detail-section-full">
+            <div className="section-heading compact">
+              <div>
+                <span className="section-number">related.articles</span>
+                <h2>Related articles</h2>
+              </div>
+              <p>Technical notes and explanations connected to this product or application area.</p>
+            </div>
+            <div className="article-grid compact">
+              {relatedArticles.map((article) => (
+                <ArticleCard article={article} compact key={article.slug} />
               ))}
             </div>
           </section>

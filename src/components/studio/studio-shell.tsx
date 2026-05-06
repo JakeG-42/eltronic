@@ -14,6 +14,7 @@ import {
   LayoutDashboard,
   LogOut,
   Moon,
+  Newspaper,
   Paintbrush,
   QrCode,
   Settings,
@@ -49,6 +50,7 @@ const navGroups: Array<{
     label: "Content",
     items: [
       { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
+      { href: "/studio/articles", label: "Articles", icon: Newspaper, roles: ["super_admin", "admin"] },
       { href: "/studio/builder", label: "Builder", icon: Paintbrush, roles: ["super_admin", "admin"] },
       { href: "/studio/media", label: "Media", icon: ImageIcon, roles: ["super_admin", "admin"] },
       { href: "/studio/files", label: "Files", icon: Files, roles: ["super_admin", "admin"] },
@@ -204,6 +206,7 @@ function currentModeLabel(pathname: string) {
   if (pathname.startsWith("/studio/templates")) return "Code Studio";
   if (pathname.startsWith("/studio/files")) return "Files";
   if (pathname.startsWith("/studio/media")) return "Media";
+  if (pathname.startsWith("/studio/articles")) return "Articles";
   if (pathname.startsWith("/studio/products")) return "Products";
   if (pathname.startsWith("/studio/tools")) return "Tools";
   if (pathname.startsWith("/studio/submissions")) return "Enquiries";

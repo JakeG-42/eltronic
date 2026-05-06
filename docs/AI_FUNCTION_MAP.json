@@ -157,7 +157,39 @@
       "path": "/",
       "file": "src/app/(site)/page.tsx",
       "kind": "public",
-      "dataSource": "getFeaturedProducts(), src/content/site.ts#serviceModules, workflowModules, sectorModules"
+      "dataSource": "getFeaturedProducts(), getHomepageArticles(), src/content/site.ts#serviceModules, workflowModules, sectorModules",
+      "features": [
+        "interactive homepage hero",
+        "From CAN-Bus to Cloud demo platform block",
+        "homepage-featured article cards",
+        "builder-controlled sections"
+      ]
+    },
+    {
+      "path": "/articles",
+      "file": "src/app/(site)/articles/page.tsx",
+      "kind": "public-articles",
+      "dataSource": "getArticles()",
+      "features": [
+        "published article/news index",
+        "article category chips",
+        "article cards from managed data"
+      ]
+    },
+    {
+      "path": "/articles/[slug]",
+      "file": "src/app/(site)/articles/[slug]/page.tsx",
+      "kind": "public-article-detail",
+      "dataSource": "getArticleBySlug(slug), getProducts()",
+      "structuredData": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "features": [
+        "safe simple Markdown renderer",
+        "source DOCX link",
+        "related product links"
+      ]
     },
     {
       "path": "/products",
@@ -169,7 +201,7 @@
       "path": "/products/[slug]",
       "file": "src/app/(site)/products/[slug]/page.tsx",
       "kind": "public",
-      "dataSource": "getProductBySlug(slug), getProductImages(product)",
+      "dataSource": "getProductBySlug(slug), getProductImages(product), getRelatedArticlesForProduct(product)",
       "clientComponents": [
         "src/components/site/product-media-gallery.tsx"
       ],
@@ -241,7 +273,7 @@
       "path": "/sitemap.xml",
       "file": "src/app/sitemap.ts",
       "kind": "seo",
-      "dataSource": "static public routes, getProducts(), getProductImages(product), getPublishedProjectCaseStudies()"
+      "dataSource": "static public routes, getArticles(), getProducts(), getProductImages(product), getPublishedProjectCaseStudies()"
     },
     {
       "path": "/robots.txt",
@@ -274,6 +306,31 @@
         "bulk delete selected references",
         "grid/table view toggle"
       ]
+    },
+    {
+      "path": "/studio/articles",
+      "file": "src/app/studio/(admin)/articles/page.tsx",
+      "kind": "admin-articles-table",
+      "guard": "isAdminAuthenticated()",
+      "dataSource": "getArticles({ includeDrafts: true })",
+      "features": [
+        "article/news table",
+        "publish status display",
+        "homepage-featured count",
+        "edit/delete actions"
+      ]
+    },
+    {
+      "path": "/studio/articles/new",
+      "file": "src/app/studio/(admin)/articles/new/page.tsx",
+      "kind": "admin-article-create",
+      "guard": "isAdminAuthenticated()"
+    },
+    {
+      "path": "/studio/articles/[slug]/edit",
+      "file": "src/app/studio/(admin)/articles/[slug]/edit/page.tsx",
+      "kind": "admin-article-edit",
+      "guard": "isAdminAuthenticated()"
     },
     {
       "path": "/studio/files",
@@ -386,6 +443,18 @@
       "file": "src/app/studio/actions.ts",
       "authRequired": true,
       "effect": "Deletes a product by slug and revalidates managed pages."
+    },
+    {
+      "id": "saveArticleAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Creates or updates one article/news record from form data and revalidates managed pages."
+    },
+    {
+      "id": "deleteArticleAction",
+      "file": "src/app/studio/actions.ts",
+      "authRequired": true,
+      "effect": "Deletes one article by slug and revalidates managed pages."
     },
     {
       "id": "updateSubmissionStatusAction",
@@ -501,6 +570,34 @@
       "syncCommand": "npm run images:products:sync"
     },
     "primaryImageAssets": "public/product-images and public/media; remote source URLs should be localized where possible"
+  },
+  "articleModel": {
+    "sourceType": "TypeScript + JSON + managed data",
+    "typeFile": "src/content/articles.ts",
+    "importedDataFile": "src/content/articles-imported.json",
+    "importCommand": "npm run articles:import",
+    "sourceMediaPath": "public/media/articles/<slug>/*.docx",
+    "storageKey": "articles in src/lib/managed-data.ts",
+    "fields": [
+      "slug",
+      "title",
+      "excerpt",
+      "category",
+      "status",
+      "publishedAt",
+      "updatedAt",
+      "author",
+      "tags[]",
+      "relatedProductSlugs[]",
+      "homepageFeatured",
+      "featured",
+      "sourceFileName",
+      "sourceFileUrl",
+      "heroImage",
+      "body"
+    ],
+    "publicBehavior": "Published articles appear on /articles and /articles/[slug]. Product pages show related article cards through getRelatedArticlesForProduct(). The homepage uses getHomepageArticles() and also has a static From CAN-Bus to Cloud demo platform block.",
+    "studioBehavior": "Admins can create/edit/delete articles from /studio/articles using src/components/studio/article-form.tsx. Body is simple Markdown rendered by src/components/site/article-markdown.tsx, not raw HTML."
   },
   "projectCaseStudyModel": {
     "sourceType": "TypeScript",
@@ -643,7 +740,7 @@
       ]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
-    "studioSidebar": "Grouped under Overview, Messages, Content, Tools and Admin with compact link typography. Media and Files sit under Content; Code Studio sits under Admin; the QR tool link is labelled QR Code Generator. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
+    "studioSidebar": "Grouped under Overview, Messages, Content, Tools and Admin with compact link typography. Products, Articles, Builder, Media and Files sit under Content; Code Studio sits under Admin; the QR tool link is labelled QR Code Generator. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "studioQrCodeGenerator": {
@@ -663,6 +760,16 @@
         "deleteStudioFilesAction"
       ],
       "behavior": "Protected local file library for public/media. Lists files recursively, uploads accepted file types into a chosen subfolder, supports compact grid/table views, shows image thumbnails or file type icons, and bulk-deletes selected local files."
+    },
+    "studioArticles": {
+      "route": "/studio/articles",
+      "component": "src/components/studio/article-form.tsx",
+      "storage": "articles key in src/lib/managed-data.ts",
+      "actions": [
+        "saveArticleAction",
+        "deleteArticleAction"
+      ],
+      "behavior": "Protected article/news manager. Supports draft/published status, category, tags, homepage/featured flags, source DOCX metadata, hero image URL, related product checkboxes and simple Markdown body editing."
     },
     "websiteBuilder": {
       "route": "/studio/builder",
@@ -688,6 +795,9 @@
       "src/components/ui/badge.tsx",
       "src/components/ui/separator.tsx",
       "src/components/studio/qr-code-generator.tsx",
+      "src/components/site/article-card.tsx",
+      "src/components/site/article-markdown.tsx",
+      "src/components/studio/article-form.tsx",
       "src/components/studio/product-form.tsx",
       "src/components/studio/product-image-manager.tsx",
       "src/components/studio/submission-card.tsx"

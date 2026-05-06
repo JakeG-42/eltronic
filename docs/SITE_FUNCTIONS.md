@@ -9,6 +9,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Public site shell: `src/app/(site)/layout.tsx` and `src/components/site/site-shell.tsx`.
 - Public ambient background: `src/components/site/ambient-background.tsx` renders subtle floating syntax glyphs behind public pages.
 - Public product media gallery: `src/components/site/product-media-gallery.tsx`.
+- Public article cards/renderer: `src/components/site/article-card.tsx` and `src/components/site/article-markdown.tsx`.
 - Product image renderer: `src/components/site/managed-image.tsx` supports normal URLs and inline uploaded image data.
 - Homepage role typewriter: `src/components/site/hero-role-typewriter.tsx` animates the small role label above the `Eltronic` hero wordmark.
 - Studio product image manager: `src/components/studio/product-image-manager.tsx`.
@@ -18,6 +19,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Website Builder defaults: `src/content/site-builder.ts`.
 - SEO helpers and site configuration: `src/lib/seo.ts`.
 - Project/case-study content scaffold: `src/content/projects.ts` and `docs/PROJECT_CASE_STUDY_TEMPLATE.md`.
+- Article seed/import content: `src/content/articles.ts` and `src/content/articles-imported.json`.
 - Template/file editor registry: `src/lib/template-editor.ts`.
 - Local Studio file library: `src/lib/studio-files.ts`.
 - Global styles: `src/app/globals.css`.
@@ -25,11 +27,12 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Generated product gallery manifest: `src/content/product-gallery-assets.json`.
 - Product gallery generator: `scripts/generate-product-gallery-assets.mjs`.
 - Product asset localizer: `scripts/localize-product-assets.mjs`.
+- Article resource importer: `scripts/import-article-resources.mjs`.
 - Site page/module content: `src/content/site.ts`.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
-- Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Web & IOT (`/web-connected-platforms`), Products (`/products`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
+- Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Web & IOT (`/web-connected-platforms`), Products (`/products`), Articles (`/articles`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery and the shared interactive circular `< / >` code-mark hero visual for public pages.
@@ -39,7 +42,9 @@ Concise living reference for how the current Eltronic Next.js site works.
 
 ## Current Routes
 
-- `/`: homepage with hero copy, solution/service sections, featured product cards, public service CTAs and the shared professional workflow modules from `src/content/site.ts`.
+- `/`: homepage with hero copy, the From CAN-Bus to Cloud demo platform section, featured article cards, solution/service sections, featured product cards, public service CTAs and the shared professional workflow modules from `src/content/site.ts`.
+- `/articles`: public article/news index generated from managed article records.
+- `/articles/[slug]`: public article detail page with simple Markdown rendering, source DOCX link where available, related product links and article/breadcrumb structured data.
 - `/products`: dynamic product listing page generated from the managed catalogue.
 - `/products/[slug]`: dynamic product detail page generated from the managed catalogue.
 - `/projects`: public project/case-study index generated from `src/content/projects.ts`.
@@ -51,10 +56,13 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/data-specification`: public resource page for data sheets, guides and product documents, using a violet interactive code-mark hero with a subtle data/specification motif. Product documents are grouped by product and display product/type tags derived from the product record and document label/path.
 - `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
-- `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.
+- `/sitemap.xml`: dynamic sitemap with static routes, managed article routes, managed product routes, product images and published project routes.
 - `/robots.txt`: crawler rules allowing the public site while excluding `/studio` and `/api`.
 - `/studio/login`: password login for the admin area.
 - `/studio`: shadcn-styled admin dashboard.
+- `/studio/articles`: protected article/news table for imported DOCX content, public article records and related product links.
+- `/studio/articles/new`: article creation form.
+- `/studio/articles/[slug]/edit`: full article editor.
 - `/studio/media`: protected product media manager derived from managed product galleries, with compact grid/table views and bulk removal of selected image references.
 - `/studio/files`: protected local file library for uploads under `public/media`, with compact grid/table views and bulk deletion.
 - `/studio/tools`: redirects to `/studio/tools/qr-code`.
@@ -100,6 +108,35 @@ Each product currently has:
 - `documents`: optional list of data sheet/document links. Imported product PDFs are stored locally under `public/media/products`.
 - `variants`: optional order/variant list with optional SKU, price and article number.
 - `enquiryPrompt`: detail-page call-to-action label.
+
+## Article Data Model
+
+Articles are seeded from `src/content/articles.ts` and `src/content/articles-imported.json`, then read/written through `src/lib/managed-data.ts` under the `articles` key. The initial DOCX source files from `Eltronic_resources` are copied into `public/media/articles/<slug>/`.
+
+Each article currently has:
+
+- `slug`: URL segment used by `/articles/[slug]`.
+- `title`: public and Studio display title.
+- `excerpt`: short summary used on cards and metadata.
+- `category`: article group such as Telematics, CAN-Bus, HMI Systems, Cloud Integration or Company.
+- `status`: `draft` or `published`; public routes only show published articles.
+- `publishedAt` and `updatedAt`: sorting and metadata dates.
+- `author`: display/structured-data author.
+- `tags`: article card and matching tags.
+- `relatedProductSlugs`: links articles back to product pages.
+- `homepageFeatured` and `featured`: promotion flags used by homepage article cards and article sorting.
+- `sourceFileName` and `sourceFileUrl`: optional original DOCX reference.
+- `heroImage`: optional future hero image path.
+- `body`: simple Markdown-style content rendered safely by `src/components/site/article-markdown.tsx`.
+
+## Article/News Behavior
+
+- `/articles` shows published articles as a public News/Blog-style library.
+- `/articles/[slug]` renders a public article detail page with breadcrumb/article JSON-LD, tag chips, source DOCX link and related product links.
+- Product detail pages show related article cards when an article is explicitly linked to that product or strongly matches product tags/family/category.
+- The homepage includes a hard-coded “From CAN-Bus to Cloud” demo platform block under the hero, plus managed homepage article cards from `getHomepageArticles()`.
+- `/studio/articles` lets admins create, edit, delete, publish/draft, tag, feature and link articles to products.
+- `npm run articles:import` extracts DOCX text from `/Users/jake/Documents/Eltronic_resources` with `textutil`, writes `src/content/articles-imported.json`, and copies original DOCX files to `public/media/articles`.
 
 ## Website Builder Behavior
 
@@ -151,7 +188,7 @@ Each product currently has:
 - Site-wide metadata lives in `src/app/layout.tsx` and shared helpers live in `src/lib/seo.ts`.
 - Public pages use canonical URLs, title templates, meta descriptions, keyword hints, Open Graph and Twitter metadata.
 - `NEXT_PUBLIC_SITE_URL` controls the absolute site URL used by canonical links, structured data and the sitemap. Set it to the final domain when `eltronic.co.uk` is pointed at Vercel.
-- `src/app/sitemap.ts` creates `/sitemap.xml` dynamically from static public routes, managed products and published project case studies.
+- `src/app/sitemap.ts` creates `/sitemap.xml` dynamically from static public routes, managed articles, managed products and published project case studies.
 - `src/app/robots.ts` creates `/robots.txt` and disallows `/studio` and `/api` from normal crawling.
 - `src/app/opengraph-image.tsx` generates the default social sharing preview image.
 - `src/app/icon.svg` and `src/app/manifest.ts` provide basic favicon/app metadata.
@@ -200,6 +237,7 @@ Each product currently has:
 - Studio has a grouped sidebar with Overview, Messages, Content, Tools and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
+- Studio includes Articles for News/Blog content, imported technical notes, homepage-featured article cards and product-related references.
 - Studio includes Code Studio for inspecting whitelisted source files.
 - Studio Media shows images as product-gallery references rather than standalone assets. Images can be selected in a compact grid or table and removed in bulk from their attached product galleries; the final image on a product is protected from deletion.
 - Studio Files manages standalone local files under `public/media`, including uploaded files and localized product images/PDFs. It shares the compact grid/table management pattern with Studio Media.

@@ -7,6 +7,7 @@ const navItems = [
   { href: "/software-it", label: "Software", icon: "software" },
   { href: "/web-connected-platforms", label: "Web & IOT", icon: "webIot" },
   { href: "/products", label: "Products", icon: "products" },
+  { href: "/articles", label: "Articles", icon: "articles" },
   { href: "/about", label: "About", icon: "about" },
   { href: "/contact", label: "Contact", icon: "contact" },
 ] as const;
@@ -67,6 +68,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <nav className="footer-group" aria-label="Resources">
               <h2 className="footer-group-title">Resources</h2>
               <Link href="/sectors">Sectors</Link>
+              <Link href="/articles">Articles</Link>
               <Link href="/data-specification">Data & specification</Link>
               <Link href="/about">About Eltronic</Link>
               <Link href="/contact">Start an enquiry</Link>
@@ -103,6 +105,15 @@ function NavIcon({ name }: { name: (typeof navItems)[number]["icon"] }) {
       <svg {...commonProps}>
         <path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5v-7Z" />
         <path d="m4 8.5 8 4.5 8-4.5M12 13v7" />
+      </svg>
+    );
+  }
+
+  if (name === "articles") {
+    return (
+      <svg {...commonProps}>
+        <path d="M5 5.5h14v13H5z" />
+        <path d="M8 9h8M8 12h8M8 15h5" />
       </svg>
     );
   }

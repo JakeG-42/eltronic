@@ -22,6 +22,9 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/app/studio/(admin)/layout.tsx`: protected Studio shell wrapper.
 - `src/app/studio/(admin)/page.tsx`: Studio dashboard.
 - `src/app/studio/(admin)/media/page.tsx`: product media manager derived from managed product galleries.
+- `src/app/studio/(admin)/articles/page.tsx`: Studio article/news manager.
+- `src/app/studio/(admin)/articles/[slug]/edit/page.tsx`: full article editor.
+- `src/components/studio/article-form.tsx`: article editor form with markdown body, source file, homepage flags and related products.
 - `src/components/studio/media-library-manager.tsx`: selectable grid/table manager for removing product-gallery image references in bulk.
 - `src/app/studio/(admin)/files/page.tsx`: local Studio file manager for `public/media`.
 - `src/components/studio/file-library-manager.tsx`: selectable grid/table manager for local files, uploads and bulk deletion.
@@ -32,6 +35,8 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/app/studio/actions.ts`: admin server actions.
 - `src/app/contact/actions.ts`: public contact form submission action.
 - `src/content/products.ts`: seed catalogue wrapper for Eltronic/AutoPi products plus imported Topcon data.
+- `src/content/articles.ts`: article/news seed wrapper including the From CAN-Bus to Cloud demo concept and imported DOCX articles.
+- `src/content/articles-imported.json`: DOCX-extracted article seed content from `Eltronic_resources`.
 - `src/content/topcon-products.json`: CSV-backed Topcon OPUS catalogue records with localized image and document URLs.
 - `src/content/product-gallery-assets.json`: generated supplemental gallery assets for non-Topcon seed products.
 - `src/content/site.ts`: public services, software/IT, sector, workflow and resource module content.
@@ -46,6 +51,8 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `src/components/site/ambient-background.tsx`: subtle public-only floating syntax glyphs.
 - `src/components/site/managed-image.tsx`: shared image renderer that supports normal URLs and inline uploaded image data.
 - `src/components/site/product-media-gallery.tsx`: interactive product image selection and zoom.
+- `src/components/site/article-card.tsx`: public article cards used on homepage, article index and product pages.
+- `src/components/site/article-markdown.tsx`: safe simple Markdown renderer for article bodies.
 - `src/components/studio/qr-code-generator.tsx`: client-side Studio QR generator for links/text and Wi-Fi join codes.
 - `src/components/studio/product-image-manager.tsx`: Studio visual image preview/order editor.
 - `public/product-images`: local product image assets used by the public catalogue.
@@ -54,6 +61,7 @@ Always verify current code before changing behavior. Treat this document as a ma
 - `public/media`: local uploaded/downloaded media and file assets managed from Studio Files.
 - `scripts/generate-product-gallery-assets.mjs`: repeatable generator/sync script for supplemental product gallery SVGs.
 - `scripts/localize-product-assets.mjs`: downloads remote product images/PDFs into `public/media/products` and rewrites matching URLs to local `/media/...` paths.
+- `scripts/import-article-resources.mjs`: imports DOCX article files from `/Users/jake/Documents/Eltronic_resources` into `src/content/articles-imported.json` and `public/media/articles`.
 - `scripts/sync-topcon-products.mjs`: replaces managed Topcon products in Neon/Redis/local data from `src/content/topcon-products.json`.
 - `docs/AI_FUNCTION_MAP.json`: machine-readable feature map.
 - `docs/PROJECT_CASE_STUDY_TEMPLATE.md`: checklist and object shape for future project write-ups.
@@ -139,8 +147,8 @@ Studio is intentionally separate from the public site chrome.
 - Public pages live under the `(site)` route group and use `src/components/site/site-shell.tsx`.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
-- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/media`, `/studio/files`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
-- The current Studio sidebar groups links under Overview, Messages, Content, Tools and Admin. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. The QR tool nav label is QR Code Generator. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/articles`, `/studio/media`, `/studio/files`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
+- The current Studio sidebar groups links under Overview, Messages, Content, Tools and Admin. Articles, Products, Builder, Media and Files belong under Content. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. The QR tool nav label is QR Code Generator. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
 - The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
 
@@ -177,6 +185,22 @@ Supplemental launch gallery images for AutoPi and the Eltronic I&Q module are ge
 - These generated assets are technical illustrations, not manufacturer photos. Topcon uses real manufacturer assets localized under `public/media/products`.
 
 Website Builder settings are stored in `src/lib/managed-data.ts` under `siteBuilder`. Defaults are in `src/content/site-builder.ts`. `/studio/builder` saves through `saveSiteBuilderAction()` and the homepage uses `getSiteBuilderSettings()` to render theme variables, hero copy, section visibility and section order. Treat it as the internal Elementor/Colibri-style builder foundation; do not add a public admin toolbar unless Jake explicitly asks for one.
+
+## Article Management
+
+Public articles live at `/articles` and `/articles/[slug]`. Studio article management lives at `/studio/articles`, `/studio/articles/new` and `/studio/articles/[slug]/edit`.
+
+Articles are stored in the managed data layer under `articles`, with seed fallback from `src/content/articles.ts`. The initial imported article body content lives in `src/content/articles-imported.json`; original DOCX files are preserved under `public/media/articles/<slug>/`.
+
+The article model supports `title`, `slug`, `excerpt`, `category`, `status`, `publishedAt`, `author`, `tags`, `relatedProductSlugs`, `homepageFeatured`, `featured`, optional `sourceFileUrl`, optional `heroImage`, and simple Markdown `body`. Public rendering uses `src/components/site/article-markdown.tsx`, not raw HTML.
+
+Product pages call `getRelatedArticlesForProduct()` and show related cards when an article is explicitly linked through `relatedProductSlugs` or matches product terms. The homepage has a static From CAN-Bus to Cloud demo platform block under the hero, and managed homepage article cards from `getHomepageArticles()`.
+
+To refresh the DOCX import, run:
+
+```bash
+npm run articles:import
+```
 
 Code Studio lives at `/studio/templates`. It reads a whitelist from `src/lib/template-editor.ts`. Keep it whitelisted. Do not turn it into arbitrary filesystem access. Saving is local-development-only; production/Vercel should remain read-only so source changes stay versioned through GitHub.
 

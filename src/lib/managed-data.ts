@@ -15,6 +15,7 @@ import {
   type ProductTemplate,
   type ProductVariant,
 } from "@/content/products";
+import { seedArticles, type Article, type ArticleStatus } from "@/content/articles";
 import {
   defaultSiteBuilderSettings,
   type SiteBackgroundStyle,
@@ -76,6 +77,7 @@ export type ContactSubmissionWriteResult = {
 
 type ManagedData = {
   adminUsers: AdminUser[];
+  articles: Article[];
   contactNotifications: ContactNotificationSettings;
   products: Product[];
   siteBuilder: SiteBuilderSettings;
@@ -133,6 +135,7 @@ function getPrefixedPostgresConnectionString() {
 function createEmptyData(): ManagedData {
   return {
     adminUsers: createSeedAdminUsers(),
+    articles: normalizeArticles(seedArticles),
     contactNotifications: getDefaultContactNotificationSettings(),
     products: normalizeProducts(seededProducts),
     siteBuilder: normalizeSiteBuilderSettings(),
@@ -144,6 +147,10 @@ function createEmptyData(): ManagedData {
 function normalizeData(data: Partial<ManagedData> | null | undefined): ManagedData {
   return {
     adminUsers: normalizeAdminUsers(data?.adminUsers),
+    articles:
+      Array.isArray(data?.articles) && data.articles.length > 0
+        ? normalizeArticles(data.articles)
+        : normalizeArticles(seedArticles),
     contactNotifications: normalizeContactNotificationSettings(data?.contactNotifications),
     products:
       Array.isArray(data?.products) && data.products.length > 0
@@ -207,6 +214,47 @@ function normalizeProducts(products: Product[]) {
       modules: normalizeProductModules(product.modules),
     };
   });
+}
+
+function normalizeArticles(articles?: Article[]) {
+  if (!Array.isArray(articles)) {
+    return normalizeArticles(seedArticles);
+  }
+
+  return articles
+    .map((article) => normalizeArticle(article))
+    .filter((article) => article.title && article.slug && article.body)
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
+function normalizeArticle(article: Partial<Article>): Article {
+  const now = new Date().toISOString();
+  const title = String(article.title ?? "").trim();
+  const slug = slugify(String(article.slug || title));
+  const body = String(article.body ?? "").trim();
+  const tags = Array.isArray(article.tags) ? article.tags.map((tag) => String(tag).trim()).filter(Boolean) : [];
+  const relatedProductSlugs = Array.isArray(article.relatedProductSlugs)
+    ? article.relatedProductSlugs.map((slugValue) => slugify(String(slugValue))).filter(Boolean)
+    : [];
+
+  return {
+    author: String(article.author ?? "Eltronic").trim() || "Eltronic",
+    body,
+    category: String(article.category ?? "Article").trim() || "Article",
+    excerpt: String(article.excerpt ?? firstTextExcerpt(body)).trim(),
+    featured: Boolean(article.featured),
+    heroImage: String(article.heroImage ?? "").trim() || undefined,
+    homepageFeatured: Boolean(article.homepageFeatured),
+    publishedAt: validIsoDate(article.publishedAt) ?? now,
+    relatedProductSlugs,
+    slug,
+    sourceFileName: String(article.sourceFileName ?? "").trim() || undefined,
+    sourceFileUrl: String(article.sourceFileUrl ?? "").trim() || undefined,
+    status: normalizeArticleStatus(article.status),
+    tags,
+    title,
+    updatedAt: validIsoDate(article.updatedAt) ?? now,
+  };
 }
 
 function normalizeLaunchProductContent(product: Product): Product {
@@ -580,6 +628,50 @@ export async function getProducts() {
   return data.products;
 }
 
+export async function getArticles(options: { includeDrafts?: boolean } = {}) {
+  const data = await readManagedData();
+  const articles = options.includeDrafts ? data.articles : data.articles.filter((article) => article.status === "published");
+
+  return [...articles].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
+export async function getArticleBySlug(slug: string, options: { includeDrafts?: boolean } = {}) {
+  const articles = await getArticles(options);
+  return articles.find((article) => article.slug === slug);
+}
+
+export async function getHomepageArticles(limit = 3) {
+  const articles = await getArticles();
+  const homepageArticles = articles.filter((article) => article.homepageFeatured || article.featured);
+
+  return (homepageArticles.length > 0 ? homepageArticles : articles).slice(0, limit);
+}
+
+export async function getRelatedArticlesForProduct(product: Product, limit = 3) {
+  const articles = await getArticles();
+  const productTerms = new Set(
+    [
+      product.slug,
+      product.family,
+      product.category,
+      ...(product.tags ?? []),
+      ...product.name.split(/\s+/),
+    ]
+      .map((term) => term.toLowerCase().trim())
+      .filter((term) => term.length > 2),
+  );
+
+  return articles
+    .map((article) => ({
+      article,
+      score: articleRelatednessScore(article, product, productTerms),
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || b.article.publishedAt.localeCompare(a.article.publishedAt))
+    .slice(0, limit)
+    .map((item) => item.article);
+}
+
 export async function getAdminUsers() {
   const data = await readManagedData();
   return data.adminUsers;
@@ -813,6 +905,40 @@ export function getProductImages(product: Product): ProductImage[] {
     }));
 }
 
+function articleRelatednessScore(article: Article, product: Product, productTerms: Set<string>) {
+  let score = 0;
+
+  if (article.relatedProductSlugs?.includes(product.slug)) {
+    score += 100;
+  }
+
+  for (const tag of article.tags ?? []) {
+    const normalizedTag = tag.toLowerCase();
+
+    if (productTerms.has(normalizedTag)) {
+      score += 12;
+      continue;
+    }
+
+    for (const term of productTerms) {
+      if (normalizedTag.includes(term) || term.includes(normalizedTag)) {
+        score += 4;
+        break;
+      }
+    }
+  }
+
+  const searchableArticle = `${article.title} ${article.excerpt} ${article.category}`.toLowerCase();
+
+  for (const term of productTerms) {
+    if (searchableArticle.includes(term)) {
+      score += 2;
+    }
+  }
+
+  return score;
+}
+
 function isPublicProductImage(src: string) {
   return !src.startsWith("/product-gallery/") && !src.startsWith("/product-images/placeholders/");
 }
@@ -834,6 +960,29 @@ export async function deleteProduct(slug: string) {
   await writeManagedData({
     ...data,
     products: data.products.filter((product) => product.slug !== slug),
+  });
+}
+
+export async function upsertArticle(article: Article, previousSlug?: string) {
+  const data = await readManagedData();
+  const slugToReplace = previousSlug || article.slug;
+  const normalizedArticle = normalizeArticle(article);
+  const withoutExisting = data.articles.filter(
+    (item) => item.slug !== slugToReplace && item.slug !== normalizedArticle.slug,
+  );
+
+  await writeManagedData({
+    ...data,
+    articles: [...withoutExisting, normalizedArticle].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt)),
+  });
+}
+
+export async function deleteArticle(slug: string) {
+  const data = await readManagedData();
+
+  await writeManagedData({
+    ...data,
+    articles: data.articles.filter((article) => article.slug !== slug),
   });
 }
 
@@ -1055,6 +1204,33 @@ export function parseLines(value: FormDataEntryValue | null) {
     .filter(Boolean);
 }
 
+function normalizeArticleStatus(value: unknown): ArticleStatus {
+  return value === "draft" ? "draft" : "published";
+}
+
+function validIsoDate(value: unknown) {
+  if (typeof value !== "string" || Number.isNaN(new Date(value).getTime())) {
+    return undefined;
+  }
+
+  return new Date(value).toISOString();
+}
+
+function firstTextExcerpt(value: string) {
+  const text = value
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^\s*[-*]\s+/gm, "")
+    .replace(/\*\*/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (text.length <= 220) {
+    return text;
+  }
+
+  return `${text.slice(0, 219).replace(/\s+\S*$/, "")}...`;
+}
+
 export function parseProductTemplate(value: FormDataEntryValue | null): ProductTemplate {
   return normalizeProductTemplate(value);
 }
@@ -1112,6 +1288,32 @@ export function contactNotificationSettingsFromFormData(formData: FormData): Con
       .split(",")
       .map((recipient) => recipient.trim())
       .filter(Boolean),
+  });
+}
+
+export function articleFromFormData(formData: FormData): Article {
+  const now = new Date().toISOString();
+  const title = String(formData.get("title") ?? "").trim();
+  const body = String(formData.get("body") ?? "").trim();
+  const publishedAtInput = String(formData.get("publishedAt") ?? "").trim();
+
+  return normalizeArticle({
+    author: String(formData.get("author") ?? "Eltronic").trim() || "Eltronic",
+    body,
+    category: String(formData.get("category") ?? "Article").trim(),
+    excerpt: String(formData.get("excerpt") ?? firstTextExcerpt(body)).trim(),
+    featured: formData.get("featured") === "on",
+    heroImage: String(formData.get("heroImage") ?? "").trim(),
+    homepageFeatured: formData.get("homepageFeatured") === "on",
+    publishedAt: validIsoDate(publishedAtInput) ?? now,
+    relatedProductSlugs: formData.getAll("relatedProductSlugs").map((value) => String(value).trim()).filter(Boolean),
+    slug: slugify(String(formData.get("slug") || title)),
+    sourceFileName: String(formData.get("sourceFileName") ?? "").trim(),
+    sourceFileUrl: String(formData.get("sourceFileUrl") ?? "").trim(),
+    status: normalizeArticleStatus(formData.get("status")),
+    tags: parseTags(formData.get("tags")),
+    title,
+    updatedAt: now,
   });
 }
 

@@ -11,7 +11,9 @@ import {
   userCanManageUsers,
 } from "@/lib/admin-auth";
 import {
+  articleFromFormData,
   contactNotificationSettingsFromFormData,
+  deleteArticle,
   deleteAdminUser,
   deleteProduct,
   deleteProductMediaReferences,
@@ -25,6 +27,7 @@ import {
   updateSubmissionStatus,
   updateSubmissionStatuses,
   updateSiteBuilderSettings,
+  upsertArticle,
   upsertProduct,
   type ContactSubmissionStatus,
 } from "@/lib/managed-data";
@@ -55,12 +58,15 @@ function redirectWithError(message: string, returnTo = "/studio/products"): neve
 
 function revalidateManagedPages() {
   revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath("/articles/[slug]", "page");
   revalidatePath("/products");
   revalidatePath("/products/[slug]", "page");
   revalidatePath("/studio");
   revalidatePath("/studio/files");
   revalidatePath("/studio/media");
   revalidatePath("/studio/products");
+  revalidatePath("/studio/articles");
   revalidatePath("/studio/builder");
   revalidatePath("/studio/submissions");
 }
@@ -109,6 +115,53 @@ export async function deleteProductAction(formData: FormData) {
     revalidateManagedPages();
   } catch (error) {
     redirectWithError(error instanceof Error ? error.message : "Unable to delete product.", returnTo);
+  }
+
+  redirect(returnTo);
+}
+
+export async function saveArticleAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/articles");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot manage articles.", returnTo);
+  }
+
+  const previousSlug = String(formData.get("previousSlug") ?? "") || undefined;
+  const article = articleFromFormData(formData);
+
+  if (!article.title || !article.slug || !article.excerpt || !article.body) {
+    redirectWithError("Article title, summary and body are required.", returnTo);
+  }
+
+  try {
+    await upsertArticle(article, previousSlug);
+    revalidateManagedPages();
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to save article.", returnTo);
+  }
+
+  if (previousSlug && previousSlug !== article.slug && returnTo.includes(`/studio/articles/${previousSlug}/edit`)) {
+    redirect(`/studio/articles/${article.slug}/edit`);
+  }
+
+  redirect(returnTo);
+}
+
+export async function deleteArticleAction(formData: FormData) {
+  const user = await requireAdminAction();
+  const returnTo = getReturnTo(formData, "/studio/articles");
+
+  if (!userCanManageSiteContent(user)) {
+    redirectWithError("This account cannot delete articles.", returnTo);
+  }
+
+  try {
+    await deleteArticle(String(formData.get("slug") ?? ""));
+    revalidateManagedPages();
+  } catch (error) {
+    redirectWithError(error instanceof Error ? error.message : "Unable to delete article.", returnTo);
   }
 
   redirect(returnTo);

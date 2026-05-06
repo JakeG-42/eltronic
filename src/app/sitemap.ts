@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getPublishedProjectCaseStudies } from "@/content/projects";
 import { absoluteUrl } from "@/lib/seo";
-import { getProductImages, getProducts } from "@/lib/managed-data";
+import { getArticles, getProductImages, getProducts } from "@/lib/managed-data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +13,7 @@ const staticRoutes: Array<{
 }> = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/products", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/articles", priority: 0.82, changeFrequency: "weekly" },
   { path: "/solutions", priority: 0.85, changeFrequency: "monthly" },
   { path: "/software-it", priority: 0.85, changeFrequency: "monthly" },
   { path: "/web-connected-platforms", priority: 0.82, changeFrequency: "monthly" },
@@ -24,7 +25,7 @@ const staticRoutes: Array<{
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const [products, projects] = await Promise.all([getProducts(), getPublishedProjectCaseStudies()]);
+  const [products, projects, articles] = await Promise.all([getProducts(), getPublishedProjectCaseStudies(), getArticles()]);
   const projectIndexRoute =
     projects.length > 0
       ? [
@@ -53,6 +54,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     images: project.images.map((image) => absoluteUrl(image.src)),
   }));
 
+  const articleRoutes = articles.map((article) => ({
+    url: absoluteUrl(`/articles/${article.slug}`),
+    lastModified: article.updatedAt ? new Date(article.updatedAt) : now,
+    changeFrequency: "monthly" as const,
+    priority: article.homepageFeatured || article.featured ? 0.76 : 0.68,
+  }));
+
   return [
     ...staticRoutes.map((route) => ({
       url: absoluteUrl(route.path),
@@ -62,6 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...projectIndexRoute,
     ...productRoutes,
+    ...articleRoutes,
     ...projectRoutes,
   ];
 }

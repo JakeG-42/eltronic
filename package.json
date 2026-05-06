@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "articles:import": "node scripts/import-article-resources.mjs /Users/jake/Documents/Eltronic_resources",
     "assets:localize": "node scripts/localize-product-assets.mjs --update-local-data",
     "assets:localize:sync": "node scripts/localize-product-assets.mjs --update-local-data --sync-managed-data",
     "email:check": "node scripts/check-email-notifications.mjs",

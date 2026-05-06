@@ -1,11 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Boxes, Database, FileCode2, Inbox, LayoutTemplate, Paintbrush, Plus } from "lucide-react";
+import { Boxes, Database, FileCode2, Inbox, LayoutTemplate, Newspaper, Paintbrush, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { productTemplateDefinitions, productTemplateLabels } from "@/content/products";
-import { getProducts, getStorageMode, getSubmissions } from "@/lib/managed-data";
+import { getArticles, getProducts, getStorageMode, getSubmissions } from "@/lib/managed-data";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +14,7 @@ export const metadata = {
 };
 
 export default async function StudioDashboardPage() {
-  const [products, submissions] = await Promise.all([getProducts(), getSubmissions()]);
+  const [products, submissions, articles] = await Promise.all([getProducts(), getSubmissions(), getArticles({ includeDrafts: true })]);
   const newSubmissions = submissions.filter((submission) => submission.status === "new");
   const activeTemplateCount = new Set(products.map((product) => product.template)).size || productTemplateDefinitions.length;
 
@@ -33,6 +33,9 @@ export default async function StudioDashboardPage() {
             <Link href="/studio/products">Manage products</Link>
           </Button>
           <Button asChild variant="outline">
+            <Link href="/studio/articles">Manage articles</Link>
+          </Button>
+          <Button asChild variant="outline">
             <Link href="/studio/builder">
               <Paintbrush className="size-4" />
               Website builder
@@ -47,8 +50,9 @@ export default async function StudioDashboardPage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-4">
+      <section className="grid gap-4 md:grid-cols-5">
         <MetricCard icon={<Boxes className="size-5" />} label="Products" value={products.length.toString()} />
+        <MetricCard icon={<Newspaper className="size-5" />} label="Articles" value={articles.length.toString()} />
         <MetricCard icon={<LayoutTemplate className="size-5" />} label="Templates" value={activeTemplateCount.toString()} compact />
         <MetricCard icon={<Inbox className="size-5" />} label="New enquiries" value={newSubmissions.length.toString()} />
         <MetricCard icon={<Database className="size-5" />} label="Storage" value={getStorageMode()} compact />

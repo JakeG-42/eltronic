@@ -17,6 +17,8 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Added a public `/articles` News/Blog library and `/studio/articles` backend for creating, editing, publishing, tagging, homepage-featuring and product-linking articles. Imported 13 DOCX files from `/Users/jake/Documents/Eltronic_resources` into editable seed articles and preserved the originals under `public/media/articles`.
+- Added a homepage “From CAN-Bus to Cloud” Smart Mobile Machinery Demo Platform section under the hero, plus homepage article cards and related article cards on product pages.
 - Reworked `/data-specification` into a product-grouped document library with product tags, inferred document type tags and local PDF filename display.
 - Added `/studio/files` under Content as a local `public/media` file manager with upload, compact grid/table views and bulk deletion; localized Topcon/AutoPi product images and PDFs into `public/media/products`, rewrote product/document URLs to `/media/...`, and synced the managed product catalogue in Neon.
 - Added interactive circular `< / >` code-mark hero visuals to `/sectors` and `/data-specification`, with lime/violet themes and subtle inner sector/data motifs.

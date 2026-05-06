@@ -1,18 +1,24 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 
+import { ArticleCard } from "@/components/site/article-card";
 import { HeroRoleTypewriter } from "@/components/site/hero-role-typewriter";
 import { ManagedImage } from "@/components/site/managed-image";
 import { TechnicalVisual } from "@/components/site/technical-visuals";
+import type { Article } from "@/content/articles";
 import type { Product } from "@/content/products";
 import { sectorModules, serviceModules, workflowModules } from "@/content/site";
 import type { SiteBuilderSection, SiteBuilderTheme } from "@/content/site-builder";
-import { getFeaturedProducts, getSiteBuilderSettings } from "@/lib/managed-data";
+import { getFeaturedProducts, getHomepageArticles, getSiteBuilderSettings } from "@/lib/managed-data";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [featuredProducts, builder] = await Promise.all([getFeaturedProducts(), getSiteBuilderSettings()]);
+  const [featuredProducts, builder, homepageArticles] = await Promise.all([
+    getFeaturedProducts(),
+    getSiteBuilderSettings(),
+    getHomepageArticles(3),
+  ]);
   const visibleSections = [...builder.home.sections].filter((section) => section.enabled).sort((a, b) => a.order - b.order);
   const heroUsesCodeMark = builder.home.hero.visualVariant === "display";
   const heroVisualLabel = heroUsesCodeMark ? "Eltronic interactive code mark" : builder.home.hero.visualLabel;
@@ -47,8 +53,76 @@ export default async function Home() {
         />
       </section>
 
+      <DemoPlatformSection />
+      <HomeArticlesSection articles={homepageArticles} />
+
       {visibleSections.map((section) => renderHomeSection(section, featuredProducts))}
     </main>
+  );
+}
+
+function DemoPlatformSection() {
+  return (
+    <section className="section homepage-demo-section">
+      <div className="split-module reverse">
+        <div className="demo-platform-panel">
+          <span className="section-number">demo.platform</span>
+          <h2>From CAN-Bus to Cloud</h2>
+          <p>
+            A portable Smart Mobile Machinery Demo Platform brings the full Eltronic offer into one working
+            demonstrator: operator interface, CAN control, telemetry, safety, sensors and cloud dashboard.
+          </p>
+          <div className="actions">
+            <Link className="button" href="/articles/from-can-bus-to-cloud-smart-mobile-machinery-demo-platform">
+              Read the concept
+            </Link>
+            <Link className="button secondary" href="/contact">
+              Discuss a demonstrator
+            </Link>
+          </div>
+        </div>
+        <div className="demo-platform-stack" aria-label="Smart Mobile Machinery Demo Platform stack">
+          {[
+            "TOPCON HMI",
+            "AutoPi",
+            "Teltonika",
+            "ECU / CAN controller",
+            "Actuators",
+            "Joystick",
+            "Beacon / light",
+            "Sensors",
+            "Camera",
+            "Safety",
+            "Cloud dashboard",
+          ].map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomeArticlesSection({ articles }: { articles: Article[] }) {
+  if (articles.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="section homepage-articles-section">
+      <div className="section-heading">
+        <div>
+          <span className="section-number">articles.latest</span>
+          <h2>Technical notes and ideas</h2>
+        </div>
+        <p>Organised explanations from Eltronic on HMI systems, telematics, CAN-Bus, cloud integration and practical system delivery.</p>
+      </div>
+      <div className="article-grid compact">
+        {articles.map((article) => (
+          <ArticleCard article={article} compact key={article.slug} />
+        ))}
+      </div>
+    </section>
   );
 }
 
