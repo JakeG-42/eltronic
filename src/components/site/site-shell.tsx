@@ -75,7 +75,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="footer-contact-card">
               <span className="section-number">contact.signal</span>
               <h2>Have a system to discuss?</h2>
-              <p>Send the prototype, product, software or operations problem and we will help shape the next step.</p>
+              <p>Eltronic is the solution. Get in touch today.</p>
               <a href="mailto:sales@eltronic.co.uk">sales@eltronic.co.uk</a>
               <a href="tel:+447935239421">+44 (0) 79 3523 9421</a>
             </div>
