@@ -4,7 +4,7 @@ Read this first when returning to the Eltronic project. This document is written
 
 ## Purpose
 
-Eltronic is a standalone Next.js replacement for the old WordPress/WooCommerce/Colibri site. It is quote/contact-led, not checkout-led. The admin area is a lightweight custom studio for managing products, assigning product templates and reading contact submissions.
+Eltronic is a standalone Next.js replacement for the old WordPress/WooCommerce/Colibri site. It is quote/contact-led, not checkout-led. The admin area is a lightweight custom studio for managing products, the single default product template and contact submissions.
 
 Always verify current code before changing behavior. Treat this document as a map, not a substitute for inspecting files.
 
@@ -193,11 +193,11 @@ Product form parsing uses `productFromFormData()`:
 
 The Studio product form uses a two-column editing flow: main product sections on the left, with publish, commerce and module controls in a sticky sidebar on desktop. Keep sections collapsible when adding new product-management panels so the form remains manageable in the quick-edit drawer.
 
-Product templates are currently:
+Product template behavior:
 
-- `hmi`
-- `data-logger`
-- `module`
+- `default` is the only current product template.
+- Legacy `hmi`, `data-logger` and `module` records are normalized to `default` by `normalizeProducts()` in `src/lib/managed-data.ts`.
+- The `default` template is the former HMI-style product page layout. On public product pages, Technical data must stay full width directly under Highlights.
 
 Gallery behavior:
 
@@ -208,13 +208,7 @@ Gallery behavior:
 - Product detail pages render `ProductMediaGallery`, a client component with thumbnail switching, keyboard-friendly zoom, and previous/next controls.
 - Primary product images can be local files under `public/product-images` or trusted manufacturer URLs recorded in seed/managed data. Avoid legacy placeholder media in public galleries.
 
-If adding a new template, update:
-
-- `ProductTemplate` in `src/content/products.ts`.
-- `parseProductTemplate()` in `src/lib/managed-data.ts`.
-- The template select in `src/components/studio/product-form.tsx`.
-- `productTypeLabel` in `src/app/(site)/products/[slug]/page.tsx`.
-- `docs/AI_FUNCTION_MAP.json`.
+If Jake asks to add another product template again, update `ProductTemplate`, `parseProductTemplate()`, Studio product form display, `productTypeLabel`, public detail layout expectations and the AI/docs maps together.
 
 ## SEO And Project Pages
 

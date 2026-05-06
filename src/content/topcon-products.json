@@ -4,7 +4,7 @@
     "name": "Topcon OPUS A3e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a3e.html",
     "tags": [
       "topcon",
@@ -100,7 +100,7 @@
     "name": "Topcon OPUS A3s",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a3s.html",
     "tags": [
       "topcon",
@@ -217,7 +217,7 @@
     "name": "Topcon OPUS B6e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b6e.html",
     "tags": [
       "topcon",
@@ -334,7 +334,7 @@
     "name": "Topcon OPUS C Series",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS C series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b6e-copy-1.html",
     "tags": [
       "topcon",
@@ -447,7 +447,7 @@
     "name": "Topcon OPUS B2s",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2s.html",
     "tags": [
       "topcon",
@@ -560,7 +560,7 @@
     "name": "Topcon OPUS B3e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b3e.html",
     "tags": [
       "topcon",
@@ -673,7 +673,7 @@
     "name": "Topcon OPUS B2+s",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2-s.html",
     "tags": [
       "topcon",
@@ -786,7 +786,7 @@
     "name": "Topcon OPUS B2e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b3e-copy-1.html",
     "tags": [
       "topcon",
@@ -899,7 +899,7 @@
     "name": "Topcon OPUS B2+e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b2-e.html",
     "tags": [
       "topcon",
@@ -1013,7 +1013,7 @@
     "name": "Topcon OPUS B4e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS B series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-b4e-6.html",
     "tags": [
       "topcon",
@@ -1130,7 +1130,7 @@
     "name": "Topcon OPUS A6e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a6e.html",
     "tags": [
       "topcon",
@@ -1247,7 +1247,7 @@
     "name": "Topcon OPUS A6s",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a6s.html",
     "tags": [
       "topcon",
@@ -1364,7 +1364,7 @@
     "name": "Topcon OPUS A8e",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a8e.html",
     "tags": [
       "topcon",
@@ -1481,7 +1481,7 @@
     "name": "Topcon OPUS A8s",
     "category": "Rugged HMI displays",
     "family": "Topcon OPUS A series",
-    "template": "hmi",
+    "template": "default",
     "sourceUrl": "https://topcon-electronics.de/en/products/overview/single-view/backpage/overview/productcat/main-products/product/opus-a8s.html",
     "tags": [
       "topcon",

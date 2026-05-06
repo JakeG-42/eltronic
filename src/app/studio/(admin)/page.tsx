@@ -14,13 +14,12 @@ export const metadata = {
 
 export default async function StudioDashboardPage() {
   const [products, submissions] = await Promise.all([getProducts(), getSubmissions()]);
-  const templates = new Set(products.map((product) => product.template));
   const newSubmissions = submissions.filter((submission) => submission.status === "new");
 
   return (
     <div className="grid gap-6">
       <section className="studio-page-header">
-        <p>A clean control room for product content, template assignment, ordered galleries and quote enquiries.</p>
+        <p>A clean control room for product content, the default product template, ordered galleries and quote enquiries.</p>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link href="/studio/products/new">
@@ -48,7 +47,7 @@ export default async function StudioDashboardPage() {
 
       <section className="grid gap-4 md:grid-cols-4">
         <MetricCard icon={<Boxes className="size-5" />} label="Products" value={products.length.toString()} />
-        <MetricCard icon={<LayoutTemplate className="size-5" />} label="Templates" value={templates.size.toString()} />
+        <MetricCard icon={<LayoutTemplate className="size-5" />} label="Template" value="Default" compact />
         <MetricCard icon={<Inbox className="size-5" />} label="New enquiries" value={newSubmissions.length.toString()} />
         <MetricCard icon={<Database className="size-5" />} label="Storage" value={getStorageMode()} compact />
       </section>
@@ -66,7 +65,7 @@ export default async function StudioDashboardPage() {
                   <strong>{product.name}</strong>
                   <small>{product.family}</small>
                 </span>
-                <span>{product.template}</span>
+                <span>Default</span>
               </Link>
             ))}
           </CardContent>

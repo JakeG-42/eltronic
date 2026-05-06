@@ -1,7 +1,7 @@
 import generatedProductGalleryAssets from "./product-gallery-assets.json";
 import topconProductsData from "./topcon-products.json";
 
-export type ProductTemplate = "hmi" | "data-logger" | "module";
+export type ProductTemplate = "default";
 
 export type ProductImage = {
   src: string;
@@ -95,7 +95,7 @@ const seedProducts: Product[] = [
     name: "AutoPi CAN-FD Pro",
     category: "CAN data logging",
     family: "AutoPi",
-    template: "data-logger",
+    template: "default",
     sourceUrl: "https://eltronic.co.uk/autopi",
     image: {
       src: "/product-images/autopi-can-fd-pro.png",
@@ -136,7 +136,7 @@ const seedProducts: Product[] = [
     name: "I&Q CAN-Bus I/O Module",
     category: "I/O module",
     family: "Eltronic",
-    template: "module",
+    template: "default",
     sourceUrl: "https://eltronic.co.uk/eltronic-i-o-iq-can-bus-module",
     image: {
       src: "/product-images/eltronic-iq-can-bus-module.jpg",
@@ -175,6 +175,7 @@ function withGeneratedGallery(product: Product): Product {
 
   return {
     ...product,
+    template: "default",
     image: images[0] ?? product.image,
     images,
   };

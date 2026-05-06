@@ -93,7 +93,7 @@ export default async function StudioProductsPage({ searchParams }: ProductsPageP
                         </span>
                       </td>
                       <td>
-                        <Badge variant="outline">{product.template}</Badge>
+                        <Badge variant="outline">Default</Badge>
                       </td>
                       <td>{product.family}</td>
                       <td>

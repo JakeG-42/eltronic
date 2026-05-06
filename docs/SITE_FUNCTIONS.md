@@ -80,7 +80,7 @@ Each product currently has:
 - `name`: display name.
 - `category`: product category label.
 - `family`: product family label.
-- `template`: one of `hmi`, `data-logger`, or `module`.
+- `template`: always `default`; legacy `hmi`, `data-logger`, and `module` values are normalized to `default` on read.
 - `sourceUrl`: original crawl/source URL.
 - `sku`: optional admin/internal stock keeping unit; not displayed publicly yet.
 - `price`: optional admin/internal price or price note; not displayed publicly yet.
@@ -126,10 +126,10 @@ Each product currently has:
 - Product listing and detail pages are marked dynamic so admin changes can be reflected without rebuilding static slug lists.
 - `generateMetadata()` sets product-specific page title, description, canonical URL, Open Graph and Twitter metadata.
 - Unknown product slugs call `notFound()`.
-- The detail page displays family, category, name, description, template-specific heading, image, highlights, enquiry prompt, specifications, documents and variants where available.
+- The detail page displays family, category, name, description, default template tag, image, highlights, enquiry prompt, full-width technical data, documents and variants where available.
 - Multiple product images render as an interactive ordered gallery on the detail page with selectable thumbnails, touch swipe/mobile gestures, desktop click-drag switching and a zoom overlay. The gallery only uses managed product media from seed data, generated manifest entries or Studio edits, and should support any number of managed images rather than a fixed four-image template.
 - Product detail pages emit product and breadcrumb JSON-LD structured data.
-- Template headings are currently mapped in `src/app/(site)/products/[slug]/page.tsx`.
+- The public product detail layout places the full-width Technical data section directly under Highlights.
 
 ## SEO Behavior
 
@@ -165,11 +165,9 @@ Each product currently has:
 - There are no third-party captcha scripts, cookies or external anti-spam services.
 - `npm run test:contact-bot` runs a safe fake-bot tester against `https://project-5v5cr.vercel.app` by default. It only tests rejected bot paths unless `-- --valid` is passed.
 
-## Current Product Templates
+## Current Product Template
 
-- `hmi`: rugged HMI display products.
-- `data-logger`: CAN/CAN-FD logging and diagnostics products.
-- `module`: I/O module or expansion products.
+- `default`: single product detail template, cloned from the former HMI-style layout.
 
 ## Admin Behavior
 
@@ -193,8 +191,8 @@ Each product currently has:
 - Product forms use a two-column editor: main content sections on the left, with a sticky publish/commerce/module sidebar on desktop. Sections remain collapsible so image, technical, module and variant panels can be shown/hidden while editing.
 - Product forms support newline-based editing for highlights, specs, documents and variants.
 - Product management includes admin-only SKU, price, tags and module enable/disable settings.
-- Product image editing uses a gallery-style preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt`/`imageFileName` fallback fields. The gallery has image tiles, a dedicated add-image tile, and a modal editor for URL, local upload, filename and alt text. Uploaded raster files are resized client-side and stored as inline image data in the managed product record, with a normalized filename stored for Studio display. The first image is saved as the primary image. There is no intended maximum gallery-image count across HMI, data-logger/CAN or module templates.
-- Template assignment is managed with a select field on each product.
+- Product image editing uses a gallery-style preview/order manager with an ordered `galleryImagesJson` payload and repeated `imageSrc`/`imageAlt`/`imageFileName` fallback fields. The gallery has image tiles, a dedicated add-image tile, and a modal editor for URL, local upload, filename and alt text. Uploaded raster files are resized client-side and stored as inline image data in the managed product record, with a normalized filename stored for Studio display. The first image is saved as the primary image. There is no intended maximum gallery-image count.
+- Product template is displayed as `Default` in Studio and posted as a hidden `default` value; there is no multi-template selector at the moment.
 - Contact submissions can be reviewed, statused as `new`, `reviewed`, `replied`, `archived`, or `blocked`, filtered by type, bulk-updated and deleted.
 
 ## Storage Behavior

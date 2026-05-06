@@ -10,8 +10,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { productModuleDefinitions, type Product, type ProductModuleKey } from "@/content/products";
 
 const inputGridClass = "grid gap-2";
-const selectClass =
-  "flex h-10 w-full rounded-xl border border-input bg-background/60 px-3 py-2 text-sm text-foreground shadow-xs outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]";
 
 export function ProductForm({
   families,
@@ -32,6 +30,7 @@ export function ProductForm({
     <form action={saveProductAction} className="studio-product-editor">
       <input name="previousSlug" type="hidden" value={product?.slug ?? ""} />
       <input name="returnTo" type="hidden" value={returnTo} />
+      <input name="template" type="hidden" value="default" />
 
       <div className="studio-editor-main">
         <ProductFormSection
@@ -63,11 +62,7 @@ export function ProductForm({
             </div>
             <div className={inputGridClass}>
               <Label htmlFor={`${formId}-template`}>Template</Label>
-              <select className={selectClass} defaultValue={product?.template ?? "hmi"} id={`${formId}-template`} name="template">
-                <option value="hmi">HMI</option>
-                <option value="data-logger">Data logger</option>
-                <option value="module">Module</option>
-              </select>
+              <Input id={`${formId}-template`} readOnly value="Default" />
             </div>
             <div className={inputGridClass}>
               <Label htmlFor={`${formId}-enquiry`}>CTA label</Label>
@@ -157,7 +152,7 @@ export function ProductForm({
           <dl className="studio-editor-summary">
             <div>
               <dt>Template</dt>
-              <dd>{product?.template ?? "HMI default"}</dd>
+              <dd>Default</dd>
             </div>
             <div>
               <dt>Gallery</dt>
@@ -197,7 +192,7 @@ export function ProductForm({
               id={`${formId}-tags`}
               name="tags"
               defaultValue={product?.tags?.join(", ")}
-              placeholder="hmi, CAN-Bus, rugged, topcon"
+              placeholder="display, CAN-Bus, rugged, topcon"
             />
             <p className="studio-field-hint">Comma-separated tags for filtering, grouping and future admin workflows.</p>
           </div>

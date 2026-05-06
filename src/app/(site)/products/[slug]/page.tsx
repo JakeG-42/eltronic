@@ -77,72 +77,66 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <ProductMediaGallery images={images} productName={product.name} />
       </section>
 
-      <section className="detail-layout">
-        <div className="stack">
+      <section className="detail-layout product-detail-layout">
+        <section className="panel detail-section-full">
+          <div className="tag-row">
+            <span className="tag">{productTypeLabel[product.template]}</span>
+            <span className="tag warning">{product.category}</span>
+          </div>
+          <h2>Highlights</h2>
+          <ul className="highlight-list">
+            {product.highlights.map((highlight) => (
+              <li key={highlight}>{highlight}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="panel detail-section-full">
+          <h2>Technical data</h2>
+          <dl className="spec-list">
+            {product.specifications.map((spec) => (
+              <div className="spec-row" key={spec.label}>
+                <dt>{spec.label}</dt>
+                <dd>{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        {product.variants ? (
           <section className="panel">
-            <div className="tag-row">
-              <span className="tag">{productTypeLabel[product.template]}</span>
-              <span className="tag warning">{product.category}</span>
-            </div>
-            <h2>Highlights</h2>
-            <ul className="highlight-list">
-              {product.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
+            <h2>Order information</h2>
+            <ul className="variant-list">
+              {product.variants.map((variant) => (
+                <li key={`${variant.name}-${variant.articleNumber ?? variant.details}`}>
+                  <strong>{variant.name}</strong>
+                  <p>{variant.details}</p>
+                  {variant.articleNumber ? <span className="tag">{variant.articleNumber}</span> : null}
+                </li>
               ))}
             </ul>
           </section>
+        ) : null}
 
-          {product.variants ? (
-            <section className="panel">
-              <h2>Order information</h2>
-              <ul className="variant-list">
-                {product.variants.map((variant) => (
-                  <li key={`${variant.name}-${variant.articleNumber ?? variant.details}`}>
-                    <strong>{variant.name}</strong>
-                    <p>{variant.details}</p>
-                    {variant.articleNumber ? <span className="tag">{variant.articleNumber}</span> : null}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-        </div>
-
-        <aside className="stack">
+        {product.documents ? (
           <section className="panel">
-            <h2>Technical data</h2>
-            <dl className="spec-list">
-              {product.specifications.map((spec) => (
-                <div className="spec-row" key={spec.label}>
-                  <dt>{spec.label}</dt>
-                  <dd>{spec.value}</dd>
-                </div>
+            <h2>Documents</h2>
+            <div className="document-list">
+              {product.documents.map((document) => (
+                <a className="button secondary" href={document.url} key={document.label}>
+                  {document.label}
+                </a>
               ))}
-            </dl>
+            </div>
           </section>
-
-          {product.documents ? (
-            <section className="panel">
-              <h2>Documents</h2>
-              <div className="document-list">
-                {product.documents.map((document) => (
-                  <a className="button secondary" href={document.url} key={document.label}>
-                    {document.label}
-                  </a>
-                ))}
-              </div>
-            </section>
-          ) : null}
-        </aside>
+        ) : null}
       </section>
     </main>
   );
 }
 
 const productTypeLabel = {
-  hmi: "HMI display",
-  "data-logger": "Data logging",
-  module: "Control module",
+  default: "Default",
 };
 
 function schemaImageUrl(src: string) {

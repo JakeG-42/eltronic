@@ -17,7 +17,7 @@ export default async function NewProductPage() {
   return (
     <div className="grid gap-6">
       <section className="studio-page-header">
-        <p>Create a product record, choose its template and order its gallery images.</p>
+        <p>Create a product record with the default template and order its gallery images.</p>
         <Button asChild variant="outline">
           <Link href="/studio/products">Back to products</Link>
         </Button>

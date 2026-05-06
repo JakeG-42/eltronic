@@ -417,9 +417,7 @@
     "topconSourceCsv": "docs/topcon_product_catalogue_import.csv",
     "topconSyncCommand": "npm run products:topcon:sync",
     "templates": [
-      "hmi",
-      "data-logger",
-      "module"
+      "default"
     ],
     "fields": [
       "slug",
@@ -459,11 +457,12 @@
     "templateChangeChecklist": [
       "src/content/products.ts#ProductTemplate",
       "src/lib/managed-data.ts#parseProductTemplate",
-      "src/components/studio/product-form.tsx template select",
+      "src/components/studio/product-form.tsx template display",
       "src/app/(site)/products/[slug]/page.tsx#productTypeLabel",
       "docs/AI_FUNCTION_MAP.json",
       "docs/SITE_FUNCTIONS.md"
     ],
+    "templateBehavior": "Only the default template is active. Legacy hmi, data-logger and module values are normalized to default in src/lib/managed-data.ts. Public product technical data is full-width under Highlights.",
     "galleryImages": {
       "function": "src/lib/managed-data.ts#getProductImages",
       "behavior": "Returns every valid managed product.images entry in order, or product.image as the single fallback. Do not slice or cap by product template. Launch placeholder image assets are filtered from public output. Generated launch illustrations are explicit seed/managed gallery entries for non-Topcon products; Topcon uses CSV-backed manufacturer image URLs.",

@@ -17,7 +17,10 @@ for (const envFile of [".env.local", ".env.development.local"]) {
   loadEnvFile(envFile);
 }
 
-const topconProducts = JSON.parse(await readFile(TOPCON_PRODUCTS_PATH, "utf8"));
+const topconProducts = JSON.parse(await readFile(TOPCON_PRODUCTS_PATH, "utf8")).map((product) => ({
+  ...product,
+  template: "default",
+}));
 const storage = getStorage();
 const data = await storage.read();
 

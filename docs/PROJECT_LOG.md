@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Collapsed product templates to a single `default` template, normalizing legacy `hmi`, `data-logger` and `module` records on read, and moved product technical data into a full-width section under highlights.
 - Reworked `/studio/media` into a compact selectable media manager with seven-column desktop grid, table view and bulk removal of selected product-gallery image references.
 - Renamed the Studio sidebar Templates item to Code Studio and moved it into the Admin group.
 - Restyled Studio `product.media` editing from row-based image cards into a compact gallery grid with a dedicated add-image tile and a modal editor for URL, upload, filename and alt text.
