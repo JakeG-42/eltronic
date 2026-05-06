@@ -45,8 +45,11 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
         return;
       }
 
-      const normalizedX = clamp(((clientX - rect.left) / rect.width) * 2 - 1, -1, 1);
-      const normalizedY = clamp(((clientY - rect.top) / rect.height) * 2 - 1, -1, 1);
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const radius = Math.min(rect.width, rect.height) / 2;
+      const normalizedX = clamp((clientX - centerX) / radius, -1, 1);
+      const normalizedY = clamp((clientY - centerY) / radius, -1, 1);
       const distance = Math.min(1, Math.hypot(normalizedX, normalizedY));
 
       target.x = normalizedX * 30 * distance;
@@ -63,14 +66,6 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
       const distanceFromCenter = clamp((visualCenter - viewportCenter) / window.innerHeight, -1, 1);
 
       target.scrollY = distanceFromCenter * -18;
-    };
-
-    const resetPointerTarget = () => {
-      target.x = 0;
-      target.y = 0;
-      target.angle = 0;
-      target.glowX = neutralPoint.glowX;
-      target.glowY = neutralPoint.glowY;
     };
 
     const animate = () => {
@@ -93,8 +88,7 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
 
     const handlePointerMove = (event: PointerEvent) => setTargetFromPointer(event.clientX, event.clientY);
 
-    figure.addEventListener("pointermove", handlePointerMove);
-    figure.addEventListener("pointerleave", resetPointerTarget);
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("scroll", setScrollTarget, { passive: true });
     window.addEventListener("resize", setScrollTarget);
 
@@ -103,8 +97,7 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
 
     return () => {
       window.cancelAnimationFrame(frame);
-      figure.removeEventListener("pointermove", handlePointerMove);
-      figure.removeEventListener("pointerleave", resetPointerTarget);
+      window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("scroll", setScrollTarget);
       window.removeEventListener("resize", setScrollTarget);
     };

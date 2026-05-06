@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Updated the homepage circular code mark so it tracks the cursor across the whole viewport, not only when hovering the element.
 - Added cursor-following motion, spaced `< / >` glyphs, breathing glow and gentle scroll parallax to the homepage circular code mark.
 - Changed the homepage display hero visual into a circular interactive `</>` code mark with softer magenta/purple styling and no visible HMI/CAN caption inside the graphic.
 - Restored editable product templates in Studio with `Default`, `HMI`, `Data logger` and `Module` options while keeping open-ended galleries and full-width technical data.
