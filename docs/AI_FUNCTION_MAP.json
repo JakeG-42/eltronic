@@ -222,7 +222,13 @@
       "path": "/data-specification",
       "file": "src/app/(site)/data-specification/page.tsx",
       "kind": "public-resource",
-      "dataSource": "getProducts(), src/content/site.ts#resourceModules"
+      "dataSource": "getProducts(), src/content/site.ts#resourceModules",
+      "features": [
+        "product-grouped document library",
+        "product tag derived from catalogue item",
+        "document type tag inferred from label/path",
+        "local PDF filename display"
+      ]
     },
     {
       "path": "/contact",

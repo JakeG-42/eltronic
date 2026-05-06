@@ -275,6 +275,8 @@ Public page visuals are code-native SVG modules, not bitmap files:
 
 The public shell also renders `src/components/site/ambient-background.tsx`, a very subtle fixed background layer with floating syntax glyphs. Keep it low opacity, behind content, and respectful of `prefers-reduced-motion`.
 
+The `/data-specification` page reads `getProducts()` and groups `product.documents` by product. Its visible document tags are derived, not stored separately: product tag comes from `product.name`, and type tags are inferred from document labels/paths such as basic/simple data, full datasheet, datasheet and operating manual.
+
 The homepage hero uses `src/components/site/hero-role-typewriter.tsx` for the small role label above `Eltronic`. It cycles through short professional role phrases and respects `prefers-reduced-motion`.
 
 The public main navigation uses inline SVG icons in `src/components/site/site-shell.tsx`. Desktop shows the core customer journey links: Services, Software, Web & IOT, Products, About and Contact. Mobile uses a compact native `details` hamburger with the same links, and `src/components/site/mobile-nav-auto-close.tsx` closes it on link click, outside tap or Escape. Keep secondary pages such as Sectors and Data & specification discoverable through page CTAs or footer links rather than crowding the primary nav.

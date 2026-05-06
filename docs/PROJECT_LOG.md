@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Reworked `/data-specification` into a product-grouped document library with product tags, inferred document type tags and local PDF filename display.
 - Added `/studio/files` under Content as a local `public/media` file manager with upload, compact grid/table views and bulk deletion; localized Topcon/AutoPi product images and PDFs into `public/media/products`, rewrote product/document URLs to `/media/...`, and synced the managed product catalogue in Neon.
 - Added interactive circular `< / >` code-mark hero visuals to `/sectors` and `/data-specification`, with lime/violet themes and subtle inner sector/data motifs.
 - Thickened the homepage hero `Eltronic` wordmark treatment using a subtle text-stroke/faux-weight style without changing the hero font size.

@@ -48,7 +48,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/software-it`: public service page for industrial software, PLC-adjacent applications, PCB/control-unit programming support, HMI/operator workflows, device data, gateways and operational IT around equipment and production environments.
 - `/web-connected-platforms`: public service page for company websites, CRM-style platforms, UI/UX, connected services, finance/warehousing/manufacturing integrations, IoT dashboards, IT agency-style support and technical consultancy.
 - `/sectors`: public applications page for specialist vehicles, fleet systems, simulators/test rigs and business operations, using a lime interactive code-mark hero with a subtle sector-node motif.
-- `/data-specification`: public resource page for data sheets, guides and product documents, using a violet interactive code-mark hero with a subtle data/specification motif.
+- `/data-specification`: public resource page for data sheets, guides and product documents, using a violet interactive code-mark hero with a subtle data/specification motif. Product documents are grouped by product and display product/type tags derived from the product record and document label/path.
 - `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
 - `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.
