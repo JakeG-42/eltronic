@@ -772,6 +772,28 @@ h3 {
   --code-tone-soft: #7dd3fc;
 }
 
+.technical-visual.code-mark-lime {
+  --code-glow-rgb: 132 204 22;
+  --code-light-rgb: 217 249 157;
+  --code-soft-rgb: 34 197 94;
+  --code-tone-cool: #67e8f9;
+  --code-tone-deep: #22c55e;
+  --code-tone-light: #d9f99d;
+  --code-tone-mid: #84cc16;
+  --code-tone-soft: #86efac;
+}
+
+.technical-visual.code-mark-violet {
+  --code-glow-rgb: 139 92 246;
+  --code-light-rgb: 221 214 254;
+  --code-soft-rgb: 99 102 241;
+  --code-tone-cool: #8bd3ff;
+  --code-tone-deep: #6366f1;
+  --code-tone-light: #ddd6fe;
+  --code-tone-mid: #8b5cf6;
+  --code-tone-soft: #c4b5fd;
+}
+
 .technical-visual.code-mark::before {
   position: absolute;
   inset: -8%;
@@ -970,6 +992,33 @@ h3 {
 .visual-code-particle:nth-child(4n) {
   fill: var(--code-tone-cool);
   filter: drop-shadow(0 0 6px rgb(var(--code-light-rgb) / 0.24));
+}
+
+.visual-code-motif {
+  opacity: 0.36;
+  pointer-events: none;
+}
+
+.visual-code-motif-line,
+.visual-code-motif-frame {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.visual-code-motif-line {
+  stroke-width: 2.6;
+  filter: drop-shadow(0 0 8px rgb(var(--code-glow-rgb) / 0.2));
+}
+
+.visual-code-motif-frame {
+  stroke: rgb(var(--code-light-rgb) / 0.22);
+  stroke-width: 2;
+}
+
+.visual-code-motif-node {
+  fill: var(--code-tone-light);
+  filter: drop-shadow(0 0 8px rgb(var(--code-glow-rgb) / 0.28));
 }
 
 .visual-code-mark {

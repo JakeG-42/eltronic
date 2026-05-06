@@ -29,7 +29,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Web & IOT (`/web-connected-platforms`), Products (`/products`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
-- Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.
+- Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery and the shared interactive circular `< / >` code-mark hero visual for public pages.
 - Public footer: `src/components/site/site-shell.tsx` renders a simple static footer; avoid sticky/reveal footer effects unless they are tested across full-page layouts.
 - AI context pack: future agents should start with `docs/AGENT_CONTEXT.md` and `docs/AI_FUNCTION_MAP.json`.
 - Public content tone: present Eltronic as a practical technical systems, prototyping, product, electronics, software and integration partner. Product catalogue language should frame products as modules/building blocks for wider systems, not the whole business.
@@ -44,8 +44,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/solutions`: public Services page for bespoke systems, prototypes, electronics, CAN/screens, product support, business systems and integration.
 - `/software-it`: public service page for industrial software, PLC-adjacent applications, PCB/control-unit programming support, HMI/operator workflows, device data, gateways and operational IT around equipment and production environments.
 - `/web-connected-platforms`: public service page for company websites, CRM-style platforms, UI/UX, connected services, finance/warehousing/manufacturing integrations, IoT dashboards, IT agency-style support and technical consultancy.
-- `/sectors`: public applications page for specialist vehicles, fleet systems, simulators/test rigs and business operations.
-- `/data-specification`: public resource page for data sheets, guides and product documents.
+- `/sectors`: public applications page for specialist vehicles, fleet systems, simulators/test rigs and business operations, using a lime interactive code-mark hero with a subtle sector-node motif.
+- `/data-specification`: public resource page for data sheets, guides and product documents, using a violet interactive code-mark hero with a subtle data/specification motif.
 - `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
 - `/contact`: quote/contact flow that stores submissions in the managed data layer.
 - `/sitemap.xml`: dynamic sitemap with static routes, managed product routes, product images and published project routes.

@@ -31,7 +31,13 @@ export default function SectorsPage() {
             </Link>
           </div>
         </div>
-        <TechnicalVisual label="Application sector map" variant="sectors" />
+        <TechnicalVisual
+          codeMark
+          codeMotif="sectors"
+          codeTheme="lime"
+          label="Interactive application sector map"
+          variant="display"
+        />
       </section>
 
       <section className="section">

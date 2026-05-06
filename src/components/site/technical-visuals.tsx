@@ -1,14 +1,20 @@
-import { InteractiveCodeMark, type CodeMarkTheme } from "@/components/site/interactive-code-mark";
+import {
+  InteractiveCodeMark,
+  type CodeMarkMotif,
+  type CodeMarkTheme,
+} from "@/components/site/interactive-code-mark";
 
 type TechnicalVisualVariant = "network" | "display" | "sectors" | "data";
 
 export function TechnicalVisual({
   codeMark = false,
+  codeMotif = "code",
   codeTheme = "magenta",
   label,
   variant,
 }: {
   codeMark?: boolean;
+  codeMotif?: CodeMarkMotif;
   codeTheme?: CodeMarkTheme;
   label: string;
   variant: TechnicalVisualVariant;
@@ -16,7 +22,7 @@ export function TechnicalVisual({
   const isCodeMark = codeMark && variant === "display";
 
   if (isCodeMark) {
-    return <InteractiveCodeMark label={label} theme={codeTheme} />;
+    return <InteractiveCodeMark label={label} motif={codeMotif} theme={codeTheme} />;
   }
 
   return (

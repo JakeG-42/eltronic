@@ -614,7 +614,7 @@
       "file": "src/components/site/technical-visuals.tsx",
       "type": "code-native SVG",
       "homepageCodeMark": "src/components/site/interactive-code-mark.tsx",
-      "homepageCodeMarkBehavior": "Client-side circular < / > hero visual with viewport-wide cursor tracking, inner glyph drift, rotation toward the pointer, breathing magenta/purple glow and gentle scroll parallax. Respects prefers-reduced-motion.",
+      "homepageCodeMarkBehavior": "Client-side circular < / > hero visual with viewport-wide cursor tracking, inner glyph drift, rotation toward the pointer, breathing glow, subtle particles, optional inner motifs and gentle scroll parallax. Homepage stays magenta/purple unless Jake asks otherwise; Services, Software, About, Web & Connected Platforms, Sectors and Data & Specification use themed subpage variants. Respects prefers-reduced-motion.",
       "variants": [
         "display",
         "network",

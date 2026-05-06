@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Added interactive circular `< / >` code-mark hero visuals to `/sectors` and `/data-specification`, with lime/violet themes and subtle inner sector/data motifs.
 - Thickened the homepage hero `Eltronic` wordmark treatment using a subtle text-stroke/faux-weight style without changing the hero font size.
 - Repositioned `/software-it` toward industrial software, PLC-adjacent applications, PCB/control-unit programming support, HMI workflows and operational IT; repositioned `/web-connected-platforms` toward websites, CRM-style platforms, UI/UX, finance/warehouse/manufacturing integrations, IoT dashboards and IT agency-style support.
 - Added `Web & IOT` to the public header navigation, linking to `/web-connected-platforms` with a dedicated connected-nodes icon.

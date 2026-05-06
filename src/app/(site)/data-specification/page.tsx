@@ -41,7 +41,13 @@ export default async function DataSpecificationPage() {
             </Link>
           </div>
         </div>
-        <TechnicalVisual label="Data and specification workflow" variant="data" />
+        <TechnicalVisual
+          codeMark
+          codeMotif="data"
+          codeTheme="violet"
+          label="Interactive data and specification workflow"
+          variant="display"
+        />
       </section>
 
       <section className="section">

@@ -262,8 +262,8 @@ The public site uses the existing custom CSS in `src/app/globals.css`.
 Public page visuals are code-native SVG modules, not bitmap files:
 
 - Component: `src/components/site/technical-visuals.tsx`.
-- Homepage/subpage code mark: `src/components/site/interactive-code-mark.tsx`; it is the client-side circular `< / >` hero visual with viewport-wide cursor tracking, breathing glow, subtle inner particles, gentle scroll parallax and optional colour themes. Keep the homepage on the default magenta theme unless Jake explicitly asks to change it.
-- Variants: `display`, `network`, `sectors`, `data`.
+- Homepage/subpage code mark: `src/components/site/interactive-code-mark.tsx`; it is the client-side circular `< / >` hero visual with viewport-wide cursor tracking, breathing glow, subtle inner particles, gentle scroll parallax, optional colour themes and optional inner motifs. Keep the homepage on the default magenta theme unless Jake explicitly asks to change it.
+- Technical visual variants: `display`, `network`, `sectors`, `data`. Current hero code-mark themes include homepage magenta, Services emerald, Software cyan, About amber, Web & Connected Platforms teal, Sectors lime and Data & Specification violet.
 - Preferred for now because visuals remain editable, versioned and deployable without a media library.
 
 The public shell also renders `src/components/site/ambient-background.tsx`, a very subtle fixed background layer with floating syntax glyphs. Keep it low opacity, behind content, and respectful of `prefers-reduced-motion`.

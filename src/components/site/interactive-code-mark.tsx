@@ -5,10 +5,12 @@ import type { CSSProperties } from "react";
 
 type InteractiveCodeMarkProps = {
   label: string;
+  motif?: CodeMarkMotif;
   theme?: CodeMarkTheme;
 };
 
-export type CodeMarkTheme = "amber" | "cyan" | "emerald" | "magenta" | "teal";
+export type CodeMarkMotif = "code" | "data" | "sectors";
+export type CodeMarkTheme = "amber" | "cyan" | "emerald" | "lime" | "magenta" | "teal" | "violet";
 
 type MotionPoint = {
   angle: number;
@@ -58,7 +60,7 @@ const codeParticles: CodeParticle[] = [
   { x: 266, y: 392, radius: 1.8, opacity: 0.42, delay: -11.2, duration: 9.6, driftX: 11, driftY: -8 },
 ];
 
-export function InteractiveCodeMark({ label, theme = "magenta" }: InteractiveCodeMarkProps) {
+export function InteractiveCodeMark({ label, motif = "code", theme = "magenta" }: InteractiveCodeMarkProps) {
   const codeMarkId = useId().replace(/:/g, "");
   const coreClipId = `code-core-${codeMarkId}`;
   const glowGradientId = `code-glow-${codeMarkId}`;
@@ -142,7 +144,10 @@ export function InteractiveCodeMark({ label, theme = "magenta" }: InteractiveCod
   }, []);
 
   return (
-    <figure className={`technical-visual display code-mark code-mark-${theme} interactive-code-mark`} ref={figureRef}>
+    <figure
+      className={`technical-visual display code-mark code-mark-${theme} code-mark-motif-${motif} interactive-code-mark`}
+      ref={figureRef}
+    >
       <svg aria-label={label} viewBox="0 0 720 720" role="img">
         <defs>
           <linearGradient id={lineGradientId} x1="0%" x2="100%" y1="0%" y2="100%">
@@ -198,6 +203,8 @@ export function InteractiveCodeMark({ label, theme = "magenta" }: InteractiveCod
               />
             ))}
           </g>
+          {motif === "sectors" ? <SectorMotif lineGradientId={lineGradientId} /> : null}
+          {motif === "data" ? <DataMotif lineGradientId={lineGradientId} /> : null}
           <text className="visual-code-mark" x="360" y="388" textAnchor="middle">
             <tspan>{"<"}</tspan>
             <tspan dx="20">{"/"}</tspan>
@@ -206,6 +213,41 @@ export function InteractiveCodeMark({ label, theme = "magenta" }: InteractiveCod
         </g>
       </svg>
     </figure>
+  );
+}
+
+function SectorMotif({ lineGradientId }: { lineGradientId: string }) {
+  return (
+    <g className="visual-code-motif visual-code-motif-sectors" aria-hidden="true">
+      <path
+        className="visual-code-motif-line"
+        d="M360 360L288 310M360 360L434 310M360 360L290 420M360 360L436 420"
+        stroke={`url(#${lineGradientId})`}
+      />
+      {[
+        [288, 310],
+        [434, 310],
+        [290, 420],
+        [436, 420],
+      ].map(([cx, cy]) => (
+        <circle className="visual-code-motif-node" cx={cx} cy={cy} key={`${cx}-${cy}`} r="8" />
+      ))}
+    </g>
+  );
+}
+
+function DataMotif({ lineGradientId }: { lineGradientId: string }) {
+  return (
+    <g className="visual-code-motif visual-code-motif-data" aria-hidden="true">
+      <path
+        className="visual-code-motif-line"
+        d="M296 304H424M296 334H392M328 416H424M360 304V416"
+        stroke={`url(#${lineGradientId})`}
+      />
+      <rect className="visual-code-motif-frame" x="284" y="292" width="152" height="136" rx="20" />
+      <circle className="visual-code-motif-node" cx="360" cy="304" r="6" />
+      <circle className="visual-code-motif-node" cx="360" cy="416" r="6" />
+    </g>
   );
 }
 
