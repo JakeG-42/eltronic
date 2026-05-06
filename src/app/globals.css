@@ -546,6 +546,12 @@ h3 {
   display: block;
 }
 
+.home-page .hero-title .title-value {
+  font-weight: 800;
+  -webkit-text-stroke: 0.018em rgba(178, 194, 255, 0.58);
+  paint-order: stroke fill;
+}
+
 .title-suffix {
   color: var(--accent);
 }
