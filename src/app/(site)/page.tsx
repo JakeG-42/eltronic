@@ -14,6 +14,8 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const [featuredProducts, builder] = await Promise.all([getFeaturedProducts(), getSiteBuilderSettings()]);
   const visibleSections = [...builder.home.sections].filter((section) => section.enabled).sort((a, b) => a.order - b.order);
+  const heroUsesCodeMark = builder.home.hero.visualVariant === "display";
+  const heroVisualLabel = heroUsesCodeMark ? "Eltronic interactive code mark" : builder.home.hero.visualLabel;
 
   return (
     <main
@@ -38,7 +40,11 @@ export default async function Home() {
           </div>
         </div>
 
-        <TechnicalVisual label={builder.home.hero.visualLabel} variant={builder.home.hero.visualVariant} />
+        <TechnicalVisual
+          codeMark={heroUsesCodeMark}
+          label={heroVisualLabel}
+          variant={builder.home.hero.visualVariant}
+        />
       </section>
 
       {visibleSections.map((section) => renderHomeSection(section, featuredProducts))}

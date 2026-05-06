@@ -149,7 +149,7 @@ export default async function StudioBuilderPage({ searchParams }: BuilderPagePro
               </Field>
               <Field label="Visual module">
                 <select className="builder-select" defaultValue={settings.home.hero.visualVariant} name="heroVisualVariant">
-                  <option value="display">Display architecture</option>
+                  <option value="display">Code mark</option>
                   <option value="network">Network integration</option>
                   <option value="sectors">Sector map</option>
                   <option value="data">Data/specification</option>
