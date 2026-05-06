@@ -27,8 +27,8 @@ export default function SoftwareItPage() {
             <Link className="button" href="/contact">
               Discuss a system
             </Link>
-            <Link className="button secondary" href="/solutions">
-              View control-system solutions
+            <Link className="button secondary" href="/web-connected-platforms">
+              Web & connected platforms
             </Link>
           </div>
         </div>
@@ -61,6 +61,25 @@ export default function SoftwareItPage() {
               </ul>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="cta-module">
+          <div>
+            <span className="section-number">web.platforms</span>
+            <h2>Websites and platforms that connect properly.</h2>
+            <p>
+              Some work starts with a website, an old platform or a business
+              process that has outgrown the tools around it. Eltronic can build
+              bespoke platforms from the ground up, modernise older systems,
+              preserve the right design direction, and connect web, ecommerce,
+              IT, IoT and operational software into something more useful.
+            </p>
+          </div>
+          <Link className="button" href="/web-connected-platforms">
+            Explore Web & Connected Platforms
+          </Link>
         </div>
       </section>
 

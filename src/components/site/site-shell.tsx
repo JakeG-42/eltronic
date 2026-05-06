@@ -59,6 +59,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <h2 className="footer-group-title">Explore</h2>
               <Link href="/solutions">Services</Link>
               <Link href="/software-it">Software & Systems</Link>
+              <Link href="/web-connected-platforms">Web & Connected Platforms</Link>
               <Link href="/products">Product catalogue</Link>
             </nav>
 

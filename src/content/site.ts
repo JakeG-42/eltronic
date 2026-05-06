@@ -65,11 +65,11 @@ export const softwareServiceModules = [
     examples: ["Shipping workflows", "Stock and order sync", "Customer portals", "Middleware services"],
   },
   {
-    title: "Plugins, ecommerce and business tools",
+    title: "Web platforms, plugins and business tools",
     code: "plugins.commerce",
     summary:
-      "Bespoke plugins and practical extensions for Shopify, websites, internal tools and operational systems that need to fit a specific process.",
-    examples: ["Shopify plugins", "Website tools", "CRM extensions", "Customer-facing portals"],
+      "Bespoke web platforms, Shopify plugins and practical extensions for websites, internal tools and operational systems that need to fit a specific process.",
+    examples: ["Bespoke platforms", "Shopify plugins", "Website tools", "Customer-facing portals"],
   },
   {
     title: "Embedded, IoT and device services",

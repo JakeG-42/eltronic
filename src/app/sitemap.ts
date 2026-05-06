@@ -15,6 +15,7 @@ const staticRoutes: Array<{
   { path: "/products", priority: 0.9, changeFrequency: "weekly" },
   { path: "/solutions", priority: 0.85, changeFrequency: "monthly" },
   { path: "/software-it", priority: 0.85, changeFrequency: "monthly" },
+  { path: "/web-connected-platforms", priority: 0.82, changeFrequency: "monthly" },
   { path: "/sectors", priority: 0.75, changeFrequency: "monthly" },
   { path: "/data-specification", priority: 0.7, changeFrequency: "monthly" },
   { path: "/about", priority: 0.65, changeFrequency: "monthly" },

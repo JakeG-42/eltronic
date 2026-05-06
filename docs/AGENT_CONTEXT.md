@@ -270,11 +270,11 @@ The public shell also renders `src/components/site/ambient-background.tsx`, a ve
 
 The homepage hero uses `src/components/site/hero-role-typewriter.tsx` for the small role label above `Eltronic`. It cycles through short professional role phrases and respects `prefers-reduced-motion`.
 
-The public main navigation uses inline SVG icons in `src/components/site/site-shell.tsx`. Desktop shows the core customer journey links: Services, Software, Products, About and Contact. Mobile uses a compact native `details` hamburger with the same links, and `src/components/site/mobile-nav-auto-close.tsx` closes it on link click, outside tap or Escape. Keep secondary pages such as Sectors and Data & specification discoverable through page CTAs or footer links rather than crowding the primary nav.
+The public main navigation uses inline SVG icons in `src/components/site/site-shell.tsx`. Desktop shows the core customer journey links: Services, Software, Products, About and Contact. Mobile uses a compact native `details` hamburger with the same links, and `src/components/site/mobile-nav-auto-close.tsx` closes it on link click, outside tap or Escape. Keep secondary pages such as Web & Connected Platforms, Sectors and Data & specification discoverable through page CTAs or footer links rather than crowding the primary nav.
 
 The public footer is also rendered from `src/components/site/site-shell.tsx`. Keep it simple and static for now; the sticky reveal experiment made the footer appear behind content and was removed.
 
-Workflow/process copy for public control-system integration and Software & Systems pages lives in `src/content/site.ts`. Keep it professional: complex engineering should be presented as controlled, clear and easy for the customer to move through, not as if the work itself is basic.
+Workflow/process copy for public control-system integration and Software & Systems pages lives in `src/content/site.ts`. The Web & Connected Platforms page lives at `src/app/(site)/web-connected-platforms/page.tsx` and should stay positioned as bespoke platform development, system modernisation, integrations, IoT, IT support and consultancy rather than a generic redesign offer. Keep it professional: complex engineering should be presented as controlled, clear and easy for the customer to move through, not as if the work itself is basic.
 
 Public copy should avoid generic IT-support language and repeated machine/machinery phrasing unless clearly needed. Prefer precise but plain terms such as working prototypes, technical systems, product modules, specialist equipment, operating environment, application, embedded services, connected devices, platform, control system, operator interface, plugin, API, internal tool and operational workflow.
 

@@ -207,6 +207,12 @@
       "dataSource": "src/content/site.ts#softwareServiceModules, softwareWorkflowModules"
     },
     {
+      "path": "/web-connected-platforms",
+      "file": "src/app/(site)/web-connected-platforms/page.tsx",
+      "kind": "public-content",
+      "dataSource": "Local page arrays for web/platform capabilities and delivery approach"
+    },
+    {
       "path": "/sectors",
       "file": "src/app/(site)/sectors/page.tsx",
       "kind": "public-content",
