@@ -344,14 +344,14 @@ const legacyBuilderSectionValues: Partial<
     ctaLabel: ["Explore Software & Systems"],
     panelEyebrow: ["software.systems"],
     panelSummary: [
-      "From shipping and CRM integrations to MQTT services, HTTP APIs, internal servers, dashboards and connected hardware workflows, Eltronic helps reduce errors, manual admin and wasted time.",
+      "From control-unit tools and HMI workflows to MQTT services, HTTP APIs, industrial servers, dashboards and connected hardware workflows, Eltronic helps reduce errors, manual admin and wasted time.",
     ],
-    panelTitle: ["Internal platforms, data and connected devices."],
+    panelTitle: ["Industrial software, data and connected devices."],
     summary: [
-      "Full-stack internal platforms, API integration, embedded services and technical consultancy for more efficient operations.",
-      "Bespoke internal systems, API integration, embedded services and practical consulting for more efficient operations.",
+      "PLC-adjacent applications, embedded services, industrial data and practical consultancy for more efficient operations.",
+      "Control-unit software, embedded services, industrial data and practical consulting for more efficient operations.",
     ],
-    title: ["Software, systems and device integration", "Software and systems integration"],
+    title: ["Industrial software and device integration", "Software, control and device integration"],
   },
   workflow: {
     summary: [

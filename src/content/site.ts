@@ -37,7 +37,7 @@ export const serviceModules = [
     eyebrow: "operations.software",
     summary:
       "Internal platforms, APIs, plugins and integrations that connect operational software, ecommerce, warehouse tools and finance systems.",
-    bullets: ["Shopify and bespoke plugins", "Shipping and warehouse APIs", "Sage and business-system support"],
+    bullets: ["Shopify and bespoke plugins", "Shipping and warehouse APIs", "Finance and manufacturing systems"],
   },
   {
     slug: "support-infrastructure",
@@ -51,45 +51,52 @@ export const serviceModules = [
 
 export const softwareServiceModules = [
   {
-    title: "Internal platforms and dashboards",
-    code: "systems.backend",
+    title: "Control-system and PLC software",
+    code: "control.logic",
     summary:
-      "Admin portals, workflow tools, dashboards and operational platforms built around the way the business actually runs.",
-    examples: ["Admin portals", "Quoting tools", "Operations dashboards", "Reporting views"],
+      "PLC-adjacent applications, sequencing support, status logic and control workflows that help equipment behave predictably.",
+    examples: ["PLC integration", "Control logic", "State/status tools", "Alarm workflows"],
   },
   {
-    title: "API, middleware and data integration",
-    code: "integration.api",
+    title: "PCB, control-unit and embedded support",
+    code: "embedded.control",
     summary:
-      "Connect shipping, stock, CRM, customer portals, finance tools and third-party services so data moves cleanly without double entry.",
-    examples: ["Shipping workflows", "Stock and order sync", "Customer portals", "Middleware services"],
+      "Programming support around PCBs, controllers, embedded devices and gateways where hardware needs reliable software around it.",
+    examples: ["PCB programming support", "Controller interfaces", "CAN/serial links", "Gateway services"],
   },
   {
-    title: "Web platforms, plugins and business tools",
-    code: "plugins.commerce",
+    title: "HMI and operator interfaces",
+    code: "operator.hmi",
     summary:
-      "Bespoke web platforms, Shopify plugins and practical extensions for websites, internal tools and operational systems that need to fit a specific process.",
-    examples: ["Bespoke platforms", "Shopify plugins", "Website tools", "Customer-facing portals"],
+      "Screens, panel PCs, diagnostics, logs and operator workflows for control units, industrial equipment and connected products.",
+    examples: ["HMI workflows", "Panel PC tools", "Diagnostics", "Production views"],
   },
   {
-    title: "Embedded, IoT and device services",
-    code: "embedded.services",
+    title: "Industrial data, IoT and telemetry",
+    code: "industrial.data",
     summary:
-      "Software for connected hardware, controllers, screens, sensors and gateways, with practical protocols and reliable interfaces.",
-    examples: ["MQTT/HTTP services", "Device telemetry", "Edge gateways", "Command/status APIs"],
+      "Data capture, telemetry, protocol services and dashboards for sensors, devices, gateways and industrial operating environments.",
+    examples: ["MQTT/HTTP services", "Device telemetry", "Edge gateways", "Data logging"],
   },
   {
-    title: "Business software support",
-    code: "support.business",
+    title: "Industrial PC and operational IT applications",
+    code: "industrial.it",
     summary:
-      "Support for the systems companies already rely on, including Sage workflows, remote desktop access, internal servers and operational IT.",
-    examples: ["Sage support", "Remote desktop", "Internal servers", "Secure access"],
+      "Practical applications for industrial PCs, internal servers, remote access, secure workflows and production-support environments.",
+    examples: ["Industrial PC tools", "Remote access", "Internal servers", "Secure access"],
+  },
+  {
+    title: "Manufacturing system integration",
+    code: "factory.integration",
+    summary:
+      "Connections between shop-floor data, manufacturing systems, warehouse operations, finance tools and reporting layers where industrial work meets business data.",
+    examples: ["Manufacturing data", "Warehouse links", "Finance links", "Reporting layers"],
   },
   {
     title: "Technical consultancy and process improvement",
     code: "consult.efficiency",
     summary:
-      "Practical technical guidance on what to build, what to integrate and where automation will reduce errors, rework and wasted time.",
+      "Practical technical guidance on what to build, what to integrate and where industrial software or automation will reduce errors, rework and wasted time.",
     examples: ["Workflow reviews", "Automation planning", "System selection", "Project scoping"],
   },
   {
@@ -159,7 +166,7 @@ export const sectorModules = [
     code: "sector.operations",
     summary:
       "Internal platforms, plugins, ecommerce integrations, remote access and support systems for companies that need cleaner operations.",
-    examples: ["Shopify plugins", "Sage workflows", "Internal tools", "Website systems"],
+    examples: ["Shopify plugins", "Finance workflows", "Internal tools", "Website systems"],
   },
 ];
 

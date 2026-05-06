@@ -5,38 +5,52 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Web & Connected Platforms",
   description:
-    "Bespoke websites, connected platforms, integrations, IoT data services, IT support and technical consultancy from Eltronic.",
+    "Company websites, CRM-style platforms, UI/UX, connected services, IoT dashboards, business integrations and IT support from Eltronic.",
   path: "/web-connected-platforms",
 });
 
 const platformCapabilities = [
   {
-    code: "platform.build",
-    title: "Bespoke platforms from the ground up",
+    code: "web.design",
+    title: "Company websites and UI/UX",
     summary:
-      "Custom portals, dashboards, workflow tools and operational systems built around the way the business actually needs to work.",
-    examples: ["Customer portals", "Internal platforms", "Operational dashboards"],
+      "Modern websites, redesigns and interface systems that look right, feel clear and are built with future integrations in mind.",
+    examples: ["Website design", "UI/UX", "Design systems"],
+  },
+  {
+    code: "crm.platforms",
+    title: "CRM and customer platforms",
+    summary:
+      "Customer portals, enquiry workflows, account areas, dashboards and CRM-style systems built around how the company actually works.",
+    examples: ["CRM-style tools", "Customer portals", "Sales dashboards"],
   },
   {
     code: "modernise.connect",
     title: "Modernising older systems",
     summary:
-      "Practical work to make older websites, databases, spreadsheets, desktop tools and business systems easier to maintain and connect.",
-    examples: ["Legacy workflows", "Data cleanup", "Connectable interfaces"],
+      "Practical work to make older websites, databases, spreadsheets, desktop tools and business systems easier to maintain, support and connect.",
+    examples: ["Legacy workflows", "Data cleanup", "Platform migration"],
   },
   {
-    code: "web.systems",
-    title: "Websites that can become useful systems",
+    code: "business.bridge",
+    title: "Business system connections",
     summary:
-      "New websites and rebuilds that keep the right visual direction while making room for integrations, forms, portals, stock, orders and future tools.",
-    examples: ["Website rebuilds", "Design preservation", "Integration-ready foundations"],
+      "API, middleware and plugin work that connects ecommerce, finance, warehousing, manufacturing, logistics, CRM and reporting systems without double entry.",
+    examples: ["Finance links", "Warehouse APIs", "Manufacturing data"],
   },
   {
-    code: "api.bridge",
-    title: "Linking existing platforms together",
+    code: "ops.visibility",
+    title: "Operational dashboards and reporting",
     summary:
-      "API, middleware and plugin work that connects ecommerce, Sage, shipping, warehouse, CRM, finance and operational systems without double entry.",
-    examples: ["Shopify plugins", "Warehouse APIs", "Sage workflows"],
+      "Web dashboards and reporting views that bring orders, jobs, stock, production status, service activity and management information into one clearer place.",
+    examples: ["Job tracking", "Stock visibility", "Management reports"],
+  },
+  {
+    code: "studio.support",
+    title: "Design studio and IT agency support",
+    summary:
+      "A practical support layer for companies that need design, web changes, hosting guidance, access setup, technical decisions and ongoing improvement.",
+    examples: ["Website support", "Hosting guidance", "Technical reviews"],
   },
   {
     code: "iot.data",
@@ -44,13 +58,6 @@ const platformCapabilities = [
     summary:
       "Device data, sensors, gateways and dashboards that turn physical equipment and assets into useful information for the business.",
     examples: ["Telemetry", "Device dashboards", "Remote monitoring"],
-  },
-  {
-    code: "it.consult",
-    title: "IT support and technical consultancy",
-    summary:
-      "Support around hosting, access, remote desktop, internal infrastructure, technical choices and staged improvement plans.",
-    examples: ["Remote access", "Hosting support", "Technical reviews"],
   },
 ];
 
@@ -91,13 +98,14 @@ export default function WebConnectedPlatformsPage() {
       <section className="hero compact-hero">
         <div className="hero-copy">
           <p className="code-kicker">web.connected.platforms</p>
-          <h1>Websites, platforms and systems that connect.</h1>
+          <h1>Websites, CRM tools and business platforms that connect.</h1>
           <p className="lede">
-            Eltronic builds new web platforms and modernises existing systems so
-            they can work with the tools, data, devices and people already inside
-            the business. That can mean a clean new build, a careful migration,
-            a better integration layer, an IoT dashboard, or a website that keeps
-            the right aesthetic while becoming far more useful.
+            Eltronic builds company websites, CRM-style tools, connected
+            platforms and IoT dashboards that work with the data, people and
+            systems already inside the business. That can mean a clean new
+            build, a careful migration, a design refresh, a better integration
+            layer, or a platform that connects finance, warehousing,
+            manufacturing and customer workflows.
           </p>
           <div className="actions">
             <Link className="button" href="/contact">
@@ -118,8 +126,9 @@ export default function WebConnectedPlatformsPage() {
             <h2>Build new, connect old, improve what matters.</h2>
           </div>
           <p>
-            This is not just website redesign. The work sits between web design,
-            software engineering, IT, IoT and business systems consultancy.
+            This is the company-facing side of Eltronic: web design, UI/UX,
+            connected platforms, CRM-style workflows, business-system
+            integrations, IoT dashboards and practical IT support.
           </p>
         </div>
         <div className="module-grid">
@@ -149,11 +158,12 @@ export default function WebConnectedPlatformsPage() {
             <div className="terminal-body">
               <span className="terminal-line">existing.platform</span>
               <span className="terminal-line">website.frontend</span>
+              <span className="terminal-line">crm.workflow</span>
               <span className="terminal-line">api.middleware</span>
-              <span className="terminal-line">sage.workflow</span>
+              <span className="terminal-line">finance.systems</span>
               <span className="terminal-line">warehouse.orders</span>
+              <span className="terminal-line">manufacturing.jobs</span>
               <span className="terminal-line">iot.telemetry</span>
-              <span className="terminal-line">customer.portal</span>
             </div>
           </figure>
           <div>
@@ -161,10 +171,10 @@ export default function WebConnectedPlatformsPage() {
             <h2>Keep what works. Rebuild what holds the business back.</h2>
             <p className="lede">
               Sometimes the best answer is a new bespoke platform. Sometimes it
-              is keeping the design direction, data or working process and
-              rebuilding the technical foundation underneath it. The goal is not
-              change for the sake of change. It is making the system easier to
-              connect, support and improve.
+              is keeping the design direction, brand feel, data or working
+              process and rebuilding the technical foundation underneath it. The
+              goal is not change for the sake of change. It is making the
+              system easier to use, connect, support and improve.
             </p>
             <div className="actions">
               <Link className="button secondary" href="/contact">

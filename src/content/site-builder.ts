@@ -134,15 +134,15 @@ export const defaultSiteBuilderSettings: SiteBuilderSettings = {
         enabled: true,
         order: 2,
         eyebrow: "02",
-        title: "Software, APIs and operational tools",
+        title: "Industrial software, control logic and connected data",
         summary:
-          "Backend systems, dashboards, ecommerce plugins, Sage workflows, shipping and warehouse integrations, and support around the tools companies rely on.",
-        ctaLabel: "Explore software support",
+          "PLC-adjacent software, control-unit applications, device data, industrial dashboards and operational IT for equipment and production environments.",
+        ctaLabel: "Explore software systems",
         ctaHref: "/software-it",
-        panelEyebrow: "software.integration",
-        panelTitle: "Software that joins the practical work together.",
+        panelEyebrow: "software.control",
+        panelTitle: "Software that keeps practical systems working.",
         panelSummary:
-          "From Shopify plugins and API middleware to dashboards, remote access, internal platforms and connected hardware workflows, Eltronic helps reduce manual work and make systems easier to run.",
+          "From HMI workflows and control-unit tools to telemetry, dashboards, remote access and manufacturing-system links, Eltronic helps make equipment and operations easier to run.",
       },
       {
         key: "workflow",

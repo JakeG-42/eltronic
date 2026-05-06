@@ -83,9 +83,10 @@ export default function AboutPage() {
           </p>
           <p>
             The work can involve an HMI display, CAN logging, electronics, a
-            tracking system, a Shopify plugin, a Sage workflow, a website, an
-            internal platform or all of them together. The aim is the same: make
-            the technical path controlled, understandable and reliable.
+            tracking system, a Shopify plugin, a finance or warehouse workflow,
+            a website, an internal platform or all of them together. The aim is
+            the same: make the technical path controlled, understandable and
+            reliable.
           </p>
         </article>
 

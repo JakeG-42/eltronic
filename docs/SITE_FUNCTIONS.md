@@ -42,8 +42,8 @@ Concise living reference for how the current Eltronic Next.js site works.
 - `/projects`: public project/case-study index generated from `src/content/projects.ts`.
 - `/projects/[slug]`: public project/case-study detail page with article and breadcrumb structured data.
 - `/solutions`: public Services page for bespoke systems, prototypes, electronics, CAN/screens, product support, business systems and integration.
-- `/software-it`: public service page for internal platforms, API/shipping/warehouse integrations, plugins, embedded/device services, remote access and operational IT support.
-- `/web-connected-platforms`: public service page for bespoke web platforms, website rebuilds/migrations, legacy system modernisation, API/platform integrations, IoT dashboards, IT support and technical consultancy.
+- `/software-it`: public service page for industrial software, PLC-adjacent applications, PCB/control-unit programming support, HMI/operator workflows, device data, gateways and operational IT around equipment and production environments.
+- `/web-connected-platforms`: public service page for company websites, CRM-style platforms, UI/UX, connected services, finance/warehousing/manufacturing integrations, IoT dashboards, IT agency-style support and technical consultancy.
 - `/sectors`: public applications page for specialist vehicles, fleet systems, simulators/test rigs and business operations.
 - `/data-specification`: public resource page for data sheets, guides and product documents.
 - `/about`: company positioning page for Eltronic's equipment, product, integration and software approach.
