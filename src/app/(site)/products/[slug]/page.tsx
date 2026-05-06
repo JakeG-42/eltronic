@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductMediaGallery } from "@/components/site/product-media-gallery";
 import { StructuredData } from "@/components/site/structured-data";
+import { productTemplateLabels } from "@/content/products";
 import { getProductBySlug, getProductImages } from "@/lib/managed-data";
 import { absoluteUrl, breadcrumbJsonLd, createPageMetadata, siteConfig } from "@/lib/seo";
 
@@ -38,7 +39,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const images = getProductImages(product);
 
   return (
-    <main className="page">
+    <main className={`page product-detail-page product-template-${product.template}`}>
       <StructuredData
         data={[
           breadcrumbJsonLd([
@@ -80,7 +81,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="detail-layout product-detail-layout">
         <section className="panel detail-section-full">
           <div className="tag-row">
-            <span className="tag">{productTypeLabel[product.template]}</span>
+            <span className="tag">{productTemplateLabels[product.template]}</span>
             <span className="tag warning">{product.category}</span>
           </div>
           <h2>Highlights</h2>
@@ -134,10 +135,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
     </main>
   );
 }
-
-const productTypeLabel = {
-  default: "Default",
-};
 
 function schemaImageUrl(src: string) {
   if (/^(data|blob):/i.test(src)) {

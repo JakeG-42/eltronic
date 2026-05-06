@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProductForm } from "@/components/studio/product-form";
+import { productTemplateLabels } from "@/content/products";
 import { getProductFamilies, getProductImages, getProducts } from "@/lib/managed-data";
 
 type ProductsPageProps = {
@@ -93,7 +94,7 @@ export default async function StudioProductsPage({ searchParams }: ProductsPageP
                         </span>
                       </td>
                       <td>
-                        <Badge variant="outline">Default</Badge>
+                        <Badge variant="outline">{productTemplateLabels[product.template]}</Badge>
                       </td>
                       <td>{product.family}</td>
                       <td>

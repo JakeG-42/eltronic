@@ -7,7 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { productModuleDefinitions, type Product, type ProductModuleKey } from "@/content/products";
+import {
+  productModuleDefinitions,
+  productTemplateDefinitions,
+  productTemplateLabels,
+  type Product,
+  type ProductModuleKey,
+} from "@/content/products";
 
 const inputGridClass = "grid gap-2";
 
@@ -25,12 +31,12 @@ export function ProductForm({
   const formId = product?.slug ?? "new";
   const imageItems = editableImages(product);
   const submitText = submitLabel ?? (product ? "Save product" : "Create product");
+  const currentTemplate = product?.template ?? "default";
 
   return (
     <form action={saveProductAction} className="studio-product-editor">
       <input name="previousSlug" type="hidden" value={product?.slug ?? ""} />
       <input name="returnTo" type="hidden" value={returnTo} />
-      <input name="template" type="hidden" value="default" />
 
       <div className="studio-editor-main">
         <ProductFormSection
@@ -62,7 +68,21 @@ export function ProductForm({
             </div>
             <div className={inputGridClass}>
               <Label htmlFor={`${formId}-template`}>Template</Label>
-              <Input id={`${formId}-template`} readOnly value="Default" />
+              <select
+                className="flex h-10 w-full rounded-xl border border-input bg-background/60 px-3 py-2 text-sm text-foreground shadow-xs outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                defaultValue={currentTemplate}
+                id={`${formId}-template`}
+                name="template"
+              >
+                {productTemplateDefinitions.map((template) => (
+                  <option key={template.key} value={template.key}>
+                    {template.label}
+                  </option>
+                ))}
+              </select>
+              <p className="studio-field-hint">
+                Choose a product-page template without limiting the number of gallery images.
+              </p>
             </div>
             <div className={inputGridClass}>
               <Label htmlFor={`${formId}-enquiry`}>CTA label</Label>
@@ -152,7 +172,7 @@ export function ProductForm({
           <dl className="studio-editor-summary">
             <div>
               <dt>Template</dt>
-              <dd>Default</dd>
+              <dd>{productTemplateLabels[currentTemplate]}</dd>
             </div>
             <div>
               <dt>Gallery</dt>

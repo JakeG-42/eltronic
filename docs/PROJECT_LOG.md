@@ -17,6 +17,7 @@ Concise living log for the Eltronic standalone site/app. Add newest updates at t
 
 ## What Has Happened So Far
 
+- Restored editable product templates in Studio with `Default`, `HMI`, `Data logger` and `Module` options while keeping open-ended galleries and full-width technical data.
 - Moved the Studio Messages sidebar group directly under Overview and renamed the QR tool link to QR Code Generator.
 - Collapsed product templates to a single `default` template, normalizing legacy `hmi`, `data-logger` and `module` records on read, and moved product technical data into a full-width section under highlights.
 - Reworked `/studio/media` into a compact selectable media manager with seven-column desktop grid, table view and bulk removal of selected product-gallery image references.

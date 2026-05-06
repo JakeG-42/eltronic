@@ -1,7 +1,49 @@
 import generatedProductGalleryAssets from "./product-gallery-assets.json";
 import topconProductsData from "./topcon-products.json";
 
-export type ProductTemplate = "default";
+export type ProductTemplate = "default" | "hmi" | "data-logger" | "module";
+
+export const productTemplateLabels: Record<ProductTemplate, string> = {
+  default: "Default",
+  hmi: "HMI",
+  "data-logger": "Data logger",
+  module: "Module",
+};
+
+export const productTemplateDefinitions = [
+  {
+    key: "default",
+    label: productTemplateLabels.default,
+    description: "General product layout cloned from the former HMI template.",
+  },
+  {
+    key: "hmi",
+    label: productTemplateLabels.hmi,
+    description: "Operator displays, terminals and rugged screen-led products.",
+  },
+  {
+    key: "data-logger",
+    label: productTemplateLabels["data-logger"],
+    description: "CAN logging, telematics and data capture products.",
+  },
+  {
+    key: "module",
+    label: productTemplateLabels.module,
+    description: "I/O modules, CAN modules and integration hardware.",
+  },
+] as const satisfies readonly {
+  description: string;
+  key: ProductTemplate;
+  label: string;
+}[];
+
+export function normalizeProductTemplate(value: unknown): ProductTemplate {
+  const candidate = String(value ?? "").trim();
+
+  return productTemplateDefinitions.some((template) => template.key === candidate)
+    ? (candidate as ProductTemplate)
+    : "default";
+}
 
 export type ProductImage = {
   src: string;
@@ -175,7 +217,7 @@ function withGeneratedGallery(product: Product): Product {
 
   return {
     ...product,
-    template: "default",
+    template: normalizeProductTemplate(product.template),
     image: images[0] ?? product.image,
     images,
   };

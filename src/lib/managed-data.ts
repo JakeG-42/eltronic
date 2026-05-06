@@ -5,6 +5,7 @@ import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
 
 import {
+  normalizeProductTemplate,
   productModuleDefinitions,
   products as seededProducts,
   type Product,
@@ -198,7 +199,7 @@ function normalizeProducts(products: Product[]) {
 
     return {
       ...product,
-      template: "default" as const,
+      template: normalizeProductTemplate(product.template),
       image: images[0] ?? product.image,
       images,
       documents: normalizeProductDocuments(product.documents),
@@ -932,8 +933,8 @@ export function parseLines(value: FormDataEntryValue | null) {
     .filter(Boolean);
 }
 
-export function parseProductTemplate(): ProductTemplate {
-  return "default";
+export function parseProductTemplate(value: FormDataEntryValue | null): ProductTemplate {
+  return normalizeProductTemplate(value);
 }
 
 export function siteBuilderFromFormData(formData: FormData): SiteBuilderSettings {
@@ -1019,7 +1020,7 @@ export function productFromFormData(formData: FormData): Product {
     name,
     category: String(formData.get("category") ?? "").trim(),
     family: String(formData.get("family") ?? "").trim(),
-    template: parseProductTemplate(),
+    template: parseProductTemplate(formData.get("template")),
     sourceUrl: String(formData.get("sourceUrl") ?? "").trim(),
     sku: String(formData.get("sku") ?? "").trim() || undefined,
     price: String(formData.get("price") ?? "").trim() || undefined,

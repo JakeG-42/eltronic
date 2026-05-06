@@ -4,7 +4,7 @@ Read this first when returning to the Eltronic project. This document is written
 
 ## Purpose
 
-Eltronic is a standalone Next.js replacement for the old WordPress/WooCommerce/Colibri site. It is quote/contact-led, not checkout-led. The admin area is a lightweight custom studio for managing products, the single default product template and contact submissions.
+Eltronic is a standalone Next.js replacement for the old WordPress/WooCommerce/Colibri site. It is quote/contact-led, not checkout-led. The admin area is a lightweight custom studio for managing products, product templates and contact submissions.
 
 Always verify current code before changing behavior. Treat this document as a map, not a substitute for inspecting files.
 
@@ -195,9 +195,10 @@ The Studio product form uses a two-column editing flow: main product sections on
 
 Product template behavior:
 
-- `default` is the only current product template.
-- Legacy `hmi`, `data-logger` and `module` records are normalized to `default` by `normalizeProducts()` in `src/lib/managed-data.ts`.
+- Supported product templates are `default`, `hmi`, `data-logger` and `module`.
+- `normalizeProducts()` and `parseProductTemplate()` in `src/lib/managed-data.ts` preserve those supported template values and normalize unknown values to `default`.
 - The `default` template is the former HMI-style product page layout. On public product pages, Technical data must stay full width directly under Highlights.
+- The Studio product form must keep a real template selector so special products can move between templates without code edits.
 
 Gallery behavior:
 
@@ -208,7 +209,7 @@ Gallery behavior:
 - Product detail pages render `ProductMediaGallery`, a client component with thumbnail switching, keyboard-friendly zoom, and previous/next controls.
 - Primary product images can be local files under `public/product-images` or trusted manufacturer URLs recorded in seed/managed data. Avoid legacy placeholder media in public galleries.
 
-If Jake asks to add another product template again, update `ProductTemplate`, `parseProductTemplate()`, Studio product form display, `productTypeLabel`, public detail layout expectations and the AI/docs maps together.
+If Jake asks to add another product template again, update `ProductTemplate`, `productTemplateDefinitions`, `parseProductTemplate()`, Studio product form display, public detail layout expectations and the AI/docs maps together.
 
 ## SEO And Project Pages
 

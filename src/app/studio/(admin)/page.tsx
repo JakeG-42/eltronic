@@ -4,6 +4,7 @@ import { Boxes, Database, FileCode2, Inbox, LayoutTemplate, Paintbrush, Plus } f
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { productTemplateDefinitions, productTemplateLabels } from "@/content/products";
 import { getProducts, getStorageMode, getSubmissions } from "@/lib/managed-data";
 
 export const dynamic = "force-dynamic";
@@ -15,11 +16,12 @@ export const metadata = {
 export default async function StudioDashboardPage() {
   const [products, submissions] = await Promise.all([getProducts(), getSubmissions()]);
   const newSubmissions = submissions.filter((submission) => submission.status === "new");
+  const activeTemplateCount = new Set(products.map((product) => product.template)).size || productTemplateDefinitions.length;
 
   return (
     <div className="grid gap-6">
       <section className="studio-page-header">
-        <p>A clean control room for product content, the default product template, ordered galleries and quote enquiries.</p>
+        <p>A clean control room for product content, product templates, ordered galleries and quote enquiries.</p>
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link href="/studio/products/new">
@@ -47,7 +49,7 @@ export default async function StudioDashboardPage() {
 
       <section className="grid gap-4 md:grid-cols-4">
         <MetricCard icon={<Boxes className="size-5" />} label="Products" value={products.length.toString()} />
-        <MetricCard icon={<LayoutTemplate className="size-5" />} label="Template" value="Default" compact />
+        <MetricCard icon={<LayoutTemplate className="size-5" />} label="Templates" value={activeTemplateCount.toString()} compact />
         <MetricCard icon={<Inbox className="size-5" />} label="New enquiries" value={newSubmissions.length.toString()} />
         <MetricCard icon={<Database className="size-5" />} label="Storage" value={getStorageMode()} compact />
       </section>
@@ -65,7 +67,7 @@ export default async function StudioDashboardPage() {
                   <strong>{product.name}</strong>
                   <small>{product.family}</small>
                 </span>
-                <span>Default</span>
+                <span>{productTemplateLabels[product.template]}</span>
               </Link>
             ))}
           </CardContent>
