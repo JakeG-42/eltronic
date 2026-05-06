@@ -26,7 +26,7 @@ Concise living reference for how the current Eltronic Next.js site works.
 - Managed data layer: `src/lib/managed-data.ts`.
 - Contact captcha helper: `src/lib/contact-captcha.ts`.
 - Admin UI: `src/app/studio`.
-- Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Products (`/products`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Web & Connected Platforms`, `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
+- Public navigation: brand link to `/`, desktop icon-labelled links for Services (`/solutions`), Software (`/software-it`), Web & IOT (`/web-connected-platforms`), Products (`/products`), `/about`, and `/contact`, plus a compact hamburger menu on mobile. The mobile menu auto-closes on link click, outside tap and Escape. `Projects`, `Sectors` and `Data & specification` remain reachable from page CTAs and the footer.
 - Fonts: `Tajawal` and `Fira_Code` are loaded through `next/font/google`.
 - UI system: public pages use custom CSS; admin uses Tailwind CSS v4 and shadcn-style local components under `src/components/ui`.
 - Technical visual modules: `src/components/site/technical-visuals.tsx` renders SVG-style imagery for public pages.

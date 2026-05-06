@@ -5,6 +5,7 @@ import { MobileNavAutoClose } from "@/components/site/mobile-nav-auto-close";
 const navItems = [
   { href: "/solutions", label: "Services", icon: "solutions" },
   { href: "/software-it", label: "Software", icon: "software" },
+  { href: "/web-connected-platforms", label: "Web & IOT", icon: "webIot" },
   { href: "/products", label: "Products", icon: "products" },
   { href: "/about", label: "About", icon: "about" },
   { href: "/contact", label: "Contact", icon: "contact" },
@@ -120,6 +121,16 @@ function NavIcon({ name }: { name: (typeof navItems)[number]["icon"] }) {
       <svg {...commonProps}>
         <path d="M5 6h14v9H5z" />
         <path d="M8 19h8M10 15v4M14 15v4M9 10l2 2 4-5" />
+      </svg>
+    );
+  }
+
+  if (name === "webIot") {
+    return (
+      <svg {...commonProps}>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />
+        <path d="M5.6 5.6 9.9 9.9M14.1 14.1l4.3 4.3M18.4 5.6l-4.3 4.3M9.9 14.1l-4.3 4.3" />
       </svg>
     );
   }
