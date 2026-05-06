@@ -41,6 +41,10 @@ const navGroups: Array<{
     items: [{ href: "/studio", label: "Dashboard", icon: LayoutDashboard, roles: ["super_admin", "admin", "moderator"] }],
   },
   {
+    label: "Messages",
+    items: [{ href: "/studio/submissions", label: "Enquiries", icon: Inbox, roles: ["super_admin", "admin", "moderator"] }],
+  },
+  {
     label: "Content",
     items: [
       { href: "/studio/products", label: "Products", icon: Boxes, roles: ["super_admin", "admin"] },
@@ -50,11 +54,7 @@ const navGroups: Array<{
   },
   {
     label: "Tools",
-    items: [{ href: "/studio/tools/qr-code", label: "QR Code", icon: QrCode, roles: ["super_admin", "admin", "moderator"] }],
-  },
-  {
-    label: "Messages",
-    items: [{ href: "/studio/submissions", label: "Enquiries", icon: Inbox, roles: ["super_admin", "admin", "moderator"] }],
+    items: [{ href: "/studio/tools/qr-code", label: "QR Code Generator", icon: QrCode, roles: ["super_admin", "admin", "moderator"] }],
   },
   {
     label: "Admin",

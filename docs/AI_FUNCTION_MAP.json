@@ -611,7 +611,7 @@
       ]
     },
     "studioShell": "src/components/studio/studio-shell.tsx",
-    "studioSidebar": "Grouped under Overview, Content, Tools, Messages and Admin with compact link typography. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
+    "studioSidebar": "Grouped under Overview, Messages, Content, Tools and Admin with compact link typography. The QR tool link is labelled QR Code Generator. Enquiries badge polling is handled by src/components/studio/studio-submission-notifier.tsx against /api/studio/submissions/summary.",
     "studioTheme": "dark/light mode stored in localStorage key eltronic-studio-theme",
     "studioPageHeaderPattern": "StudioShell topbar displays the active mode. Admin pages use compact .studio-page-header description/action rows instead of large duplicate page h1 titles.",
     "studioQrCodeGenerator": {

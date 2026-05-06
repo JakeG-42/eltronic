@@ -179,7 +179,7 @@ Each product currently has:
 - Session cookies include user id, session version and issue time; password resets bump the session version and invalidate old sessions for that user.
 - Roles are `super_admin`, `admin`, and `moderator`. Super admin/admin currently have full control; moderator can manage enquiries and their own account.
 - Studio is separate from the public site shell; public header/footer do not render in admin routes.
-- Studio has a grouped sidebar with Overview, Content, Tools, Messages and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
+- Studio has a grouped sidebar with Overview, Messages, Content, Tools and Admin sections. The Enquiries item shows coloured `+N` badges when the client detects new enquiry/captcha/honeypot records.
 - Studio includes user and account management routes.
 - Studio includes a Website Builder mode for homepage theme/content controls.
 - Studio includes Code Studio for inspecting whitelisted source files.

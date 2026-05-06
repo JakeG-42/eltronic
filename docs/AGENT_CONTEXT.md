@@ -135,7 +135,7 @@ Studio is intentionally separate from the public site chrome.
 - Studio pages live under `src/app/studio/(admin)` and use `src/components/studio/studio-shell.tsx`.
 - `/studio/login` is outside the protected admin route group.
 - Studio navigation modes are real routes: `/studio`, `/studio/products`, `/studio/media`, `/studio/builder`, `/studio/templates`, `/studio/tools/qr-code`, `/studio/submissions`, `/studio/users`, `/studio/account`, and `/studio/settings`.
-- The current Studio sidebar groups links under Overview, Content, Tools, Messages and Admin. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
+- The current Studio sidebar groups links under Overview, Messages, Content, Tools and Admin. Code Studio is the `/studio/templates` source/file viewer and belongs under Admin. The QR tool nav label is QR Code Generator. Keep nav labels compact; the sidebar intentionally uses smaller text than the public site.
 - The Enquiries nav item uses `src/components/studio/studio-submission-notifier.tsx` and `/api/studio/submissions/summary` to poll for new submission counts and show coloured `+N` badges by type.
 - Studio theme is browser-local and toggled by `src/components/studio/studio-shell.tsx`.
 
