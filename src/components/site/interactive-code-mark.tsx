@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
+import type { CSSProperties } from "react";
 
 type InteractiveCodeMarkProps = {
   label: string;
@@ -15,6 +16,17 @@ type MotionPoint = {
   y: number;
 };
 
+type CodeParticle = {
+  delay: number;
+  duration: number;
+  driftX: number;
+  driftY: number;
+  opacity: number;
+  radius: number;
+  x: number;
+  y: number;
+};
+
 const neutralPoint: MotionPoint = {
   angle: 0,
   glowX: 50,
@@ -24,7 +36,27 @@ const neutralPoint: MotionPoint = {
   y: 0,
 };
 
+const codeParticles: CodeParticle[] = [
+  { x: 300, y: 304, radius: 2.2, opacity: 0.48, delay: -1.8, duration: 8.8, driftX: 8, driftY: -10 },
+  { x: 392, y: 290, radius: 1.5, opacity: 0.34, delay: -5.4, duration: 10.6, driftX: -7, driftY: 8 },
+  { x: 438, y: 344, radius: 1.9, opacity: 0.42, delay: -2.6, duration: 9.4, driftX: 6, driftY: 9 },
+  { x: 278, y: 374, radius: 1.3, opacity: 0.3, delay: -6.2, duration: 11.2, driftX: 10, driftY: 5 },
+  { x: 334, y: 418, radius: 2.4, opacity: 0.5, delay: -3.7, duration: 9.8, driftX: -6, driftY: -9 },
+  { x: 424, y: 410, radius: 1.4, opacity: 0.32, delay: -7.1, duration: 12.4, driftX: -10, driftY: -6 },
+  { x: 360, y: 274, radius: 1.2, opacity: 0.28, delay: -4.9, duration: 13, driftX: 4, driftY: 12 },
+  { x: 256, y: 334, radius: 1.6, opacity: 0.38, delay: -8.3, duration: 10.2, driftX: 12, driftY: -4 },
+  { x: 462, y: 382, radius: 1.1, opacity: 0.26, delay: -1.2, duration: 11.8, driftX: -9, driftY: 7 },
+  { x: 316, y: 448, radius: 1.2, opacity: 0.3, delay: -9, duration: 12.8, driftX: 7, driftY: -11 },
+  { x: 404, y: 452, radius: 1.7, opacity: 0.4, delay: -5.9, duration: 9.2, driftX: -8, driftY: -8 },
+  { x: 452, y: 318, radius: 1.2, opacity: 0.3, delay: -10.1, duration: 13.6, driftX: -11, driftY: 3 },
+  { x: 288, y: 424, radius: 1.1, opacity: 0.25, delay: -2.1, duration: 12.2, driftX: 8, driftY: -6 },
+  { x: 334, y: 282, radius: 1.4, opacity: 0.33, delay: -6.8, duration: 10.8, driftX: -4, driftY: 11 },
+  { x: 386, y: 426, radius: 1, opacity: 0.24, delay: -4.1, duration: 14, driftX: 6, driftY: -7 },
+  { x: 266, y: 392, radius: 1.8, opacity: 0.42, delay: -11.2, duration: 9.6, driftX: 11, driftY: -8 },
+];
+
 export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
+  const coreClipId = `code-core-${useId().replace(/:/g, "")}`;
   const figureRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -116,6 +148,9 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
             <stop offset="0%" stopColor="#d946ef" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#020617" stopOpacity="0" />
           </radialGradient>
+          <clipPath id={coreClipId}>
+            <circle cx="360" cy="360" r="126" />
+          </clipPath>
         </defs>
         <circle className="visual-bg" cx="360" cy="360" r="330" />
         <circle fill="url(#display-glow)" cx="360" cy="360" r="330" />
@@ -137,6 +172,26 @@ export function InteractiveCodeMark({ label }: InteractiveCodeMarkProps) {
         />
         <g className="visual-code-inner">
           <circle className="visual-code-core" cx="360" cy="360" r="132" />
+          <g className="visual-code-depth" clipPath={`url(#${coreClipId})`}>
+            {codeParticles.map((particle) => (
+              <circle
+                className="visual-code-particle"
+                cx={particle.x}
+                cy={particle.y}
+                key={`${particle.x}-${particle.y}`}
+                r={particle.radius}
+                style={
+                  {
+                    "--particle-delay": `${particle.delay}s`,
+                    "--particle-drift-x": `${particle.driftX}px`,
+                    "--particle-drift-y": `${particle.driftY}px`,
+                    "--particle-duration": `${particle.duration}s`,
+                    "--particle-opacity": particle.opacity,
+                  } as CSSProperties
+                }
+              />
+            ))}
+          </g>
           <text className="visual-code-mark" x="360" y="388" textAnchor="middle">
             <tspan>{"<"}</tspan>
             <tspan dx="20">{"/"}</tspan>
