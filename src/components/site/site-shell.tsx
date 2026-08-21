@@ -3,13 +3,12 @@ import { AmbientBackground } from "@/components/site/ambient-background";
 import { MobileNavAutoClose } from "@/components/site/mobile-nav-auto-close";
 
 const navItems = [
-  { href: "/solutions", label: "Services", icon: "solutions" },
-  { href: "/software-it", label: "Integrations", icon: "software" },
-  { href: "/web-connected-platforms", label: "Web & IOT", icon: "webIot" },
-  { href: "/products", label: "Products", icon: "products" },
-  { href: "/articles", label: "Articles", icon: "articles" },
-  { href: "/about", label: "About", icon: "about" },
-  { href: "/contact", label: "Contact", icon: "contact" },
+  { label: "EV Charging", icon: "solutions" },
+  { label: "Domestic", icon: "software" },
+  { label: "Commercial", icon: "webIot" },
+  { label: "Maintenance", icon: "products" },
+  { label: "About", icon: "about" },
+  { label: "Contact", icon: "contact" },
 ] as const;
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
@@ -19,14 +18,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <header className="main-header">
         <nav className="nav-container" aria-label="Main navigation">
           <Link className="brand-logo logo-text" href="/">
-            Eltronic
+            EV Installers Demo
           </Link>
           <div className="nav-menu desktop-nav">
             {navItems.map((item) => (
-              <Link href={item.href} key={item.href}>
+              <a href="#" key={item.label} aria-disabled="true">
                 <NavIcon name={item.icon} />
                 <span>{item.label}</span>
-              </Link>
+              </a>
             ))}
           </div>
           <details className="mobile-nav">
@@ -37,10 +36,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </summary>
             <div className="mobile-nav-panel">
               {navItems.map((item) => (
-                <Link href={item.href} key={item.href}>
+                <a href="#" key={item.label} aria-disabled="true">
                   <NavIcon name={item.icon} />
                   <span>{item.label}</span>
-                </Link>
+                </a>
               ))}
             </div>
           </details>
@@ -53,37 +52,52 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <div className="footer-main">
             <div className="footer-brand">
               <Link className="footer-logo gradient-text" href="/">
-                Eltronic
+                EV Installers Demo
               </Link>
             </div>
 
             <nav className="footer-group" aria-label="Explore">
               <h2 className="footer-group-title">Explore</h2>
-              <Link href="/solutions">Services</Link>
-              <Link href="/software-it">Integrations</Link>
-              <Link href="/web-connected-platforms">Web & Connected Platforms</Link>
-              <Link href="/products">Product catalogue</Link>
+              <a href="#" aria-disabled="true">
+                EV Charging
+              </a>
+              <a href="#" aria-disabled="true">
+                Domestic electrics
+              </a>
+              <a href="#" aria-disabled="true">
+                Commercial installs
+              </a>
+              <a href="#" aria-disabled="true">
+                Maintenance
+              </a>
             </nav>
 
-            <nav className="footer-group" aria-label="Resources">
-              <h2 className="footer-group-title">Resources</h2>
-              <Link href="/sectors">Sectors</Link>
-              <Link href="/articles">Articles</Link>
-              <Link href="/data-specification">Data & specification</Link>
-              <Link href="/about">About Eltronic</Link>
-              <Link href="/contact">Start an enquiry</Link>
+            <nav className="footer-group" aria-label="Company">
+              <h2 className="footer-group-title">Company</h2>
+              <a href="#" aria-disabled="true">
+                About
+              </a>
+              <a href="#" aria-disabled="true">
+                Coverage areas
+              </a>
+              <a href="#" aria-disabled="true">
+                FAQs
+              </a>
+              <a href="#" aria-disabled="true">
+                Contact
+              </a>
             </nav>
 
             <div className="footer-contact-card">
-              <span className="section-number">demo.access</span>
-              <h2>Review the Andersen preview</h2>
-              <p>Open the secured Andersen configurator page on this demo site.</p>
-              <Link href="/andersen">Go to Andersen preview</Link>
+              <span className="section-number">configurator.demo</span>
+              <h2>Product configurator</h2>
+              <p>Open the secured Andersen EV product configurator for this demo.</p>
+              <Link href="/andersen">Open configurator</Link>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>© 2026 Eltronic. Prototyping, systems integration and software engineering.</p>
+            <p>© 2026 EV Installers Demo. Sample site for demonstration only.</p>
           </div>
         </div>
       </footer>
@@ -104,15 +118,6 @@ function NavIcon({ name }: { name: (typeof navItems)[number]["icon"] }) {
       <svg {...commonProps}>
         <path d="M4 8.5 12 4l8 4.5v7L12 20l-8-4.5v-7Z" />
         <path d="m4 8.5 8 4.5 8-4.5M12 13v7" />
-      </svg>
-    );
-  }
-
-  if (name === "articles") {
-    return (
-      <svg {...commonProps}>
-        <path d="M5 5.5h14v13H5z" />
-        <path d="M8 9h8M8 12h8M8 15h5" />
       </svg>
     );
   }

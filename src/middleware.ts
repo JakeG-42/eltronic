@@ -61,14 +61,24 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (await isValidToken(request.cookies.get(DEMO_SITE_GATE_COOKIE)?.value)) {
-    return NextResponse.next();
+  const hasAccess = await isValidToken(request.cookies.get(DEMO_SITE_GATE_COOKIE)?.value);
+
+  if (!hasAccess) {
+    const unlockUrl = request.nextUrl.clone();
+    unlockUrl.pathname = "/unlock";
+    unlockUrl.searchParams.set("next", "/");
+    return NextResponse.redirect(unlockUrl);
   }
 
-  const unlockUrl = request.nextUrl.clone();
-  unlockUrl.pathname = "/unlock";
-  unlockUrl.searchParams.set("next", pathname);
-  return NextResponse.redirect(unlockUrl);
+  // Keep the password-gated shell on the home page only; hide the original site content.
+  if (pathname !== "/") {
+    const homeUrl = request.nextUrl.clone();
+    homeUrl.pathname = "/";
+    homeUrl.search = "";
+    return NextResponse.redirect(homeUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

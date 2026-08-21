@@ -39,9 +39,10 @@ export default async function UnlockDemoPage({ searchParams }: UnlockPageProps) 
             <div className="mb-3 flex size-12 items-center justify-center rounded-2xl bg-primary/12 text-primary">
               <LockKeyhole className="size-5" />
             </div>
-            <CardTitle>Demo access</CardTitle>
+            <CardTitle>EV Installers Demo</CardTitle>
             <CardDescription>
-              Enter the site password to continue. The Andersen page uses a separate password.
+              Enter the site password to continue. The Andersen configurator uses a separate
+              password.
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
