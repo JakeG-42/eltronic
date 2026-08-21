@@ -77,23 +77,12 @@ export default async function AndersenPage({ searchParams }: AndersenPageProps) 
 
   return (
     <main className="page">
-      <section className="hero compact-hero">
-        <div className="hero-copy">
-          <p className="code-kicker">andersen.configurator</p>
-          <h1>Andersen configurator preview.</h1>
-          <p className="lede">
-            Password-protected embed of the Andersen EV configurator for internal review.
-          </p>
-        </div>
-      </section>
-
       <section className="section">
         <div className="section-heading">
           <div>
             <span className="section-number">01</span>
-            <h2>Live configurator</h2>
+            <h2>Andersen EV Product Configurator</h2>
           </div>
-          <p>Use the embedded configurator below to review partner product options.</p>
         </div>
         <div className="overflow-hidden rounded-[24px]">
           <iframe
