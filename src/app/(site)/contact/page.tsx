@@ -29,11 +29,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
     params?.error === "required"
       ? "Please add your name, email and message before sending."
       : params?.error === "storage"
-        ? "The message could not be sent right now. Please email sales@eltronic.co.uk if this continues."
+        ? "The message could not be sent right now. Please try again shortly."
         : params?.error === "captcha"
           ? "Please solve the quick anti-spam question before sending."
           : params?.error === "spam"
-            ? "The message could not be sent. Please email sales@eltronic.co.uk if this continues."
+            ? "The message could not be sent. Please try again shortly."
             : null;
 
   return (
@@ -47,17 +47,6 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
             We will review the application and come back with a practical
             next step.
           </p>
-
-          <div className="contact-card-grid">
-            <a className="contact-card" href="tel:+447935239421">
-              <span>Phone</span>
-              <strong>+44(0) 79 3523 9421</strong>
-            </a>
-            <a className="contact-card" href="mailto:sales@eltronic.co.uk">
-              <span>Email</span>
-              <strong>sales@eltronic.co.uk</strong>
-            </a>
-          </div>
 
           <div className="contact-note">
             <span>Useful details</span>

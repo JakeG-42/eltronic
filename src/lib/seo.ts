@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
-const fallbackSiteUrl = "https://project-5v5cr.vercel.app";
+const fallbackSiteUrl = "https://eltronic-andersen-demo.vercel.app";
 
 export const siteConfig = {
   name: "Eltronic",
   url: (process.env.NEXT_PUBLIC_SITE_URL || fallbackSiteUrl).replace(/\/+$/, ""),
   description:
     "Bespoke technical systems, prototypes, electronics, software, web platforms, IoT services, products and integrations for equipment, fleets and business operations.",
-  email: "sales@eltronic.co.uk",
-  phone: "+44 79 3523 9421",
+  email: "",
+  phone: "",
   locale: "en_GB",
   keywords: [
     "Eltronic",
@@ -92,8 +92,6 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: siteConfig.name,
     url: siteConfig.url,
-    email: siteConfig.email,
-    telephone: siteConfig.phone,
     description: siteConfig.description,
     areaServed: "United Kingdom",
     knowsAbout: siteConfig.keywords,

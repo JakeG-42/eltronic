@@ -58,7 +58,7 @@ export default function OpenGraphImage() {
               Bespoke technical systems, products, software and integrations.
             </div>
           </div>
-          <div style={{ color: "#94a3b8", display: "flex", fontSize: 28 }}>eltronic.co.uk</div>
+          <div style={{ color: "#94a3b8", display: "flex", fontSize: 28 }}>Demo preview</div>
         </div>
       </div>
     ),

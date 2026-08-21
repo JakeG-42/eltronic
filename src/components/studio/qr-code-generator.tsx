@@ -71,7 +71,7 @@ export function QrCodeGenerator() {
   const qrCodeRef = useRef<QrCodeStylingInstance | null>(null);
   const qrConstructorRef = useRef<QrCodeConstructor | null>(null);
   const [mode, setMode] = useState<QrMode>("text");
-  const [content, setContent] = useState("https://eltronic.co.uk");
+  const [content, setContent] = useState("https://eltronic-andersen-demo.vercel.app");
   const [wifiSsid, setWifiSsid] = useState("");
   const [wifiPassword, setWifiPassword] = useState("");
   const [wifiSecurity, setWifiSecurity] = useState<WifiSecurity>("WPA");

@@ -4,7 +4,7 @@ import { MobileNavAutoClose } from "@/components/site/mobile-nav-auto-close";
 
 const navItems = [
   { href: "/solutions", label: "Services", icon: "solutions" },
-  { href: "/software-it", label: "Software", icon: "software" },
+  { href: "/software-it", label: "Integrations", icon: "software" },
   { href: "/web-connected-platforms", label: "Web & IOT", icon: "webIot" },
   { href: "/products", label: "Products", icon: "products" },
   { href: "/articles", label: "Articles", icon: "articles" },
@@ -60,7 +60,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <nav className="footer-group" aria-label="Explore">
               <h2 className="footer-group-title">Explore</h2>
               <Link href="/solutions">Services</Link>
-              <Link href="/software-it">Software & Systems</Link>
+              <Link href="/software-it">Integrations</Link>
               <Link href="/web-connected-platforms">Web & Connected Platforms</Link>
               <Link href="/products">Product catalogue</Link>
             </nav>
@@ -75,11 +75,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </nav>
 
             <div className="footer-contact-card">
-              <span className="section-number">contact.signal</span>
-              <h2>Have a system to discuss?</h2>
-              <p>Eltronic is the solution. Get in touch today.</p>
-              <a href="mailto:sales@eltronic.co.uk">sales@eltronic.co.uk</a>
-              <a href="tel:+447935239421">+44 (0) 79 3523 9421</a>
+              <span className="section-number">demo.access</span>
+              <h2>Review the Andersen preview</h2>
+              <p>Open the secured Andersen configurator page on this demo site.</p>
+              <Link href="/andersen">Go to Andersen preview</Link>
             </div>
           </div>
 

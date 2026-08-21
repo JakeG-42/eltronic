@@ -24,3 +24,4 @@ npm-debug.log*
 # Local admin storage
 .data/
 .env*.local
+.vercel

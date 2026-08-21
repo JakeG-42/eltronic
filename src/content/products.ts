@@ -138,7 +138,7 @@ const seedProducts: Product[] = [
     category: "CAN data logging",
     family: "AutoPi",
     template: "default",
-    sourceUrl: "https://eltronic.co.uk/autopi",
+    sourceUrl: "/products/autopi-can-fd-pro",
     image: {
       src: "/product-images/autopi-can-fd-pro.png",
       alt: "AutoPi CAN-FD Pro device and antenna kit",
@@ -179,7 +179,7 @@ const seedProducts: Product[] = [
     category: "I/O module",
     family: "Eltronic",
     template: "default",
-    sourceUrl: "https://eltronic.co.uk/eltronic-i-o-iq-can-bus-module",
+    sourceUrl: "/products/eltronic-i-o-iq-can-bus-module",
     image: {
       src: "/product-images/eltronic-iq-can-bus-module.jpg",
       alt: "Eltronic I&Q CAN-Bus I/O module",
