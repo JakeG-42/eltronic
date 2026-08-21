@@ -86,8 +86,8 @@ export default async function AndersenPage({ searchParams }: AndersenPageProps) 
         </div>
         <div className="overflow-hidden rounded-[24px]">
           <iframe
-            src="https://priceless-configurator.vercel.app/customiser/test?token=3sn6bjQxvZZ6BGXzrCaclscQSqPjeH5j"
-            title="Test configurator"
+            src="https://priceless-configurator.vercel.app/customiser/eltronic?token=-0TD4XWjQuFS1PPXG4tMgYpTMAqn0ac8"
+            title="Eltronic configurator"
             width="100%"
             height={1280}
             style={{ border: 0, borderRadius: 24, overflow: "hidden", display: "block" }}
