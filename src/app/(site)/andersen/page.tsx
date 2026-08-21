@@ -84,7 +84,7 @@ export default async function AndersenPage({ searchParams }: AndersenPageProps) 
             <h2>Andersen EV Product Configurator</h2>
           </div>
         </div>
-        <div className="andersen-embed-shell overflow-hidden rounded-[24px]">
+        <div className="andersen-embed-shell overflow-hidden">
           <iframe
             className="andersen-embed-frame"
             src="https://priceless-configurator.vercel.app/customiser/eltronic?token=-0TD4XWjQuFS1PPXG4tMgYpTMAqn0ac8"
