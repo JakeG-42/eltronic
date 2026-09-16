@@ -1,6 +1,7 @@
 import { LockKeyhole } from "lucide-react";
 
 import { unlockAndersenPageAction } from "@/app/(site)/andersen/actions";
+import { AndersenConfiguratorEmbed } from "@/components/site/andersen-configurator-embed";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -85,12 +86,7 @@ export default async function AndersenPage({ searchParams }: AndersenPageProps) 
           </div>
         </div>
         <div className="andersen-embed-shell overflow-hidden">
-          <iframe
-            className="andersen-embed-frame"
-            src="https://priceless-configurator.vercel.app/customiser/eltronic?token=-0TD4XWjQuFS1PPXG4tMgYpTMAqn0ac8"
-            title="Eltronic configurator"
-            loading="lazy"
-          />
+          <AndersenConfiguratorEmbed />
         </div>
       </section>
     </main>
