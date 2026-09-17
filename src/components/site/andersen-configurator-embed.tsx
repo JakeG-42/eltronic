@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-const EMBED_FRAME_ID = "aev-configurator-eltronic-NXHRY1bs";
+const EMBED_FRAME_ID = "aev-configurator-andersen-ev-B9o4T7RW";
 const CONFIGURATOR_SRC =
-  "https://priceless-configurator-git-feature-domainloc-e35171-andersen-ev.vercel.app/customiser/eltronic?token=NXHRY_1bs9BmzIPlBQQWsckXo0PJTIP-";
+  "https://priceless-configurator-git-feature-domainloc-e35171-andersen-ev.vercel.app/customiser/andersen-ev?token=B9o4T7R-WMo1UJJPyS4xecvWlF2Y_c1f";
 const EMBED_RESIZE_SOURCE = "aev-configurator";
 const EMBED_RESIZE_TYPE = "aev-configurator-resize";
 const EMBED_FALLBACK_HEIGHT = 560;
@@ -57,7 +57,7 @@ export function AndersenConfiguratorEmbed() {
       ref={frameRef}
       id={EMBED_FRAME_ID}
       src={CONFIGURATOR_SRC}
-      title="Eltronic configurator"
+      title="Andersen EV configurator"
       width="100%"
       height={EMBED_FALLBACK_HEIGHT}
       style={{
