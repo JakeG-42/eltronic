@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 const EMBED_FRAME_ID = "aev-configurator-eltronic-mIoUmiNY";
 const CONFIGURATOR_SRC =
-  "https://priceless-configurator-bvnd1qn8a-andersen-ev.vercel.app/customiser/eltronic?token=mIoUmiNY2SvHSGi8CcM1O1KX2ju-U2S2";
+  "https://priceless-configurator-hole48roj-andersen-ev.vercel.app/customiser/eltronic?token=mIoUmiNY2SvHSGi8CcM1O1KX2ju-U2S2";
 const EMBED_RESIZE_SOURCE = "aev-configurator";
 const EMBED_RESIZE_TYPE = "aev-configurator-resize";
 const EMBED_FALLBACK_HEIGHT = 560;
